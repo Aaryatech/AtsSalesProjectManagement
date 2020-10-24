@@ -104,7 +104,7 @@
 								<form
 									action="${pageContext.request.contextPath}/submitInsertDepartment"
 									class="form-validate-jquery" novalidate="novalidate"
-									id="submitInsertLocaion" method="post">
+									id="submitTagForm" method="post">
 
 									<div class="form-group row">
 										<div class="col-md-6">
@@ -115,37 +115,41 @@
 											</label>
 											<div class="col-lg-7  float">
 												<input type="text" class="form-control" value="${dept.name}"
-													placeholder="Enter Department" id="tagName" maxlength="30"
-													minlength="5" name="tagName" autocomplete="off"
-													required="required">
+													placeholder="Enter Tag Name" id="tagName" name="tagName"
+													autocomplete="off" required="required">
 											</div>
 										</div>
 
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold  col-lg-5 float"
-												for="desigShortName">Type<span class="text-danger">*
-											</span>:
+												for="accountType">Select Account Type<span
+												class="text-danger">* </span>:
 											</label>
 											<div class="col-lg-7 float">
-												<select name="status"
+												<select name="accountType"
 													class="form-control form-control-select2"
-													data-placeholder="Select status" data-fouc
+													data-placeholder="Select Account Type" data-fouc
 													required="required">
 													<option value="">select</option>
-													<option value="open">Lead</option>
-													<option value="hold">inquiry</option>
+													<c:forEach items="${AccountTypeList}" var="AccountType">
+														<option value="${AccountType.mdAccTypeId }">${AccountType.mdAccTypeShortName}</option>
+													</c:forEach>
+
+
 												</select>
 
 											</div>
 										</div>
+
 									</div>
+
 
 									<div class="form-group row mb-0">
 										<div style="margin: 0 auto;">
 
-											<button type="submit" class="btn blue_btn ml-3 legitRipple"
-												id="submtbtn">Submit</button>
+											<button type="submit" class="btn blue_btn ml-3 legitRipple  "
+												data-popup="tooltip" data-uuid="" id="submtbtn">Submit</button>
 											<a
 												href="${pageContext.request.contextPath}/showDepartmentList"><button
 													type="button" class="btn btn-light">Back</button></a>
@@ -175,6 +179,35 @@
 	</div>
 	<!-- /page content -->
 
+
+	<script>
+		// Custom bootbox dialog
+		$('.bootbox_custom').on('click', function() {
+			bootbox.confirm({
+				title : 'Confirm',
+				message : 'Confirm Submit Form ',
+				buttons : {
+					confirm : {
+						label : 'yes',
+						className : 'btn-success'
+					},
+					cancel : {
+						lable : 'Cancel',
+						classNAme : 'btn-link'
+					}
+				},
+				callback : function(result) {
+					if (result) {
+
+					}
+				}
+			});
+
+		});
+	</script>
+
+
+
 	<script>
 		function trim(el) {
 			el.value = el.value.replace(/(^\s*)|(\s*$)/gi, ""). // removes leading and trailing spaces
@@ -184,56 +217,38 @@
 			return;
 		}
 
-		/* $(document).ready(function($) {
+		$(document).ready(function($) {
 
-			$("#submitInsertLocaion").submit(function(e) {
-				var isError = false;
-				var errMsg = "";
-				var validation = '';
+			$("#submitTagForm").submit(function(e) {
 
-				if (parseInt(validation) == 1) {
+				//alert(document.getElementById("submitTagForm").noValidate)
+				bootbox.confirm({
+					title : 'Confirm',
+					message : 'Confirm Submit Form? ',
+					buttons : {
+						confirm : {
+							label : 'yes',
+							className : 'btn-success'
+						},
+						cancel : {
+							lable : 'Cancel',
+							classNAme : 'btn-link'
+						}
+					},
+					callback : function(result) {
+						if (result) {
+							document.getElementById('submitTagForm').submit();
 
-					if (!$("#man_pow").val() || $("#man_pow").val() < 0) {
-						isError = true;
-						$("#error_man_pow").show();
-					} else {
-						$("#error_man_pow").hide();
+							//$("#submitTagForm").submit();
+						}
+						//return false;
 					}
-				}//end of if validation==1
-
-				if (!$("#desigName").val()) {
-
-					isError = true;
-
-					$("#error_designation").show()
-					//return false;
-				} else {
-					$("#error_designation").hide()
-				}
-
-				if (!$("#desigShortName").val()) {
-
-					isError = true;
-
-					$("#error_desigShortName").show()
-
-				} else {
-					$("#error_desigShortName").hide()
-				}
-
-				if (!isError) {
-
-					var x = true;
-					if (x == true) {
-
-						document.getElementById("submtbtn").disabled = true;
-						return true;
-					}
-					//end ajax send this to php page
-				}
+				});
 				return false;
 			});
-		}); */
+			
+			
+		});
 		//
 	</script>
 
