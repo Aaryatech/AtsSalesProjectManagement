@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -44,7 +45,8 @@ import com.ats.hreasy.common.RandomString;
 import com.ats.hreasy.model.AccessRightModule;
 import com.ats.hreasy.model.EmpType; 
 import com.ats.hreasy.model.Info; 
-import com.ats.hreasy.model.LoginResponse; 
+import com.ats.hreasy.model.LoginResponse;
+import com.ats.hreasy.model.UserLoginData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -53,6 +55,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @Scope("session")
 public class HomeController {
+	
+
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -97,8 +101,33 @@ public class HomeController {
 				mav = "redirect:/";
 				session.setAttribute("errorMsg", "Login Failed");
 			} else {
-				mav = "redirect:/dashboard";
+				//mav = "redirect:/dashboard";
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("userName", name);
+				map.add("password", password);
+				
+				//Get User By Username And Password From Api	
+				try {
+					UserLoginData user =Constants.getRestTemplate().postForObject(Constants.url+"getUserByUsernameAndPassword", map, UserLoginData.class);
+				//System.err.println("User Responce="+user);
+				//System.err.println(user.getStatusCodeValue());
+				//UserLoginData userResponse=user.getBody();
+				if(user==null) {
+					
+					mav = "redirect:/";
+					session.setAttribute("errorMsg", "Login Failed! Enter Valid Username Or Password");
+				}else {
+					mav = "redirect:/dashboard";
+					session.setAttribute("userObj", user);
+				}
+				} catch (Exception e) {
+					// TODO: handle exception
+					mav = "redirect:/";
+					session.setAttribute("errorMsg", "Something Went Wromg Please Try Again!!!");
+					e.printStackTrace();
+				}
+				
+				
 				/*
 				 * TempClass temp = new TempClass(); temp.setUsername(name);
 				 * temp.setPassword(password); GetToken res = rest.postForObject(Constants.url +

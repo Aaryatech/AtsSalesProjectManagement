@@ -44,7 +44,7 @@
 						<table width="100%">
 							<tr width="100%">
 								<td width="60%"><h5 class="pageTitle">
-										<i class="icon-list-unordered"></i> TAG LIST
+										<i class="icon-list-unordered "></i> TAG LIST
 									</h5></td>
 								<td width="40%" align="right"><a
 									href="${pageContext.request.contextPath}/addNewTag"
@@ -105,47 +105,27 @@
 								</tr>
 							</thead>
 							<tbody>
-
-								<tr>
-									<td>${count.index+1}</td>
-									<td>HR</td>
-									<td>Lead</td>
-
-
-									<td class="text-center">
-										<%-- <c:if test="${editAccess == 0}"> --%> <a
-										href="${pageContext.request.contextPath}/editSkillRate?skillId=${skillList.exVar1}"
-										class="list-icons-item text-primary-600" data-popup="tooltip"
-										title="" data-original-title="Edit"><i
-											class="icon-pencil7"></i></a> <%-- </c:if> <c:if test="${deleteAccess == 0}"> --%>
-
-
-										<a href="javascript:void(0)"
-										class="list-icons-item text-danger-600 bootbox_custom"
-										data-uuid="${skillList.exVar1}" data-popup="tooltip" title=""
-										data-original-title="Delete"><i class="icon-trash"></i></a> <%-- </c:if> --%>
-									</td>
-								</tr>
-								<c:forEach items="${skillList}" var="skillList"
+							
+						<c:forEach items="${tagList}" var="tag"
 									varStatus="count">
 									<tr>
 										<td>${count.index+1}</td>
-										<td>HR</td>
-										<td>Lead</td>
+										<td>${tag.mTagName}</td>
+										<td>${tag.exVar1}</td>
 
 
 										<td class="text-center">
 											<%-- <c:if test="${editAccess == 0}"> --%> <a
-											href="${pageContext.request.contextPath}/editSkillRate?skillId=${skillList.exVar1}"
+											href="${pageContext.request.contextPath}/editTag?tagId=${tag.mTagId}"
 											class="list-icons-item text-primary-600" data-popup="tooltip"
 											title="" data-original-title="Edit"><i
 												class="icon-pencil7"></i></a> <%-- </c:if> <c:if test="${deleteAccess == 0}"> --%>
 
 
-											<a href="javascript:void(0)"
+											<a href="#"
 											class="list-icons-item text-danger-600 bootbox_custom"
-											data-uuid="${skillList.exVar1}" data-popup="tooltip" title=""
-											data-original-title="Delete"><i class="icon-trash"></i></a> <%-- </c:if> --%>
+											 data-popup="tooltip" title=""
+											data-original-title="Delete" data-uuid="${tag.mTagId}"><i class="icon-trash"></i></a> <%-- </c:if> --%>
 										</td>
 									</tr>
 								</c:forEach>
@@ -194,7 +174,7 @@
 										},
 										callback : function(result) {
 											if (result) {
-												location.href = "${pageContext.request.contextPath}/deleteSkillRate?skillId="
+												location.href = "${pageContext.request.contextPath}/deleteTag?tagId="
 														+ uuid;
 
 											}

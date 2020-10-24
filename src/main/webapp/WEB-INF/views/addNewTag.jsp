@@ -100,12 +100,16 @@
 									session.removeAttribute("successMsg");
 									}
 								%>
-
+				
+								
 								<form
-									action="${pageContext.request.contextPath}/submitInsertDepartment"
+									action="${pageContext.request.contextPath}/submitTagForm"
 									class="form-validate-jquery" novalidate="novalidate"
 									id="submitTagForm" method="post">
 
+									
+									<input type="hidden" id="tagId" value="${tagResponse.mTagId}" name="tagId">
+	
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label
@@ -114,7 +118,7 @@
 											</span>:
 											</label>
 											<div class="col-lg-7  float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control" value="${tagResponse.mTagName}"
 													placeholder="Enter Tag Name" id="tagName" name="tagName"
 													autocomplete="off" required="required">
 											</div>
@@ -132,8 +136,12 @@
 													data-placeholder="Select Account Type" data-fouc
 													required="required">
 													<option value="">select</option>
+													<c:forEach items="${AccountTypeList}">
+													
+													</c:forEach>
+													
 													<c:forEach items="${AccountTypeList}" var="AccountType">
-														<option value="${AccountType.mdAccTypeId }">${AccountType.mdAccTypeShortName}</option>
+														<option value="${AccountType.mdAccTypeId }" ${AccountType.mdAccTypeId == tagResponse.mAccTypeId ? 'selected' : ''}  >${AccountType.mdAccTypeShortName}</option>
 													</c:forEach>
 
 
@@ -151,7 +159,7 @@
 											<button type="submit" class="btn blue_btn ml-3 legitRipple  "
 												data-popup="tooltip" data-uuid="" id="submtbtn">Submit</button>
 											<a
-												href="${pageContext.request.contextPath}/showDepartmentList"><button
+												href="${pageContext.request.contextPath}/tagList"><button
 													type="button" class="btn btn-light">Back</button></a>
 										</div>
 									</div>
@@ -183,25 +191,7 @@
 	<script>
 		// Custom bootbox dialog
 		$('.bootbox_custom').on('click', function() {
-			bootbox.confirm({
-				title : 'Confirm',
-				message : 'Confirm Submit Form ',
-				buttons : {
-					confirm : {
-						label : 'yes',
-						className : 'btn-success'
-					},
-					cancel : {
-						lable : 'Cancel',
-						classNAme : 'btn-link'
-					}
-				},
-				callback : function(result) {
-					if (result) {
-
-					}
-				}
-			});
+		
 
 		});
 	</script>
@@ -217,38 +207,41 @@
 			return;
 		}
 
-		$(document).ready(function($) {
-
-			$("#submitTagForm").submit(function(e) {
-
-				//alert(document.getElementById("submitTagForm").noValidate)
-				bootbox.confirm({
-					title : 'Confirm',
-					message : 'Confirm Submit Form? ',
-					buttons : {
-						confirm : {
-							label : 'yes',
-							className : 'btn-success'
-						},
-						cancel : {
-							lable : 'Cancel',
-							classNAme : 'btn-link'
-						}
-					},
-					callback : function(result) {
-						if (result) {
-							document.getElementById('submitTagForm').submit();
-
-							//$("#submitTagForm").submit();
-						}
-						//return false;
-					}
-				});
-				return false;
-			});
-			
+		$(document).ready(
+				function($) {
+					
+					$('#submitTagForm').submit(
+							function(e){
+								
+								if($('#submitTagForm').valid()==true){
+									
+									bootbox.confirm({
+										title : 'Confirm',
+										message : 'Confirm Submit Form ',
+										buttons : {
+											confirm : {
+												label : 'yes',
+												className : 'btn-success'
+											},
+											cancel : {
+												lable : 'Cancel',
+												classNAme : 'btn-link'
+											}
+										},
+										callback : function(result) {
+											if (result) {
+												document.getElementById('submitTagForm').submit();
+											}
+										}
+									});
+									return false;
+									}
+								return false;
+							});
+										 
 			
 		});
+
 		//
 	</script>
 
