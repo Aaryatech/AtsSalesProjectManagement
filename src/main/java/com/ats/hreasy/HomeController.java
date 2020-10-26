@@ -43,8 +43,8 @@ import org.springframework.web.client.RestTemplate;
 import com.ats.hreasy.common.Constants;
 import com.ats.hreasy.common.RandomString;
 import com.ats.hreasy.model.AccessRightModule;
-import com.ats.hreasy.model.EmpType; 
-import com.ats.hreasy.model.Info; 
+import com.ats.hreasy.model.EmpType;
+import com.ats.hreasy.model.Info;
 import com.ats.hreasy.model.LoginResponse;
 import com.ats.hreasy.model.UserLoginData;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,8 +55,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @Scope("session")
 public class HomeController {
-	
-
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -101,83 +99,52 @@ public class HomeController {
 				mav = "redirect:/";
 				session.setAttribute("errorMsg", "Login Failed");
 			} else {
-				//mav = "redirect:/dashboard";
+				// mav = "redirect:/dashboard";
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("userName", name);
 				map.add("password", password);
-				
-				//Get User By Username And Password From Api	
+
+				// Get User By Username And Password From Api
 				try {
-					UserLoginData user =Constants.getRestTemplate().postForObject(Constants.url+"getUserByUsernameAndPassword", map, UserLoginData.class);
-				//System.err.println("User Responce="+user);
-				//System.err.println(user.getStatusCodeValue());
-				//UserLoginData userResponse=user.getBody();
-				if(user==null) {
-					
-					mav = "redirect:/";
-					session.setAttribute("errorMsg", "Login Failed! Enter Valid Username Or Password");
-				}else {
-					mav = "redirect:/dashboard";
-					session.setAttribute("userObj", user);
-				}
+					UserLoginData user = Constants.getRestTemplate()
+							.postForObject(Constants.url + "getUserByUsernameAndPassword", map, UserLoginData.class);
+					// System.err.println("User Responce="+user);
+					// System.err.println(user.getStatusCodeValue());
+					// UserLoginData userResponse=user.getBody();
+					if (user == null) {
+
+						mav = "redirect:/";
+						session.setAttribute("errorMsg", "Login Failed! Enter Valid Username Or Password");
+					} else {
+
+						List<AccessRightModule> moduleJsonList = new ArrayList<AccessRightModule>();
+						try {
+							map = new LinkedMultiValueMap<>();
+							map.add("empTypeId", user.getEmpAccessId());
+							EmpType editEmpType = Constants.getRestTemplate()
+									.postForObject(Constants.url + "/getEmpTypeById", map, EmpType.class);
+
+							AccessRightModule[] moduleJson = null;
+							ObjectMapper mapper = new ObjectMapper();
+
+							moduleJson = mapper.readValue(editEmpType.getEmpTypeAccess(), AccessRightModule[].class);
+
+							moduleJsonList = new ArrayList<AccessRightModule>(Arrays.asList(moduleJson));
+
+						} catch (Exception e) {
+
+							e.printStackTrace();
+						}
+						session.setAttribute("moduleJsonList", moduleJsonList);
+						mav = "redirect:/dashboard";
+						session.setAttribute("userObj", user);
+					}
 				} catch (Exception e) {
 					// TODO: handle exception
 					mav = "redirect:/";
-					session.setAttribute("errorMsg", "Something Went Wromg Please Try Again!!!");
+					session.setAttribute("errorMsg", "Something Went Wrong Please Try Again!!!");
 					e.printStackTrace();
 				}
-				
-				
-				/*
-				 * TempClass temp = new TempClass(); temp.setUsername(name);
-				 * temp.setPassword(password); GetToken res = rest.postForObject(Constants.url +
-				 * "authenticate", temp, GetToken.class); Constants.JWTToken=res.getToken();
-				 */
-				/*map = new LinkedMultiValueMap<String, Object>();
-
-				MessageDigest md = MessageDigest.getInstance("MD5");
-				byte[] messageDigest = md.digest(password.getBytes());
-				BigInteger number = new BigInteger(1, messageDigest);
-				String hashtext = number.toString(16);
-
-				map.add("username", name);
-				map.add("password", hashtext);
-
-				LoginResponse userObj = Constants.getRestTemplate().postForObject(Constants.url + "loginProcess", map,
-						LoginResponse.class);
-
-				if (userObj.getIsError() == false) {
-
-					request.getSession().setMaxInactiveInterval(14400);
-
-					mav = "redirect:/dashboard";
-					session.setAttribute("userInfo", userObj);
-
-					map = new LinkedMultiValueMap<>();
-					map.add("empTypeId", userObj.getAccessRoleId());
-					EmpType editEmpType = Constants.getRestTemplate().postForObject(Constants.url + "/getEmpTypeById",
-							map, EmpType.class);
-					List<AccessRightModule> moduleJsonList = new ArrayList<AccessRightModule>();
-
-					try {
-
-						AccessRightModule[] moduleJson = null;
-						ObjectMapper mapper = new ObjectMapper();
-
-						moduleJson = mapper.readValue(editEmpType.getEmpTypeAccess(), AccessRightModule[].class);
-
-						moduleJsonList = new ArrayList<AccessRightModule>(Arrays.asList(moduleJson));
-
-					} catch (Exception e) {
-
-						e.printStackTrace();
-					}
-					session.setAttribute("moduleJsonList", moduleJsonList);
-
-				} else {
-					mav = "redirect:/";
-					session.setAttribute("errorMsg", "Login Failed");
-				}*/
 
 			}
 
@@ -378,4 +345,16 @@ public class HomeController {
 		return "success";
 	}
 
+	@RequestMapping(value = "/addofficeTask", method = RequestMethod.GET)
+	public String addofficeTask(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		String mav = "addofficeTask";
+
+		try {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
 }

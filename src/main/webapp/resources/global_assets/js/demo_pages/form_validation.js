@@ -184,12 +184,12 @@ var FormValidation = function() {
                 url: {
                     url: true
                 },
-                date: {
+                /*date: {
                     date: true
                 },
                 date_iso: {
                     dateISO: true
-                },
+                },*/
                 numbers: {
                     number: true
                 },
