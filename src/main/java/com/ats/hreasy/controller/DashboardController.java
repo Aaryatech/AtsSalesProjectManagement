@@ -25,8 +25,11 @@ import com.ats.hreasy.common.Constants;
 import com.ats.hreasy.model.AccessRightModule;
 import com.ats.hreasy.model.AccountType;
 import com.ats.hreasy.model.Channel;
+import com.ats.hreasy.model.Designation;
+import com.ats.hreasy.model.DomainType;
 import com.ats.hreasy.model.Info;
 import com.ats.hreasy.model.LmsDetail;
+import com.ats.hreasy.model.LmsHeader;
 import com.ats.hreasy.model.LmsHeaderWithNames;
 import com.ats.hreasy.model.Tags;
 import com.ats.hreasy.model.TaskDetailsEmpName;
@@ -181,6 +184,18 @@ public class DashboardController {
 
 			model.addAttribute("tagList", tagList);
 
+			DomainType[] domainType = Constants.getRestTemplate().getForObject(Constants.url + "getAllDomainTypelist",
+					DomainType[].class);
+			List<DomainType> domainList = new ArrayList<DomainType>(Arrays.asList(domainType));
+
+			model.addAttribute("domainList", domainList);
+
+			Designation[] designation = Constants.getRestTemplate().getForObject(Constants.url + "getAllDesignation",
+					Designation[].class);
+			List<Designation> designationList = new ArrayList<Designation>(Arrays.asList(designation));
+
+			model.addAttribute("designationList", designationList);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -263,6 +278,70 @@ public class DashboardController {
 			e.printStackTrace();
 		}
 		return mav;
+	}
+
+	@RequestMapping(value = "/submitLms", method = RequestMethod.POST)
+	public String submitLms(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			HttpSession session = request.getSession();
+			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			Date dt = new Date();
+
+			String custName = request.getParameter("custName");
+			String cmpName = request.getParameter("cmpName");
+			int type = Integer.parseInt(request.getParameter("type"));
+			int channelId = Integer.parseInt(request.getParameter("channelId"));
+			int domainId = Integer.parseInt(request.getParameter("domainId"));
+			String domainText = request.getParameter("domainText");
+			String accCode = request.getParameter("accCode");
+			String[] accTag = request.getParameterValues("accTag");
+			String website = request.getParameter("website");
+			int empCount = 0;
+			try {
+				empCount = Integer.parseInt(request.getParameter("empCount"));
+			} catch (Exception e) {
+
+			}
+
+			String contactNo = request.getParameter("contactNo");
+			String scaleDesc = request.getParameter("scaleDesc");
+			String remark = request.getParameter("remark");
+			String rating = request.getParameter("rating");
+
+			String tags = "";
+
+			for (int i = 0; i < accTag.length; i++) {
+				tags = tags + "," + accTag[i];
+			}
+			tags = tags.substring(1);
+			//System.out.println(tags);
+			LmsHeader lmsHeader = new LmsHeader();
+			lmsHeader.setAccCompany(cmpName);
+			lmsHeader.setMdAccTypeId(type);
+			lmsHeader.setChannelId(channelId);
+			lmsHeader.setAccDomainId(domainId);
+			lmsHeader.setAccDomainOther(domainText);
+			lmsHeader.setAccCode(accCode);
+			lmsHeader.setAccTags(tags);
+			lmsHeader.setAccWebsite(website);
+			lmsHeader.setAccEmpCount(empCount);
+			lmsHeader.setAccCompanyLandline(contactNo);
+			lmsHeader.setAccScaleDesc(scaleDesc);
+			lmsHeader.setAccRemark(remark);
+			lmsHeader.setAccAtsRating(rating);
+			lmsHeader.setDelStatus(1);
+			lmsHeader.setMakerUserId(userDetail.getEmpId());
+			lmsHeader.setMakerDatetime(sf.format(dt));
+
+			lmsHeader.setLmsDetailList(lmsDetailList);
+
+			System.out.println(lmsHeader);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/showLeadList";
 	}
 
 	@RequestMapping(value = "/addEnquiry", method = RequestMethod.GET)

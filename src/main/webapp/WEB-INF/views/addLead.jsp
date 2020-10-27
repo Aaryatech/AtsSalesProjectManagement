@@ -100,8 +100,7 @@
 									}
 								%>
 
-								<form
-									action="${pageContext.request.contextPath}/submitInsertDepartment"
+								<form action="${pageContext.request.contextPath}/submitLms"
 									class="form-validate-jquery" novalidate="novalidate"
 									id="submitLead" method="post">
 
@@ -185,10 +184,12 @@
 											<div class="col-lg-7 float">
 												<select name="domainId"
 													class="form-control form-control-select2"
-													data-placeholder="Select Type" data-fouc
+													data-placeholder="Select Domain" data-fouc
 													required="required" id="domainId">
-													<option value="0">Other Domain</option>
-
+													<option value="">Select Domain</option>
+													<c:forEach items="${domainList}" var="domainList">
+														<option value="${domainList.mDomainId}">${domainList.mDomainName}</option>
+													</c:forEach>
 												</select>
 
 											</div>
@@ -196,16 +197,13 @@
 
 
 										<div class="col-md-6">
-											<label
-												class="col-form-label  text-info font-weight-bold col-lg-5 float"
-												for="domainText">Domain Name<span
-												class="text-danger">* </span> :
-											</label>
+											<label class="col-form-label col-lg-5 float" for="domainText">Domain
+												Name : </label>
 											<div class="col-lg-7 float">
 
 												<input type="text" class="form-control"
 													placeholder="Domain Name" id="domainText" maxlength="30"
-													name="domainText" autocomplete="off" required="required">
+													name="domainText" autocomplete="off">
 
 											</div>
 										</div>
@@ -274,9 +272,9 @@
 											<label class="col-form-label  col-lg-5 float" for="empCount">Employee
 												Count : </label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control"
+												<input type="number" class="form-control"
 													placeholder="Employee Count" id="empCount" maxlength="30"
-													name="empCount" autocomplete="off">
+													name="empCount" autocomplete="off" min="0">
 
 											</div>
 										</div>
@@ -288,10 +286,10 @@
 											</span>:
 											</label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control"
 													placeholder="Contact No." id="contactNo" maxlength="10"
 													minlength="10" name="contactNo" autocomplete="off"
-													data-mask="9999999999">
+													data-mask="9999999999" required="required">
 
 											</div>
 										</div>
@@ -302,9 +300,9 @@
 											<label class="col-form-label col-lg-5 float" for="scaleDesc">ACC
 												Scale Desc :</label>
 											<div class="col-lg-7 float">
-												<textarea rows="3" cols="5" name="textarea"
-													class="form-control" placeholder="ACC Scale Desc"
-													id="scaleDesc" name="scaleDesc"></textarea>
+												<textarea rows="3" cols="5" class="form-control"
+													placeholder="ACC Scale Desc" id="scaleDesc"
+													name="scaleDesc"></textarea>
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -353,8 +351,9 @@
 														data-placeholder="Select Designation" data-fouc
 														id="designation">
 														<option value="">Select Designation</option>
-														<c:forEach items="${tagList}" var="tagList">
-															<option value="${tagList.mTagId}">${tagList.mTagName}</option>
+														<c:forEach items="${designationList}"
+															var="designationList">
+															<option value="${designationList.mDesignationId}">${designationList.mDesignationName}</option>
 														</c:forEach>
 													</select><span class="validation-invalid-label"
 														id="error_designation" style="display: none;">This
@@ -370,7 +369,7 @@
 												<div class="col-lg-7 float">
 													<input type="text" class="form-control"
 														placeholder="Contact No." id="cpMobile1" name="cpMobile1"
-														autocomplete="off"> <span
+														autocomplete="off" maxlength="10"> <span
 														class="validation-invalid-label" id="error_cpMobile1"
 														style="display: none;">This field is required.</span>
 												</div>
