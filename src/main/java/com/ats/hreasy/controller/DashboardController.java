@@ -24,7 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ats.hreasy.common.Constants;
 import com.ats.hreasy.model.AccessRightModule;
 import com.ats.hreasy.model.AccountType;
+import com.ats.hreasy.model.Channel;
 import com.ats.hreasy.model.Info;
+import com.ats.hreasy.model.LmsDetail;
+import com.ats.hreasy.model.LmsHeaderWithNames;
 import com.ats.hreasy.model.Tags;
 import com.ats.hreasy.model.TaskDetailsEmpName;
 import com.ats.hreasy.model.UserLoginData;
@@ -158,17 +161,90 @@ public class DashboardController {
 		return mav;
 	}
 
+	List<LmsDetail> lmsDetailList = new ArrayList<LmsDetail>();
+
 	@RequestMapping(value = "/addLead", method = RequestMethod.GET)
 	public String addLead(HttpServletRequest request, HttpServletResponse response, Model model) {
 
 		String mav = "addLead";
 
 		try {
+			lmsDetailList = new ArrayList<LmsDetail>();
+			Channel[] channel = Constants.getRestTemplate().getForObject(Constants.url + "getAllChannelList",
+					Channel[].class);
+			List<Channel> chanalList = new ArrayList<>(Arrays.asList(channel));
+			model.addAttribute("chanalList", chanalList);
+
+			Tags[] tags = Constants.getRestTemplate().postForObject(Constants.url + "getAllTagsWithAccountTypeName",
+					null, Tags[].class);
+			List<Tags> tagList = new ArrayList<Tags>(Arrays.asList(tags));
+
+			model.addAttribute("tagList", tagList);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
+	}
+
+	@RequestMapping(value = "/addContactPersonLead", method = RequestMethod.POST)
+	@ResponseBody
+	public Info addContactPersonLead(HttpServletRequest request, HttpServletResponse response) {
+
+		Info info = new Info();
+		try {
+
+			String cpName = request.getParameter("cpName");
+			int designation = Integer.parseInt(request.getParameter("designation"));
+			String cpMobile1 = request.getParameter("cpMobile1");
+			String cpMobile2 = request.getParameter("cpMobile2");
+			String email = request.getParameter("email");
+
+			LmsDetail lmsDetail = new LmsDetail();
+			lmsDetail.setCpDesignationId(designation);
+			lmsDetail.setCpEmail(email);
+			lmsDetail.setCpMobile(cpMobile1);
+			lmsDetail.setCpMobile2(cpMobile2);
+			lmsDetail.setCpName(cpName);
+
+			if (lmsDetailList.size() == 0) {
+				lmsDetail.setCpPrimary(1);
+			}
+			lmsDetailList.add(lmsDetail);
+			info.setError(false);
+			info.setMsg("Successfully Added");
+		} catch (Exception e) {
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("failed Added");
+		}
+		return info;
+	}
+
+	@RequestMapping(value = "/deleteContactPersonLead", method = RequestMethod.POST)
+	@ResponseBody
+	public Info deleteContactPersonLead(HttpServletRequest request, HttpServletResponse response) {
+
+		Info info = new Info();
+		try {
+
+			int id = Integer.parseInt(request.getParameter("id"));
+			lmsDetailList.remove(id);
+			info.setError(false);
+			info.setMsg("Successfully Deleted");
+		} catch (Exception e) {
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("failed Deleted");
+		}
+		return info;
+	}
+
+	@RequestMapping(value = "/getCpList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<LmsDetail> getCpList(HttpServletRequest request, HttpServletResponse response) {
+
+		return lmsDetailList;
 	}
 
 	@RequestMapping(value = "/showLeadList", method = RequestMethod.GET)
@@ -177,6 +253,11 @@ public class DashboardController {
 		String mav = "showLeadList";
 
 		try {
+
+			LmsHeaderWithNames[] tags = Constants.getRestTemplate()
+					.getForObject(Constants.url + "getListOfAllLmsHeader", LmsHeaderWithNames[].class);
+			List<LmsHeaderWithNames> list = new ArrayList<>(Arrays.asList(tags));
+			model.addAttribute("list", list);
 
 		} catch (Exception e) {
 			e.printStackTrace();

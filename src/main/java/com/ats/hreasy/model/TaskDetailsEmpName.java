@@ -35,19 +35,19 @@ private int taskId;
 	
 	private String taskWhatWentWrong;
 	
-	private boolean thisTaskStatus;
+	private int thisTaskStatus;
 	
-	private boolean  taskFinalStatus;
+	private int  taskFinalStatus;
 	
-	private boolean taskPriority;
+	private int taskPriority;
 	
 	private int taskPts;
 	
 	private String taskDoneDate;
 	
-	private boolean delStatus;
+	private int delStatus;
 	
-	private boolean isActive;
+	private int isActive;
 	
 	private int makerUserId;
 	
@@ -180,27 +180,27 @@ private int taskId;
 		this.taskWhatWentWrong = taskWhatWentWrong;
 	}
 
-	public boolean isThisTaskStatus() {
+	public int isThisTaskStatus() {
 		return thisTaskStatus;
 	}
 
-	public void setThisTaskStatus(boolean thisTaskStatus) {
+	public void setThisTaskStatus(int thisTaskStatus) {
 		this.thisTaskStatus = thisTaskStatus;
 	}
 
-	public boolean isTaskFinalStatus() {
+	public int isTaskFinalStatus() {
 		return taskFinalStatus;
 	}
 
-	public void setTaskFinalStatus(boolean taskFinalStatus) {
+	public void setTaskFinalStatus(int taskFinalStatus) {
 		this.taskFinalStatus = taskFinalStatus;
 	}
 
-	public boolean isTaskPriority() {
+	public int isTaskPriority() {
 		return taskPriority;
 	}
 
-	public void setTaskPriority(boolean taskPriority) {
+	public void setTaskPriority(int taskPriority) {
 		this.taskPriority = taskPriority;
 	}
 
@@ -220,19 +220,19 @@ private int taskId;
 		this.taskDoneDate = taskDoneDate;
 	}
 
-	public boolean isDelStatus() {
+	public int isDelStatus() {
 		return delStatus;
 	}
 
-	public void setDelStatus(boolean delStatus) {
+	public void setDelStatus(int delStatus) {
 		this.delStatus = delStatus;
 	}
 
-	public boolean isActive() {
+	public int isActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(int isActive) {
 		this.isActive = isActive;
 	}
 

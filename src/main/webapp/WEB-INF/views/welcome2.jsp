@@ -1130,33 +1130,7 @@
 							var rows = table.rows().remove().draw();
 
 							for (var i = 0; i < response.length; i++) {
-
-								/* <tr>
-								<td class="text-center"><a href="#" data-toggle="modal"
-									data-target="#customerProfile"><i
-										class="icon-users2 icon-2x d-inline-block text-info"
-										title="Customer Profile"></i></a>
-								<div class="font-size-sm text-muted line-height-1">Office
-									task</div></td>
-								<td class="text-center">
-								<h6 class="mb-0">12</h6>
-								<div class="font-size-sm text-muted line-height-1">hours</div>
-								</td>
-								<td>
-								<div class="font-weight-semibold">
-									LEAD - Previous Task <span
-											class="badge badge-primary badge-pill">10 PTS</span>
-								</div>
-								<div class="text-muted">Call to customer</div> <a href="#"
-									data-toggle="modal" data-target="#task_log"><span
-										class="badge badge-success badge-pill">65 Completed</span></a>
-								</td>
-
-								<td class="text-center">20-10-2020 12:00 AM</td>
-								<td class="text-center"><span class="badge badge-danger">High</span></td>
-								<td>Akshay,Sachin</td>
-
-								</tr> */
+ 
 								var profile = '<div class="text-center"> <a href="#" data-toggle="modal" data-target="#customerProfile">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
 										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'

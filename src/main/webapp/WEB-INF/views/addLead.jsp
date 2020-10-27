@@ -103,95 +103,21 @@
 								<form
 									action="${pageContext.request.contextPath}/submitInsertDepartment"
 									class="form-validate-jquery" novalidate="novalidate"
-									id="submitInsertLocaion" method="post">
+									id="submitLead" method="post">
 
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"
-												for="tagName">Customer Name<span class="text-danger">*
-											</span>:
-											</label>
-											<div class="col-lg-7  float">
-												<input type="text" class="form-control" value="${dept.name}"
-													placeholder="Customer Department" id="tagName"
-													maxlength="30" minlength="5" name="tagName"
-													autocomplete="off" required="required">
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<label
-												class="col-form-label text-info font-weight-bold  col-lg-5 float"
-												for="desigShortName">Type<span class="text-danger">*
-											</span>:
-											</label>
-											<div class="col-lg-7 float">
-												<select name="status"
-													class="form-control form-control-select2"
-													data-placeholder="Select status" data-fouc
-													required="required">
-													<option value="">select</option>
-													<option value="open">Customer</option>
-													<option value="hold">Collaborator</option>
-												</select>
-
-											</div>
-										</div>
-									</div>
-									<div class="form-group row">
-										<div class="col-md-6">
-											<label
-												class="col-form-label text-info font-weight-bold col-lg-5 float"
-												for="accCode">Acc Code<span class="text-danger">*
-											</span> :
+												for="custName">Customer Name<span
+												class="text-danger">* </span>:
 											</label>
 											<div class="col-lg-7  float">
 												<input type="text" class="form-control"
-													placeholder="Acc Code" id="accCode" maxlength="30"
-													minlength="5" name="accCode" autocomplete="off"
-													required="required">
+													placeholder="Customer Name" id="custName" maxlength="30"
+													name="custName" autocomplete="off" required="required">
 											</div>
 										</div>
-
-										<div class="col-md-6">
-											<label
-												class="col-form-label  text-info font-weight-bold col-lg-5 float"
-												for="dId">Select Domain<span class="text-danger">*
-											</span> :
-											</label>
-											<div class="col-lg-7 float">
-												<select name="dId" class="form-control form-control-select2"
-													data-placeholder="Select status" data-fouc
-													required="required">
-													<option value="">select</option>
-													<option value="open">Customer</option>
-													<option value="hold">Collaborator</option>
-												</select>
-
-											</div>
-										</div>
-									</div>
-									<div class="form-group row">
-										<div class="col-md-6">
-											<label
-												class="col-form-label text-info font-weight-bold col-lg-5 float"
-												for="accTag">Acc Tag<span class="text-danger">*
-											</span>:
-											</label>
-											<div class="col-lg-7 float">
-												<select name="accTag"
-													class="form-control form-control-select2"
-													data-placeholder="Select status" data-fouc
-													required="required">
-													<option value="">select</option>
-													<option value="open">HR</option>
-													<option value="hold">HR</option>
-												</select>
-
-											</div>
-										</div>
-
 										<div class="col-md-6">
 											<label
 												class="col-form-label  text-info font-weight-bold col-lg-5 float"
@@ -200,9 +126,50 @@
 											</label>
 											<div class="col-lg-7 float">
 												<input type="text" class="form-control" value="${dept.name}"
-													placeholder="Company Name" id="tagName" maxlength="30"
-													minlength="5" name="cmpName" autocomplete="off"
-													required="required">
+													placeholder="Company Name" id="cmpName" maxlength="30"
+													name="cmpName" autocomplete="off" required="required">
+
+											</div>
+										</div>
+
+									</div>
+									<div class="form-group row">
+										<div class="col-md-6">
+											<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for="type">Type<span class="text-danger">* </span>:
+											</label>
+											<div class="col-lg-7 float">
+												<select name="type"
+													class="form-control form-control-select2"
+													data-placeholder="Select Type" data-fouc
+													required="required" id="type">
+													<option value="">select</option>
+													<option value="1">Customer</option>
+													<option value="2">Collaborator</option>
+												</select>
+
+											</div>
+										</div>
+
+
+										<div class="col-md-6">
+											<label
+												class="col-form-label  text-info font-weight-bold col-lg-5 float"
+												for="channelId">Select Channel<span
+												class="text-danger">* </span> :
+											</label>
+											<div class="col-lg-7 float">
+
+												<select name="channelId"
+													class="form-control form-control-select2"
+													data-placeholder="Select Channel" data-fouc
+													required="required" id="channelId"><option
+														value="">Select Channel</option>
+													<c:forEach items="${chanalList}" var="chanalList">
+														<option value="${chanalList.mChannelId}">${chanalList.mChannelName}</option>
+													</c:forEach>
+												</select>
 
 											</div>
 										</div>
@@ -210,12 +177,82 @@
 
 									<div class="form-group row">
 										<div class="col-md-6">
+											<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for="domainId">Select Domain<span
+												class="text-danger">* </span>:
+											</label>
+											<div class="col-lg-7 float">
+												<select name="domainId"
+													class="form-control form-control-select2"
+													data-placeholder="Select Type" data-fouc
+													required="required" id="domainId">
+													<option value="0">Other Domain</option>
+
+												</select>
+
+											</div>
+										</div>
+
+
+										<div class="col-md-6">
+											<label
+												class="col-form-label  text-info font-weight-bold col-lg-5 float"
+												for="domainText">Domain Name<span
+												class="text-danger">* </span> :
+											</label>
+											<div class="col-lg-7 float">
+
+												<input type="text" class="form-control"
+													placeholder="Domain Name" id="domainText" maxlength="30"
+													name="domainText" autocomplete="off" required="required">
+
+											</div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-6">
+											<label
+												class="col-form-label text-info font-weight-bold col-lg-5 float"
+												for="accCode">ACC Code<span class="text-danger">*
+											</span> :
+											</label>
+											<div class="col-lg-7  float">
+												<input type="text" class="form-control"
+													placeholder="Acc Code" id="accCode" maxlength="30"
+													name="accCode" autocomplete="off" required="required">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label
+												class="col-form-label text-info font-weight-bold col-lg-5 float"
+												for="accTag">ACC Tag<span class="text-danger">*
+											</span>:
+											</label>
+											<div class="col-lg-7 float">
+												<select name="accTag"
+													class="form-control form-control-select2"
+													data-placeholder="Select status" data-fouc
+													required="required" id="accTag" multiple="multiple">
+													<option value="">Select Channel</option>
+													<c:forEach items="${tagList}" var="tagList">
+														<option value="${tagList.mTagId}">${tagList.mTagName}</option>
+													</c:forEach>
+												</select>
+
+											</div>
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+										<div class="col-md-6">
 											<label class="col-form-label  col-lg-5 float" for="website">Website
 												: </label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control"
 													placeholder="Website" id="website" maxlength="30"
-													minlength="5" name="website" autocomplete="off">
+													name="website" autocomplete="off">
 
 											</div>
 										</div>
@@ -224,9 +261,9 @@
 											<label class="col-form-label  col-lg-5 float" for="turnover">Turnover
 												: </label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control"
 													placeholder="Turnover" id="turnover" maxlength="30"
-													minlength="5" name="turnover" autocomplete="off">
+													name="turnover" autocomplete="off">
 
 											</div>
 										</div>
@@ -234,12 +271,12 @@
 
 									<div class="form-group row">
 										<div class="col-md-6">
-											<label class="col-form-label  col-lg-5 float" for="website">Employee
+											<label class="col-form-label  col-lg-5 float" for="empCount">Employee
 												Count : </label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
-													placeholder="Website" id="website" maxlength="30"
-													minlength="5" name="website" autocomplete="off">
+												<input type="text" class="form-control"
+													placeholder="Employee Count" id="empCount" maxlength="30"
+													name="empCount" autocomplete="off">
 
 											</div>
 										</div>
@@ -247,13 +284,14 @@
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"
-												for="turnover">Contact No<span class="text-danger">*
+												for="contactNo">Contact No<span class="text-danger">*
 											</span>:
 											</label>
 											<div class="col-lg-7 float">
 												<input type="text" class="form-control" value="${dept.name}"
-													placeholder="Contact No." id="turnover" maxlength="10"
-													minlength="10" name="turnover" autocomplete="off">
+													placeholder="Contact No." id="contactNo" maxlength="10"
+													minlength="10" name="contactNo" autocomplete="off"
+													data-mask="9999999999">
 
 											</div>
 										</div>
@@ -261,22 +299,140 @@
 
 									<div class="form-group row">
 										<div class="col-md-6">
-											<label
-												class="col-form-label text-info font-weight-bold col-lg-5 float"
-												for="remark">Remark<span class="text-danger">*</span>
-											</label>
+											<label class="col-form-label col-lg-5 float" for="scaleDesc">ACC
+												Scale Desc :</label>
 											<div class="col-lg-7 float">
 												<textarea rows="3" cols="5" name="textarea"
-													class="form-control" required placeholder="Remark"
-													id="taskDescription" name="taskDescription"></textarea>
+													class="form-control" placeholder="ACC Scale Desc"
+													id="scaleDesc" name="scaleDesc"></textarea>
 											</div>
+										</div>
+										<div class="col-md-6">
+											<label class="col-form-label  col-lg-5 float" for="remark">Remark
+												:</label>
+											<div class="col-lg-7 float">
+												<textarea rows="3" cols="5" name="remark"
+													class="form-control" placeholder="Remark" id="remark"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-6">
+											<label class="col-form-label  col-lg-5 float" for="rating">Rating
+												: </label>
+											<div class="col-lg-7 float">
+												<input type="number" class="form-control"
+													placeholder="Rating" id="rating" min="0" max="5"
+													name="rating" autocomplete="off">
+
+											</div>
+										</div>
+
+									</div>
+									<hr>
+									<div id="detailDiv">
+										<div class="form-group row">
+											<div class="col-md-6">
+												<label class="col-form-label col-lg-5 float" for="cpName">Contact
+													Person : </label>
+												<div class="col-lg-7 float">
+													<input type="text" class="form-control"
+														placeholder="Contact Person Name" id="cpName"
+														maxlength="30" name="cpName" autocomplete="off"> <span
+														class="validation-invalid-label" id="error_cpName"
+														style="display: none;">This field is required.</span>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<label class="col-form-label col-lg-5 float"
+													for="designation">Select Designation : </label>
+												<div class="col-lg-7 float">
+													<select name="designation"
+														class="form-control form-control-select2"
+														data-placeholder="Select Designation" data-fouc
+														id="designation">
+														<option value="">Select Designation</option>
+														<c:forEach items="${tagList}" var="tagList">
+															<option value="${tagList.mTagId}">${tagList.mTagName}</option>
+														</c:forEach>
+													</select><span class="validation-invalid-label"
+														id="error_designation" style="display: none;">This
+														field is required.</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<div class="col-md-6">
+												<label class="col-form-label col-lg-5 float" for="cpMobile1">Contact
+													No. : </label>
+												<div class="col-lg-7 float">
+													<input type="text" class="form-control"
+														placeholder="Contact No." id="cpMobile1" name="cpMobile1"
+														autocomplete="off"> <span
+														class="validation-invalid-label" id="error_cpMobile1"
+														style="display: none;">This field is required.</span>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<label class="col-form-label col-lg-5 float" for="cpMobile2">Alternate
+													Contact No. : </label>
+												<div class="col-lg-7 float">
+													<input type="text" class="form-control"
+														placeholder="Contact No." id="cpMobile2" name="cpMobile2"
+														autocomplete="off"><span
+														class="validation-invalid-label" id="error_cpMobile2"
+														style="display: none;">Enter valid mobile no.</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<div class="col-md-6">
+												<label class="col-form-label col-lg-5 float" for="emailId">Email
+													: </label>
+												<div class="col-lg-7 float">
+													<input type="text" class="form-control" placeholder="Email"
+														id="emailId" name="emailId" autocomplete="off"> <span
+														class="validation-invalid-label" id="error_emailId"
+														style="display: none;">Enter valid email.</span>
+												</div>
+											</div>
+
 										</div>
 									</div>
 									<div class="form-group row mb-0">
 										<div style="margin: 0 auto;">
 
+											<button type="button" class="btn blue_btn ml-3 legitRipple"
+												id="addBtn" onclick="addCp()">Add</button>
+
+										</div>
+									</div>
+									<div class="table-responsive">
+										<table class="table tasks-list table-lg" id="contactlist">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th class="text-center">Contact Person Name</th>
+													<th class="text-center">Contact No.</th>
+													<th class="text-center">Alternate Contact No.</th>
+													<th class="text-center">Email</th>
+													<th class="text-center">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
+									<div class="form-group row mb-0">
+										<div style="margin: 0 auto;">
+
 											<button type="submit" class="btn blue_btn ml-3 legitRipple"
-												id="submtbtn">Submit</button>
+												id="submtbtn" disabled>Submit</button>
 											<a href="${pageContext.request.contextPath}/showLeadList"><button
 													type="button" class="btn btn-light">Back</button></a>
 										</div>
@@ -314,57 +470,180 @@
 			return;
 		}
 
-		/* $(document).ready(function($) {
+		$(document).ready(function($) {
 
-			$("#submitInsertLocaion").submit(function(e) {
-				var isError = false;
-				var errMsg = "";
-				var validation = '';
+			$("#submitLead").submit(function(e) {
+				if ($('#submitLead').valid() == true) {
 
-				if (parseInt(validation) == 1) {
-
-					if (!$("#man_pow").val() || $("#man_pow").val() < 0) {
-						isError = true;
-						$("#error_man_pow").show();
-					} else {
-						$("#error_man_pow").hide();
-					}
-				}//end of if validation==1
-
-				if (!$("#desigName").val()) {
-
-					isError = true;
-
-					$("#error_designation").show()
-					//return false;
-				} else {
-					$("#error_designation").hide()
-				}
-
-				if (!$("#desigShortName").val()) {
-
-					isError = true;
-
-					$("#error_desigShortName").show()
-
-				} else {
-					$("#error_desigShortName").hide()
-				}
-
-				if (!isError) {
-
-					var x = true;
-					if (x == true) {
-
-						document.getElementById("submtbtn").disabled = true;
-						return true;
-					}
-					//end ajax send this to php page
+					bootbox.confirm({
+						title : 'Confirm',
+						message : 'Confirm Generate Lead ? ',
+						buttons : {
+							confirm : {
+								label : 'yes',
+								className : 'btn-success'
+							},
+							cancel : {
+								lable : 'Cancel',
+								classNAme : 'btn-link'
+							}
+						},
+						callback : function(result) {
+							if (result) {
+								document.getElementById('submitLead').submit();
+							}
+						}
+					});
+					return false;
 				}
 				return false;
 			});
-		}); */
-		//
+		});
+
+		function addCp() {
+
+			var cpName = $("#cpName").val();
+			var designation = $("#designation").val();
+			var cpMobile1 = $("#cpMobile1").val();
+			var cpMobile2 = $("#cpMobile2").val();
+			var email = $("#emailId").val();
+
+			if (validate()) {
+
+				var fd = new FormData();
+				fd.append("cpName", cpName);
+				fd.append("designation", designation);
+				fd.append("cpMobile1", cpMobile1);
+				fd.append("cpMobile2", cpMobile2);
+				fd.append("email", email);
+
+				$
+						.ajax({
+							url : '${pageContext.request.contextPath}/addContactPersonLead',
+							type : 'post',
+							dataType : 'json',
+							data : fd,
+							contentType : false,
+							processData : false,
+							success : function(response) {
+								getCpList();
+							},
+						});
+			}
+		}
+
+		function getCpList() {
+
+			var fd = new FormData();
+
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/getCpList',
+						type : 'post',
+						dataType : 'json',
+						data : fd,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+
+							var table = $('#contactlist').DataTable();
+							var rows = table.rows().remove().draw();
+
+							for (var i = 0; i < response.length; i++) {
+
+								var action = '<div class="text-center"> <a href="javascript:void(0)" class="list-icons-item text-primary-600" data-popup="tooltip" '
+										+ ' title="" data-original-title="Delete" onclick="deleteCp('
+										+ i
+										+ ')"><i class="icon-trash"></i></a></div>'
+
+								$('#contactlist td').css('white-space',
+										'initial');
+								$('#contactlist').DataTable().row.add(
+										[ (i + 1), response[i].cpName,
+												response[i].cpMobile,
+												response[i].cpMobile2,
+												response[i].cpEmail, action ])
+										.draw();
+							}
+
+							if (response.length > 0) {
+								document.getElementById('submtbtn').disabled = false;
+							} else {
+								document.getElementById('submtbtn').disabled = true;
+							}
+
+						},
+					});
+
+		}
+
+		function deleteCp(id) {
+
+			var fd = new FormData();
+			fd.append("id", id);
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/deleteContactPersonLead',
+						type : 'post',
+						dataType : 'json',
+						data : fd,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+							getCpList();
+						},
+					});
+
+		}
+
+		function validate() {
+			var cpName = $("#cpName").val();
+			var designation = $("#designation").val();
+			var cpMobile1 = $("#cpMobile1").val();
+			var cpMobile2 = $("#cpMobile2").val();
+			var email = $("#emailId").val();
+
+			$("#error_cpName").hide();
+			$("#error_designation").hide();
+			$("#error_cpMobile1").hide();
+			$("#error_cpMobile2").hide();
+			$("#error_emailId").hide();
+			var mob = /^\d{10}$/;
+			const emailRegex = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+
+			var isError = true;
+
+			if (cpName == "") {
+				$("#error_cpName").show();
+				isError = false;
+			}
+			if (designation == "") {
+				$("#error_designation").show();
+				isError = false;
+			}
+			if (cpMobile1 == "") {
+				$("#error_cpMobile1").html('This filed is required.');
+				$("#error_cpMobile1").show();
+				isError = false;
+			} else if (!mob.test(cpMobile1)) {
+				$("#error_cpMobile1").html('Invalid mobile no');
+				$("#error_cpMobile1").show();
+				isError = false;
+			}
+
+			if (!mob.test(cpMobile2) && cpMobile2 != "") {
+				$("#error_cpMobile2").html('Invalid mobile no');
+				$("#error_cpMobile2").show();
+				isError = false;
+			}
+
+			if (!emailRegex.test(email) && email != "") {
+				$("#error_emailId").html('Invalid email.');
+				$("#error_emailId").show();
+				isError = false;
+			}
+			return isError;
+		}
 	</script>
 
 	<!-- <script type="text/javascript">

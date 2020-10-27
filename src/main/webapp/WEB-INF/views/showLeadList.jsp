@@ -99,46 +99,31 @@
 								<tr class="bg-blue">
 
 									<th width="10%" class="text-center">SR. N0.</th>
-									<th class="text-center">COMPANY NAME</th>
-									<th class="text-center">TYPE</th>
-									<th class="text-center">CHANNEL</th>
-									<th class="text-center">ACC TAG</th>
-									<th width="10%" class="text-center">ACTION</th>
+									<th class="text-center">Company Name</th>
+									<!-- <th class="text-center">Customer Name</th> -->
+									<th class="text-center">Type</th>
+									<th class="text-center">Channel</th>
+									<th class="text-center">ACC Tag</th>
+									<th width="10%" class="text-center">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 
-								<tr>
-									<td>${count.index+1}</td>
-									<td>ATS</td>
-									<td>CUSTOMER</td>
-									<td>FB</td>
-									<td>HR</td>
-									<td class="text-center">
-										<%-- <c:if test="${editAccess == 0}"> --%> <a
-										href="${pageContext.request.contextPath}/editSkillRate?skillId=${skillList.exVar1}"
-										class="list-icons-item text-primary-600" data-popup="tooltip"
-										title="" data-original-title="Edit"><i
-											class="icon-pencil7"></i></a> <%-- </c:if> <c:if test="${deleteAccess == 0}"> --%>
 
-
-										<a href="javascript:void(0)"
-										class="list-icons-item text-danger-600 bootbox_custom"
-										data-uuid="${skillList.exVar1}" data-popup="tooltip" title=""
-										data-original-title="Delete"><i class="icon-trash"></i></a> <%-- </c:if> --%>
-									</td>
-								</tr>
-								<c:forEach items="${skillList}" var="skillList"
-									varStatus="count">
+								<c:forEach items="${list}" var="list" varStatus="count">
 									<tr>
 										<td>${count.index+1}</td>
-										<td>HR</td>
-										<td>Lead</td>
-
-
+										<td>${list.accCompany}</td>
+										<%-- <td>${list.accCompany}</td> --%>
+										<td><c:choose>
+												<c:when test="${list.mdAccTypeId==1}">Customer</c:when>
+												<c:otherwise>Collaborator</c:otherwise>
+											</c:choose></td>
+										<td>${list.channelName}</td>
+										<td>${list.tagNames}</td>
 										<td class="text-center">
 											<%-- <c:if test="${editAccess == 0}"> --%> <a
-											href="${pageContext.request.contextPath}/editSkillRate?skillId=${skillList.exVar1}"
+											href="${pageContext.request.contextPath}/editLms?lmsId=${list.lmsId}"
 											class="list-icons-item text-primary-600" data-popup="tooltip"
 											title="" data-original-title="Edit"><i
 												class="icon-pencil7"></i></a> <%-- </c:if> <c:if test="${deleteAccess == 0}"> --%>
@@ -146,7 +131,7 @@
 
 											<a href="javascript:void(0)"
 											class="list-icons-item text-danger-600 bootbox_custom"
-											data-uuid="${skillList.exVar1}" data-popup="tooltip" title=""
+											data-uuid="${list.lmsId}" data-popup="tooltip" title=""
 											data-original-title="Delete"><i class="icon-trash"></i></a> <%-- </c:if> --%>
 										</td>
 									</tr>
@@ -196,7 +181,7 @@
 										},
 										callback : function(result) {
 											if (result) {
-												location.href = "${pageContext.request.contextPath}/deleteSkillRate?skillId="
+												location.href = "${pageContext.request.contextPath}/deleteLead?lmsId="
 														+ uuid;
 
 											}
