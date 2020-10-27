@@ -19,11 +19,14 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.hreasy.common.Constants;
+import com.ats.hreasy.model.AccessRightModule;
 import com.ats.hreasy.model.AccountType;
 import com.ats.hreasy.model.Info;
 import com.ats.hreasy.model.Tags;
+import com.ats.hreasy.model.TaskDetailsEmpName;
 import com.ats.hreasy.model.UserLoginData;
 
 @Controller
@@ -41,6 +44,25 @@ public class DashboardController {
 			e.printStackTrace();
 		}
 		return mav;
+	}
+
+	@RequestMapping(value = "/getPendingTaskList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<TaskDetailsEmpName> getPendingTaskList(HttpServletRequest request, HttpServletResponse response) {
+
+		List<TaskDetailsEmpName> list = new ArrayList<>();
+		try {
+			HttpSession session = request.getSession();
+			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("empId", userDetail.getEmpId());
+			TaskDetailsEmpName[] tags = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getTaskDetailWithEmpNameByEmpid", map, TaskDetailsEmpName[].class);
+			list = new ArrayList<>(Arrays.asList(tags));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -71,38 +93,37 @@ public class DashboardController {
 
 	@RequestMapping(value = "/tagList", method = RequestMethod.GET)
 	public String tagList(HttpServletRequest request, HttpServletResponse response, Model model) {
-		List<Tags> tagListResp=new ArrayList<Tags>();
+		List<Tags> tagListResp = new ArrayList<Tags>();
 		String mav = "";
 
-		
 		try {
-			
-	
-		Tags[]	tags=Constants.getRestTemplate().postForObject(Constants.url+"getAllTagsWithAccountTypeName", null, Tags[].class);
-		tagListResp=new ArrayList<Tags>(Arrays.asList(tags));
-		System.err.println(tagListResp);
-		mav="tagList";
-		model.addAttribute("tagList", tagListResp);
+
+			Tags[] tags = Constants.getRestTemplate().postForObject(Constants.url + "getAllTagsWithAccountTypeName",
+					null, Tags[].class);
+			tagListResp = new ArrayList<Tags>(Arrays.asList(tags));
+			System.err.println(tagListResp);
+			mav = "tagList";
+			model.addAttribute("tagList", tagListResp);
 		} catch (Exception e) {
 			System.err.println("Exception Occur In Catch Block Of / tagList Mapping");
-			tagListResp=new ArrayList<Tags>();
-			mav ="tagList";
+			tagListResp = new ArrayList<Tags>();
+			mav = "tagList";
 			e.printStackTrace();
-			
-			
+
 		}
 		return mav;
 	}
 
 	@RequestMapping(value = "/addNewTag", method = RequestMethod.GET)
 	public String addNewTag(HttpServletRequest request, HttpServletResponse response, Model model) {
-		List<AccountType> accTypeResponse=new ArrayList<AccountType>();
+		List<AccountType> accTypeResponse = new ArrayList<AccountType>();
 		String mav = "addNewTag";
-		Tags newTag=new Tags();
+		Tags newTag = new Tags();
 		try {
-			AccountType [] accType=Constants.getRestTemplate().postForObject(Constants.url+"getAllAccouctTypeList", null, AccountType[].class);
-			accTypeResponse=new ArrayList<>(Arrays.asList(accType));
-			//System.err.println(accTypeResponse+"Accounttype Response");
+			AccountType[] accType = Constants.getRestTemplate().postForObject(Constants.url + "getAllAccouctTypeList",
+					null, AccountType[].class);
+			accTypeResponse = new ArrayList<>(Arrays.asList(accType));
+			// System.err.println(accTypeResponse+"Accounttype Response");
 			model.addAttribute("AccountTypeList", accTypeResponse);
 			model.addAttribute("tagResponse", newTag);
 		} catch (Exception e) {
@@ -110,23 +131,25 @@ public class DashboardController {
 		}
 		return mav;
 	}
-	
-	
+
 	@RequestMapping(value = "/editTag", method = RequestMethod.GET)
-	public String editTag(HttpServletRequest request, HttpServletResponse response, Model model,@RequestParam int tagId ) {
+	public String editTag(HttpServletRequest request, HttpServletResponse response, Model model,
+			@RequestParam int tagId) {
 		System.err.println("In Edit Tag ");
-		List<AccountType> accTypeResponse=new ArrayList<AccountType>();
+		List<AccountType> accTypeResponse = new ArrayList<AccountType>();
 		String mav = "addNewTag";
-		Tags tagResp=new Tags();
-		MultiValueMap<String,Object> map=new LinkedMultiValueMap<String, Object>();
+		Tags tagResp = new Tags();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("tagId", tagId);
-		
+
 		try {
 			System.err.println("In Try Before Resttemplate");
-			AccountType [] accType=Constants.getRestTemplate().postForObject(Constants.url+"getAllAccouctTypeList", null, AccountType[].class);
-			accTypeResponse=new ArrayList<>(Arrays.asList(accType));
-		tagResp=Constants.getRestTemplate().postForObject(Constants.url+"getSingTagByIdAndDelStatus", map, Tags.class);
-			//System.err.println(accTypeResponse+"Accounttype Response");
+			AccountType[] accType = Constants.getRestTemplate().postForObject(Constants.url + "getAllAccouctTypeList",
+					null, AccountType[].class);
+			accTypeResponse = new ArrayList<>(Arrays.asList(accType));
+			tagResp = Constants.getRestTemplate().postForObject(Constants.url + "getSingTagByIdAndDelStatus", map,
+					Tags.class);
+			// System.err.println(accTypeResponse+"Accounttype Response");
 			model.addAttribute("AccountTypeList", accTypeResponse);
 			model.addAttribute("tagResponse", tagResp);
 		} catch (Exception e) {
@@ -160,7 +183,7 @@ public class DashboardController {
 		}
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/addEnquiry", method = RequestMethod.GET)
 	public String addEnquiry(HttpServletRequest request, HttpServletResponse response, Model model) {
 
@@ -186,20 +209,18 @@ public class DashboardController {
 		}
 		return mav;
 	}
-	
-	@RequestMapping(value="/submitTagForm",method=RequestMethod.POST)
+
+	@RequestMapping(value = "/submitTagForm", method = RequestMethod.POST)
 	public String addNewTAg(HttpServletRequest request, HttpServletResponse response, Model model) {
-		Tags tag=new Tags();
-		Info info =new Info();
+		Tags tag = new Tags();
+		Info info = new Info();
 		HttpSession session = request.getSession();
-		SimpleDateFormat simpleDate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date=new Date();
-		String mav="";
-		
-		
-		UserLoginData currentUser=(UserLoginData)session.getAttribute("userObj");
-		
-		
+		SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		String mav = "";
+
+		UserLoginData currentUser = (UserLoginData) session.getAttribute("userObj");
+
 		try {
 			tag.setmTagId(Integer.parseInt(request.getParameter("tagId")));
 			tag.setmAccTypeId(Integer.parseInt(request.getParameter("accountType")));
@@ -208,77 +229,65 @@ public class DashboardController {
 			tag.setActive(true);
 			tag.setMakerUserId(currentUser.getEmpId());
 			tag.setMakerDatetime(simpleDate.format(date));
-			if(tag.getmTagId()==0) {
-				
-				Tags t1=Constants.getRestTemplate().postForObject(Constants.url+"addNewTag", tag, Tags.class);	
-				System.err.println("Saved Tag Is="+"\t"+t1);
-				if(t1!=null) {
+			if (tag.getmTagId() == 0) {
+
+				Tags t1 = Constants.getRestTemplate().postForObject(Constants.url + "addNewTag", tag, Tags.class);
+				System.err.println("Saved Tag Is=" + "\t" + t1);
+				if (t1 != null) {
 					session.setAttribute("successMsg", "New Tag SuccessFully  Added");
-				}else {
+				} else {
 					session.setAttribute("errorMsg", "Unable To Add New Tag");
 				}
-			}else {
-				System.err.println("Exiisting Tag For Edit Is:"+"\t"+tag);
-				info=Constants.getRestTemplate().postForObject(Constants.url+"editTag", tag, Info.class);
-				if(!info.isError()) {
+			} else {
+				System.err.println("Exiisting Tag For Edit Is:" + "\t" + tag);
+				info = Constants.getRestTemplate().postForObject(Constants.url + "editTag", tag, Info.class);
+				if (!info.isError()) {
 					session.setAttribute("successMsg", "Tag SucessFully Updated");
-					
-				}else {
+
+				} else {
 					session.setAttribute("errorMsg", "Unable To Update  Tag");
 				}
 			}
-		
-			
-			mav= "redirect:/tagList";
-		
+
+			mav = "redirect:/tagList";
+
 		} catch (Exception e) {
 			// TODO: handle exception
-			
+
 			System.err.println("Something Went Wrong Cat Block Of  /submitTagForm  mapping");
 			e.printStackTrace();
-			mav= "redirect:/addNewTag";
+			mav = "redirect:/addNewTag";
 		}
-		
-		
-			
-		
+
 		return mav;
-		
-		
+
 	}
-	
-	
-	@RequestMapping(value="/deleteTag",method=RequestMethod.GET)
-	public String deleteTagById(@RequestParam int tagId ,HttpServletRequest request) {
-		MultiValueMap<String, Object> map =new LinkedMultiValueMap<String, Object>();
+
+	@RequestMapping(value = "/deleteTag", method = RequestMethod.GET)
+	public String deleteTagById(@RequestParam int tagId, HttpServletRequest request) {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("tagId", tagId);
-	
-		Info info=new Info();
-		String mav="";
+
+		Info info = new Info();
+		String mav = "";
 		HttpSession session = request.getSession();
 		try {
-			info=Constants.getRestTemplate().postForObject(Constants.url+"deleteTagByDelStatus", map, Info.class);
-			if(info.isError()) {
+			info = Constants.getRestTemplate().postForObject(Constants.url + "deleteTagByDelStatus", map, Info.class);
+			if (info.isError()) {
 				session.setAttribute("errorMsg", "Unable To Delete Tag");
-				mav="redirect:/";
+				mav = "redirect:/";
 			}
-			session.setAttribute("successMsg","Tag Successfully Deleted");
-			mav="redirect:/tagList";
+			session.setAttribute("successMsg", "Tag Successfully Deleted");
+			mav = "redirect:/tagList";
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
 			e.printStackTrace();
-			mav="redirect:/";
+			mav = "redirect:/";
 		}
-		
-		//System.err.println(tagId+"\t"+"Tag Id");
+
+		// System.err.println(tagId+"\t"+"Tag Id");
 		return mav;
 	}
-	
-	
-	
-	
-	
-	
 
 }

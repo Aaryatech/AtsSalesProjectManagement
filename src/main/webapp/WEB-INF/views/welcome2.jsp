@@ -124,8 +124,7 @@
 							</div>
 
 							<div class="table-responsive">
-								<table class="table tasks-list table-lg"
-									style="border-color: #ddd;">
+								<table class="table tasks-list table-lg" id="pendingTaskTable">
 									<thead>
 										<tr>
 											<th>#</th>
@@ -1048,7 +1047,32 @@
 		</div>
 	</div>
 
+	<!-- Info modal -->
+	<div id="modal_step1" class="modal fade " data-backdrop="false"
+		tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header bg-info">
+					<h6 class="modal-title">Please wait.....</h6>
+					<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				</div>
 
+				<div class="modal-body">
+					<!-- <h6 class="font-weight-semibold text-center">Please wait.....
+					</h6>
+
+					<hr> -->
+					<p class="text-center text-info">If it is taking time please
+						reload the page</p>
+				</div>
+
+				<div class="modal-footer">
+					<!--   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+
+				</div>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		// Single picker
 		$('.datepickerclass').daterangepicker({
@@ -1071,19 +1095,6 @@
 				separator : ' to '
 			}
 		});
-
-		$('#selectAll').click(function(event) {
-			if (this.checked) {
-				// Iterate each checkbox
-				$(':checkbox').each(function() {
-					this.checked = true;
-				});
-			} else {
-				$(':checkbox').each(function() {
-					this.checked = false;
-				});
-			}
-		});
 	</script>
 	<!-- <script type="text/javascript">
 		$(window).on('load', function() {
@@ -1091,76 +1102,111 @@
 		});
 	</script> -->
 
-	<script>
-		// Custom bootbox dialog
-		$('.bootbox_custom')
-				.on(
-						'click',
-						function() {
-							//var uuid = $(this).data("uuid") // will return the number 123
-							var table = $('#printtable1').DataTable();
-							table.search("").draw();
-							$("#error_emp").hide();
-							var list = [];
 
-							$("input:checkbox[name=selectEmp]:checked").each(
-									function() {
-										list.push($(this).val());
-									});
-							if (list.length > 0) {
-
-								bootbox
-										.confirm({
-											title : 'Confirm ',
-											message : 'Have you upload attendance of the selected month of employee?',
-											buttons : {
-												confirm : {
-													label : 'Yes',
-													className : 'btn-success'
-												},
-												cancel : {
-													label : 'Cancel',
-													className : 'btn-link'
-												}
-											},
-											callback : function(result) {
-												if (result) {
-													document
-															.getElementById(
-																	'submitFixAttendaceByDateAndEmp')
-															.submit();
-
-												}
-											}
-										});
-							} else {
-								//alert("Select Minimum one employee")
-								$("#error_emp").show();
-							}
-						});
-	</Script>
 	<script type="text/javascript">
-		$('.datatable-fixed-left_custom').DataTable({
+		$(document).ready(function() {
+			getTaskPendingList();
+		})
 
-			columnDefs : [ {
-				orderable : false,
-				targets : [ 0 ]
-			}, {
-				orderable : false,
-				targets : [ 1 ]
-			} ],
-			"order" : [],
-			//scrollX : true,
-			scrollX : true,
-			scrollY : '65vh',
-			scrollCollapse : true,
-			paging : false,
-			fixedColumns : {
-				leftColumns : 1,
-				rightColumns : 0
-			}
+		function getTaskPendingList() {
 
-		});
+			var fd = new FormData();
+
+			//$('#modal_step1').modal('show');
+
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/getPendingTaskList',
+						type : 'post',
+						dataType : 'json',
+						data : fd,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+
+							//$('#modal_step1').modal('hide');
+							//alert(JSON.stringify(response))
+							var table = $('#pendingTaskTable').DataTable();
+							var rows = table.rows().remove().draw();
+
+							for (var i = 0; i < response.length; i++) {
+
+								/* <tr>
+								<td class="text-center"><a href="#" data-toggle="modal"
+									data-target="#customerProfile"><i
+										class="icon-users2 icon-2x d-inline-block text-info"
+										title="Customer Profile"></i></a>
+								<div class="font-size-sm text-muted line-height-1">Office
+									task</div></td>
+								<td class="text-center">
+								<h6 class="mb-0">12</h6>
+								<div class="font-size-sm text-muted line-height-1">hours</div>
+								</td>
+								<td>
+								<div class="font-weight-semibold">
+									LEAD - Previous Task <span
+											class="badge badge-primary badge-pill">10 PTS</span>
+								</div>
+								<div class="text-muted">Call to customer</div> <a href="#"
+									data-toggle="modal" data-target="#task_log"><span
+										class="badge badge-success badge-pill">65 Completed</span></a>
+								</td>
+
+								<td class="text-center">20-10-2020 12:00 AM</td>
+								<td class="text-center"><span class="badge badge-danger">High</span></td>
+								<td>Akshay,Sachin</td>
+
+								</tr> */
+								var profile = '<div class="text-center"> <a href="#" data-toggle="modal" data-target="#customerProfile">'
+										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+								if (response[i].sts == 1) {
+									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+											+ response[i].day
+											+ '-'
+											+ response[i].hour
+											+ ':'
+											+ response[i].minutes
+											+ '</h6> <div class="font-size-sm text-muted line-height-1">hours</div></div>';
+								}
+								var taskDescription = '<div class="font-weight-semibold">'
+										+ response[i].mdAccTypeText
+										+ '- '
+										+ response[i].taskTittle
+										+ ' '
+										+ '<span class="badge badge-primary badge-pill">'
+										+ response[i].taskPts
+										+ ' PTS</span></div> <div class="text-muted">'
+										+ response[i].taskAllotmentInstructions
+										+ '</div>'
+										+ '<a href="#" data-toggle="modal" data-target="#task_log"><span class="badge badge-success badge-pill">'
+										+ response[i].completed
+										+ ' Completed</span></a>';
+								var schdatetime = '<div class="text-center">'
+										+ response[i].taskScheTime + '</div>';
+								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+								if (response[i].taskPriority == 2) {
+									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+								} else if (response[i].taskPriority == 3) {
+									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+								}
+
+								$('#pendingTaskTable td').css('white-space',
+										'initial');
+								$('#pendingTaskTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												priority,
+												response[i].employeeName ])
+										.draw();
+							}
+
+						},
+					});
+
+		}
 		$('.datepickerclass').daterangepicker({
 			singleDatePicker : true,
 			selectMonths : true,
