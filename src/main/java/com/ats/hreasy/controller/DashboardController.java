@@ -283,8 +283,9 @@ public class DashboardController {
 	@RequestMapping(value = "/submitLms", method = RequestMethod.POST)
 	public String submitLms(HttpServletRequest request, HttpServletResponse response) {
 
+		HttpSession session = request.getSession();
 		try {
-			HttpSession session = request.getSession();
+
 			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			Date dt = new Date();
@@ -316,7 +317,7 @@ public class DashboardController {
 				tags = tags + "," + accTag[i];
 			}
 			tags = tags.substring(1);
-			//System.out.println(tags);
+			// System.out.println(tags);
 			LmsHeader lmsHeader = new LmsHeader();
 			lmsHeader.setAccCompany(cmpName);
 			lmsHeader.setMdAccTypeId(type);
@@ -332,13 +333,20 @@ public class DashboardController {
 			lmsHeader.setAccRemark(remark);
 			lmsHeader.setAccAtsRating(rating);
 			lmsHeader.setDelStatus(1);
+			lmsHeader.setActive(1);
 			lmsHeader.setMakerUserId(userDetail.getEmpId());
 			lmsHeader.setMakerDatetime(sf.format(dt));
 
 			lmsHeader.setLmsDetailList(lmsDetailList);
-
-			System.out.println(lmsHeader);
+			LmsHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewLmsHeader",
+					lmsHeader, LmsHeader.class);
+			if (res == null) {
+				session.setAttribute("errorMsg", "Failed To Generated Lead.");
+			} else {
+				session.setAttribute("successMsg", "Lead Generated Successfully.");
+			}
 		} catch (Exception e) {
+			session.setAttribute("errorMsg", "Failed To Generated Lead.");
 			e.printStackTrace();
 		}
 		return "redirect:/showLeadList";
