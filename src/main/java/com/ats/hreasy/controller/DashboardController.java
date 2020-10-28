@@ -32,7 +32,9 @@ import com.ats.hreasy.model.LmsDetail;
 import com.ats.hreasy.model.LmsHeader;
 import com.ats.hreasy.model.LmsHeaderWithNames;
 import com.ats.hreasy.model.Tags;
+import com.ats.hreasy.model.TaskDetails;
 import com.ats.hreasy.model.TaskDetailsEmpName;
+import com.ats.hreasy.model.TaskStatus;
 import com.ats.hreasy.model.UserLoginData;
 
 @Controller
@@ -214,6 +216,7 @@ public class DashboardController {
 			String cpMobile1 = request.getParameter("cpMobile1");
 			String cpMobile2 = request.getParameter("cpMobile2");
 			String email = request.getParameter("email");
+			String designationName = request.getParameter("designationName");
 
 			LmsDetail lmsDetail = new LmsDetail();
 			lmsDetail.setCpDesignationId(designation);
@@ -221,9 +224,21 @@ public class DashboardController {
 			lmsDetail.setCpMobile(cpMobile1);
 			lmsDetail.setCpMobile2(cpMobile2);
 			lmsDetail.setCpName(cpName);
-
+			lmsDetail.setExVar1(designationName);
+			lmsDetail.setDelStatus(1);
 			if (lmsDetailList.size() == 0) {
 				lmsDetail.setCpPrimary(1);
+			} else {
+				int find = 0;
+				for (int i = 0; i < lmsDetailList.size(); i++) {
+					if (lmsDetailList.get(i).getDelStatus() == 1) {
+						find = 1;
+						break;
+					}
+				}
+				if (find == 0) {
+					lmsDetail.setCpPrimary(1);
+				}
 			}
 			lmsDetailList.add(lmsDetail);
 			info.setError(false);
@@ -280,17 +295,187 @@ public class DashboardController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/submitLms", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteLead", method = RequestMethod.GET)
+	public String deleteLead(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		HttpSession session = request.getSession();
+		try {
+
+			int lmsId = Integer.parseInt(request.getParameter("lmsId"));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("lmsId", lmsId);
+			Info info = Constants.getRestTemplate().postForObject(Constants.url + "deleteLmsHeader", map, Info.class);
+
+			if (info.isError() == true) {
+				session.setAttribute("errorMsg", "Failed To Detel Lead.");
+			} else {
+
+				session.setAttribute("successMsg", "Lead Deleted Successfully.");
+			}
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", "Failed To Generated Lead.");
+			e.printStackTrace();
+		}
+		return "redirect:/showLeadList";
+	}
+
+	LmsHeaderWithNames editLmsHeader = new LmsHeaderWithNames();
+
+	@RequestMapping(value = "/editLms", method = RequestMethod.GET)
+	public String editLms(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		HttpSession session = request.getSession();
+		String mv = "editLms";
+		try {
+			lmsDetailList = new ArrayList<LmsDetail>();
+			int lmsId = Integer.parseInt(request.getParameter("lmsId"));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("lmsId", lmsId);
+			editLmsHeader = Constants.getRestTemplate().postForObject(Constants.url + "/getLmsHeader", map,
+					LmsHeaderWithNames.class);
+			model.addAttribute("editLmsHeader", editLmsHeader);
+
+			Channel[] channel = Constants.getRestTemplate().getForObject(Constants.url + "getAllChannelList",
+					Channel[].class);
+			List<Channel> chanalList = new ArrayList<>(Arrays.asList(channel));
+			model.addAttribute("chanalList", chanalList);
+
+			Tags[] tags = Constants.getRestTemplate().postForObject(Constants.url + "getAllTagsWithAccountTypeName",
+					null, Tags[].class);
+			List<Tags> tagList = new ArrayList<Tags>(Arrays.asList(tags));
+
+			model.addAttribute("tagList", tagList);
+
+			DomainType[] domainType = Constants.getRestTemplate().getForObject(Constants.url + "getAllDomainTypelist",
+					DomainType[].class);
+			List<DomainType> domainList = new ArrayList<DomainType>(Arrays.asList(domainType));
+
+			model.addAttribute("domainList", domainList);
+
+			Designation[] designation = Constants.getRestTemplate().getForObject(Constants.url + "getAllDesignation",
+					Designation[].class);
+			List<Designation> designationList = new ArrayList<Designation>(Arrays.asList(designation));
+
+			model.addAttribute("designationList", designationList);
+
+			String[] selectedTags = editLmsHeader.getAccTags().split(",");
+			model.addAttribute("selectedTags", selectedTags);
+			lmsDetailList = editLmsHeader.getLmsDetailList();
+
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", "Failed To Generated Lead.");
+			e.printStackTrace();
+		}
+		return mv;
+	}
+
+	@RequestMapping(value = "/deleteContactPersonLeadEdit", method = RequestMethod.POST)
+	@ResponseBody
+	public Info deleteContactPersonLeadEdit(HttpServletRequest request, HttpServletResponse response) {
+
+		Info info = new Info();
+		try {
+
+			int id = Integer.parseInt(request.getParameter("id"));
+
+			if (lmsDetailList.get(id).getLmsId() == 0) {
+				lmsDetailList.remove(id);
+			} else {
+				lmsDetailList.get(id).setDelStatus(0);
+			}
+
+			info.setError(false);
+			info.setMsg("Successfully Deleted");
+		} catch (Exception e) {
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("failed Deleted");
+		}
+		return info;
+	}
+
+	@RequestMapping(value = "/submitEditLms", method = RequestMethod.POST)
 	public String submitLms(HttpServletRequest request, HttpServletResponse response) {
 
 		HttpSession session = request.getSession();
 		try {
 
 			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date dt = new Date();
 
-			String custName = request.getParameter("custName");
+			// String custName = request.getParameter("custName");
+			String cmpName = request.getParameter("cmpName");
+			int type = Integer.parseInt(request.getParameter("type"));
+			int channelId = Integer.parseInt(request.getParameter("channelId"));
+			int domainId = Integer.parseInt(request.getParameter("domainId"));
+			String domainText = request.getParameter("domainText");
+			String accCode = request.getParameter("accCode");
+			String[] accTag = request.getParameterValues("accTag");
+			String website = request.getParameter("website");
+			int empCount = 0;
+			try {
+				empCount = Integer.parseInt(request.getParameter("empCount"));
+			} catch (Exception e) {
+
+			}
+
+			String contactNo = request.getParameter("contactNo");
+			String scaleDesc = request.getParameter("scaleDesc");
+			String remark = request.getParameter("remark");
+			String rating = request.getParameter("rating");
+
+			String tags = "";
+
+			for (int i = 0; i < accTag.length; i++) {
+				tags = tags + "," + accTag[i];
+			}
+			tags = tags.substring(1);
+			// System.out.println(tags);
+
+			editLmsHeader.setAccCompany(cmpName);
+			editLmsHeader.setMdAccTypeId(type);
+			editLmsHeader.setChannelId(channelId);
+			editLmsHeader.setAccDomainId(domainId);
+			editLmsHeader.setAccDomainOther(domainText);
+			editLmsHeader.setAccCode(accCode);
+			editLmsHeader.setAccTags(tags);
+			editLmsHeader.setAccWebsite(website);
+			editLmsHeader.setAccEmpCount(empCount);
+			editLmsHeader.setAccCompanyLandline(contactNo);
+			editLmsHeader.setAccScaleDesc(scaleDesc);
+			editLmsHeader.setAccRemark(remark);
+			editLmsHeader.setAccAtsRating(rating);
+
+			editLmsHeader.setLmsDetailList(lmsDetailList);
+
+			// System.out.println(lmsHeader);
+			LmsHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewLmsHeader", editLmsHeader,
+					LmsHeader.class);
+			if (res == null) {
+				session.setAttribute("errorMsg", "Failed to update lead.");
+			} else {
+
+				session.setAttribute("successMsg", "Lead updated successfully.");
+			}
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", "Failed to update lead.");
+			e.printStackTrace();
+		}
+		return "redirect:/showLeadList";
+	}
+
+	@RequestMapping(value = "/submitLms", method = RequestMethod.POST)
+	public String submitEditLms(HttpServletRequest request, HttpServletResponse response) {
+
+		HttpSession session = request.getSession();
+		try {
+
+			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date dt = new Date();
+
+			// String custName = request.getParameter("custName");
 			String cmpName = request.getParameter("cmpName");
 			int type = Integer.parseInt(request.getParameter("type"));
 			int channelId = Integer.parseInt(request.getParameter("channelId"));
@@ -333,16 +518,38 @@ public class DashboardController {
 			lmsHeader.setAccRemark(remark);
 			lmsHeader.setAccAtsRating(rating);
 			lmsHeader.setDelStatus(1);
-			lmsHeader.setActive(1);
+			lmsHeader.setIsActive(1);
 			lmsHeader.setMakerUserId(userDetail.getEmpId());
 			lmsHeader.setMakerDatetime(sf.format(dt));
 
 			lmsHeader.setLmsDetailList(lmsDetailList);
-			LmsHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewLmsHeader",
-					lmsHeader, LmsHeader.class);
+
+			// System.out.println(lmsHeader);
+			LmsHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewLmsHeader", lmsHeader,
+					LmsHeader.class);
 			if (res == null) {
 				session.setAttribute("errorMsg", "Failed To Generated Lead.");
 			} else {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("mdAccTypeId", 1);
+				map.add("statusSequence", 0);
+				TaskStatus[] sts = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getTaskStatusByAccTypeIdAndSequnce", map, TaskStatus[].class);
+
+				TaskDetails taskDetails = new TaskDetails();
+				taskDetails.setMdAccTypeId(1);
+				taskDetails.setPriKey(res.getLmsId());
+				taskDetails.setTaskTittle(sts[0].getmTaskStatusName());
+				taskDetails.setTaskFinalStatus(sts[0].getmTaskStatusId());
+				taskDetails.setTaskPriority(1);
+				taskDetails.setTaskPts(sts[0].getmTaskPts());
+				taskDetails.setMakerUserId(userDetail.getEmpId());
+				taskDetails.setMakerDatetime(sf.format(dt));
+				taskDetails.setDelStatus(1);
+				taskDetails.setIsActive(1);
+				TaskDetails newTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask",
+						taskDetails, TaskDetails.class);
 				session.setAttribute("successMsg", "Lead Generated Successfully.");
 			}
 		} catch (Exception e) {

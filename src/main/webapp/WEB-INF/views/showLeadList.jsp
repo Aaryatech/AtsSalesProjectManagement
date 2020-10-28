@@ -104,6 +104,7 @@
 									<th class="text-center">Type</th>
 									<th class="text-center">Channel</th>
 									<th class="text-center">ACC Tag</th>
+									<th class="text-center">Contact Person Info</th>
 									<th width="10%" class="text-center">Action</th>
 								</tr>
 							</thead>
@@ -121,6 +122,7 @@
 											</c:choose></td>
 										<td>${list.channelName}</td>
 										<td>${list.tagNames}</td>
+										<td>${list.cpInfo}</td>
 										<td class="text-center">
 											<%-- <c:if test="${editAccess == 0}"> --%> <a
 											href="${pageContext.request.contextPath}/editLms?lmsId=${list.lmsId}"

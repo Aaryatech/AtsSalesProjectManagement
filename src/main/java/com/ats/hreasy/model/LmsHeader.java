@@ -51,14 +51,6 @@ public class LmsHeader {
 
 	private List<LmsDetail> lmsDetailList;
 
-	public List<LmsDetail> getLmsDetailList() {
-		return lmsDetailList;
-	}
-
-	public void setLmsDetailList(List<LmsDetail> lmsDetailList) {
-		this.lmsDetailList = lmsDetailList;
-	}
-
 	public int getLmsId() {
 		return lmsId;
 	}
@@ -179,7 +171,7 @@ public class LmsHeader {
 		this.accCompanyLandline = accCompanyLandline;
 	}
 
-	public int isAccStatus() {
+	public int getAccStatus() {
 		return accStatus;
 	}
 
@@ -195,7 +187,7 @@ public class LmsHeader {
 		this.accRemark = accRemark;
 	}
 
-	public int isDelStatus() {
+	public int getDelStatus() {
 		return delStatus;
 	}
 
@@ -203,11 +195,11 @@ public class LmsHeader {
 		this.delStatus = delStatus;
 	}
 
-	public int isActive() {
+	public int getIsActive() {
 		return isActive;
 	}
 
-	public void setActive(int isActive) {
+	public void setIsActive(int isActive) {
 		this.isActive = isActive;
 	}
 
@@ -259,6 +251,14 @@ public class LmsHeader {
 		this.exVar2 = exVar2;
 	}
 
+	public List<LmsDetail> getLmsDetailList() {
+		return lmsDetailList;
+	}
+
+	public void setLmsDetailList(List<LmsDetail> lmsDetailList) {
+		this.lmsDetailList = lmsDetailList;
+	}
+
 	@Override
 	public String toString() {
 		return "LmsHeader [lmsId=" + lmsId + ", mdAccTypeId=" + mdAccTypeId + ", channelId=" + channelId + ", accCode="
@@ -271,4 +271,6 @@ public class LmsHeader {
 				+ ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", lmsDetailList="
 				+ lmsDetailList + "]";
 	}
+
+	 
 }

@@ -52,7 +52,7 @@
 								<table width="100%">
 									<tr width="100%">
 										<td width="60%"><h5 class="pageTitle">
-												<i class="icon-list-unordered"></i> NEW LEAD
+												<i class="icon-list-unordered"></i> EDIT LEAD
 											</h5></td>
 										<td width="40%" align="right"><a
 											href="${pageContext.request.contextPath}/showLeadList"
@@ -100,7 +100,7 @@
 									}
 								%>
 
-								<form action="${pageContext.request.contextPath}/submitLms"
+								<form action="${pageContext.request.contextPath}/submitEditLms"
 									class="form-validate-jquery" novalidate="novalidate"
 									id="submitLead" method="post">
 
@@ -124,7 +124,8 @@
 											</span>:
 											</label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control"
+													value="${editLmsHeader.accCompany}"
 													placeholder="Company Name" id="cmpName" maxlength="30"
 													name="cmpName" autocomplete="off" required="required">
 
@@ -144,8 +145,17 @@
 													data-placeholder="Select Type" data-fouc
 													required="required" id="type">
 													<option value="">select</option>
-													<option value="1">Customer</option>
-													<option value="2">Collaborator</option>
+													<c:choose>
+														<c:when test="${editLmsHeader.mdAccTypeId==1}">
+															<option value="1" selected>Customer</option>
+															<option value="2">Collaborator</option>
+														</c:when>
+														<c:otherwise>
+															<option value="1">Customer</option>
+															<option value="2" selected>Collaborator</option>
+														</c:otherwise>
+													</c:choose>
+
 												</select>
 
 											</div>
@@ -166,7 +176,17 @@
 													required="required" id="channelId"><option
 														value="">Select Channel</option>
 													<c:forEach items="${chanalList}" var="chanalList">
-														<option value="${chanalList.mChannelId}">${chanalList.mChannelName}</option>
+
+														<c:choose>
+															<c:when
+																test="${editLmsHeader.channelId==chanalList.mChannelId}">
+																<option value="${chanalList.mChannelId}" selected>${chanalList.mChannelName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${chanalList.mChannelId}">${chanalList.mChannelName}</option>
+															</c:otherwise>
+														</c:choose>
+
 													</c:forEach>
 												</select>
 
@@ -188,7 +208,16 @@
 													required="required" id="domainId">
 													<option value="">Select Domain</option>
 													<c:forEach items="${domainList}" var="domainList">
-														<option value="${domainList.mDomainId}">${domainList.mDomainName}</option>
+														<c:choose>
+															<c:when
+																test="${editLmsHeader.accDomainId==domainList.mDomainId}">
+																<option value="${domainList.mDomainId}" selected>${domainList.mDomainName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${domainList.mDomainId}">${domainList.mDomainName}</option>
+															</c:otherwise>
+														</c:choose>
+
 													</c:forEach>
 												</select>
 
@@ -203,7 +232,8 @@
 
 												<input type="text" class="form-control"
 													placeholder="Domain Name" id="domainText" maxlength="30"
-													name="domainText" autocomplete="off">
+													name="domainText" autocomplete="off"
+													value="${editLmsHeader.accDomainOther}">
 
 											</div>
 										</div>
@@ -218,7 +248,8 @@
 											<div class="col-lg-7  float">
 												<input type="text" class="form-control"
 													placeholder="Acc Code" id="accCode" maxlength="30"
-													name="accCode" autocomplete="off" required="required">
+													name="accCode" autocomplete="off" required="required"
+													value="${editLmsHeader.accCode}">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -227,6 +258,7 @@
 												for="accTag">ACC Tag<span class="text-danger">*
 											</span>:
 											</label>
+
 											<div class="col-lg-7 float">
 												<select name="accTag"
 													class="form-control form-control-select2"
@@ -234,7 +266,21 @@
 													required="required" id="accTag" multiple="multiple">
 													<option value="">Select Channel</option>
 													<c:forEach items="${tagList}" var="tagList">
-														<option value="${tagList.mTagId}">${tagList.mTagName}</option>
+														<c:set var="find" value="0"></c:set>
+														<c:forEach items="${selectedTags}" var="selectedTags">
+															<c:if test="${selectedTags eq tagList.mTagId}">
+																<c:set var="find" value="1"></c:set>
+															</c:if> - 
+														</c:forEach>
+														<c:choose>
+															<c:when test="${find==1}">
+																<option value="${tagList.mTagId}" selected>${tagList.mTagName}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${tagList.mTagId}">${tagList.mTagName}</option>
+															</c:otherwise>
+														</c:choose>
+
 													</c:forEach>
 												</select>
 
@@ -250,7 +296,8 @@
 											<div class="col-lg-7 float">
 												<input type="text" class="form-control"
 													placeholder="Website" id="website" maxlength="30"
-													name="website" autocomplete="off">
+													name="website" autocomplete="off"
+													value="${editLmsHeader.accWebsite}">
 
 											</div>
 										</div>
@@ -261,7 +308,8 @@
 											<div class="col-lg-7 float">
 												<input type="text" class="form-control"
 													placeholder="Turnover" id="turnover" maxlength="30"
-													name="turnover" autocomplete="off">
+													name="turnover" autocomplete="off"
+													value="${editLmsHeader.accTurnover}">
 
 											</div>
 										</div>
@@ -274,7 +322,8 @@
 											<div class="col-lg-7 float">
 												<input type="number" class="form-control"
 													placeholder="Employee Count" id="empCount" maxlength="30"
-													name="empCount" autocomplete="off" min="0">
+													name="empCount" autocomplete="off" min="0"
+													value="${editLmsHeader.accEmpCount}">
 
 											</div>
 										</div>
@@ -289,7 +338,8 @@
 												<input type="text" class="form-control"
 													placeholder="Contact No." id="contactNo" maxlength="10"
 													minlength="10" name="contactNo" autocomplete="off"
-													data-mask="9999999999" required="required">
+													data-mask="9999999999" required="required"
+													value="${editLmsHeader.accCompanyLandline}">
 
 											</div>
 										</div>
@@ -302,7 +352,7 @@
 											<div class="col-lg-7 float">
 												<textarea rows="3" cols="5" class="form-control"
 													placeholder="ACC Scale Desc" id="scaleDesc"
-													name="scaleDesc"></textarea>
+													name="scaleDesc">${editLmsHeader.accScaleDesc}</textarea>
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -310,7 +360,7 @@
 												:</label>
 											<div class="col-lg-7 float">
 												<textarea rows="3" cols="5" name="remark"
-													class="form-control" placeholder="Remark" id="remark"></textarea>
+													class="form-control" placeholder="Remark" id="remark">${editLmsHeader.accRemark}</textarea>
 											</div>
 										</div>
 									</div>
@@ -321,7 +371,8 @@
 											<div class="col-lg-7 float">
 												<input type="number" class="form-control"
 													placeholder="Rating" id="rating" min="0" max="5"
-													name="rating" autocomplete="off">
+													name="rating" autocomplete="off"
+													value="${editLmsHeader.accAtsRating}">
 
 											</div>
 										</div>
@@ -424,7 +475,20 @@
 												</tr>
 											</thead>
 											<tbody>
-
+												<c:forEach items="${editLmsHeader.lmsDetailList}"
+													var="lmsDetailList" varStatus="count">
+													<tr>
+														<td>${count.index+1}</td>
+														<td>${lmsDetailList.cpName}&nbsp;(${lmsDetailList.exVar1})</td>
+														<td>${lmsDetailList.cpMobile}</td>
+														<td>${lmsDetailList.cpMobile2}</td>
+														<td>${lmsDetailList.cpEmail}</td>
+														<td class="text-center"><a href="javascript:void(0)"
+															class="list-icons-item text-danger-600"
+															onclick="deleteCp(${count.index})" title="Delete"><i
+																class="icon-trash"></i></a></td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>
@@ -432,7 +496,7 @@
 										<div style="margin: 0 auto;">
 
 											<button type="submit" class="btn blue_btn ml-3 legitRipple"
-												id="submtbtn" disabled>Submit</button>
+												id="submtbtn">Submit</button>
 											<a href="${pageContext.request.contextPath}/showLeadList"><button
 													type="button" class="btn btn-light">Back</button></a>
 										</div>
@@ -477,7 +541,7 @@
 
 					bootbox.confirm({
 						title : 'Confirm',
-						message : 'Confirm Generate Lead ? ',
+						message : 'Confirm update lead ? ',
 						buttons : {
 							confirm : {
 								label : 'yes',
@@ -550,10 +614,14 @@
 							var table = $('#contactlist').DataTable();
 							var rows = table.rows().remove().draw();
 
+							var index=0;
+							
 							for (var i = 0; i < response.length; i++) {
 
-								var action = '<div class="text-center"> <a href="javascript:void(0)" class="list-icons-item text-primary-600" data-popup="tooltip" '
-										+ ' title="" data-original-title="Delete" onclick="deleteCp('
+								if(response[i].delStatus==1){
+									index=index+1;
+									var action = '<div class="text-center"> <a href="javascript:void(0)" class="list-icons-item text-primary-600" data-popup="tooltip" '
+										+ ' title="Delete" data-original-title="Delete" onclick="deleteCp('
 										+ i
 										+ ')"><i class="icon-trash"></i></a></div>'
 
@@ -561,7 +629,7 @@
 										'initial');
 								$('#contactlist').DataTable().row.add(
 										[
-												(i + 1),
+												(index),
 												response[i].cpName + ' ('
 														+ response[i].exVar1
 														+ ')',
@@ -569,9 +637,11 @@
 												response[i].cpMobile2,
 												response[i].cpEmail, action ])
 										.draw();
+								}
+								
 							}
 
-							if (response.length > 0) {
+							if (index > 0) {
 								document.getElementById('submtbtn').disabled = false;
 							} else {
 								document.getElementById('submtbtn').disabled = true;
@@ -593,7 +663,7 @@
 			fd.append("id", id);
 			$
 					.ajax({
-						url : '${pageContext.request.contextPath}/deleteContactPersonLead',
+						url : '${pageContext.request.contextPath}/deleteContactPersonLeadEdit',
 						type : 'post',
 						dataType : 'json',
 						data : fd,

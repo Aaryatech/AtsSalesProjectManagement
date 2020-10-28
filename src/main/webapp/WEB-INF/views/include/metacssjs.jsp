@@ -186,9 +186,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/validation/validate.min.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/inputs/touchspin.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/inputs/touchspin.min.js"></script> 
 <script
 	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/styling/switch.min.js"></script>
 <script
