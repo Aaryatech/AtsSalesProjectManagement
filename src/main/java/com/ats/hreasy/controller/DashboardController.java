@@ -54,6 +54,19 @@ public class DashboardController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/taskAssignPendingList", method = RequestMethod.GET)
+	public String taskAssignPendingList(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		String mav = "taskAssignPendingList";
+
+		try {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+
 	@RequestMapping(value = "/getPendingTaskList", method = RequestMethod.POST)
 	@ResponseBody
 	public List<TaskDetailsEmpName> getPendingTaskList(HttpServletRequest request, HttpServletResponse response) {
@@ -64,6 +77,24 @@ public class DashboardController {
 			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("empId", userDetail.getEmpId());
+			TaskDetailsEmpName[] tags = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getTaskDetailWithEmpNameByEmpid", map, TaskDetailsEmpName[].class);
+			list = new ArrayList<>(Arrays.asList(tags));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@RequestMapping(value = "/getAssignPendingTaskList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<TaskDetailsEmpName> getAssignPendingTaskList(HttpServletRequest request, HttpServletResponse response) {
+
+		List<TaskDetailsEmpName> list = new ArrayList<>();
+		try {
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("empId", 0);
 			TaskDetailsEmpName[] tags = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getTaskDetailWithEmpNameByEmpid", map, TaskDetailsEmpName[].class);
 			list = new ArrayList<>(Arrays.asList(tags));
@@ -473,6 +504,7 @@ public class DashboardController {
 
 			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat yy = new SimpleDateFormat("yyyy-MM-dd");
 			Date dt = new Date();
 
 			// String custName = request.getParameter("custName");
@@ -548,6 +580,10 @@ public class DashboardController {
 				taskDetails.setMakerDatetime(sf.format(dt));
 				taskDetails.setDelStatus(1);
 				taskDetails.setIsActive(1);
+				taskDetails.setTaskAllotedTo("0");
+				taskDetails.setTaskAllotmentInstructions("-");
+				taskDetails.setTaskScheDate(yy.format(dt));
+				taskDetails.setTaskScheTime(sf.format(dt));
 				TaskDetails newTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask",
 						taskDetails, TaskDetails.class);
 				session.setAttribute("successMsg", "Lead Generated Successfully.");
@@ -659,6 +695,30 @@ public class DashboardController {
 			System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
 			e.printStackTrace();
 			mav = "redirect:/";
+		}
+
+		// System.err.println(tagId+"\t"+"Tag Id");
+		return mav;
+	}
+
+	@RequestMapping(value = "/allocateTask", method = RequestMethod.GET)
+	public String allocateTask(HttpServletRequest request, Model model) {
+
+		String mav = "allocateTask";
+		HttpSession session = request.getSession();
+		try {
+
+			int taskId = Integer.parseInt(request.getParameter("taskId"));
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("tagId", taskId);
+			TaskDetailsEmpName taskDetail = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getTaskdetailsEmpnameByTaskId", map, TaskDetailsEmpName.class);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
+
 		}
 
 		// System.err.println(tagId+"\t"+"Tag Id");
