@@ -108,16 +108,17 @@
 								</tr>
 							</thead>
 							<tbody>
-
+							<c:forEach items="${inqHeadList}" var="inqHeader"  varStatus="count">
 								<tr>
 									<td>${count.index+1}</td>
-									<td>ATS</td>
-									<td>CUSTOMER</td>
-									<td>FB</td>
-									<td>HR</td>
+									<td>${inqHeader.inqCompany}</td>
+									<td>${inqHeader.mdAccName}</td>
+									<td>${inqHeader.channelName}</td>
+									<td>${inqHeader.tagNames }</td>
+							
 									<td class="text-center">
 										<%-- <c:if test="${editAccess == 0}"> --%> <a
-										href="${pageContext.request.contextPath}/editSkillRate?skillId=${skillList.exVar1}"
+										href="${pageContext.request.contextPath}/editEnquiry?inqId=${inqHeader.inqId}"
 										class="list-icons-item text-primary-600" data-popup="tooltip"
 										title="" data-original-title="Edit"><i
 											class="icon-pencil7"></i></a> <%-- </c:if> <c:if test="${deleteAccess == 0}"> --%>
@@ -125,10 +126,14 @@
 
 										<a href="javascript:void(0)"
 										class="list-icons-item text-danger-600 bootbox_custom"
-										data-uuid="${skillList.exVar1}" data-popup="tooltip" title=""
+										data-uuid="${inqHeader.inqId}" data-popup="tooltip" title=""
 										data-original-title="Delete"><i class="icon-trash"></i></a> <%-- </c:if> --%>
 									</td>
 								</tr>
+							
+							
+							</c:forEach>
+							
 								<c:forEach items="${skillList}" var="skillList"
 									varStatus="count">
 									<tr>
@@ -139,7 +144,7 @@
 
 										<td class="text-center">
 											<%-- <c:if test="${editAccess == 0}"> --%> <a
-											href="${pageContext.request.contextPath}/editSkillRate?skillId=${skillList.exVar1}"
+											href="${pageContext.request.contextPath}/editEnquiry?inqId=${inqHeader.inqId}"
 											class="list-icons-item text-primary-600" data-popup="tooltip"
 											title="" data-original-title="Edit"><i
 												class="icon-pencil7"></i></a> <%-- </c:if> <c:if test="${deleteAccess == 0}"> --%>
@@ -174,7 +179,7 @@
 
 	</div>
 	<!-- /page content -->
-	<script>
+<script>
 		// Custom bootbox dialog
 		$('.bootbox_custom')
 				.on(
@@ -197,7 +202,7 @@
 										},
 										callback : function(result) {
 											if (result) {
-												location.href = "${pageContext.request.contextPath}/deleteSkillRate?skillId="
+												location.href = "${pageContext.request.contextPath}/deleteInqHeader?inqId="
 														+ uuid;
 
 											}
@@ -205,5 +210,38 @@
 									});
 						});
 	</Script>
+	<!-- <script>
+	$('.bootbox_custom')
+	.on(
+			'click',
+			function() {
+				var uuid = $(this).data("uuid") // will return the number 123
+				bootbox
+						.confirm({
+							title : 'Confirm ',
+							message : 'Are you sure you want to delete selected records ?',
+							buttons : {
+								confirm : {
+									label : 'Yes',
+									className : 'btn-success'
+								},
+								cancel : {
+									label : 'Cancel',
+									className : 'btn-link'
+								}
+							},
+							callback : function(result) {
+								if (result) {
+									location.href = "${pageContext.request.contextPath}/deleteInqHeader?inqId="
+											+ uuid;
+
+								}
+							}
+						});
+			});
+	
+	
+	
+	</script> -->
 </body>
 </html>

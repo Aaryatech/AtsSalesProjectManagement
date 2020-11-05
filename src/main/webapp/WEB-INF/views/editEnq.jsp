@@ -52,7 +52,7 @@
 								<table width="100%">
 									<tr width="100%">
 										<td width="60%"><h5 class="pageTitle">
-												<i class="icon-list-unordered"></i> NEW ENQUIRY
+												<i class="icon-list-unordered"></i> UPDATE ENQUIRY
 											</h5></td>
 										<td width="40%" align="right"><a
 											href="${pageContext.request.contextPath}/showEnquiryList"
@@ -99,12 +99,13 @@
 									session.removeAttribute("successMsg");
 									}
 								%>
-
+							
 								<form
-									action="${pageContext.request.contextPath}/submitAddEnquiryForm"
+									action="${pageContext.request.contextPath}/submitEditEnquiryForm"
 									class="form-validate-jquery" novalidate="novalidate"
 									id="submitAddEnquiryForm" method="post">
-
+									<input type="hidden" name="inqId" name="inqId" value="${editEnqHeader.inqId }">
+											<c:out value="	${editEnqHeaders}"></c:out> 
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label
@@ -119,7 +120,19 @@
 													required="required">
 													<option value="">select</option>
 													<c:forEach items="${accTypeList}" var="accType">
-													<option value="${accType.mdAccTypeId}">${accType.mdAccTypeShortName}</option>
+													
+													<c:choose>
+													<c:when test="${editEnqHeader.mdAccTypeId==accType.mdAccTypeId}">
+												
+													<option value="${accType.mdAccTypeId}" selected="selected" >${accType.mdAccTypeShortName}</option>
+													</c:when>
+													<c:otherwise>
+													<c:out value="In Otherwise"></c:out>
+													<option value="${accType.mdAccTypeId}" >${accType.mdAccTypeShortName}</option>
+													</c:otherwise>
+													
+													</c:choose>
+													
 													</c:forEach>
 													</select>
 
@@ -139,7 +152,16 @@
 													required="required">
 													<option value="">select</option>
 													<c:forEach items="${chanalList}" var="channel">
-													<option value="${channel.mChannelId}">${channel.mChannelName}</option>
+													<c:choose>
+														<c:when test="${channel.mChannelId==editEnqHeader.channelId}">
+															<option value="${channel.mChannelId}" selected="selected">${channel.mChannelName}</option>
+														</c:when>
+														<c:otherwise>
+															<option value="${channel.mChannelId}" >${channel.mChannelName}</option>
+														</c:otherwise>
+													
+													</c:choose>
+													
 													</c:forEach>
 													</select>
 
@@ -155,7 +177,7 @@
 											</label>
 											<div class="col-lg-7  float">
 												<input type="text" class="form-control"
-													placeholder="Enter Domain Name" id="domainName" maxlength="30"
+													placeholder="Enter Domain Name" id="domainName" maxlength="30" value="${editEnqHeader.inqDomainOther}"
 													minlength="5" name="domainName" autocomplete="off"
 													required="required">
 											</div>
@@ -173,7 +195,15 @@
 													required="required">
 													<option value="">select</option>
 													<c:forEach items="${domainList}" var="domain">
-														<option value="${domain.mDomainId}">${domain.mDomainName}</option>
+													<c:choose>
+														<c:when test="${domain.mDomainId==editEnqHeader.inqDomainId}">
+															<option value="${domain.mDomainId}" selected="selected" >${domain.mDomainName}</option>
+														</c:when>
+														<c:otherwise>
+															<option value="${domain.mDomainId}"  >${domain.mDomainName}</option>
+														</c:otherwise>													
+													</c:choose>
+													
 													</c:forEach>
 												</select>
 
@@ -181,6 +211,8 @@
 										</div>
 									</div>
 									<div class="form-group row">
+							
+								
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"
@@ -194,7 +226,24 @@
 													required="required">
 													<option value="">select</option>
 													<c:forEach items="${tagList}" var="tag">
-													<option value="${tag.mTagId}">${tag.mTagName }</option>
+														<c:set var="find" value="0"></c:set>
+														<c:forEach items="${selectedTags }" var="selectedTag">
+															<c:if test="${selectedTag eq tag.mTagId}">
+															<c:set value="1" var="find"></c:set>
+															</c:if>
+														</c:forEach>	
+														
+														<c:choose>
+															<c:when test="${find==1 }">
+																<option value="${tag.mTagId}" selected="selected">${tag.mTagName }</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${tag.mTagId}">${tag.mTagName }</option>
+															</c:otherwise>
+														
+														</c:choose>												
+													
+													
 													</c:forEach>
 													
 													
@@ -210,7 +259,7 @@
 											</span>:
 											</label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control" value="${editEnqHeader.inqCompany}"
 													placeholder="Company Name" id="cmpName" maxlength="30"
 													minlength="5" name="cmpName" autocomplete="off"
 													required="required">
@@ -224,7 +273,7 @@
 											<label class="col-form-label  col-lg-5 float" for="website">Website
 												: </label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control" value="${editEnqHeader.inqWebsite}"
 													placeholder="Website" id="website" maxlength="30"
 													minlength="5" name="website" autocomplete="off">
 
@@ -235,7 +284,7 @@
 											<label class="col-form-label  col-lg-5 float" for="turnover">Turnover
 												: </label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control" value="${editEnqHeader.inqTurnover}"
 													placeholder="Turnover" id="turnover" maxlength="30"
 													minlength="5" name="turnover" autocomplete="off">
 
@@ -248,7 +297,7 @@
 											<label class="col-form-label  col-lg-5 float" for="website">Employee
 												Count : </label>
 											<div class="col-lg-7 float">
-												<input type="number" class="form-control" value="${dept.name}"
+												<input type="number" class="form-control" value="${editEnqHeader.inqEmpCount}"
 													placeholder="Employee Count" id="empCount" maxlength="30"
 													 name="empCount" autocomplete="off" min="0">
 
@@ -262,7 +311,7 @@
 											</span>:
 											</label>
 											<div class="col-lg-7 float">
-												<input type="text" class="form-control" value="${dept.name}"
+												<input type="text" class="form-control" value="${editEnqHeader.inqCompanyLandline}"
 													placeholder="Contact No." id="contactNo" maxlength="10"
 													minlength="10" name="contactNo" autocomplete="off">
 
@@ -275,9 +324,9 @@
 											<label class="col-form-label col-lg-5 float" for="scaleDesc">ACC
 												Scale Desc :</label>
 											<div class="col-lg-7 float">
-												<textarea rows="3" cols="5" class="form-control"
+												<textarea rows="3" cols="5" class="form-control" 
 													placeholder="ACC Scale Desc" id="scaleDesc"
-													name="scaleDesc"></textarea>
+													name="scaleDesc">${editEnqHeader.inqScaleDesc}</textarea>
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -288,7 +337,7 @@
 											<div class="col-lg-7 float">
 												<textarea rows="3" cols="5" name="Remark"
 													class="form-control" required placeholder="Remark"
-													id="Remark" name="taskDescription"></textarea>
+													id="Remark" name="taskDescription">${editEnqHeader.inqRemark}</textarea>
 											</div>
 										</div>
 									</div>
@@ -297,7 +346,7 @@
 											<label class="col-form-label  col-lg-5 float" for="rating">Rating
 												: </label>
 											<div class="col-lg-7 float">
-												<input type="number" class="form-control"
+												<input type="number" class="form-control" value="${editEnqHeader.inqAtsRating}"
 													placeholder="Rating" id="rating" min="0" max="5"
 													name="rating" autocomplete="off">
 
@@ -404,6 +453,32 @@
 												</tr>
 											</thead>
 											<tbody>
+												<c:forEach items="${editEnqHeader.inqDetailList}" var="inqDetailList"
+													varStatus="count">
+													<tr>
+													<td>${count.index+1}</td>
+													<td>${inqDetailList.cpName}</td>
+													<td>${inqDetailList.cpMobile }</td>
+													<td>${inqDetailList.cpMobile2}</td>
+													<td>${inqDetailList.cpEmail}</td>
+													 <td class="text-center">
+													 
+													 
+													 	 <!-- <a href="javascript:void(0)"
+																	class="list-icons-item text-danger-600 bootbox_custom1"
+																	data-uuid="${count.index}" data-popup="tooltip" title=""
+																	data-original-title="Delete"><i class="icon-trash"></i></a> --> 
+													 
+													 
+													 
+													 <a href="javascript:void(0)"
+															class="list-icons-item text-danger-600"
+															onclick="deleteCp(${count.index})" title="Delete"><i
+																class="icon-trash"></i>
+													</a>
+												</td> 
+													</tr>
+												</c:forEach>
 
 											</tbody>
 										</table>
@@ -450,6 +525,113 @@
 			return;
 		}
 		
+
+		function deleteCp(id) {
+			
+			if(id>=0){
+				
+				
+				bootbox
+				.confirm({
+					title : 'Confirm ',
+					message : 'Are you sure you want to delete selected records ?',
+					buttons : {
+						confirm : {
+							label : 'Yes',
+							className : 'btn-success'
+						},
+						cancel : {
+							label : 'Cancel',
+							className : 'btn-link'
+						}
+					},
+					callback : function(result) {
+						if (result) {
+							
+							var fd = new FormData();
+							fd.append("id", id);
+							$
+									.ajax({
+										url : '${pageContext.request.contextPath}/deleteCpInquiry',
+										type : 'post',
+										dataType : 'json',
+										data : fd,
+										contentType : false,
+										processData : false,
+										success : function(response) {
+											getCpList();
+										},
+									});
+
+							
+						}
+					}
+				});
+				
+			}
+
+		
+		}
+		
+		
+		
+		function getCpList() {
+
+			var fd = new FormData();
+
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/getCpListInquiry',
+						type : 'post',
+						dataType : 'json',
+						data : fd,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+
+							var table = $('#contactlist').DataTable();
+							var rows = table.rows().remove().draw();
+
+							var index=0;
+							
+							for (var i = 0; i < response.length; i++) {
+
+								if(response[i].delStatus==1){
+									index=index+1;
+									var action = '<div class="text-center"> <a href="javascript:void(0)" class="list-icons-item text-primary-600" data-popup="tooltip" '
+										+ ' title="Delete" data-original-title="Delete" onclick="deleteCp('
+										+ i
+										+ ')"><i class="icon-trash"></i></a></div>'
+
+								$('#contactlist td').css('white-space',
+										'initial');
+								$('#contactlist').DataTable().row.add(
+										[
+												(index),
+												response[i].cpName,
+												response[i].cpMobile,
+												response[i].cpMobile2,
+												response[i].cpEmail, action ])
+										.draw();
+								}
+								
+							}
+
+							if (index > 0) {
+								document.getElementById('submtbtn').disabled = false;
+							} else {
+								document.getElementById('submtbtn').disabled = true;
+							}
+							$("#cpName").val('');
+							$("#designation").val(0);
+							$("#cpMobile1").val('');
+							$("#cpMobile2").val('');
+							$("#emailId").val('');
+							$("#designation").trigger("chosen:updated");
+						},
+					});
+
+		}
 		
 		
 		
@@ -487,61 +669,16 @@
 		
 		
 		
-		function getCpList() {
-			
-			var fd = new FormData();
-
-			$
-					.ajax({
-						url : '${pageContext.request.contextPath}/getCpListInquiry',
-						type : 'post',
-						dataType : 'json',
-						data : fd,
-						contentType : false,
-						processData : false,
-						success : function(response) {
-
-							var table = $('#contactlist').DataTable();
-							var rows = table.rows().remove().draw();
-
-							for (var i = 0; i < response.length; i++) {
-
-								var action = '<div class="text-center"> <a href="javascript:void(0)" class="list-icons-item text-primary-600" data-popup="tooltip" '
-										+ ' title="" data-original-title="Delete" onclick="deleteCp('
-										+ i
-										+ ')"><i class="icon-trash"></i></a></div>'
-
-								$('#contactlist td').css('white-space',
-										'initial');
-								$('#contactlist').DataTable().row.add(
-										[ (i + 1), response[i].cpName,
-												response[i].cpMobile,
-												response[i].cpMobile2,
-												response[i].cpEmail, action ])
-										.draw();
-							}
-
-							if (response.length > 0) {
-								document.getElementById('submtbtn').disabled = false;
-							} else {
-								document.getElementById('submtbtn').disabled = true;
-							}
-
-						},
-					});
-
-		}
-		
 
 		
 
-		function deleteCp(id) {
+/* 		function deleteCp(id) {
 
 			var fd = new FormData();
 			fd.append("id", id);
 			$
 					.ajax({
-						url : '${pageContext.request.contextPath}/deleteContactPersonInquiry',
+						url : '${pageContext.request.contextPath}/deleteCpInquiry',
 						type : 'post',
 						dataType : 'json',
 						data : fd,
@@ -552,7 +689,7 @@
 						},
 					});
 
-		}
+		} */
 		
 		
 		function validate() {
@@ -657,8 +794,8 @@
 		//
 	</script>
 
-	<!-- <script type="text/javascript">
-	$('#submtbtn').on('click', function() {
+	<script>
+	/* $('#submtbtn').on('click', function() {
         swalInit({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -686,8 +823,61 @@
             }
         });
     });
+    
+     
+ */    
+    
+ </script>
+ <script>
+    
+	/* $('.bootbox_custom1')
+	.on(
+			'click',
+			function() {
+				var uuid = $(this).data("uuid") 
+				alert("In Boot Box")
+				
+				bootbox
+				.confirm({
+					title : 'Confirm ',
+					message : 'Are you sure you want to delete selected records ?',
+					buttons : {
+						confirm : {
+							label : 'Yes',
+							className : 'btn-success'
+						},
+						cancel : {
+							label : 'Cancel',
+							className : 'btn-link'
+						}
+					},
+					callback : function(result) {
+						if (result) {
+							
+							var fd = new FormData();
+							fd.append("id", id);
+							$
+									.ajax({
+										url : '${pageContext.request.contextPath}/deleteCpInquiry',
+										type : 'post',
+										dataType : 'json',
+										data : fd,
+										contentType : false,
+										processData : false,
+										success : function(response) {
+											getCpList();
+										},
+									});
+
+							
+						}
+					}
+				});
+			
+			});
+	 */
 	
-	</script> -->
+	</script>
 
 </body>
 </html>
