@@ -106,7 +106,9 @@
 									id="submitAddEnquiryForm" method="post">
 
 									<div class="form-group row">
-										<div class="col-md-6">
+								
+								<!--Account Type Is By Default 2  -->
+									<%-- 	<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"
 												for="tagName">Account Type<span class="text-danger">*
@@ -124,7 +126,7 @@
 													</select>
 
 											</div>
-										</div> 
+										</div>  --%>
 
 										<div class="col-md-6">
 											<label

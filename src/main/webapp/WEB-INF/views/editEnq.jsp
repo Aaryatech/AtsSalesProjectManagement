@@ -107,7 +107,8 @@
 									<input type="hidden" name="inqId" name="inqId" value="${editEnqHeader.inqId }">
 											<c:out value="	${editEnqHeaders}"></c:out> 
 									<div class="form-group row">
-										<div class="col-md-6">
+								<!--Account Type Is Bydefault 2  -->
+								<%-- 		<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"
 												for="tagName">Account Type<span class="text-danger">*
@@ -138,7 +139,7 @@
 
 											</div>
 										</div> 
-
+ --%>
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold  col-lg-5 float"

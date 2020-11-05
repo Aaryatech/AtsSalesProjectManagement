@@ -374,9 +374,13 @@ public class EnquiryController {
 		model.addAttribute("designationList", designationList);
 		
 		
-		AccountType[] accTypeArr=Constants.getRestTemplate().getForObject(Constants.url+"getAllAccouctTypeList", AccountType[].class);
-		List<AccountType> accTypeList=new ArrayList<AccountType>(Arrays.asList(accTypeArr));
-		model.addAttribute("accTypeList",accTypeList);
+			/*
+			 * AccountType[]
+			 * accTypeArr=Constants.getRestTemplate().getForObject(Constants.url+
+			 * "getAllAccouctTypeList", AccountType[].class); List<AccountType>
+			 * accTypeList=new ArrayList<AccountType>(Arrays.asList(accTypeArr));
+			 * model.addAttribute("accTypeList",accTypeList);
+			 */
 		
 	
 		
