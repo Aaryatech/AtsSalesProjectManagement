@@ -70,5 +70,21 @@ public class AdminDashboard {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value = "/lmsDetailDashBoard", method = RequestMethod.GET)
+	public String lmsDetailDashBoard(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		HttpSession session = request.getSession();
+		String mav = new String();
+
+		try {
+
+			mav = "dashboard/lmsDetailDashBoard";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
 
 }

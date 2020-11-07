@@ -40,7 +40,7 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header bg-white header-elements-inline">
-								<h6 class="card-title">Employee Task Summary Table</h6>
+								<h6 class="card-title">LMS Dashboard</h6>
 								<div class="header-elements">
 									<div class="list-icons">
 										<a class="list-icons-item" data-action="collapse"></a>
@@ -65,7 +65,8 @@
 
 										<tr>
 											<td class="text-center">1</td>
-											<td width="30%">Akshay</td>
+											<td width="30%"><a
+												href="${pageContext.request.contextPath}/lmsDetailDashBoard">Akshay</a></td>
 											<td class="text-center">
 												<div class="row">
 

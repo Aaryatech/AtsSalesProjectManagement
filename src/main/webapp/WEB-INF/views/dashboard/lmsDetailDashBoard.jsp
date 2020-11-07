@@ -52,33 +52,21 @@
 									<div class="col-2">
 										<div class="mb-3">
 											<h5 class="font-weight-semibold mb-0">2,345</h5>
-											<span class="text-muted font-size-sm">Unallocated</span>
+											<span class="text-muted font-size-sm">Introduction
+												Mail Pending</span>
 										</div>
 									</div>
 									<div class="col-2">
 										<div class="mb-3 ">
 											<h5 class="font-weight-semibold mb-0">32,693</h5>
-											<span class="text-muted font-size-sm">Allocated</span>
+											<span class="text-muted font-size-sm">Demo Meeting
+												Pending</span>
 										</div>
 									</div>
 									<div class="col-2">
 										<div class="mb-3">
 											<h5 class="font-weight-semibold mb-0">2,345</h5>
-											<span class="text-muted font-size-sm">Completed</span>
-										</div>
-									</div>
-
-									<div class="col-2">
-										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">3,568</h5>
-											<span class="text-muted font-size-sm">Pending</span>
-										</div>
-									</div>
-
-									<div class="col-2">
-										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">32,693</h5>
-											<span class="text-muted font-size-sm">Remaining</span>
+											<span class="text-muted font-size-sm">Demo Scheduled</span>
 										</div>
 									</div>
 
@@ -88,15 +76,13 @@
 								<ul class="nav nav-tabs nav-tabs-highlight">
 
 									<li class="nav-item"><a href="#highlighted-tab1"
-										class="nav-link active" data-toggle="tab">Allocated </a></li>
+										class="nav-link active" data-toggle="tab">Introduction
+											Mail Pending </a></li>
 									<li class="nav-item"><a href="#highlighted-tab2"
-										class="nav-link" data-toggle="tab">Unallocated </a></li>
+										class="nav-link" data-toggle="tab">Demo Meeting Pending </a></li>
 									<li class="nav-item"><a href="#highlighted-tab3"
-										class="nav-link" data-toggle="tab">Completed</a></li>
-									<li class="nav-item"><a href="#highlighted-tab4"
-										class="nav-link" data-toggle="tab">Pending</a></li>
-									<li class="nav-item"><a href="#highlighted-tab5"
-										class="nav-link" data-toggle="tab">Remaining</a></li>
+										class="nav-link" data-toggle="tab">Demo Scheduled</a></li>
+
 
 								</ul>
 

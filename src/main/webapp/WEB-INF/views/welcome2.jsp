@@ -325,7 +325,7 @@
 
 
 
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header bg-white header-elements-inline">
@@ -387,7 +387,7 @@
 
 					</div>
 
-				</div>
+				</div> -->
 
 			</div>
 			<!-- /content area -->
@@ -405,128 +405,17 @@
 
 
 	<!-- Modal -->
-	<div id="modal_form_vertical" class="modal fade" tabindex="-1">
+	<div id="taskDetailModel" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg">
 			<!-- <div class="modal-dialog"> -->
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2 class="modal-title">Task Description - Call Customer</h2>
+					<h2 class="modal-title">
+						Task Description - <span id="taskhead">Call Customer</span>
+					</h2>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<div class="modal-body">
-
-					<p>Duis mollis, est non commodo luctus, nisi erat porttitor
-						ligula, eget lacinia odio sem. Praesent commodo cursus magna, vel
-						scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
-						laoreet rutrum faucibus dolor auctor.</p>
-
-
-					<ul>
-						<li><div class="row">
-								<div class="col-sm-2">
-									<strong>Schedule Date Time</strong>
-								</div>
-								: 20-10-2020 12:00 AM
-							</div></li>
-						<li><div class="row">
-								<div class="col-sm-2">
-									<strong>Generate By</strong>
-								</div>
-								: Swapnil Mashalkar, 20-10-2020 12:00 AM
-							</div></li>
-						<li><div class="row">
-								<div class="col-sm-2">
-									<strong>Alloted By</strong>
-								</div>
-								: Swapnil Mashalkar, 20-10-2020 12:00 AM
-							</div></li>
-					</ul>
-
-
-					<form class="form-validate-jquery" action="#"
-						novalidate="novalidate" id="a">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-sm-3">
-									<label for="status">Change Status<span
-										class="text-danger">*</span>
-									</label> <select name="status"
-										class="form-control form-control-select2"
-										data-placeholder="Select status" data-fouc required="required">
-										<option value="open">Open</option>
-										<option value="hold">On hold</option>
-										<option value="resolved">Resolved</option>
-										<option value="dublicate">Dublicate</option>
-										<option value="invalid" selected="selected">Invalid</option>
-										<option value="wontfix">Wontfix</option>
-										<option value="closed">Closed</option>
-									</select>
-								</div>
-								<div class="col-sm-3">
-									<label for="sdate">New Schedule Date<span
-										class="text-danger">*</span>
-									</label> <input type="text" placeholder="Schedule Date"
-										class="form-control datepickerclass" required="required"
-										id="sdate" name="sdate">
-								</div>
-								<div class="col-sm-3">
-									<label for="stime">New Schedule Time<span
-										class="text-danger">*</span>
-									</label> <input type="text" placeholder="Schedule Time"
-										class="form-control " required="required" id="stime"
-										name="stime">
-								</div>
-								<div class="col-sm-3">
-									<label for="taskDescription">New Task Instruction<span
-										class="text-danger">*</span>
-									</label> <input type="text" class="form-control" name="taskDescription"
-										placeholder="Default textarea" id="taskDescription"
-										name="taskDescription" required>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="row">
-								<div class="col-sm-3">
-									<label for="clientDiscussion">Client Discussion<span
-										class="text-danger">*</span>
-									</label>
-									<textarea rows="3" cols="5" name="textarea"
-										class="form-control" placeholder="Default textarea"
-										id="clientDiscussion" name="clientDiscussion" required></textarea>
-								</div>
-								<div class="col-sm-3">
-									<label for="clientProfiling">Client Profiling<span
-										class="text-danger">*</span>
-									</label>
-									<textarea rows="3" cols="5" class="form-control"
-										placeholder="Client Profiling" id="clientProfiling"
-										name="clientProfiling" required></textarea>
-								</div>
-								<div class="col-sm-3">
-									<label for="que">Any Tough Question<span
-										class="text-danger">*</span>
-									</label>
-									<textarea rows="3" cols="5" class="form-control"
-										placeholder="Question" id="que" name="que" required></textarea>
-								</div>
-								<div class="col-sm-3">
-									<label for="right">What went right<span
-										class="text-danger">*</span>
-									</label>
-									<textarea rows="3" cols="5" class="form-control"
-										placeholder="Question" id="right" name="right" required></textarea>
-								</div>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn bg-primary">Submit</button>
-						</div>
-					</form>
-				</div>
+				<div class="modal-body" id="modalbody"></div>
 
 
 			</div>
@@ -629,46 +518,7 @@
 					<h2 class="modal-title">Previous Task</h2>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<div class="modal-body">
-					<div class=" border-top-teal">
-						<div class="list-feed">
-							<div class="list-feed-item">
-								<a href="#">David Linner</a> requested refund for a double bank
-								card charge
-								<div class="text-muted">Jan 12, 12:47</div>
-							</div>
-
-							<div class="list-feed-item">
-								User <a href="#">Christopher Wallace</a> from Google is awaiting
-								for staff reply
-								<div class="text-muted">Jan 11, 10:25</div>
-							</div>
-
-							<div class="list-feed-item">
-								Ticket <strong>#43683</strong> has been resolved by <a href="#">Victoria
-									Wilson</a>
-								<div class="text-muted">Jan 10, 09:37</div>
-							</div>
-
-							<div class="list-feed-item">
-								<a href="#">Eugene Kopyov</a> merged <strong>Master</strong>, <strong>Demo</strong>
-								and <strong>Dev</strong> branches
-								<div class="text-muted">Jan 9, 08:28</div>
-							</div>
-
-							<div class="list-feed-item">
-								All sellers have received payouts for December, 2016!
-								<div class="text-muted">Jan 8, 07:58</div>
-							</div>
-
-							<div class="list-feed-item">
-								<a href="#">Chris Arney</a> created a new ticket <strong>#43136</strong>
-								and assigned to <a href="#">John Nod</a>
-								<div class="text-muted">Jan 7, 06:32</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div class="modal-body" id="taskLogData"></div>
 
 
 			</div>
@@ -676,7 +526,7 @@
 	</div>
 	<!-- /info modal -->
 
-	<div id="customerProfile" class="modal fade" tabindex="-1">
+	<div id="customerProfileModel" class="modal fade" tabindex="-1">
 
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
@@ -685,359 +535,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
-				<div class="modal-body py-0">
-
-					<div class="card-body bg-blue text-center card-img-top"
-						style="background-image: url(${pageContext.request.contextPath}/resources/global_assets/images/backgrounds/panel_bg.png); background-size: contain;">
-						<div class="card-img-actions d-inline-block mb-3">
-							<%-- <img class="img-fluid rounded-circle"
-								src="${pageContext.request.contextPath}/resources/global_assets/images/placeholders/placeholder.jpg"
-								width="170" height="170" alt=""> --%>
-							<!-- <div class="card-img-actions-overlay card-img rounded-circle">
-								<a href="#"
-									class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round legitRipple">
-									<i class="icon-plus3"></i>
-								</a> <a href="user_pages_profile.html"
-									class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2 legitRipple">
-									<i class="icon-link"></i>
-								</a>
-							</div> -->
-						</div>
-
-						<h3 class="font-weight-semibold mb-0">Victoria Davidson</h3>
-						<span class="d-block opacity-75">Aaryate Solution / +3630
-							8911837</span><span class="d-block opacity-75">corporate@domain.com
-							/ www.ats.com</span>
-
-					</div>
-					<div class="form-group">
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="late_employee" id="weekly_off_emp_list" style="">
-									<ul
-										class="nav nav-tabs nav-tabs-solid nav-justified bg-indigo-400 border-x-0 border-bottom-0 border-top-indigo-300 mb-0">
-										<li class="nav-item"><a
-											class="nav-link font-size-sm text-uppercase  ">Client
-												Profiling</a></li>
-
-									</ul>
-									<div class="late_one fix_scroll">
-
-										<div class="datatable-scroll-wrap">
-
-											<ul class="media-list">
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-											</ul>
-										</div>
-
-									</div>
-
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="late_employee" id="weekly_off_emp_list" style="">
-									<ul
-										class="nav nav-tabs nav-tabs-solid nav-justified bg-indigo-400 border-x-0 border-bottom-0 border-top-indigo-300 mb-0">
-										<li class="nav-item"><a
-											class="nav-link font-size-sm text-uppercase  ">Tough
-												Questions</a></li>
-
-									</ul>
-									<div class="late_one fix_scroll">
-
-										<div class="datatable-scroll-wrap">
-
-											<ul class="media-list">
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-											</ul>
-										</div>
-
-									</div>
-
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="late_employee" id="weekly_off_emp_list" style="">
-									<ul
-										class="nav nav-tabs nav-tabs-solid nav-justified bg-indigo-400 border-x-0 border-bottom-0 border-top-indigo-300 mb-0">
-										<li class="nav-item"><a
-											class="nav-link font-size-sm text-uppercase  ">What's
-												went right</a></li>
-
-									</ul>
-									<div class="late_one fix_scroll">
-
-										<div class="datatable-scroll-wrap">
-
-											<ul class="media-list">
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-												<li class="media">
-
-													<div class="media-body">
-														<div class="d-flex justify-content-between">
-															<a href="#">The constitutionally inventoried
-																precariously...</a> <span class="font-size-sm text-muted">20-10-2020</span>
-														</div>
-
-														-Akshay Kasar
-													</div>
-												</li>
-											</ul>
-										</div>
-
-									</div>
-
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="late_employee" id="weekly_off_emp_list" style="">
-									<ul
-										class="nav nav-tabs nav-tabs-solid nav-justified bg-indigo-400 border-x-0 border-bottom-0 border-top-indigo-300 mb-0">
-										<li class="nav-item"><a
-											class="nav-link font-size-sm text-uppercase ">Previous
-												Task</a></li>
-
-									</ul>
-									<div class="late_one fix_scroll">
-
-										<div class="datatable-scroll-wrap">
-
-											<div class=" border-top-teal">
-												<div class="list-feed">
-													<div class="list-feed-item">
-														<a href="#">David Linner</a> requested refund for a double
-														bank card charge
-														<div class="text-muted">Jan 12, 12:47</div>
-													</div>
-
-													<div class="list-feed-item">
-														User <a href="#">Christopher Wallace</a> from Google is
-														awaiting for staff reply
-														<div class="text-muted">Jan 11, 10:25</div>
-													</div>
-
-													<div class="list-feed-item">
-														Ticket <strong>#43683</strong> has been resolved by <a
-															href="#">Victoria Wilson</a>
-														<div class="text-muted">Jan 10, 09:37</div>
-													</div>
-
-													<div class="list-feed-item">
-														<a href="#">Eugene Kopyov</a> merged <strong>Master</strong>,
-														<strong>Demo</strong> and <strong>Dev</strong> branches
-														<div class="text-muted">Jan 9, 08:28</div>
-													</div>
-
-													<div class="list-feed-item">
-														All sellers have received payouts for December, 2016!
-														<div class="text-muted">Jan 8, 07:58</div>
-													</div>
-
-													<div class="list-feed-item">
-														<a href="#">Chris Arney</a> created a new ticket <strong>#43136</strong>
-														and assigned to <a href="#">John Nod</a>
-														<div class="text-muted">Jan 7, 06:32</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
+				<div class="modal-body py-0" id="custProfile"></div>
 
 				<!-- <div class="modal-footer pt-3">
 					<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
@@ -1130,31 +628,43 @@
 							var rows = table.rows().remove().draw();
 
 							for (var i = 0; i < response.length; i++) {
- 
-								var profile = '<div class="text-center"> <a href="#" data-toggle="modal" data-target="#customerProfile">'
+
+								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+										+ response[i].mdAccTypeId
+										+ ','
+										+ response[i].priKey
+										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
 										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
 								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 								if (response[i].sts == 1) {
 									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
 											+ response[i].day
-											+ '-'
+											+ ' - '
 											+ response[i].hour
 											+ ':'
 											+ response[i].minutes
-											+ '</h6> <div class="font-size-sm text-muted line-height-1">hours</div></div>';
+											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 								}
-								var taskDescription = '<div class="font-weight-semibold">'
+								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+										+ response[i].taskId
+										+ ',\''
+										+ response[i].taskTittle
+										+ '\')">'
 										+ response[i].mdAccTypeText
 										+ '- '
 										+ response[i].taskTittle
-										+ ' '
+										+ '</a>&nbsp;'
 										+ '<span class="badge badge-primary badge-pill">'
 										+ response[i].taskPts
 										+ ' PTS</span></div> <div class="text-muted">'
 										+ response[i].taskAllotmentInstructions
 										+ '</div>'
-										+ '<a href="#" data-toggle="modal" data-target="#task_log"><span class="badge badge-success badge-pill">'
+										+ '<a href="#"  onclick="getTaskLog('
+										+ response[i].mdAccTypeId
+										+ ','
+										+ response[i].priKey
+										+ ')"><span class="badge badge-success badge-pill">'
 										+ response[i].completed
 										+ ' Completed</span></a>';
 								var schdatetime = '<div class="text-center">'
@@ -1189,6 +699,53 @@
 				format : 'DD-MM-YYYY'
 			}
 		});
+		function taskDetail(taskId, taskTittle) {
+			//alert(empId)
+
+			//alert(var1+':'+var2);
+			$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/compaletTask?taskId="
+					+ taskId;
+			$("#modalbody").load(strhref);
+			$("#taskDetailModel").modal("show");
+			$('#taskDetailModel').on('hidden.bs.modal', function() {
+				$("#modalbody").html("");
+				getTaskPendingList();
+			});
+
+		}
+
+		function getTaskLog(typeId, primaryKey) {
+			//alert(typeId)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/taskLog?typeId="
+					+ typeId + "&primaryKey=" + primaryKey;
+			$("#taskLogData").load(strhref);
+			$("#task_log").modal("show");
+			$('#task_log').on('hidden.bs.modal', function() {
+				$("#taskLogData").html("");
+				//getTaskPendingList();
+			});
+
+		}
+
+		function getCustProfile(typeId, primaryKey) {
+			//alert(typeId)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/customerProfile?typeId="
+					+ typeId + "&primaryKey=" + primaryKey;
+			$("#custProfile").load(strhref);
+			$("#customerProfileModel").modal("show");
+			$('#customerProfileModel').on('hidden.bs.modal', function() {
+				$("#custProfile").html("");
+				//getTaskPendingList();
+			});
+
+		}
 	</script>
 </body>
 </html>

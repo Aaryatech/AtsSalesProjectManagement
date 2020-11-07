@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.hreasy.common.Constants;
+import com.ats.hreasy.common.DateConvertor;
 import com.ats.hreasy.model.AccessRightModule;
 import com.ats.hreasy.model.AccountType;
 import com.ats.hreasy.model.Channel;
+import com.ats.hreasy.model.CustInfo;
 import com.ats.hreasy.model.Designation;
 import com.ats.hreasy.model.DomainType;
 import com.ats.hreasy.model.Info;
@@ -34,12 +36,193 @@ import com.ats.hreasy.model.LmsHeaderWithNames;
 import com.ats.hreasy.model.Tags;
 import com.ats.hreasy.model.TaskDetails;
 import com.ats.hreasy.model.TaskDetailsEmpName;
+import com.ats.hreasy.model.TaskDetailsWithMsg;
 import com.ats.hreasy.model.TaskStatus;
 import com.ats.hreasy.model.UserLoginData;
 
 @Controller
 @Scope("session")
 public class DashboardController {
+
+	TaskDetailsEmpName taskDetail = new TaskDetailsEmpName();
+	List<TaskStatus> stsList = new ArrayList<>();
+
+	@RequestMapping(value = "/customerProfile", method = RequestMethod.GET)
+	public String customerProfile(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		String mav = "task/customerProfile";
+
+		try {
+
+			int typeId = Integer.parseInt(request.getParameter("typeId"));
+			int primaryKey = Integer.parseInt(request.getParameter("primaryKey"));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("type", typeId);
+			map.add("primaryKey", primaryKey);
+			// System.out.println(map);
+			CustInfo custInfo = Constants.getRestTemplate().postForObject(Constants.url + "getCustInfo", map,
+					CustInfo.class);
+
+			model.addAttribute("custInfo", custInfo);
+
+			TaskDetailsEmpName[] log = Constants.getRestTemplate().postForObject(Constants.url + "getTaskPreviousLog",
+					map, TaskDetailsEmpName[].class);
+
+			List<TaskDetailsEmpName> logList = new ArrayList<>(Arrays.asList(log));
+			model.addAttribute("logList", logList);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("mdAccTypeId", typeId);
+			map.add("priKey", primaryKey);
+			// System.out.println(map);
+			TaskDetailsWithMsg[] taskDetailsWithMsg = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getTaskDetailsClientProfiling", map, TaskDetailsWithMsg[].class);
+			List<TaskDetailsWithMsg> clientProfilingList = new ArrayList<>(Arrays.asList(taskDetailsWithMsg));
+			model.addAttribute("clientProfilingList", clientProfilingList);
+
+			TaskDetailsWithMsg[] wentright = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getTaskDetailsClientWentWrong", map, TaskDetailsWithMsg[].class);
+			List<TaskDetailsWithMsg> wentrightList = new ArrayList<>(Arrays.asList(wentright));
+			model.addAttribute("wentrightList", wentrightList);
+
+			TaskDetailsWithMsg[] question = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getTaskDetailsClientQuestions", map, TaskDetailsWithMsg[].class);
+			List<TaskDetailsWithMsg> questionList = new ArrayList<>(Arrays.asList(question));
+			model.addAttribute("questionList", questionList);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = "/taskLog", method = RequestMethod.GET)
+	public String taskLog(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		String mav = "task/taskLog";
+
+		try {
+
+			int typeId = Integer.parseInt(request.getParameter("typeId"));
+			int primaryKey = Integer.parseInt(request.getParameter("primaryKey"));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("type", typeId);
+			map.add("primaryKey", primaryKey);
+			TaskDetailsEmpName[] log = Constants.getRestTemplate().postForObject(Constants.url + "getTaskPreviousLog",
+					map, TaskDetailsEmpName[].class);
+
+			List<TaskDetailsEmpName> logList = new ArrayList<>(Arrays.asList(log));
+			model.addAttribute("logList", logList);
+
+			System.out.println(logList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = "/compaletTask", method = RequestMethod.GET)
+	public String compaletTask(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		String mav = "task/compaletTask";
+
+		try {
+
+			int taskId = Integer.parseInt(request.getParameter("taskId"));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("taskId", taskId);
+			taskDetail = Constants.getRestTemplate().postForObject(Constants.url + "getTaskdetailsEmpnameByTaskId", map,
+					TaskDetailsEmpName.class);
+
+			model.addAttribute("taskDetail", taskDetail);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("mdAccTypeId", 1);
+			TaskStatus[] taskStatus = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getAllTaskStatusBymdAccTypeId", map, TaskStatus[].class);
+			stsList = new ArrayList<>(Arrays.asList(taskStatus));
+			model.addAttribute("stsList", stsList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = "/submitandupdatetask", method = RequestMethod.POST)
+	@ResponseBody
+	public Info submitandupdatetask(HttpServletRequest request, HttpServletResponse response) {
+
+		HttpSession session = request.getSession();
+		Info info = new Info();
+
+		try {
+
+			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date dt = new Date();
+
+			// String custName = request.getParameter("custName");
+
+			int status = Integer.parseInt(request.getParameter("status"));
+			String sdate = request.getParameter("sdate");
+
+			String stime = request.getParameter("stime");
+			String clientDiscussion = request.getParameter("clientDiscussion");
+			String taskDescription = request.getParameter("taskDescription");
+			String clientProfiling = request.getParameter("clientProfiling");
+			String queations = request.getParameter("queations");
+			String right = request.getParameter("right");
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("taskId", taskDetail.getTaskId());
+			TaskDetails taskinfo = Constants.getRestTemplate().postForObject(Constants.url + "getTaskById", map,
+					TaskDetails.class);
+			taskinfo.setTaskClientDiscussion(clientDiscussion);
+			taskinfo.setThisTaskStatus(1);
+			taskinfo.setTaskDoneBy(userDetail.getEmpId());
+			taskinfo.setTaskDoneDate(sf.format(dt));
+			TaskDetails update = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask", taskinfo,
+					TaskDetails.class);
+
+			TaskDetails taskDetails = new TaskDetails();
+			taskDetails.setMdAccTypeId(taskDetail.getMdAccTypeId());
+			taskDetails.setPriKey(taskDetail.getPriKey());
+
+			for (int i = 0; i < stsList.size(); i++) {
+				// System.out.println(stsList.get(i).getmTaskStatusId() + " " + status);
+				if (stsList.get(i).getmTaskStatusId() == status) {
+					taskDetails.setTaskTittle(stsList.get(i).getmTaskStatusName());
+					taskDetails.setTaskFinalStatus(status);
+					taskDetails.setTaskPts(stsList.get(i).getmTaskPts());
+					break;
+				}
+			}
+
+			taskDetails.setTaskPriority(1);
+			taskDetails.setMakerUserId(userDetail.getEmpId());
+			taskDetails.setMakerDatetime(sf.format(dt));
+			taskDetails.setDelStatus(1);
+			taskDetails.setIsActive(1);
+			taskDetails.setTaskAllotedTo(taskDetail.getTaskAllotedTo());
+			taskDetails.setTaskAllotmentInstructions(taskDescription);
+			taskDetails.setTaskScheDate(DateConvertor.convertToYMD(sdate));
+			taskDetails.setTaskScheTime(DateConvertor.convertToYMD(sdate) + " " + stime);
+			taskDetails.setTaskClientProfiling(clientProfiling);
+			taskDetails.setTaskThoughQuestions(queations);
+			taskDetails.setTaskWhatWentWrong(right);
+			System.out.println(taskDetails);
+
+			TaskDetails newTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask", taskDetails,
+					TaskDetails.class);
+
+			info.setError(false);
+			info.setMsg("Insert new Task");
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", "Failed to update lead.");
+			e.printStackTrace();
+		}
+		return info;
+	}
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboard(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -444,7 +627,7 @@ public class DashboardController {
 			String accCode = request.getParameter("accCode");
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
-			String custName=request.getParameter("cName");
+			String custName = request.getParameter("cName");
 			int empCount = 0;
 			try {
 				empCount = Integer.parseInt(request.getParameter("empCount"));
@@ -515,10 +698,10 @@ public class DashboardController {
 			int channelId = Integer.parseInt(request.getParameter("channelId"));
 			int domainId = Integer.parseInt(request.getParameter("domainId"));
 			String domainText = request.getParameter("domainText");
-			//String accCode = request.getParameter("accCode");
+			// String accCode = request.getParameter("accCode");
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
-			String custName=request.getParameter("cName");
+			String custName = request.getParameter("cName");
 			int empCount = 0;
 			try {
 				empCount = Integer.parseInt(request.getParameter("empCount"));
@@ -545,7 +728,7 @@ public class DashboardController {
 			lmsHeader.setAccDomainId(domainId);
 			lmsHeader.setAccDomainOther(domainText);
 			lmsHeader.setCustomerName(custName);
-			//lmsHeader.setAccCode(accCode);
+			// lmsHeader.setAccCode(accCode);
 			lmsHeader.setAccTags(tags);
 			lmsHeader.setAccWebsite(website);
 			lmsHeader.setAccEmpCount(empCount);

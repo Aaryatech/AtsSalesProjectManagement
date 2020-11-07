@@ -1,5 +1,5 @@
 package com.ats.hreasy.model;
-
+ 
 public class TaskDetailsEmpName {
 	
 private int taskId;
@@ -69,7 +69,7 @@ private int taskId;
 	private int  minutes;
 	private String mdAccTypeText;
 	private int  completed;
-	
+	private String time;
 	public int getCompleted() {
 		return completed;
 	}
@@ -384,6 +384,38 @@ private int taskId;
 	}
 
 	
+	public int getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public int getThisTaskStatus() {
+		return thisTaskStatus;
+	}
+
+	public int getTaskFinalStatus() {
+		return taskFinalStatus;
+	}
+
+	public int getTaskPriority() {
+		return taskPriority;
+	}
+
+	public int getDelStatus() {
+		return delStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "TaskDetailsEmpName [taskId=" + taskId + ", mdAccTypeId=" + mdAccTypeId + ", priKey=" + priKey
@@ -399,7 +431,7 @@ private int taskId;
 				+ allocatedById + ", allocatedDatetime=" + allocatedDatetime + ", exInt1=" + exInt1 + ", exInt2="
 				+ exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", employeeName=" + employeeName + ", sts="
 				+ sts + ", day=" + day + ", hour=" + hour + ", minutes=" + minutes + ", mdAccTypeText=" + mdAccTypeText
-				+ ", completed=" + completed + "]";
+				+ ", completed=" + completed + ", time=" + time + "]";
 	}
 
 }
