@@ -47,8 +47,34 @@ public class EnquiryController {
 	public String addEnquiry(HttpServletRequest request, HttpServletResponse response, Model model) {
 		System.err.println("In Add Enquiry");
 		String mav = "addEnquiry";
-
+		LmsHeaderWithNames lmsResp=new LmsHeaderWithNames();
+		MultiValueMap<String,Object> map=new LinkedMultiValueMap<String, Object>();
+		
+	
 		try {
+			/*********For Add Inquiry From Customerlist Or Collabrator List***********/
+			try {
+				String	cid=request.getParameter("Cid");
+			
+				if(cid!=null) {
+					map.add("lmsId", Integer.parseInt(cid));
+			lmsResp=Constants.getRestTemplate().postForObject(Constants.url+"getLmsHeader", map, LmsHeaderWithNames.class);
+			//System.out.println("LmsResp========"+lmsResp);	
+			model.addAttribute("cid", Integer.parseInt(cid));
+			model.addAttribute("lmsResp", lmsResp);
+				}else {
+					//System.err.println(cid+"Cidddddddddddddddddddddddddddd");
+					model.addAttribute("cid", 0);
+				}
+				
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				model.addAttribute("cid", 0);
+			}
+			/*******************************************************/
 			inqDetailList=new ArrayList<InquiryDetail>();
 			
 			Channel[] channel = Constants.getRestTemplate().getForObject(Constants.url + "getAllChannelList",
@@ -201,8 +227,10 @@ public class EnquiryController {
 			String contactNo = request.getParameter("contactNo");
 			String scaleDesc = request.getParameter("scaleDesc");
 			String remark = request.getParameter("Remark");
+			//System.out.println("Remark Is "+remark);
 			String empCnt=request.getParameter("empCount");
-			int accType=Integer.parseInt(request.getParameter("accType"));
+			int cid=Integer.parseInt(request.getParameter("cid"));
+			//int accType=Integer.parseInt(request.getParameter("accType"));
 			
 			String tags = "";
 
@@ -242,9 +270,9 @@ public class EnquiryController {
 			  inqHeader.setIsActive(1);
 			  inqHeader.setMakerUserId(userDetail.getEmpId());
 			  inqHeader.setMakerDatetime(sf.format(dt)); 
-			  inqHeader.setInqRemark(remark);
+			  inqHeader.setInqAtsRating(rating);
 			  inqHeader.setMdAccTypeId(2);
-			
+			  inqHeader.setInqRefCode(cid);
 			  System.err.println(inqHeader);
 			 
 			 
@@ -430,7 +458,7 @@ public class EnquiryController {
 			String scaleDesc = request.getParameter("scaleDesc");
 			String remark = request.getParameter("Remark");
 			String empCnt=request.getParameter("empCount");
-			int accType=Integer.parseInt(request.getParameter("accType"));
+			//int accType=Integer.parseInt(request.getParameter("accType"));
 			
 			String tags = "";
 
@@ -510,7 +538,7 @@ public class EnquiryController {
 			editEnqHeader.setIsActive(editInqHeader.getIsActive());
 			editEnqHeader.setMakerUserId(editInqHeader.getMakerUserId());
 			editEnqHeader.setMakerDatetime(editInqHeader.getMakerDatetime()); 
-			editEnqHeader.setInqRemark(remark);
+			editEnqHeader.setInqAtsRating(rating);
 			editEnqHeader.setMdAccTypeId(2);
 			
 			

@@ -97,7 +97,7 @@ body1 {
 		</div>
 
 		<!-- login-form -->
-		<form id="form-login" action="loginProcess" method="post">
+		<form id="form-login" action="resetPassword" method="post">
 			<div class="loginInner" id="pass_form1">
 
 				<div class="login_l">
@@ -119,7 +119,7 @@ body1 {
 					<img
 						src="${pageContext.request.contextPath}/resources/global_assets/images/logo_white.png"
 						alt="">
-					<h2 class="login_head_one">Sign into your account</h2>
+					<h2 class="login_head_one">Reset Your Password</h2>
 					<div class="clr"></div>
 					<c:if test="${msg!=null}">
 						<div class="alert alert-danger">${msg}</div>
@@ -155,34 +155,38 @@ body1 {
 							session.removeAttribute("errorMsg");
 						%>
 					</c:if>
+					<%-- <c:out value="${empId}"></c:out> --%>
+					<input type="hidden" value="${empId}" id="empId" name="empId">
 					<div
 						class="form-group form-group-feedback form-group-feedback-left">
-						<input type="text" id="username" name="username"
-							class="form-control form_lgn" placeholder="Username"
-							style="border-radius: 5px;">
+						<input type="text" id="password" name="password"
+							class="form-control form_lgn" placeholder="Enter New Password"
+							style="border-radius: 5px;" autocomplete="off">
 						<div class="form-control-feedback" style="padding-left: 10px;">
 							<i class="icon-user text-muted"></i>
 						</div>
 					</div>
 					<div
 						class="form-group form-group-feedback form-group-feedback-left">
-						<input type="password" id="password" name="password"
-							class="form-control form_lgn" placeholder="Password"
-							style="border-radius: 5px;">
+						<input type="password" id="cpassword" name="cpassword"
+							class="form-control form_lgn" placeholder="Confirm Password"
+							style="border-radius: 5px;" onkeyup="Validate()" autocomplete="off">
 						<div class="form-control-feedback" style="padding-left: 10px;">
 							<i class="icon-lock2 text-muted"></i>
 						</div>
 
 					</div>
+					<span class="validation-invalid-label" id="error_pass"
+														style="display: none;">Pasword Dosent Match</span>
 					<div class="checkbox clearfix">
 
 						<%--  <a href="${pageContext.request.contextPath}/showForgotPass">Forgot Password?</a> --%>
 					</div>
 					<div class="form-group" style="margin: 0;">
-						<button type="submit" class="buttonlogin" id="sbtn">Login</button>
-						<div class="forgot_pass">
+						<button type="submit" class="buttonlogin" id="sbtn">Reset Password</button>
+						<!-- <div class="forgot_pass">
 							<a href="#" onclick="showForgotWindow()">Forgot Password?</a>
-						</div>
+						</div> -->
 					</div>
 					<div class="d-lg-none">
 						<span class="navbar-text"> &copy; 2019 - 2022. <a href="#">Powered
@@ -201,7 +205,7 @@ body1 {
 
 
 			<!-- forgot password form -->
-			<div class="loginInner" style="display: none" id="pass_form">
+			<%-- <div class="loginInner" style="display: none" id="pass_form">
 
 				<div class="login_l">
 					<a href=""><img
@@ -259,7 +263,7 @@ body1 {
 
 				<div class="clr"></div>
 
-			</div>
+			</div> --%>
 		</form>
 
 
@@ -275,7 +279,6 @@ body1 {
 		function showForgotWindow() {
 			document.getElementById("pass_form").style.display = "block";
 			document.getElementById("pass_form1").style = "display:none";
-			document.getElementById("sbtn").disabled = true;
 
 		}
 		function hidePassForForm() {
@@ -284,6 +287,24 @@ body1 {
 
 		}
 	</script>
+	<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("cpassword").value;
+    	$("#error_pass").hide();
+       // alert(confirmPassword)
+        if (password != confirmPassword) {
+        	$("#error_pass").show();
+        	document.getElementById("sbtn").disabled = true;
+           // alert("Passwords do not match.");
+            return false;
+        }
+        else{
+        	document.getElementById("sbtn").disabled = false;
+        }
+        return true;
+    }
+</script>
 </body>
 
 </html>

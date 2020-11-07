@@ -444,6 +444,7 @@ public class DashboardController {
 			String accCode = request.getParameter("accCode");
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
+			String custName=request.getParameter("cName");
 			int empCount = 0;
 			try {
 				empCount = Integer.parseInt(request.getParameter("empCount"));
@@ -465,6 +466,7 @@ public class DashboardController {
 			// System.out.println(tags);
 
 			editLmsHeader.setAccCompany(cmpName);
+			editLmsHeader.setCustomerName(custName);
 			editLmsHeader.setMdAccTypeId(type);
 			editLmsHeader.setChannelId(channelId);
 			editLmsHeader.setAccDomainId(domainId);
@@ -513,9 +515,10 @@ public class DashboardController {
 			int channelId = Integer.parseInt(request.getParameter("channelId"));
 			int domainId = Integer.parseInt(request.getParameter("domainId"));
 			String domainText = request.getParameter("domainText");
-			String accCode = request.getParameter("accCode");
+			//String accCode = request.getParameter("accCode");
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
+			String custName=request.getParameter("cName");
 			int empCount = 0;
 			try {
 				empCount = Integer.parseInt(request.getParameter("empCount"));
@@ -541,7 +544,8 @@ public class DashboardController {
 			lmsHeader.setChannelId(channelId);
 			lmsHeader.setAccDomainId(domainId);
 			lmsHeader.setAccDomainOther(domainText);
-			lmsHeader.setAccCode(accCode);
+			lmsHeader.setCustomerName(custName);
+			//lmsHeader.setAccCode(accCode);
 			lmsHeader.setAccTags(tags);
 			lmsHeader.setAccWebsite(website);
 			lmsHeader.setAccEmpCount(empCount);
@@ -595,31 +599,29 @@ public class DashboardController {
 		return "redirect:/showLeadList";
 	}
 
-	@RequestMapping(value = "/addEnquiry", method = RequestMethod.GET)
-	public String addEnquiry(HttpServletRequest request, HttpServletResponse response, Model model) {
+	/*
+	 * @RequestMapping(value = "/addEnquiry", method = RequestMethod.GET) public
+	 * String addEnquiry(HttpServletRequest request, HttpServletResponse response,
+	 * Model model) {
+	 * 
+	 * String mav = "addEnquiry";
+	 * 
+	 * try {
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } return mav; }
+	 */
 
-		String mav = "addEnquiry";
-
-		try {
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return mav;
-	}
-
-	@RequestMapping(value = "/showEnquiryList", method = RequestMethod.GET)
-	public String showEnquiryList(HttpServletRequest request, HttpServletResponse response, Model model) {
-
-		String mav = "showEnquiryList";
-
-		try {
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return mav;
-	}
+	/*
+	 * @RequestMapping(value = "/showEnquiryList", method = RequestMethod.GET)
+	 * public String showEnquiryList(HttpServletRequest request, HttpServletResponse
+	 * response, Model model) {
+	 * 
+	 * String mav = "showEnquiryList";
+	 * 
+	 * try {
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } return mav; }
+	 */
 
 	@RequestMapping(value = "/submitTagForm", method = RequestMethod.POST)
 	public String addNewTAg(HttpServletRequest request, HttpServletResponse response, Model model) {

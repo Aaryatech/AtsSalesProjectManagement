@@ -14,6 +14,8 @@ public class LmsHeader {
 	private int accRefCode;
 
 	private int accDomainId;
+	
+	private String customerName;
 
 	private String accDomainOther;
 
@@ -259,18 +261,27 @@ public class LmsHeader {
 		this.lmsDetailList = lmsDetailList;
 	}
 
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
 	@Override
 	public String toString() {
 		return "LmsHeader [lmsId=" + lmsId + ", mdAccTypeId=" + mdAccTypeId + ", channelId=" + channelId + ", accCode="
-				+ accCode + ", accRefCode=" + accRefCode + ", accDomainId=" + accDomainId + ", accDomainOther="
-				+ accDomainOther + ", accTags=" + accTags + ", accCompany=" + accCompany + ", accWebsite=" + accWebsite
-				+ ", accTurnover=" + accTurnover + ", accEmpCount=" + accEmpCount + ", accScaleDesc=" + accScaleDesc
-				+ ", accAtsRating=" + accAtsRating + ", accCompanyLandline=" + accCompanyLandline + ", accStatus="
-				+ accStatus + ", accRemark=" + accRemark + ", delStatus=" + delStatus + ", isActive=" + isActive
-				+ ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1
-				+ ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", lmsDetailList="
-				+ lmsDetailList + "]";
+				+ accCode + ", accRefCode=" + accRefCode + ", accDomainId=" + accDomainId + ", customerName="
+				+ customerName + ", accDomainOther=" + accDomainOther + ", accTags=" + accTags + ", accCompany="
+				+ accCompany + ", accWebsite=" + accWebsite + ", accTurnover=" + accTurnover + ", accEmpCount="
+				+ accEmpCount + ", accScaleDesc=" + accScaleDesc + ", accAtsRating=" + accAtsRating
+				+ ", accCompanyLandline=" + accCompanyLandline + ", accStatus=" + accStatus + ", accRemark=" + accRemark
+				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
+				+ ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1="
+				+ exVar1 + ", exVar2=" + exVar2 + ", lmsDetailList=" + lmsDetailList + "]";
 	}
+
 
 	 
 }

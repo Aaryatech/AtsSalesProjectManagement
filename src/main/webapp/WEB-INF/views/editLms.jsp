@@ -120,6 +120,19 @@
 										<div class="col-md-6">
 											<label
 												class="col-form-label  text-info font-weight-bold col-lg-5 float"
+												for="cmpName">Customer Name<span class="text-danger">*
+											</span>:
+											</label>
+											<div class="col-lg-7 float">
+												<input type="text" class="form-control" value="${editLmsHeader.customerName}"
+													placeholder="Customer Name" id="cName" maxlength="30"
+													name="cName" autocomplete="off" required="required">
+
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label
+												class="col-form-label  text-info font-weight-bold col-lg-5 float"
 												for="cmpName">Company Name<span class="text-danger">*
 											</span>:
 											</label>

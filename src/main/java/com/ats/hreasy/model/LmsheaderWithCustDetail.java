@@ -2,7 +2,8 @@ package com.ats.hreasy.model;
 
 import java.util.List;
 
-public class LmsHeaderWithNames {
+public class LmsheaderWithCustDetail {
+	
 	private int lmsId;
 
 	private int mdAccTypeId;
@@ -61,6 +62,10 @@ public class LmsHeaderWithNames {
 	private List<LmsDetail> lmsDetailList;
 
 	private String cpInfo;
+	
+	private String cpContact;
+	
+	private String cpInfo2;
 
 	public int getLmsId() {
 		return lmsId;
@@ -108,6 +113,14 @@ public class LmsHeaderWithNames {
 
 	public void setAccDomainId(int accDomainId) {
 		this.accDomainId = accDomainId;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public String getAccDomainOther() {
@@ -302,17 +315,25 @@ public class LmsHeaderWithNames {
 		this.cpInfo = cpInfo;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public String getCpContact() {
+		return cpContact;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCpContact(String cpContact) {
+		this.cpContact = cpContact;
+	}
+
+	public String getCpInfo2() {
+		return cpInfo2;
+	}
+
+	public void setCpInfo2(String cpInfo2) {
+		this.cpInfo2 = cpInfo2;
 	}
 
 	@Override
 	public String toString() {
-		return "LmsHeaderWithNames [lmsId=" + lmsId + ", mdAccTypeId=" + mdAccTypeId + ", channelId=" + channelId
+		return "LmsheaderWithCustDetail [lmsId=" + lmsId + ", mdAccTypeId=" + mdAccTypeId + ", channelId=" + channelId
 				+ ", accCode=" + accCode + ", accRefCode=" + accRefCode + ", accDomainId=" + accDomainId
 				+ ", customerName=" + customerName + ", accDomainOther=" + accDomainOther + ", accTags=" + accTags
 				+ ", accCompany=" + accCompany + ", accWebsite=" + accWebsite + ", accTurnover=" + accTurnover
@@ -321,13 +342,14 @@ public class LmsHeaderWithNames {
 				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
 				+ ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1="
 				+ exVar1 + ", exVar2=" + exVar2 + ", accountType=" + accountType + ", channelName=" + channelName
-				+ ", tagNames=" + tagNames + ", lmsDetailList=" + lmsDetailList + ", cpInfo=" + cpInfo + "]";
+				+ ", tagNames=" + tagNames + ", lmsDetailList=" + lmsDetailList + ", cpInfo=" + cpInfo + ", cpContact="
+				+ cpContact + ", cpInfo2=" + cpInfo2 + "]";
 	}
+	
+	
+	
+	
+	
+	
 
-
-	
-	
-	
-	
-	
 }

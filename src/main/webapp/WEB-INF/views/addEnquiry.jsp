@@ -47,7 +47,13 @@
 
 
 						<div class="card">
-
+		
+		
+		
+	
+		
+						
+						
 							<div class="card-header header-elements-inline">
 								<table width="100%">
 									<tr width="100%">
@@ -105,7 +111,67 @@
 									class="form-validate-jquery" novalidate="novalidate"
 									id="submitAddEnquiryForm" method="post">
 
-									<div class="form-group row">
+									<input type="hidden" name="cid" id="cid" value="${cid}">
+										<c:if test="${cid!=0}">
+										
+											<div class="form-group row">
+										<div class="col-md-6">
+										<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for=CustomerName>Customer Name
+										</label>
+										<div class="col-lg-7 float">
+										<c:out value="${lmsResp.customerName}"></c:out>
+											<%-- <input type="" class="form-control"  value="${lmsResp.customerName}"> --%>
+										</div>
+										</div>
+										
+										<div class="col-md-6">
+										<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for=CompanyName>Company Name
+										</label>
+										<div class="col-lg-7 float">
+										<c:out value="${lmsResp.accCompany}"></c:out>
+											<%-- <input type="" class="form-control"  value="${lmsResp.customerName}"> --%>
+										</div>
+										</div>
+										
+										</div>
+										
+										
+										<div class="form-group row">
+										<div class="col-md-6">
+										<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for=CompanyWebsite>Company WebSite
+										</label>
+										<div class="col-lg-7 float">
+										<c:out value="${lmsResp.accWebsite}"></c:out>
+											<%-- <input type="" class="form-control"  value="${lmsResp.customerName}"> --%>
+										</div>
+										</div>
+										
+										<div class="col-md-6">
+										<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for=Cpdetail>Contact
+										</label>
+										<div class="col-lg-7 float">
+										<c:out value="${lmsResp.accCompanyLandline}"></c:out>
+											<%-- <input type="" class="form-control"  value="${lmsResp.customerName}"> --%>
+										</div>
+										</div>
+									
+										</div>
+										
+										
+										
+										
+										
+										
+										</c:if>
+								
 								
 								<!--Account Type Is By Default 2  -->
 									<%-- 	<div class="col-md-6">
@@ -127,7 +193,7 @@
 
 											</div>
 										</div>  --%>
-
+								<div class="form-group row">
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold  col-lg-5 float"
