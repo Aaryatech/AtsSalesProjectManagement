@@ -230,6 +230,7 @@ public class EnquiryController {
 			//System.out.println("Remark Is "+remark);
 			String empCnt=request.getParameter("empCount");
 			int cid=Integer.parseInt(request.getParameter("cid"));
+			String inqTittle=request.getParameter("inqTittle");
 			//int accType=Integer.parseInt(request.getParameter("accType"));
 			
 			String tags = "";
@@ -273,6 +274,8 @@ public class EnquiryController {
 			  inqHeader.setInqAtsRating(rating);
 			  inqHeader.setMdAccTypeId(2);
 			  inqHeader.setInqRefCode(cid);
+			  inqHeader.setInquiryTittle(inqTittle);
+			 
 			  System.err.println(inqHeader);
 			 
 			 
@@ -458,6 +461,7 @@ public class EnquiryController {
 			String scaleDesc = request.getParameter("scaleDesc");
 			String remark = request.getParameter("Remark");
 			String empCnt=request.getParameter("empCount");
+			String inqTittle=request.getParameter("inqTittle");
 			//int accType=Integer.parseInt(request.getParameter("accType"));
 			
 			String tags = "";
@@ -497,6 +501,7 @@ public class EnquiryController {
 			  //inqHeader.setMakerDatetime(sf.format(dt)); 
 			editInqHeader.setInqRemark(remark);
 			editInqHeader.setMdAccTypeId(2);
+			editInqHeader.setInquiryTittle(inqTittle);
 			
 			
 			InquiryHeader editEnqHeader=new InquiryHeader();
@@ -517,7 +522,7 @@ public class EnquiryController {
 			editEnqHeader.setMakerUserId(editInqHeader.getMakerUserId());
 			editEnqHeader.setMakerDatetime(editInqHeader.getMakerDatetime());
 			editEnqHeader.setMdAccTypeId(2);
-			
+			editEnqHeader.setInquiryTittle(editInqHeader.getInquiryTittle());
 			
 			
 			

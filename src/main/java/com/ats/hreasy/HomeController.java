@@ -44,6 +44,7 @@ import com.ats.hreasy.common.Constants;
 import com.ats.hreasy.common.RandomString;
 import com.ats.hreasy.model.AccessRightModule;
 import com.ats.hreasy.model.EmpType;
+import com.ats.hreasy.model.Employee;
 import com.ats.hreasy.model.Info;
 import com.ats.hreasy.model.LoginResponse;
 import com.ats.hreasy.model.UserLoginData;
@@ -357,4 +358,69 @@ public class HomeController {
 		}
 		return mav;
 	}
+	
+	
+	
+	
+	@RequestMapping(value="/checkUserName",method=RequestMethod.POST)
+	public String checkUserName(HttpServletRequest request ,HttpServletResponse response,Model model) {
+			Employee empResp=new Employee();
+			HttpSession session = request.getSession();
+			String mav="";
+			MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
+			try {
+				String userName=request.getParameter("usernameFp");
+				map.add("userName", userName);
+			empResp=Constants.getRestTemplate().postForObject(Constants.url+"findEmployeeByUsername", map, Employee.class);
+			if(empResp==null) {
+				System.err.println("In If =================");
+			session.setAttribute("errorPassMsg1", "Username Not Found Please Enter Valid User Name!!!");
+				mav="login";
+			}else {
+				System.err.println("In else =================");
+				model.addAttribute("empId", empResp.getEmpId());
+				mav="forgetPass";
+			}
+			} catch (Exception e) {
+				// TODO: handle exception
+				mav = "redirect:/";
+				System.err.println("Exception Occured!!! In Catch Block Of /checkUserName Mapping");
+				e.printStackTrace();			}
+		return mav;
+	}
+	
+	@RequestMapping(value="/resetPassword" ,method=RequestMethod.POST)
+	public String resetPassword(HttpServletRequest  request,HttpServletResponse response,Model model) {
+		//System.err.println("In resetPassword====");
+		String mav="";
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
+		Info info=new Info();
+		HttpSession session=request.getSession();
+		try {
+			int empId=Integer.parseInt(request.getParameter("empId"));
+			String passWord=request.getParameter("password");
+			map.add("empId", empId);
+			map.add("passWord", passWord);
+			info=Constants.getRestTemplate().postForObject(Constants.url+"resetPassword", map, Info.class);
+			if(info.isError()) {
+				session.setAttribute("errorMsg", "Unable To Reset Password");
+				mav = "redirect:/";
+			}else {
+				session.setAttribute("errorMsg", "Password Reset Successfully");
+				mav="login";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+				mav = "redirect:/";
+				System.err.println("Exception Occured!!! In Catch Block Of /resetPassword Mapping");
+				e.printStackTrace();
+		}
+	
+		
+		return mav;
+	}
+	
+	
+	
+	
 }
