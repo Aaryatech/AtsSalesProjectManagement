@@ -27,6 +27,8 @@ import com.ats.hreasy.model.AccessRightModule;
 import com.ats.hreasy.model.AccountType;
 import com.ats.hreasy.model.Channel;
 import com.ats.hreasy.model.CustInfo;
+import com.ats.hreasy.model.DashBoardSummary;
+import com.ats.hreasy.model.DashboardData;
 import com.ats.hreasy.model.Designation;
 import com.ats.hreasy.model.DomainType;
 import com.ats.hreasy.model.Info;
@@ -252,9 +254,9 @@ public class DashboardController {
 
 	@RequestMapping(value = "/getPendingTaskList", method = RequestMethod.POST)
 	@ResponseBody
-	public List<TaskDetailsEmpName> getPendingTaskList(HttpServletRequest request, HttpServletResponse response) {
+	public DashboardData getPendingTaskList(HttpServletRequest request, HttpServletResponse response) {
 
-		List<TaskDetailsEmpName> list = new ArrayList<>();
+		DashboardData dashboardData = new DashboardData();
 		try {
 			HttpSession session = request.getSession();
 			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
@@ -262,11 +264,17 @@ public class DashboardController {
 			map.add("empId", userDetail.getEmpId());
 			TaskDetailsEmpName[] tags = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getTaskDetailWithEmpNameByEmpid", map, TaskDetailsEmpName[].class);
-			list = new ArrayList<>(Arrays.asList(tags));
+			List<TaskDetailsEmpName> list = new ArrayList<>(Arrays.asList(tags));
+
+			DashBoardSummary dashBoardSummary = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getRegularDashboardSummry", map, DashBoardSummary.class);
+			dashboardData.setDashBoardSummary(dashBoardSummary);
+			dashboardData.setPendingTask(list);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+		return dashboardData;
 	}
 
 	@RequestMapping(value = "/getAssignPendingTaskList", method = RequestMethod.POST)

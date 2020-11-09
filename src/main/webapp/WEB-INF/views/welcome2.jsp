@@ -63,40 +63,40 @@
 
 									<div class="col-2">
 										<div class="mb-3 ">
-											<h5 class="font-weight-semibold mb-0">32,693</h5>
+											<h5 class="font-weight-semibold mb-0" id="todays_task">0</h5>
 											<span class="text-muted font-size-sm">Today's</span>
 										</div>
 									</div>
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">2,345</h5>
+											<h5 class="font-weight-semibold mb-0" id="completed_task">0</h5>
 											<span class="text-muted font-size-sm">Completed</span>
 										</div>
 									</div>
 
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">3,568</h5>
+											<h5 class="font-weight-semibold mb-0" id="pending_task">0</h5>
 											<span class="text-muted font-size-sm">Pending</span>
 										</div>
 									</div>
 
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">32,693</h5>
+											<h5 class="font-weight-semibold mb-0" id="remaining_task">0</h5>
 											<span class="text-muted font-size-sm">Remaining</span>
 										</div>
 									</div>
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">32,693</h5>
+											<h5 class="font-weight-semibold mb-0" id="completed_pts">0</h5>
 											<span class="text-muted font-size-sm">Completed PTS</span>
 										</div>
 									</div>
 
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">32,693</h5>
+											<h5 class="font-weight-semibold mb-0" id="pending_pts">0</h5>
 											<span class="text-muted font-size-sm">Pending PTS</span>
 										</div>
 									</div>
@@ -139,7 +139,7 @@
 									<tbody>
 
 
-										<tr>
+										<%-- <tr>
 											<td class="text-center"><a href="#" data-toggle="modal"
 												data-target="#customerProfile"><i
 													class="icon-users2 icon-2x d-inline-block text-info"
@@ -289,9 +289,9 @@
 
 											<td class="text-center">20-10-2020 12:00 AM</td>
 											<td class="text-center"><span class="badge badge-danger">High</span></td>
-											<td>Akshay,Sachin</td>
+											<td>Akshay,Sachin</td> --%>
 
-											<!-- <td class="text-center">
+										<!-- <td class="text-center">
 										<div class="list-icons">
 											<div class="dropdown">
 												<a href="#" class="list-icons-item dropdown-toggle caret-0"
@@ -311,7 +311,7 @@
 												</li>
 											</div>
 									</td> -->
-										</tr>
+										<!-- </tr> -->
 
 
 									</tbody>
@@ -627,53 +627,56 @@
 							var table = $('#pendingTaskTable').DataTable();
 							var rows = table.rows().remove().draw();
 
-							for (var i = 0; i < response.length; i++) {
+							var pendingTask = response.pendingTask;
+
+							for (var i = 0; i < pendingTask.length; i++) {
 
 								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
-										+ response[i].mdAccTypeId
+										+ pendingTask[i].mdAccTypeId
 										+ ','
-										+ response[i].priKey
+										+ pendingTask[i].priKey
 										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
 										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
 								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
-								if (response[i].sts == 1) {
+								if (pendingTask[i].sts == 1) {
 									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
-											+ response[i].day
+											+ pendingTask[i].day
 											+ ' - '
-											+ response[i].hour
+											+ pendingTask[i].hour
 											+ ':'
-											+ response[i].minutes
+											+ pendingTask[i].minutes
 											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 								}
 								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
-										+ response[i].taskId
+										+ pendingTask[i].taskId
 										+ ',\''
-										+ response[i].taskTittle
+										+ pendingTask[i].taskTittle
 										+ '\')">'
-										+ response[i].mdAccTypeText
+										+ pendingTask[i].mdAccTypeText
 										+ '- '
-										+ response[i].taskTittle
+										+ pendingTask[i].taskTittle
 										+ '</a>&nbsp;'
 										+ '<span class="badge badge-primary badge-pill">'
-										+ response[i].taskPts
+										+ pendingTask[i].taskPts
 										+ ' PTS</span></div> <div class="text-muted">'
-										+ response[i].taskAllotmentInstructions
+										+ pendingTask[i].taskAllotmentInstructions
 										+ '</div>'
 										+ '<a href="#"  onclick="getTaskLog('
-										+ response[i].mdAccTypeId
+										+ pendingTask[i].mdAccTypeId
 										+ ','
-										+ response[i].priKey
+										+ pendingTask[i].priKey
 										+ ')"><span class="badge badge-success badge-pill">'
-										+ response[i].completed
+										+ pendingTask[i].completed
 										+ ' Completed</span></a>';
 								var schdatetime = '<div class="text-center">'
-										+ response[i].taskScheTime + '</div>';
+										+ pendingTask[i].taskScheTime
+										+ '</div>';
 								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
 
-								if (response[i].taskPriority == 2) {
+								if (pendingTask[i].taskPriority == 2) {
 									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
-								} else if (response[i].taskPriority == 3) {
+								} else if (pendingTask[i].taskPriority == 3) {
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
 
@@ -683,10 +686,23 @@
 										[ profile, remainingTime,
 												taskDescription, schdatetime,
 												priority,
-												response[i].employeeName ])
+												pendingTask[i].employeeName ])
 										.draw();
 							}
 
+							$("#todays_task").html(
+									response.dashBoardSummary.todayCount);
+							$("#completed_task").html(
+									response.dashBoardSummary.todayCompleted);
+							$("#pending_task").html(
+									response.dashBoardSummary.pendingCount);
+							$("#remaining_task").html(
+									response.dashBoardSummary.remainingCount);
+							$("#completed_pts")
+									.html(
+											response.dashBoardSummary.todayCompletedPts);
+							$("#pending_pts").html(
+									response.dashBoardSummary.pendingPts);
 						},
 					});
 
