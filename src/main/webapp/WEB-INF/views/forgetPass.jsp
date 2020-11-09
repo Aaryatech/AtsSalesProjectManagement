@@ -97,7 +97,7 @@ body1 {
 		</div>
 
 		<!-- login-form -->
-		<form id="form-login" action="resetPassword" method="post">
+		<form id="form-login" action="resetPassword" method="post" >
 			<div class="loginInner" id="pass_form1">
 
 				<div class="login_l">
@@ -159,25 +159,47 @@ body1 {
 					<input type="hidden"  value="${empId}" id="empId" name="empId">
 					<div
 						class="form-group form-group-feedback form-group-feedback-left">
-						<input type="text" id="password" name="password"
-							class="form-control form_lgn" placeholder="Enter New Password"
-							style="border-radius: 5px;" autocomplete="off">
+						<input type="text" id="password" name="password" 
+							class="form-control form_lgn" placeholder="Enter New Password"  onkeyup="Validate()" 
+							style="border-radius: 5px;" autocomplete="off"  required="required" >
+							<span class="validation-invalid-label" id="error_pass" style="display: none;">
+							Password  Is Requiered!!!!.
+							</span>
+							<span class="validation-invalid-label" id="error_minpass" style="display: none;">
+							Password  Length Should Be Greater Than 5!!!!.
+							</span>
+							<span class="validation-invalid-label" id="error_maxpass" style="display: none;">
+							Password  Length Must Be Less Than 13!!!!.
+							</span>
 						<div class="form-control-feedback" style="padding-left: 10px;">
 							<i class="icon-user text-muted"></i>
 						</div>
 					</div>
+				
 					<div
 						class="form-group form-group-feedback form-group-feedback-left">
 						<input type="password" id="cpassword" name="cpassword"
-							class="form-control form_lgn" placeholder="Confirm Password"
-							style="border-radius: 5px;" onkeyup="Validate()" autocomplete="off">
+							class="form-control form_lgn" placeholder="Confirm Password"onkeyup="Validate()"
+							style="border-radius: 5px;"  autocomplete="off"  required="required"  >
+							<span class="validation-invalid-label" id="error_cpass" style="display: none;">
+							Confirm Password  Is Requiered!!!!.
+							</span>
+								<span class="validation-invalid-label" id="error_cminpass" style="display: none;">
+							Password  Length Should Be Greater Than 5!!!!.
+							</span>
+							<span class="validation-invalid-label" id="error_cmaxpass" style="display: none;">
+							Password  Length Must Be Less Than 13!!!!.
+							</span>
 						<div class="form-control-feedback" style="padding-left: 10px;">
 							<i class="icon-lock2 text-muted"></i>
 						</div>
 
 					</div>
-					<span class="validation-invalid-label" id="error_pass"
-														style="display: none;">Pasword Dosent Match</span>
+					
+					<br>
+					<span class="validation-invalid-label" id="error_pass1" style="display: none;">
+					Pasword Dosent Match
+					</span>
 					<div class="checkbox clearfix">
 
 						<%--  <a href="${pageContext.request.contextPath}/showForgotPass">Forgot Password?</a> --%>
@@ -289,12 +311,73 @@ body1 {
 	</script>
 	<script type="text/javascript">
     function Validate() {
+    	//alert("call validate")
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("cpassword").value;
-    	$("#error_pass").hide();
+        $("#error_pass").hide();
+        $("#error_cpass").hide();
+    	$("#error_pass1").hide();
+    	
+    	if(!$("#password").val()){
+    		//alert("if pass")
+        	$("#error_pass").show();
+        	document.getElementById("sbtn").disabled = true;
+        	return false;
+    	}
+    	
+    	if(password.length<5){
+    		//alert(password.length)
+    		$("#error_minpass").show();
+        	document.getElementById("sbtn").disabled = true;
+        	return false;
+    	}else{
+    		$("#error_minpass").hide();
+    	}
+    
+    	
+    	if(password.length>=13){
+    		//alert(password.length)
+    		$("#error_maxpass").show();
+        	document.getElementById("sbtn").disabled = true;
+        	return false;
+    	}else{
+    		$("#error_maxpass").hide();
+    	}
+    	
+    	
+    	
+    	
+     	if(confirmPassword.length<5){
+    		//alert(password.length)
+    		$("#error_cminpass").show();
+        	document.getElementById("sbtn").disabled = true;
+        	return false;
+    	}else{
+    		$("#error_cminpass").hide();
+    	}
+    
+    	
+    	if(confirmPassword.length>=13){
+    		//alert(password.length)
+    		$("#error_cmaxpass").show();
+        	document.getElementById("sbtn").disabled = true;
+        	return false;
+    	}else{
+    		$("#error_cmaxpass").hide();
+    	}
+    	
+    	
+    	if(!$("#cpassword").val()){
+    		//alert("if cpass")
+        	$("#error_cpass").show();
+        	document.getElementById("sbtn").disabled = true;
+        	return false;
+    	}
+    
        // alert(confirmPassword)
         if (password != confirmPassword) {
-        	$("#error_pass").show();
+        	//alert("if pass1")
+        	$("#error_pass1").show();
         	document.getElementById("sbtn").disabled = true;
            // alert("Passwords do not match.");
             return false;

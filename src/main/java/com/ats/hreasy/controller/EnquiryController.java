@@ -215,6 +215,7 @@ public class EnquiryController {
 			
 			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat yy = new SimpleDateFormat("yyyy-MM-dd");
 			Date dt = new Date();
 			
 			
@@ -309,6 +310,11 @@ public class EnquiryController {
 			  taskDetails.setMakerDatetime(sf.format(dt)); 
 			  taskDetails.setDelStatus(1);
 			  taskDetails.setIsActive(1);
+			  taskDetails.setTaskAllotedTo("0");
+			  taskDetails.setTaskAllotmentInstructions("-");
+			  taskDetails.setTaskScheDate(yy.format(dt));
+			  taskDetails.setTaskScheTime(sf.format(dt));
+			  
 			  System.err.println("Task Details To Be Saved Is ="+taskDetails); TaskDetails
 			  newTask = Constants.getRestTemplate().postForObject(Constants.url +
 			  "addNewTask", taskDetails, TaskDetails.class);

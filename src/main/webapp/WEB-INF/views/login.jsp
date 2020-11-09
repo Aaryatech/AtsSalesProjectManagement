@@ -83,6 +83,19 @@ body1 {
 	background-image:
 		url("${pageContext.request.contextPath}/resources/global_assets/images/bg2.jpg");
 }
+.img {
+    width: 175px;
+    height: 110px;
+
+}
+
+.img img {
+    max-width:100%;
+	right: 8%;
+margin-top:-20%;
+margin-left: 25%
+}
+
 </style>
 <body onload="divSelect()" >
 	<input type="hidden" name="loginOrforgot" id="loginOrforgot"  value="${loginOrforgot}">
@@ -102,15 +115,19 @@ body1 {
 
 
 		<!-- login-form -->
-		<form id="form-login" action="loginProcess" method="post">
+		<form id="form-login" action="loginProcess" method="post"  class="form-validate-jquery" novalidate="novalidate">
 	
 		
 			<div class="loginInner" id="pass_form1">
 
 				<div class="login_l">
-					<a href=""><img
-						src="${pageContext.request.contextPath}/resources/global_assets/images/monginis1.png"
-						alt=""></a>
+					<a href="">
+					<div class="img">
+					<img 
+						src="${pageContext.request.contextPath}/resources/global_assets/images/powerdBy.png"
+						alt="">
+					</div>
+					</a>
 
 					<p class="login_txt">
 						Welcome to India’s one of most preferred bakery brand ! <span>Lets
@@ -123,9 +140,9 @@ body1 {
 
 
 
-					<img
+					<%-- <img
 						src="${pageContext.request.contextPath}/resources/global_assets/images/logo_white.png"
-						alt="">
+						alt=""> --%>
 					<h2 class="login_head_one">Sign into your account</h2>
 					<div class="clr"></div>
 					<c:if test="${msg!=null}">
@@ -175,7 +192,7 @@ body1 {
 						class="form-group form-group-feedback form-group-feedback-left">
 						<input type="text" id="username" name="username"
 							class="form-control form_lgn" placeholder="Username"
-							style="border-radius: 5px;">
+							style="border-radius: 5px;" required="required">
 						<div class="form-control-feedback" style="padding-left: 10px;">
 							<i class="icon-user text-muted"></i>
 						</div>
@@ -184,7 +201,7 @@ body1 {
 						class="form-group form-group-feedback form-group-feedback-left">
 						<input type="password" id="password" name="password"
 							class="form-control form_lgn" placeholder="Password"
-							style="border-radius: 5px;">
+							style="border-radius: 5px;" required="required">
 						<div class="form-control-feedback" style="padding-left: 10px;">
 							<i class="icon-lock2 text-muted"></i>
 						</div>
@@ -222,9 +239,13 @@ body1 {
 			<div class="loginInner" style="display: none" id="pass_form">
 
 				<div class="login_l">
-					<a href=""><img
-						src="${pageContext.request.contextPath}/resources/global_assets/images/monginis1.png"
-						alt=""></a>
+					<a href="">
+					<div class="img">
+					<img 
+						src="${pageContext.request.contextPath}/resources/global_assets/images/powerdBy.png"
+						alt="">
+					</div>
+					</a>
 
 					<p class="login_txt">
 						Welcome to India’s one of most preferred bakery brand ! <span>Lets
@@ -237,9 +258,9 @@ body1 {
 
 
 
-					<img
+				<%-- 	<img
 						src="${pageContext.request.contextPath}/resources/global_assets/images/logo_white.png"
-						alt="">
+						alt=""> --%>
 					<h2 class="login_head_one">Forgot Password</h2>
 					<div class="clr"></div>
 
@@ -258,7 +279,8 @@ body1 {
 						class="form-group form-group-feedback form-group-feedback-left">
 						<input type="text" id="usernameFp" name="usernameFp"
 							class="form-control form_lgn" placeholder="Email Address"
-							style="border-radius: 5px;">
+							style="border-radius: 5px;" required="required" >
+						
 						<div class="form-control-feedback" style="padding-left: 10px;">
 							<i class="icon-envelop text-muted"></i>
 						</div>
@@ -266,8 +288,8 @@ body1 {
 
 
 					<div class="form-group" style="margin: 0;">
-						<button type="button" onclick="subPassForForm()"
-							class="buttonlogin">Submit</button>
+						<button type="button" onclick="subPassForForm()" 
+						 id="sbtn"	class="buttonlogin" onkeyup="validate()">Submit</button>
 						<div class="forgot_pass" style="text-align: left;">
 							<a href="#" onclick="hidePassForForm()">Back</a>
 						</div>
@@ -312,6 +334,8 @@ body1 {
 			}
 			
 		}
+		
+	
 	</script>
 </body>
 

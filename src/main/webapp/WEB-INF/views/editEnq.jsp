@@ -369,17 +369,17 @@
 													required="required" id="domainId">
 													<option value="">Select Domain</option>
 											
-														<option value="0">0</option>
-														<option value="0.5">0.5</option>
-														<option value="1.0">1.0</option>
-														<option value="1.5">1.5</option>
-														<option value="2.0">2.0</option>
-														<option value="2.5">2.5</option>
-														<option value="3.0">3.0</option>
-														<option value="3.5">3.5</option>
-														<option value="4.0">4.0</option>
-														<option value="4.5">4.5</option>
-														<option value="5.0">5.0</option>
+														<option value="0" ${editEnqHeader.inqAtsRating=='0' ? 'selected' : ''}>0</option>
+														<option value="0.5" ${editEnqHeader.inqAtsRating=='0.5' ? 'selected' : ''}>0.5</option>
+														<option value="1" ${editEnqHeader.inqAtsRating=='1' ? 'selected' : ''}>1.0</option>
+														<option value="1.5" ${editEnqHeader.inqAtsRating=='1.5' ? 'selected' : ''}>1.5</option>
+														<option value="2" ${editEnqHeader.inqAtsRating=='2' ? 'selected' : ''}>2.0</option>
+														<option value="2.5" ${editEnqHeader.inqAtsRating=='2.5' ? 'selected' : ''}>2.5</option>
+														<option value="3" ${editEnqHeader.inqAtsRating=='3' ? 'selected' : ''}>3.0</option>
+														<option value="3.5" ${editEnqHeader.inqAtsRating=='3.5' ? 'selected' : ''}>3.5</option>
+														<option value="4" ${editEnqHeader.inqAtsRating=='4' ? 'selected' : ''}>4.0</option>
+														<option value="4.5" ${editEnqHeader.inqAtsRating=='4.5' ? 'selected' : ''}>4.5</option>
+														<option value="5" ${editEnqHeader.inqAtsRating=='5' ? 'selected' : ''}>5.0</option>
 													
 												</select>
 
