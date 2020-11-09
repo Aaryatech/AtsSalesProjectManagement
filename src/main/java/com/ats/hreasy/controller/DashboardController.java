@@ -190,33 +190,37 @@ public class DashboardController {
 			taskDetails.setMdAccTypeId(taskDetail.getMdAccTypeId());
 			taskDetails.setPriKey(taskDetail.getPriKey());
 
+			int terminate = 0;
+
 			for (int i = 0; i < stsList.size(); i++) {
 				// System.out.println(stsList.get(i).getmTaskStatusId() + " " + status);
 				if (stsList.get(i).getmTaskStatusId() == status) {
 					taskDetails.setTaskTittle(stsList.get(i).getmTaskStatusName());
 					taskDetails.setTaskFinalStatus(status);
 					taskDetails.setTaskPts(stsList.get(i).getmTaskPts());
+					terminate = stsList.get(i).getmTaskIsClosed();
 					break;
 				}
 			}
 
-			taskDetails.setTaskPriority(1);
-			taskDetails.setMakerUserId(userDetail.getEmpId());
-			taskDetails.setMakerDatetime(sf.format(dt));
-			taskDetails.setDelStatus(1);
-			taskDetails.setIsActive(1);
-			taskDetails.setTaskAllotedTo(taskDetail.getTaskAllotedTo());
-			taskDetails.setTaskAllotmentInstructions(taskDescription);
-			taskDetails.setTaskScheDate(DateConvertor.convertToYMD(sdate));
-			taskDetails.setTaskScheTime(DateConvertor.convertToYMD(sdate) + " " + stime);
-			taskDetails.setTaskClientProfiling(clientProfiling);
-			taskDetails.setTaskThoughQuestions(queations);
-			taskDetails.setTaskWhatWentWrong(right);
-			System.out.println(taskDetails);
+			if (terminate == 0) {
 
-			TaskDetails newTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask", taskDetails,
-					TaskDetails.class);
+				taskDetails.setTaskPriority(1);
+				taskDetails.setMakerUserId(userDetail.getEmpId());
+				taskDetails.setMakerDatetime(sf.format(dt));
+				taskDetails.setDelStatus(1);
+				taskDetails.setIsActive(1);
+				taskDetails.setTaskAllotedTo(taskDetail.getTaskAllotedTo());
+				taskDetails.setTaskAllotmentInstructions(taskDescription);
+				taskDetails.setTaskScheDate(DateConvertor.convertToYMD(sdate));
+				taskDetails.setTaskScheTime(DateConvertor.convertToYMD(sdate) + " " + stime);
+				taskDetails.setTaskClientProfiling(clientProfiling);
+				taskDetails.setTaskThoughQuestions(queations);
+				taskDetails.setTaskWhatWentWrong(right);
 
+				TaskDetails newTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask",
+						taskDetails, TaskDetails.class);
+			}
 			info.setError(false);
 			info.setMsg("Insert new Task");
 		} catch (Exception e) {

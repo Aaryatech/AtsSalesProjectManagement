@@ -63,58 +63,70 @@
 									</thead>
 									<tbody>
 
+										<c:forEach items="${empList}" var="empList" varStatus="count">
+											<tr>
+												<td>${count.index+1}</td>
+												<td>${empList.empName}</td>
+												<td class="text-center">
+													<div class="row">
 
-										<tr>
-											<td class="text-center">1</td>
-											<td width="30%">Akshay</td>
-											<td class="text-center">
-												<div class="row">
+														<h6 class="mb-0">
+															${empList.allocateTask}
+															<div class="font-size-sm text-muted line-height-1">Task</div>
+														</h6>
+														&nbsp;/&nbsp;
+														<h6 class="mb-0">
+															${empList.allocatePts}
+															<div class="font-size-sm text-muted line-height-1">PTS</div>
+														</h6>
 
-													<h6 class="mb-0">
-														20
-														<div class="font-size-sm text-muted line-height-1">Task</div>
-													</h6>
-													&nbsp;/&nbsp;
-													<h6 class="mb-0">
-														40
-														<div class="font-size-sm text-muted line-height-1">PTS</div>
-													</h6>
+													</div>
 
-												</div>
+												</td>
 
-											</td>
+												<td class="text-center"><div class="row">
 
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
+														<h6 class="mb-0">
+															${empList.completedTask}
+															<div class="font-size-sm text-muted line-height-1">Task</div>
+														</h6>
+														&nbsp;/&nbsp;
+														<h6 class="mb-0">
+															${empList.completedPts}
+															<div class="font-size-sm text-muted line-height-1">PTS</div>
+														</h6>
 
-										</tr>
+													</div></td>
+												<td class="text-center"><div class="row">
 
-										<tr>
-											<td class="text-center">2</td>
-											<td width="30%">Sachin</td>
-											<td class="text-center">
-												<div class="row">
+														<h6 class="mb-0">
+															${empList.pendingCount}
+															<div class="font-size-sm text-muted line-height-1">Task</div>
+														</h6>
+														&nbsp;/&nbsp;
+														<h6 class="mb-0">
+															${empList.pendingPts}
+															<div class="font-size-sm text-muted line-height-1">PTS</div>
+														</h6>
 
-													<h6 class="mb-0">
-														20
-														<div class="font-size-sm text-muted line-height-1">Task</div>
-													</h6>
-													&nbsp;/&nbsp;
-													<h6 class="mb-0">
-														40
-														<div class="font-size-sm text-muted line-height-1">PTS</div>
-													</h6>
+													</div></td>
+												<td class="text-center"><div class="row">
 
-												</div>
+														<h6 class="mb-0">
+															${empList.remainingCount}
+															<div class="font-size-sm text-muted line-height-1">Task</div>
+														</h6>
+														&nbsp;/&nbsp;
+														<h6 class="mb-0">
+															${empList.remainingPts}
+															<div class="font-size-sm text-muted line-height-1">PTS</div>
+														</h6>
 
-											</td>
+													</div></td>
 
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
+											</tr>
+										</c:forEach>
 
-										</tr>
 
 									</tbody>
 								</table>
@@ -145,8 +157,8 @@
 										<tr>
 											<th>#</th>
 											<th class="text-center" width="20%">Module</th>
-											<th class="text-center">Task Allocated Task</th>
 											<th class="text-center">Unallocate Task</th>
+											<th class="text-center">Task Allocated Task</th>
 											<th class="text-center">Completed Task</th>
 											<th class="text-center">Pending Task</th>
 											<th class="text-center">Remaining Task</th>
@@ -159,17 +171,17 @@
 										<tr>
 											<td class="text-center">1</td>
 											<td width="30%"><a
-												href="${pageContext.request.contextPath}/moduleWiseDashboard">LMS</a></td>
+												href="${pageContext.request.contextPath}/moduleDetailWiseDashboard?moduleId=1">LMS</a></td>
 											<td class="text-center">
 												<div class="row">
 
 													<h6 class="mb-0">
-														20
+														${modeludeWiseDashboard.lmsUnallocatedTask}
 														<div class="font-size-sm text-muted line-height-1">Task</div>
 													</h6>
 													&nbsp;/&nbsp;
 													<h6 class="mb-0">
-														40
+														${modeludeWiseDashboard.lmsUnallocatedPts}
 														<div class="font-size-sm text-muted line-height-1">PTS</div>
 													</h6>
 
@@ -177,25 +189,87 @@
 
 											</td>
 
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.lmsAllocatedTask}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.lmsAllocatedPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.lmsTodayCompleted}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.lmsTodayCompleted_pts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.lmsPendingCount}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.lmsPendingPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.lmsRemainingCount}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.lmsRemainingPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
 										</tr>
 
 										<tr>
 											<td class="text-center">2</td>
-											<td width="30%">IMS</td>
-											<td class="text-center">
-												<div class="row">
+											<td width="30%"><a
+												href="${pageContext.request.contextPath}/moduleDetailWiseDashboard?moduleId=2">IMS</a></td>
+											<td class="text-center"><div class="row">
 
 													<h6 class="mb-0">
-														20
+														${modeludeWiseDashboard.inqUnallocatedTask}
 														<div class="font-size-sm text-muted line-height-1">Task</div>
 													</h6>
 													&nbsp;/&nbsp;
 													<h6 class="mb-0">
-														40
+														${modeludeWiseDashboard.inqUnallocatedPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center">
+												<div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.inqAllocatedTask}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.inqAllocatedPts}
 														<div class="font-size-sm text-muted line-height-1">PTS</div>
 													</h6>
 
@@ -203,25 +277,76 @@
 
 											</td>
 
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.inqTodayCompleted}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.inqTodayCompleted_pts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.inqPendingCount}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.inqPendingPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.inqRemainingCount}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.inqRemainingPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+
 										</tr>
 
 										<tr>
 											<td class="text-center">2</td>
-											<td width="30%">Office Task</td>
-											<td class="text-center">
-												<div class="row">
+											<td width="30%"><a
+												href="${pageContext.request.contextPath}/moduleDetailWiseDashboard?moduleId=3">Office
+													Task</a></td>
+											<td class="text-center"><div class="row">
 
 													<h6 class="mb-0">
-														20
+														${modeludeWiseDashboard.atsUnallocatedTask}
 														<div class="font-size-sm text-muted line-height-1">Task</div>
 													</h6>
 													&nbsp;/&nbsp;
 													<h6 class="mb-0">
-														40
+														${modeludeWiseDashboard.atsUnallocatedPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center">
+												<div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.atsAllocatedTask}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.atsAllocatedPts}
 														<div class="font-size-sm text-muted line-height-1">PTS</div>
 													</h6>
 
@@ -229,10 +354,46 @@
 
 											</td>
 
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.atsTodayCompleted}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.atsTodayCompleted_pts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.atsPendingCount}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.atsPendingPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+											<td class="text-center"><div class="row">
+
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.atsRemainingCount}
+														<div class="font-size-sm text-muted line-height-1">Task</div>
+													</h6>
+													&nbsp;/&nbsp;
+													<h6 class="mb-0">
+														${modeludeWiseDashboard.atsRemainingPts}
+														<div class="font-size-sm text-muted line-height-1">PTS</div>
+													</h6>
+
+												</div></td>
+
 										</tr>
 
 									</tbody>

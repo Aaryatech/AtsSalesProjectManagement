@@ -39,7 +39,14 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header header-elements-inline">
-								<h6 class="card-title">LMS Task Detail</h6>
+								<h6 class="card-title">
+									<c:choose>
+										<c:when test="${moduleId==1}">LMS Task Detail</c:when>
+										<c:when test="${moduleId==2}">IMS Task Detail</c:when>
+										<c:when test="${moduleId==3}">Office Task Detail</c:when>
+									</c:choose>
+
+								</h6>
 								<div class="header-elements">
 									<div class="list-icons">
 										<a class="list-icons-item" data-action="collapse"></a>
@@ -51,52 +58,51 @@
 
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">2,345</h5>
+											<h5 class="font-weight-semibold mb-0" id="unallocated">0</h5>
 											<span class="text-muted font-size-sm">Unallocated</span>
 										</div>
 									</div>
 									<div class="col-2">
 										<div class="mb-3 ">
-											<h5 class="font-weight-semibold mb-0">32,693</h5>
+											<h5 class="font-weight-semibold mb-0" id="allocated">0</h5>
 											<span class="text-muted font-size-sm">Allocated</span>
 										</div>
 									</div>
-									<div class="col-2">
-										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">2,345</h5>
-											<span class="text-muted font-size-sm">Completed</span>
-										</div>
-									</div>
+
 
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">3,568</h5>
+											<h5 class="font-weight-semibold mb-0" id="penidng">0</h5>
 											<span class="text-muted font-size-sm">Pending</span>
 										</div>
 									</div>
 
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0">32,693</h5>
+											<h5 class="font-weight-semibold mb-0" id="remaining">0</h5>
 											<span class="text-muted font-size-sm">Remaining</span>
 										</div>
 									</div>
-
+									<div class="col-2">
+										<div class="mb-3">
+											<h5 class="font-weight-semibold mb-0" id="completed">0</h5>
+											<span class="text-muted font-size-sm">Completed</span>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="card-body">
 								<ul class="nav nav-tabs nav-tabs-highlight">
-
 									<li class="nav-item"><a href="#highlighted-tab1"
-										class="nav-link active" data-toggle="tab">Allocated </a></li>
+										class="nav-link active" data-toggle="tab">Unallocated </a></li>
 									<li class="nav-item"><a href="#highlighted-tab2"
-										class="nav-link" data-toggle="tab">Unallocated </a></li>
+										class="nav-link" data-toggle="tab">Allocated </a></li>
 									<li class="nav-item"><a href="#highlighted-tab3"
-										class="nav-link" data-toggle="tab">Completed</a></li>
-									<li class="nav-item"><a href="#highlighted-tab4"
 										class="nav-link" data-toggle="tab">Pending</a></li>
-									<li class="nav-item"><a href="#highlighted-tab5"
+									<li class="nav-item"><a href="#highlighted-tab4"
 										class="nav-link" data-toggle="tab">Remaining</a></li>
+									<li class="nav-item"><a href="#highlighted-tab5"
+										class="nav-link" data-toggle="tab">Completed</a></li>
 
 								</ul>
 
@@ -163,7 +169,26 @@
 										</div>
 										<div class="table-responsive">
 											<table class="table tasks-list table-lg"
-												id="pendingTaskTable">
+												id="unallocatedTable">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th class="text-center">Due</th>
+														<th class="text-center">Task Description</th>
+														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Priority</th>
+
+													</tr>
+												</thead>
+												<tbody>
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="highlighted-tab2">
+										<div class="table-responsive">
+											<table class="table tasks-list table-lg" id="allocatedTable">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -178,195 +203,8 @@
 												<tbody>
 
 
-													<tr>
-														<td class="text-center"><a href="#"
-															data-toggle="modal" data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a>
-															<div class="font-size-sm text-muted line-height-1">Office
-																task</div></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																LEAD - Previous Task <span
-																	class="badge badge-primary badge-pill">10 PTS</span>
-															</div>
-															<div class="text-muted">Call to customer</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
 
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="#" data-toggle="modal"
-																	data-target="#modal_form_vertical">Office task -
-																	Call to customer</a>
-															</div>
-															<div class="text-muted">Call to customer</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">Enquiry - Demo
-																For Client</div>
-															<div class="text-muted">Demo For Client</div> <a href="#"
-															data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-warning">Normal</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="${pageContext.request.contextPath}/tagList">Developing</a>
-															</div>
-															<div class="text-muted">Developing</div> <a href="#"
-															data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-success">Low</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="${pageContext.request.contextPath}/addEnquiry">Create
-																	ad campaign banners set</a>
-															</div>
-															<div class="text-muted">That he had recently ...</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-														<td>Akshay,Sachin</td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="${pageContext.request.contextPath}/addLead">Edit
-																	the draft for the icons</a>
-															</div>
-															<div class="text-muted">You've got to get enough
-																sleep..</div> <a href="#" data-toggle="modal"
-															data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-
-
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="tab-pane fade" id="highlighted-tab2">
-										<div class="table-responsive">
-											<table class="table tasks-list table-lg"
-												id="assignPendingTaskTable">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th class="text-center">Due</th>
-														<th class="text-center">Task Description</th>
-														<th class="text-center">Schedule Date Time</th>
-														<th class="text-center">Priority</th>
-
-
-													</tr>
-												</thead>
-												<tbody>
-
-
-
-													<tr>
+													<!-- <tr>
 														<td><a href="#" data-toggle="modal"
 															data-target="#customerProfile"><i
 																class="icon-users2 icon-2x d-inline-block text-info"
@@ -392,24 +230,164 @@
 														<td class="text-center"><span
 															class="badge badge-danger">High</span></td>
 
-													</tr>
+													</tr> -->
 
 												</tbody>
 											</table>
 										</div>
 									</div>
 
-									<div class="tab-pane fade" id="highlighted-tab3">DIY
-										synth PBR banksy irony. Leggings gentrify squid 8-bit cred
-										pitchfork. Williamsburg whatever.</div>
+									<div class="tab-pane fade" id="highlighted-tab3">
+										<div class="table-responsive">
+											<table class="table tasks-list table-lg" id="pendingTable">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th class="text-center">Due</th>
+														<th class="text-center">Task Description</th>
+														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Priority</th>
+														<th class="text-center">Assigned users</th>
 
-									<div class="tab-pane fade" id="highlighted-tab4">DIY
-										synth PBR banksy irony. Leggings gentrify squid 8-bit cred
-										pitchfork. Williamsburg whatever.</div>
+													</tr>
+												</thead>
+												<tbody>
 
-									<div class="tab-pane fade" id="highlighted-tab5">DIY
-										synth PBR banksy irony. Leggings gentrify squid 8-bit cred
-										pitchfork. Williamsburg whatever.</div>
+
+
+													<!-- <tr>
+														<td><a href="#" data-toggle="modal"
+															data-target="#customerProfile"><i
+																class="icon-users2 icon-2x d-inline-block text-info"
+																title="Customer Profile"></i></a></td>
+														<td class="text-center">
+															<h6 class="mb-0">12</h6>
+															<div class="font-size-sm text-muted line-height-1">hours</div>
+
+														</td>
+														<td>
+															<div class="font-weight-semibold">
+																<a href="#" data-toggle="modal"
+																	data-target="#allocate_to">Enquiry - Call to
+																	customer</a>
+															</div>
+															<div class="text-muted">Call to customer</div> <a
+															href="#" data-toggle="modal" data-target="#task_log"><span
+																class="badge badge-success badge-pill">65
+																	Completed</span></a>
+														</td>
+
+														<td class="text-center">20-10-2020 12:00 AM</td>
+														<td class="text-center"><span
+															class="badge badge-danger">High</span></td>
+
+													</tr> -->
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+									<div class="tab-pane fade" id="highlighted-tab4">
+										<div class="table-responsive">
+											<table class="table tasks-list table-lg" id="remainingTable">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th class="text-center">Due</th>
+														<th class="text-center">Task Description</th>
+														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Priority</th>
+														<th class="text-center">Assigned users</th>
+
+													</tr>
+												</thead>
+												<tbody>
+
+
+
+													<!-- <tr>
+														<td><a href="#" data-toggle="modal"
+															data-target="#customerProfile"><i
+																class="icon-users2 icon-2x d-inline-block text-info"
+																title="Customer Profile"></i></a></td>
+														<td class="text-center">
+															<h6 class="mb-0">12</h6>
+															<div class="font-size-sm text-muted line-height-1">hours</div>
+
+														</td>
+														<td>
+															<div class="font-weight-semibold">
+																<a href="#" data-toggle="modal"
+																	data-target="#allocate_to">Enquiry - Call to
+																	customer</a>
+															</div>
+															<div class="text-muted">Call to customer</div> <a
+															href="#" data-toggle="modal" data-target="#task_log"><span
+																class="badge badge-success badge-pill">65
+																	Completed</span></a>
+														</td>
+
+														<td class="text-center">20-10-2020 12:00 AM</td>
+														<td class="text-center"><span
+															class="badge badge-danger">High</span></td>
+
+													</tr> -->
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+									<div class="tab-pane fade" id="highlighted-tab5">
+										<div class="table-responsive">
+											<table class="table tasks-list table-lg" id="completedTable">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th class="text-center">Completed Date</th>
+														<th class="text-center">Task Description</th>
+														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Priority</th>
+														<th class="text-center">Completed By</th>
+													</tr>
+												</thead>
+												<tbody>
+
+
+
+													<!-- <tr>
+														<td><a href="#" data-toggle="modal"
+															data-target="#customerProfile"><i
+																class="icon-users2 icon-2x d-inline-block text-info"
+																title="Customer Profile"></i></a></td>
+														<td class="text-center">
+															<h6 class="mb-0">12</h6>
+															<div class="font-size-sm text-muted line-height-1">hours</div>
+
+														</td>
+														<td>
+															<div class="font-weight-semibold">
+																<a href="#" data-toggle="modal"
+																	data-target="#allocate_to">Enquiry - Call to
+																	customer</a>
+															</div>
+															<div class="text-muted">Call to customer</div> <a
+															href="#" data-toggle="modal" data-target="#task_log"><span
+																class="badge badge-success badge-pill">65
+																	Completed</span></a>
+														</td>
+
+														<td class="text-center">20-10-2020 12:00 AM</td>
+														<td class="text-center"><span
+															class="badge badge-danger">High</span></td>
+
+													</tr> -->
+
+												</tbody>
+											</table>
+										</div>
+									</div>
 
 								</div>
 							</div>
@@ -430,113 +408,52 @@
 
 	</div>
 
-	<div id="allocate_to" class="modal fade" tabindex="-1">
+	<div id="taskDetailModel" class="modal fade" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h2 class="modal-title">Task Description</h2>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<div class="modal-body">
-					<h4 class="font-weight-semibold">Call Customer</h4>
-					<p>Duis mollis, est non commodo luctus, nisi erat porttitor
-						ligula, eget lacinia odio sem. Praesent commodo cursus magna, vel
-						scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
-						laoreet rutrum faucibus dolor auctor.</p>
-					<ul>
-						<li><div class="row">
-								<div class="col-sm-4">
-									<strong>Schedule Date Time</strong>
-								</div>
-								: 20-10-2020 12:00 AM
-							</div></li>
-						<li><div class="row">
-								<div class="col-sm-4">
-									<strong>Generated By</strong>
-								</div>
-								: Swapnil Mashalkar, 20-10-2020 12:00 AM
-							</div></li>
-					</ul>
-
-					<form class="form-validate-jquery" action="#"
-						novalidate="novalidate" id="a">
-
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="schdldt">Schedule
-								Date <span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<input type="text" class="form-control" required
-									placeholder="Schedule Schedule" id="schdldt" name="schdldt">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="schdltm">Schedule
-								Time <span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<input type="text" name="textarea" class="form-control" required
-									placeholder="Schedule Time" id="schdltm" name="schdltm">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="taskDescription">Task
-								Instruction<span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<textarea rows="3" cols="5" name="textarea" class="form-control"
-									required placeholder="Task Instruction" id="taskInstruction"
-									name="taskInstruction"></textarea>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="status">Allocate
-								To<span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<select name="status" class="form-control form-control-select2"
-									data-placeholder="Select status" data-fouc required="required"
-									multiple="multiple">
-									<option value="">select</option>
-									<option value="open">Sachin</option>
-									<option value="hold">Akshay</option>
-									<option value="resolved">Anmol</option>
-
-								</select>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="Priority">Set
-								Priority<span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<select name="Priority"
-									class="form-control form-control-select2"
-									data-placeholder="Select status" data-fouc required="required">
-									<option value="">select</option>
-									<option value="Low">Low</option>
-									<option value="Normal">Normal</option>
-									<option value="High">High</option>
-
-								</select>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-
-							<button type="submit" class="btn bg-primary">Submit</button>
-						</div>
-					</form>
-
-
-				</div>
+				<div class="modal-body" id="modalbody"></div>
 
 
 			</div>
 		</div>
 	</div>
+	<div id="task_log" class="modal fade" tabindex="-1">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title">Previous Task</h2>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body" id="taskLogData"></div>
 
+
+			</div>
+		</div>
+	</div>
+	<!-- /info modal -->
+
+	<div id="customerProfileModel" class="modal fade" tabindex="-1">
+
+		<div class="modal-dialog modal-lg modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header pb-3">
+					<h5 class="modal-title">Customer Profile</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<div class="modal-body py-0" id="custProfile"></div>
+
+				<!-- <div class="modal-footer pt-3">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+					<button type="button" class="btn bg-primary">Save changes</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		$(document)
 				.ready(
@@ -560,6 +477,529 @@
 				format : 'DD-MM-YYYY'
 			}
 		});
+
+		$(document).ready(function() {
+			getDataList();
+		})
+
+		function getDataList() {
+
+			var moduleId = '${moduleId}';
+			var fd = new FormData();
+			fd.append("moduleId", moduleId);
+
+			//$('#modal_step1').modal('show');
+
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/getTaskByModuleWiseList',
+						type : 'post',
+						dataType : 'json',
+						data : fd,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+
+							//$('#modal_step1').modal('hide');
+							//alert(JSON.stringify(response))
+							var table = $('#unallocatedTable').DataTable();
+							var rows = table.rows().remove().draw();
+
+							var unallocated = response.unallocatedList;
+
+							for (var i = 0; i < unallocated.length; i++) {
+
+								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+										+ unallocated[i].mdAccTypeId
+										+ ','
+										+ unallocated[i].priKey
+										+ ')">'
+										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+								if (unallocated[i].sts == 1) {
+									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+											+ unallocated[i].day
+											+ ' - '
+											+ unallocated[i].hour
+											+ ':'
+											+ unallocated[i].minutes
+											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+								}
+								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+										+ unallocated[i].taskId
+										+ ',\''
+										+ unallocated[i].taskTittle
+										+ '\')">'
+										+ unallocated[i].mdAccTypeText
+										+ '- '
+										+ unallocated[i].taskTittle
+										+ '</a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ unallocated[i].taskPts
+										+ ' PTS</span></div> <div class="text-muted">'
+										+ unallocated[i].taskAllotmentInstructions
+										+ '</div>'
+										+ '<a href="#"  onclick="getTaskLog('
+										+ unallocated[i].mdAccTypeId
+										+ ','
+										+ unallocated[i].priKey
+										+ ')"><span class="badge badge-success badge-pill">'
+										+ unallocated[i].completed
+										+ ' Completed</span></a>';
+								var schdatetime = '<div class="text-center">'
+										+ unallocated[i].taskScheTime
+										+ '</div>';
+								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+								if (unallocated[i].taskPriority == 2) {
+									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+								} else if (unallocated[i].taskPriority == 3) {
+									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+								}
+
+								$('#unallocatedTable td').css('white-space',
+										'initial');
+								$('#unallocatedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												priority ]).draw();
+							}
+
+							var table = $('#allocatedTable').DataTable();
+							var rows = table.rows().remove().draw();
+
+							var allocatedList = response.allocatedList;
+
+							for (var i = 0; i < allocatedList.length; i++) {
+
+								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+										+ allocatedList[i].mdAccTypeId
+										+ ','
+										+ allocatedList[i].priKey
+										+ ')">'
+										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+								if (allocatedList[i].sts == 1) {
+									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+											+ allocatedList[i].day
+											+ ' - '
+											+ allocatedList[i].hour
+											+ ':'
+											+ allocatedList[i].minutes
+											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+								}
+								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+										+ allocatedList[i].taskId
+										+ ',\''
+										+ allocatedList[i].taskTittle
+										+ '\')">'
+										+ allocatedList[i].mdAccTypeText
+										+ '- '
+										+ allocatedList[i].taskTittle
+										+ '</a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ allocatedList[i].taskPts
+										+ ' PTS</span></div> <div class="text-muted">'
+										+ allocatedList[i].taskAllotmentInstructions
+										+ '</div>'
+										+ '<a href="#"  onclick="getTaskLog('
+										+ allocatedList[i].mdAccTypeId
+										+ ','
+										+ allocatedList[i].priKey
+										+ ')"><span class="badge badge-success badge-pill">'
+										+ allocatedList[i].completed
+										+ ' Completed</span></a>';
+								var schdatetime = '<div class="text-center">'
+										+ allocatedList[i].taskScheTime
+										+ '</div>';
+								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+								if (allocatedList[i].taskPriority == 2) {
+									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+								} else if (allocatedList[i].taskPriority == 3) {
+									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+								}
+
+								$('#allocatedTable td').css('white-space',
+										'initial');
+								$('#allocatedTable').DataTable().row
+										.add(
+												[
+														profile,
+														remainingTime,
+														taskDescription,
+														schdatetime,
+														priority,
+														allocatedList[i].employeeName ])
+										.draw();
+							}
+
+							var table = $('#pendingTable').DataTable();
+							var rows = table.rows().remove().draw();
+
+							var pendingList = response.pendingList;
+
+							for (var i = 0; i < pendingList.length; i++) {
+
+								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+										+ pendingList[i].mdAccTypeId
+										+ ','
+										+ pendingList[i].priKey
+										+ ')">'
+										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+								if (pendingList[i].sts == 1) {
+									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+											+ pendingList[i].day
+											+ ' - '
+											+ pendingList[i].hour
+											+ ':'
+											+ pendingList[i].minutes
+											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+								}
+								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+										+ pendingList[i].taskId
+										+ ',\''
+										+ pendingList[i].taskTittle
+										+ '\')">'
+										+ pendingList[i].mdAccTypeText
+										+ '- '
+										+ pendingList[i].taskTittle
+										+ '</a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ pendingList[i].taskPts
+										+ ' PTS</span></div> <div class="text-muted">'
+										+ pendingList[i].taskAllotmentInstructions
+										+ '</div>'
+										+ '<a href="#"  onclick="getTaskLog('
+										+ pendingList[i].mdAccTypeId
+										+ ','
+										+ pendingList[i].priKey
+										+ ')"><span class="badge badge-success badge-pill">'
+										+ pendingList[i].completed
+										+ ' Completed</span></a>';
+								var schdatetime = '<div class="text-center">'
+										+ pendingList[i].taskScheTime
+										+ '</div>';
+								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+								if (pendingList[i].taskPriority == 2) {
+									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+								} else if (pendingList[i].taskPriority == 3) {
+									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+								}
+
+								$('#pendingTable td').css('white-space',
+										'initial');
+								$('#pendingTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												priority,
+												pendingList[i].employeeName ])
+										.draw();
+							}
+
+							var table = $('#remainingTable').DataTable();
+							var rows = table.rows().remove().draw();
+
+							var remainingList = response.remainingList;
+
+							for (var i = 0; i < remainingList.length; i++) {
+
+								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+										+ remainingList[i].mdAccTypeId
+										+ ','
+										+ remainingList[i].priKey
+										+ ')">'
+										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+								if (remainingList[i].sts == 1) {
+									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+											+ remainingList[i].day
+											+ ' - '
+											+ remainingList[i].hour
+											+ ':'
+											+ remainingList[i].minutes
+											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+								}
+								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+										+ remainingList[i].taskId
+										+ ',\''
+										+ remainingList[i].taskTittle
+										+ '\')">'
+										+ remainingList[i].mdAccTypeText
+										+ '- '
+										+ remainingList[i].taskTittle
+										+ '</a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ remainingList[i].taskPts
+										+ ' PTS</span></div> <div class="text-muted">'
+										+ remainingList[i].taskAllotmentInstructions
+										+ '</div>'
+										+ '<a href="#"  onclick="getTaskLog('
+										+ remainingList[i].mdAccTypeId
+										+ ','
+										+ remainingList[i].priKey
+										+ ')"><span class="badge badge-success badge-pill">'
+										+ remainingList[i].completed
+										+ ' Completed</span></a>';
+								var schdatetime = '<div class="text-center">'
+										+ remainingList[i].taskScheTime
+										+ '</div>';
+								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+								if (remainingList[i].taskPriority == 2) {
+									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+								} else if (remainingList[i].taskPriority == 3) {
+									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+								}
+
+								$('#remainingTable td').css('white-space',
+										'initial');
+								$('#remainingTable').DataTable().row
+										.add(
+												[
+														profile,
+														remainingTime,
+														taskDescription,
+														schdatetime,
+														priority,
+														remainingList[i].employeeName ])
+										.draw();
+							}
+
+							var table = $('#pendingTable').DataTable();
+							var rows = table.rows().remove().draw();
+
+							var pendingList = response.pendingList;
+
+							for (var i = 0; i < pendingList.length; i++) {
+
+								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+										+ pendingList[i].mdAccTypeId
+										+ ','
+										+ pendingList[i].priKey
+										+ ')">'
+										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+								if (pendingList[i].sts == 1) {
+									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+											+ pendingList[i].day
+											+ ' - '
+											+ pendingList[i].hour
+											+ ':'
+											+ pendingList[i].minutes
+											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+								}
+								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+										+ pendingList[i].taskId
+										+ ',\''
+										+ pendingList[i].taskTittle
+										+ '\')">'
+										+ pendingList[i].mdAccTypeText
+										+ '- '
+										+ pendingList[i].taskTittle
+										+ '</a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ pendingList[i].taskPts
+										+ ' PTS</span></div> <div class="text-muted">'
+										+ pendingList[i].taskAllotmentInstructions
+										+ '</div>'
+										+ '<a href="#"  onclick="getTaskLog('
+										+ pendingList[i].mdAccTypeId
+										+ ','
+										+ pendingList[i].priKey
+										+ ')"><span class="badge badge-success badge-pill">'
+										+ pendingList[i].completed
+										+ ' Completed</span></a>';
+								var schdatetime = '<div class="text-center">'
+										+ pendingList[i].taskScheTime
+										+ '</div>';
+								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+								if (pendingList[i].taskPriority == 2) {
+									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+								} else if (pendingList[i].taskPriority == 3) {
+									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+								}
+
+								$('#pendingTable td').css('white-space',
+										'initial');
+								$('#pendingTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												priority,
+												pendingList[i].employeeName ])
+										.draw();
+							}
+
+							var table = $('#completedTable').DataTable();
+							var rows = table.rows().remove().draw();
+
+							var completedList = response.completedList;
+
+							for (var i = 0; i < completedList.length; i++) {
+
+								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+										+ completedList[i].mdAccTypeId
+										+ ','
+										+ completedList[i].priKey
+										+ ')">'
+										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								var remainingTime = '<div class="text-center">'
+										+ completedList[i].taskDoneDate
+										+ '</div>';
+
+								var taskDescription = '<div class="font-weight-semibold">'
+										+ completedList[i].mdAccTypeText
+										+ '- '
+										+ completedList[i].taskTittle
+										+ '&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ completedList[i].taskPts
+										+ ' PTS</span></div> <div class="text-muted">'
+										+ completedList[i].taskAllotmentInstructions
+										+ '</div>'
+										+ '<a href="#"  onclick="getTaskLog('
+										+ completedList[i].mdAccTypeId
+										+ ','
+										+ completedList[i].priKey
+										+ ')"><span class="badge badge-success badge-pill">'
+										+ completedList[i].completed
+										+ ' Completed</span></a>';
+								var schdatetime = '<div class="text-center">'
+										+ completedList[i].taskScheTime
+										+ '</div>';
+								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+								if (completedList[i].taskPriority == 2) {
+									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+								} else if (completedList[i].taskPriority == 3) {
+									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+								}
+
+								$('#completedTable td').css('white-space',
+										'initial');
+								$('#completedTable').DataTable().row
+										.add(
+												[
+														profile,
+														remainingTime,
+														taskDescription,
+														schdatetime,
+														priority,
+														completedList[i].employeeName ])
+										.draw();
+							}
+
+							if (moduleId == 1) {
+								$("#unallocated")
+										.html(
+												response.modeludeWiseDashboard.lmsUnallocatedTask);
+								$("#allocated")
+										.html(
+												response.modeludeWiseDashboard.lmsAllocatedTask);
+								$("#completed")
+										.html(
+												response.modeludeWiseDashboard.lmsTodayCompleted);
+								$("#penidng")
+										.html(
+												response.modeludeWiseDashboard.lmsPendingCount);
+								$("#remaining")
+										.html(
+												response.modeludeWiseDashboard.lmsRemainingCount);
+							} else if (moduleId == 2) {
+								$("#unallocated")
+										.html(
+												response.modeludeWiseDashboard.inqUnallocatedTask);
+								$("#allocated")
+										.html(
+												response.modeludeWiseDashboard.inqAllocatedTask);
+								$("#completed")
+										.html(
+												response.modeludeWiseDashboard.inqTodayCompleted);
+								$("#penidng")
+										.html(
+												response.modeludeWiseDashboard.inqPendingCount);
+								$("#remaining")
+										.html(
+												response.modeludeWiseDashboard.inqRemainingCount);
+							} else if (moduleId == 2) {
+								$("#unallocated")
+										.html(
+												response.modeludeWiseDashboard.atsUnallocatedTask);
+								$("#allocated")
+										.html(
+												response.modeludeWiseDashboard.atsAllocatedTask);
+								$("#completed")
+										.html(
+												response.modeludeWiseDashboard.atsTodayCompleted);
+								$("#penidng")
+										.html(
+												response.modeludeWiseDashboard.atsPendingCount);
+								$("#remaining")
+										.html(
+												response.modeludeWiseDashboard.atsRemainingCount);
+							}
+
+						},
+					});
+
+		}
+
+		function taskDetail(taskId, taskTittle) {
+			//alert(taskId + " " + taskTittle)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/editTask?taskId="
+					+ taskId;
+			$("#modalbody").load(strhref);
+			$("#taskDetailModel").modal("show");
+			$('#taskDetailModel').on('hidden.bs.modal', function() {
+				$("#modalbody").html("");
+				getDataList();
+			});
+
+		}
+
+		function getTaskLog(typeId, primaryKey) {
+			//alert(typeId)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/taskLog?typeId="
+					+ typeId + "&primaryKey=" + primaryKey;
+			$("#taskLogData").load(strhref);
+			$("#task_log").modal("show");
+			$('#task_log').on('hidden.bs.modal', function() {
+				$("#taskLogData").html("");
+				//getTaskPendingList();
+			});
+
+		}
+
+		function getCustProfile(typeId, primaryKey) {
+			//alert(typeId)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/customerProfile?typeId="
+					+ typeId + "&primaryKey=" + primaryKey;
+			$("#custProfile").load(strhref);
+			$("#customerProfileModel").modal("show");
+			$('#customerProfileModel').on('hidden.bs.modal', function() {
+				$("#custProfile").html("");
+				//getTaskPendingList();
+			});
+
+		}
 	</script>
 </body>
 </html>
