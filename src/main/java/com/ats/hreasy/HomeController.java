@@ -80,6 +80,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
+	//	model.addAttribute("loginOrforgot", "0");
 		String mav = "login";
 
 		return mav;
@@ -375,6 +376,7 @@ public class HomeController {
 			if(empResp==null) {
 				System.err.println("In If =================");
 			session.setAttribute("errorPassMsg1", "Username Not Found Please Enter Valid User Name!!!");
+			model.addAttribute("loginOrforgot", "1");
 				mav="login";
 			}else {
 				System.err.println("In else =================");
@@ -406,7 +408,7 @@ public class HomeController {
 				session.setAttribute("errorMsg", "Unable To Reset Password");
 				mav = "redirect:/";
 			}else {
-				session.setAttribute("errorMsg", "Password Reset Successfully");
+				session.setAttribute("successMsg", "Password Reset Successfully");
 				mav="login";
 			}
 		} catch (Exception e) {

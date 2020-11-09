@@ -84,7 +84,9 @@ body1 {
 		url("${pageContext.request.contextPath}/resources/global_assets/images/bg2.jpg");
 }
 </style>
-<body>
+<body onload="divSelect()" >
+	<input type="hidden" name="loginOrforgot" id="loginOrforgot"  value="${loginOrforgot}">
+
 	<div class="login_bg">
 
 		<div class="page_loader"></div>
@@ -96,8 +98,13 @@ body1 {
 			</a>
 		</div>
 
+		
+
+
 		<!-- login-form -->
 		<form id="form-login" action="loginProcess" method="post">
+	
+		
 			<div class="loginInner" id="pass_form1">
 
 				<div class="login_l">
@@ -132,6 +139,14 @@ body1 {
 							session.removeAttribute("errorPassMsg");
 						%>
 					</c:if>
+						<c:if test="${sessionScope.successMsg!=null}">
+						<div class="alert alert-success">${sessionScope.successMsg}</div>
+
+						<%
+							session.removeAttribute("successMsg");
+						%>
+					</c:if>
+							
 
 					<!-- class="login-form" -->
 					<%-- 	<form action="${pageContext.request.contextPath}/loginProcess"
@@ -197,9 +212,11 @@ body1 {
 
 				<div class="clr"></div>
 			</div>
+			
 
 
 
+		
 			<!-- forgot password form -->
 			<div class="loginInner" style="display: none" id="pass_form">
 
@@ -260,6 +277,7 @@ body1 {
 				<div class="clr"></div>
 
 			</div>
+		
 		</form>
 
 
@@ -282,6 +300,16 @@ body1 {
 			document.getElementById("pass_form").style = "display:none";
 			document.getElementById("pass_form1").style.display = "block";
 
+		}
+		function divSelect() {
+			var flag=document.getElementById("loginOrforgot").value;
+			//alert(flag)
+			if(flag==1){
+			
+				document.getElementById("pass_form").style.display = "block";
+				document.getElementById("pass_form1").style = "display:none";
+			}
+			
 		}
 	</script>
 </body>
