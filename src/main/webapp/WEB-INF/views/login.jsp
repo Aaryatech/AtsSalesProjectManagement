@@ -143,6 +143,7 @@ body1 {
 						<div class="alert alert-success">${sessionScope.successMsg}</div>
 
 						<%
+							
 							session.removeAttribute("successMsg");
 						%>
 					</c:if>

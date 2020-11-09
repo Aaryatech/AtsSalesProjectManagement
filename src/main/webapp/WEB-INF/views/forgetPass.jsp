@@ -156,7 +156,7 @@ body1 {
 						%>
 					</c:if>
 					<%-- <c:out value="${empId}"></c:out> --%>
-					<input type="hidden" value="${empId}" id="empId" name="empId">
+					<input type="hidden"  value="${empId}" id="empId" name="empId">
 					<div
 						class="form-group form-group-feedback form-group-feedback-left">
 						<input type="text" id="password" name="password"

@@ -383,7 +383,8 @@ public class HomeController {
 				model.addAttribute("empId", empResp.getEmpId());
 				mav="forgetPass";
 			}
-			} catch (Exception e) {
+			} catch (Exception e) 
+			{
 				// TODO: handle exception
 				mav = "redirect:/";
 				System.err.println("Exception Occured!!! In Catch Block Of /checkUserName Mapping");
