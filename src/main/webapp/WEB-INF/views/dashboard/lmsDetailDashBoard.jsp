@@ -39,14 +39,20 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header header-elements-inline">
-								<h6 class="card-title">LMS Task Detail</h6>
+								<h6 class="card-title">
+									<c:choose>
+										<c:when test="${moduleId==1}">LMS Task Dashboard</c:when>
+										<c:when test="${moduleId==2}">IMS Task Dashboard</c:when>
+										<c:when test="${moduleId==3}">Office Task Dashboard</c:when>
+									</c:choose>
+								</h6>
 								<div class="header-elements">
 									<div class="list-icons">
 										<a class="list-icons-item" data-action="collapse"></a>
 									</div>
 								</div>
 							</div>
-							<div class="card-body py-0">
+							<!-- <div class="card-body py-0">
 								<div class="row text-center">
 
 									<div class="col-2">
@@ -71,332 +77,42 @@
 									</div>
 
 								</div>
-							</div>
+							</div> -->
 							<div class="card-body">
-								<ul class="nav nav-tabs nav-tabs-highlight">
 
-									<li class="nav-item"><a href="#highlighted-tab1"
-										class="nav-link active" data-toggle="tab">Introduction
-											Mail Pending </a></li>
-									<li class="nav-item"><a href="#highlighted-tab2"
-										class="nav-link" data-toggle="tab">Demo Meeting Pending </a></li>
-									<li class="nav-item"><a href="#highlighted-tab3"
-										class="nav-link" data-toggle="tab">Demo Scheduled</a></li>
-
-
-								</ul>
-
-								<div class="tab-content">
-									<div class="tab-pane fade show active" id="highlighted-tab1">
-										<div
-											class="navbar navbar-expand-lg navbar-light navbar-component rounded">
-											<div class="navbar-collapse " id="navbar-filter">
-												<span class="navbar-text font-weight-semibold mr-3">
-													Filter: </span>
-
-												<ul class="navbar-nav flex-wrap">
-													<li class="nav-item dropdown"><a href="#"
-														class="navbar-nav-link dropdown-toggle"
-														data-toggle="dropdown" aria-expanded="false"> <i
-															class="icon-sort-time-asc mr-2"></i> By date
-													</a>
-
-														<div class="dropdown-menu">
-															<a href="#" class="dropdown-item">Show all</a>
-															<div class="dropdown-divider"></div>
-															<a href="#" class="dropdown-item">Today</a> <a href="#"
-																class="dropdown-item">Yesterday</a> <a href="#"
-																class="dropdown-item">This week</a> <a href="#"
-																class="dropdown-item">This month</a> <a href="#"
-																class="dropdown-item">This year</a>
-														</div></li>
-
-													<li class="nav-item dropdown"><a href="#"
-														class="navbar-nav-link dropdown-toggle"
-														data-toggle="dropdown" aria-expanded="false"> <i
-															class="icon-sort-amount-desc mr-2"></i> By status
-													</a>
-
-														<div class="dropdown-menu">
-															<a href="#" class="dropdown-item">Show all</a>
-															<div class="dropdown-divider"></div>
-															<a href="#" class="dropdown-item">Open</a> <a href="#"
-																class="dropdown-item">On hold</a> <a href="#"
-																class="dropdown-item">Resolved</a> <a href="#"
-																class="dropdown-item">Closed</a> <a href="#"
-																class="dropdown-item">Duplicate</a> <a href="#"
-																class="dropdown-item">Invalid</a> <a href="#"
-																class="dropdown-item">Wontfix</a>
-														</div></li>
-
-													<li class="nav-item dropdown"><a href="#"
-														class="navbar-nav-link dropdown-toggle"
-														data-toggle="dropdown" aria-expanded="false"> <i
-															class="icon-sort-numeric-asc mr-2"></i> By priority
-													</a>
-
-														<div class="dropdown-menu">
-															<a href="#" class="dropdown-item">Show all</a>
-															<div class="dropdown-divider"></div>
-															<a href="#" class="dropdown-item">Highest</a> <a href="#"
-																class="dropdown-item">High</a> <a href="#"
-																class="dropdown-item">Normal</a> <a href="#"
-																class="dropdown-item">Low</a>
-														</div></li>
-												</ul>
-
-											</div>
-										</div>
-										<div class="table-responsive">
-											<table class="table tasks-list table-lg"
-												id="pendingTaskTable">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th class="text-center">Due</th>
-														<th class="text-center">Task Description</th>
-														<th class="text-center">Schedule Date Time</th>
-														<th class="text-center">Priority</th>
-														<th class="text-center">Assigned users</th>
-
-													</tr>
-												</thead>
-												<tbody>
+								<div class="form-group row">
+									<label class="col-form-label col-lg-2" for="status">Select
+										Status <span class="text-danger">*</span>
+									</label>
+									<div class="col-lg-3">
+										<select name="status"
+											class="form-control form-control-select2"
+											data-placeholder="Select status" required="required"
+											id="status" onchange="getDataList(this.value)">
+											<option value="0" selected>All</option>
+											<c:forEach items="${stsList}" var="stsList">
+												<option value="${stsList.mTaskStatusId}">${stsList.mTaskStatusName}</option>
+											</c:forEach>
 
 
-													<tr>
-														<td class="text-center"><a href="#"
-															data-toggle="modal" data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a>
-															<div class="font-size-sm text-muted line-height-1">Office
-																task</div></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																LEAD - Previous Task <span
-																	class="badge badge-primary badge-pill">10 PTS</span>
-															</div>
-															<div class="text-muted">Call to customer</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="#" data-toggle="modal"
-																	data-target="#modal_form_vertical">Office task -
-																	Call to customer</a>
-															</div>
-															<div class="text-muted">Call to customer</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">Enquiry - Demo
-																For Client</div>
-															<div class="text-muted">Demo For Client</div> <a href="#"
-															data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-warning">Normal</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="${pageContext.request.contextPath}/tagList">Developing</a>
-															</div>
-															<div class="text-muted">Developing</div> <a href="#"
-															data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-success">Low</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="${pageContext.request.contextPath}/addEnquiry">Create
-																	ad campaign banners set</a>
-															</div>
-															<div class="text-muted">That he had recently ...</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-														<td>Akshay,Sachin</td>
-
-
-													</tr>
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="${pageContext.request.contextPath}/addLead">Edit
-																	the draft for the icons</a>
-															</div>
-															<div class="text-muted">You've got to get enough
-																sleep..</div> <a href="#" data-toggle="modal"
-															data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-														<td>Akshay,Sachin</td>
-
-													</tr>
-
-
-												</tbody>
-											</table>
-										</div>
+										</select>
 									</div>
-									<div class="tab-pane fade" id="highlighted-tab2">
-										<div class="table-responsive">
-											<table class="table tasks-list table-lg"
-												id="assignPendingTaskTable">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th class="text-center">Due</th>
-														<th class="text-center">Task Description</th>
-														<th class="text-center">Schedule Date Time</th>
-														<th class="text-center">Priority</th>
+								</div>
+								<div class="table-responsive">
+									<table class="table tasks-list table-lg" id="unallocatedTable">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th class="text-center">Due</th>
+												<th class="text-center">Task Description</th>
+												<th class="text-center">Schedule Date Time</th>
+												<th class="text-center">Priority</th>
+												<th class="text-center">Assigned users</th>
 
-
-													</tr>
-												</thead>
-												<tbody>
-
-
-
-													<tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="#" data-toggle="modal"
-																	data-target="#allocate_to">Enquiry - Call to
-																	customer</a>
-															</div>
-															<div class="text-muted">Call to customer</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-
-													</tr>
-
-												</tbody>
-											</table>
-										</div>
-									</div>
-
-									<div class="tab-pane fade" id="highlighted-tab3">DIY
-										synth PBR banksy irony. Leggings gentrify squid 8-bit cred
-										pitchfork. Williamsburg whatever.</div>
-
-									<div class="tab-pane fade" id="highlighted-tab4">DIY
-										synth PBR banksy irony. Leggings gentrify squid 8-bit cred
-										pitchfork. Williamsburg whatever.</div>
-
-									<div class="tab-pane fade" id="highlighted-tab5">DIY
-										synth PBR banksy irony. Leggings gentrify squid 8-bit cred
-										pitchfork. Williamsburg whatever.</div>
-
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -415,114 +131,52 @@
 		<!-- /main content -->
 
 	</div>
-
-	<div id="allocate_to" class="modal fade" tabindex="-1">
+	<div id="taskDetailModel" class="modal fade" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h2 class="modal-title">Task Description</h2>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<div class="modal-body">
-					<h4 class="font-weight-semibold">Call Customer</h4>
-					<p>Duis mollis, est non commodo luctus, nisi erat porttitor
-						ligula, eget lacinia odio sem. Praesent commodo cursus magna, vel
-						scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
-						laoreet rutrum faucibus dolor auctor.</p>
-					<ul>
-						<li><div class="row">
-								<div class="col-sm-4">
-									<strong>Schedule Date Time</strong>
-								</div>
-								: 20-10-2020 12:00 AM
-							</div></li>
-						<li><div class="row">
-								<div class="col-sm-4">
-									<strong>Generated By</strong>
-								</div>
-								: Swapnil Mashalkar, 20-10-2020 12:00 AM
-							</div></li>
-					</ul>
-
-					<form class="form-validate-jquery" action="#"
-						novalidate="novalidate" id="a">
-
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="schdldt">Schedule
-								Date <span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<input type="text" class="form-control" required
-									placeholder="Schedule Schedule" id="schdldt" name="schdldt">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="schdltm">Schedule
-								Time <span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<input type="text" name="textarea" class="form-control" required
-									placeholder="Schedule Time" id="schdltm" name="schdltm">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="taskDescription">Task
-								Instruction<span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<textarea rows="3" cols="5" name="textarea" class="form-control"
-									required placeholder="Task Instruction" id="taskInstruction"
-									name="taskInstruction"></textarea>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="status">Allocate
-								To<span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<select name="status" class="form-control form-control-select2"
-									data-placeholder="Select status" data-fouc required="required"
-									multiple="multiple">
-									<option value="">select</option>
-									<option value="open">Sachin</option>
-									<option value="hold">Akshay</option>
-									<option value="resolved">Anmol</option>
-
-								</select>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-form-label col-lg-3" for="Priority">Set
-								Priority<span class="text-danger">*</span>
-							</label>
-							<div class="col-lg-9">
-								<select name="Priority"
-									class="form-control form-control-select2"
-									data-placeholder="Select status" data-fouc required="required">
-									<option value="">select</option>
-									<option value="Low">Low</option>
-									<option value="Normal">Normal</option>
-									<option value="High">High</option>
-
-								</select>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-
-							<button type="submit" class="btn bg-primary">Submit</button>
-						</div>
-					</form>
-
-
-				</div>
+				<div class="modal-body" id="modalbody"></div>
 
 
 			</div>
 		</div>
 	</div>
+	<div id="task_log" class="modal fade" tabindex="-1">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title">Previous Task</h2>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body" id="taskLogData"></div>
 
+
+			</div>
+		</div>
+	</div>
+	<!-- /info modal -->
+
+	<div id="customerProfileModel" class="modal fade" tabindex="-1">
+
+		<div class="modal-dialog modal-lg modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header pb-3">
+					<h5 class="modal-title">Customer Profile</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<div class="modal-body py-0" id="custProfile"></div>
+
+				<!-- <div class="modal-footer pt-3">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+					<button type="button" class="btn bg-primary">Save changes</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		$(document)
 				.ready(
@@ -546,6 +200,153 @@
 				format : 'DD-MM-YYYY'
 			}
 		});
+
+		$(document).ready(function() {
+			//getDataList(0);
+		})
+
+		function getDataList(value) {
+
+			var status = value;
+
+			var moduleId = '${moduleId}';
+			//alert(status)
+			var fd = new FormData();
+			fd.append("moduleId", moduleId);
+			fd.append("status", status);
+			//$('#modal_step1').modal('show');
+
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/getTaskByStatusWiseList',
+						type : 'post',
+						dataType : 'json',
+						data : fd,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+
+							//$('#modal_step1').modal('hide');
+							//alert(JSON.stringify(response))
+							var table = $('#unallocatedTable').DataTable();
+							var rows = table.rows().remove().draw();
+
+							var unallocated = response.unallocatedList;
+
+							for (var i = 0; i < unallocated.length; i++) {
+
+								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+										+ unallocated[i].mdAccTypeId
+										+ ','
+										+ unallocated[i].priKey
+										+ ')">'
+										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+								if (unallocated[i].sts == 1) {
+									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+											+ unallocated[i].day
+											+ ' - '
+											+ unallocated[i].hour
+											+ ':'
+											+ unallocated[i].minutes
+											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+								}
+								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+										+ unallocated[i].taskId
+										+ ',\''
+										+ unallocated[i].taskTittle
+										+ '\')">'
+										+ unallocated[i].mdAccTypeText
+										+ '- '
+										+ unallocated[i].taskTittle
+										+ '</a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ unallocated[i].taskPts
+										+ ' PTS</span></div> <div class="text-muted">'
+										+ unallocated[i].taskAllotmentInstructions
+										+ '</div>'
+										+ '<a href="#"  onclick="getTaskLog('
+										+ unallocated[i].mdAccTypeId
+										+ ','
+										+ unallocated[i].priKey
+										+ ')"><span class="badge badge-success badge-pill">'
+										+ unallocated[i].completed
+										+ ' Completed</span></a>';
+								var schdatetime = '<div class="text-center">'
+										+ unallocated[i].taskScheTime
+										+ '</div>';
+								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+								if (unallocated[i].taskPriority == 2) {
+									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+								} else if (unallocated[i].taskPriority == 3) {
+									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+								}
+
+								$('#unallocatedTable td').css('white-space',
+										'initial');
+								$('#unallocatedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												priority,
+												unallocated[i].employeeName ])
+										.draw();
+							}
+
+						},
+					});
+
+		}
+
+		function taskDetail(taskId, taskTittle) {
+			//alert(taskId + " " + taskTittle)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/editTask?taskId="
+					+ taskId;
+			$("#modalbody").load(strhref);
+			$("#taskDetailModel").modal("show");
+			$('#taskDetailModel').on('hidden.bs.modal', function() {
+				$("#modalbody").html("");
+				var status = $("#status").val();
+				getDataList(status);
+			});
+
+		}
+
+		function getTaskLog(typeId, primaryKey) {
+			//alert(typeId)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/taskLog?typeId="
+					+ typeId + "&primaryKey=" + primaryKey;
+			$("#taskLogData").load(strhref);
+			$("#task_log").modal("show");
+			$('#task_log').on('hidden.bs.modal', function() {
+				$("#taskLogData").html("");
+				//getTaskPendingList();
+			});
+
+		}
+
+		function getCustProfile(typeId, primaryKey) {
+			//alert(typeId)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/customerProfile?typeId="
+					+ typeId + "&primaryKey=" + primaryKey;
+			$("#custProfile").load(strhref);
+			$("#customerProfileModel").modal("show");
+			$('#customerProfileModel').on('hidden.bs.modal', function() {
+				$("#custProfile").html("");
+				//getTaskPendingList();
+			});
+
+		}
 	</script>
 </body>
 </html>

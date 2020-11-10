@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<h4 class="font-weight-semibold">Call Customer</h4>
+<h4 class="font-weight-semibold">${taskDetail.taskTittle}</h4>
 <p>${taskDetail.taskAllotmentInstructions}</p>
 <ul>
 	<li><div class="row">

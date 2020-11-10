@@ -40,7 +40,7 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header bg-white header-elements-inline">
-								<h6 class="card-title">LMS Dashboard</h6>
+								<h6 class="card-title">IMS Dashboard</h6>
 								<div class="header-elements">
 									<div class="list-icons">
 										<a class="list-icons-item" data-action="collapse"></a>
@@ -67,7 +67,7 @@
 											<tr>
 												<td class="text-center">${count.index+1}</td>
 												<td width="30%"><a
-													href="${pageContext.request.contextPath}/lmsDetailDashBoard?moduleId=1">${employeeTaskDashBoardList.empName}</a></td>
+													href="${pageContext.request.contextPath}/lmsDetailDashBoard?moduleId=2">${employeeTaskDashBoardList.empName}</a></td>
 
 												<c:forEach items="${stsList}" var="stsList">
 													<c:set value="0" var="find"></c:set>
@@ -196,83 +196,6 @@
 
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			//getTaskPendingList();
-		})
-
-		function getTaskPendingList() {
-
-			var fd = new FormData();
-
-			//$('#modal_step1').modal('show');
-
-			$
-					.ajax({
-						url : '${pageContext.request.contextPath}/getPendingTaskList',
-						type : 'post',
-						dataType : 'json',
-						data : fd,
-						contentType : false,
-						processData : false,
-						success : function(response) {
-
-							//$('#modal_step1').modal('hide');
-							//alert(JSON.stringify(response))
-							var table = $('#pendingTaskTable').DataTable();
-							var rows = table.rows().remove().draw();
-
-							for (var i = 0; i < response.length; i++) {
-
-								var profile = '<div class="text-center"> <a href="#" data-toggle="modal" data-target="#customerProfile">'
-										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
-								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
-								if (response[i].sts == 1) {
-									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
-											+ response[i].day
-											+ '-'
-											+ response[i].hour
-											+ ':'
-											+ response[i].minutes
-											+ '</h6> <div class="font-size-sm text-muted line-height-1">hours</div></div>';
-								}
-								var taskDescription = '<div class="font-weight-semibold">'
-										+ response[i].mdAccTypeText
-										+ '- '
-										+ response[i].taskTittle
-										+ ' '
-										+ '<span class="badge badge-primary badge-pill">'
-										+ response[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
-										+ response[i].taskAllotmentInstructions
-										+ '</div>'
-										+ '<a href="#" data-toggle="modal" data-target="#task_log"><span class="badge badge-success badge-pill">'
-										+ response[i].completed
-										+ ' Completed</span></a>';
-								var schdatetime = '<div class="text-center">'
-										+ response[i].taskScheTime + '</div>';
-								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
-
-								if (response[i].taskPriority == 2) {
-									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
-								} else if (response[i].taskPriority == 3) {
-									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
-								}
-
-								$('#pendingTaskTable td').css('white-space',
-										'initial');
-								$('#pendingTaskTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												priority,
-												response[i].employeeName ])
-										.draw();
-							}
-
-						},
-					});
-
-		}
 		$('.datepickerclass').daterangepicker({
 			singleDatePicker : true,
 			selectMonths : true,

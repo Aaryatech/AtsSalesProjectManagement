@@ -218,6 +218,77 @@ public class AdminDashboard {
 
 			mav = "dashboard/lmsDetailDashBoard";
 
+			int moduleId = Integer.parseInt(request.getParameter("moduleId"));
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map = new LinkedMultiValueMap<>();
+			if (moduleId == 1) {
+				map.add("mdAccTypeId", "1,4,5");
+			} else if (moduleId == 2) {
+				map.add("mdAccTypeId", "2,4,5");
+			} else if (moduleId == 2) {
+				map.add("mdAccTypeId", "3,4,5");
+			}
+
+			TaskStatus[] taskStatus = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getAllTaskStatusBymdAccTypeId", map, TaskStatus[].class);
+			List<TaskStatus> stsList = new ArrayList<>(Arrays.asList(taskStatus));
+			model.addAttribute("stsList", stsList);
+
+			model.addAttribute("moduleId", moduleId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = "/getTaskByStatusWiseList", method = RequestMethod.POST)
+	@ResponseBody
+	public GetTaskByModuleWise getTaskByStatusWiseList(HttpServletRequest request, HttpServletResponse response) {
+
+		GetTaskByModuleWise getTaskByModuleWise = new GetTaskByModuleWise();
+		try {
+			HttpSession session = request.getSession();
+			int moduleId = Integer.parseInt(request.getParameter("moduleId"));
+			int status = Integer.parseInt(request.getParameter("status"));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("moduleId", moduleId);
+			map.add("status", status);
+			getTaskByModuleWise = Constants.getRestTemplate().postForObject(Constants.url + "getTaskByStatusWiseList",
+					map, GetTaskByModuleWise.class);
+
+		} catch (Exception e) {
+			getTaskByModuleWise = new GetTaskByModuleWise();
+			e.printStackTrace();
+		}
+		return getTaskByModuleWise;
+	}
+
+	@RequestMapping(value = "/inqDashBoard", method = RequestMethod.GET)
+	public String inqDashBoard(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		HttpSession session = request.getSession();
+		String mav = new String();
+
+		try {
+
+			mav = "dashboard/inqDashBoard";
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map = new LinkedMultiValueMap<>();
+			map.add("mdAccTypeId", "2,4,5");
+			TaskStatus[] taskStatus = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getAllTaskStatusBymdAccTypeId", map, TaskStatus[].class);
+			List<TaskStatus> stsList = new ArrayList<>(Arrays.asList(taskStatus));
+			model.addAttribute("stsList", stsList);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("moduleId", "2");
+			EmployeeTaskDashBoard[] employeeTaskDashBoard = Constants.getRestTemplate()
+					.postForObject(Constants.url + "employeewiseTaskwiseList", map, EmployeeTaskDashBoard[].class);
+			List<EmployeeTaskDashBoard> employeeTaskDashBoardList = new ArrayList<>(
+					Arrays.asList(employeeTaskDashBoard));
+			model.addAttribute("employeeTaskDashBoardList", employeeTaskDashBoardList);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
