@@ -26,6 +26,7 @@ import com.ats.hreasy.common.DateConvertor;
 import com.ats.hreasy.model.AccessRightModule;
 import com.ats.hreasy.model.AccountType;
 import com.ats.hreasy.model.Channel;
+import com.ats.hreasy.model.City;
 import com.ats.hreasy.model.CustInfo;
 import com.ats.hreasy.model.DashBoardSummary;
 import com.ats.hreasy.model.DashboardData;
@@ -35,6 +36,7 @@ import com.ats.hreasy.model.Info;
 import com.ats.hreasy.model.LmsDetail;
 import com.ats.hreasy.model.LmsHeader;
 import com.ats.hreasy.model.LmsHeaderWithNames;
+import com.ats.hreasy.model.States;
 import com.ats.hreasy.model.Tags;
 import com.ats.hreasy.model.TaskDetails;
 import com.ats.hreasy.model.TaskDetailsEmpName;
@@ -423,6 +425,13 @@ public class DashboardController {
 			List<Designation> designationList = new ArrayList<Designation>(Arrays.asList(designation));
 
 			model.addAttribute("designationList", designationList);
+			
+			States[] states=Constants.getRestTemplate().getForObject(Constants.url+"getAllStates", States[].class);
+			List<States> stateList=new ArrayList<States>(Arrays.asList(states));
+			
+			model.addAttribute("stateList", stateList);
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -583,6 +592,11 @@ public class DashboardController {
 			List<Designation> designationList = new ArrayList<Designation>(Arrays.asList(designation));
 
 			model.addAttribute("designationList", designationList);
+			
+			States[] states=Constants.getRestTemplate().getForObject(Constants.url+"getAllStates", States[].class);
+			List<States> stateList=new ArrayList<States>(Arrays.asList(states));
+			
+			model.addAttribute("stateList", stateList);
 
 			String[] selectedTags = editLmsHeader.getAccTags().split(",");
 			model.addAttribute("selectedTags", selectedTags);
@@ -710,7 +724,7 @@ public class DashboardController {
 			int channelId = Integer.parseInt(request.getParameter("channelId"));
 			int domainId = Integer.parseInt(request.getParameter("domainId"));
 			String domainText = request.getParameter("domainText");
-			// String accCode = request.getParameter("accCode");
+			String accCode = request.getParameter("accCode");
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
 			String custName = request.getParameter("cName");
@@ -740,7 +754,7 @@ public class DashboardController {
 			lmsHeader.setAccDomainId(domainId);
 			lmsHeader.setAccDomainOther(domainText);
 			lmsHeader.setCustomerName(custName);
-			// lmsHeader.setAccCode(accCode);
+			lmsHeader.setAccCode(accCode);
 			lmsHeader.setAccTags(tags);
 			lmsHeader.setAccWebsite(website);
 			lmsHeader.setAccEmpCount(empCount);
@@ -921,5 +935,35 @@ public class DashboardController {
 		// System.err.println(tagId+"\t"+"Tag Id");
 		return mav;
 	}
+	
+	
+	
+	@RequestMapping(value="/getCityList",method=RequestMethod.POST)
+	@ResponseBody
+	public List<City> getCityList(HttpServletRequest request,HttpServletResponse response) {
+	List<City> cityList=new ArrayList<City>();
+	MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
+		try {
+			int stId=Integer.parseInt(request.getParameter("stateId"));
+			
+	
+				map.add("stateId", stId);
+				City[] cityArr=Constants.getRestTemplate().postForObject(Constants.url+"getCitiesByStateId" , map,City[].class);
+				cityList=new ArrayList<City>(Arrays.asList(cityArr));
+				
+			
+		
+	} catch (Exception e) {
+		// TODO: handle exception
+			cityList=new ArrayList<City>();
+			System.err.println("Exception Occured!!! In /getCityList ");
+			e.printStackTrace();
+	}
+		return cityList;
+	}
+	
+	
+	
+	
 
 }
