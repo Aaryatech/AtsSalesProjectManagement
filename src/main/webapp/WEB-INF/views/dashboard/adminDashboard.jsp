@@ -66,7 +66,8 @@
 										<c:forEach items="${empList}" var="empList" varStatus="count">
 											<tr>
 												<td>${count.index+1}</td>
-												<td>${empList.empName}</td>
+												<td><a
+													href="${pageContext.request.contextPath}/moduleDetailWiseDashboard?moduleId=0">${empList.empName}</a></td>
 												<td class="text-center">
 													<div class="row">
 

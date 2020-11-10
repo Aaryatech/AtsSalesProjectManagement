@@ -54,43 +54,69 @@
 										<tr>
 											<th>#</th>
 											<th class="text-center" width="20%">Employee</th>
-											<th class="text-center">Call Pending</th>
-											<th class="text-center">Introduction Mail Pending</th>
-											<th class="text-center">Demo Meeting Pending</th>
-											<th class="text-center">Demo Scheduled</th>
+											<c:forEach items="${stsList}" var="stsList">
+												<th class="text-center">${stsList.mTaskStatusName}</th>
+											</c:forEach>
+
 										</tr>
 									</thead>
 									<tbody>
 
+										<c:forEach items="${employeeTaskDashBoardList}"
+											var="employeeTaskDashBoardList" varStatus="count">
+											<tr>
+												<td class="text-center">${count.index+1}</td>
+												<td width="30%"><a
+													href="${pageContext.request.contextPath}/lmsDetailDashBoard">${employeeTaskDashBoardList.empName}</a></td>
 
-										<tr>
-											<td class="text-center">1</td>
-											<td width="30%"><a
-												href="${pageContext.request.contextPath}/lmsDetailDashBoard">Akshay</a></td>
-											<td class="text-center">
-												<div class="row">
+												<c:forEach items="${stsList}" var="stsList">
+													<c:set value="0" var="find"></c:set>
+													<c:forEach
+														items="${employeeTaskDashBoardList.empTaskStatusWiseDetailList}"
+														var="detailList">
 
-													<h6 class="mb-0">
-														20
-														<div class="font-size-sm text-muted line-height-1">Task</div>
-													</h6>
-													&nbsp;/&nbsp;
-													<h6 class="mb-0">
-														40
-														<div class="font-size-sm text-muted line-height-1">PTS</div>
-													</h6>
+														<c:if test="${detailList.status==stsList.mTaskStatusId}">
+															<td class="text-center">
+																<div class="row">
 
-												</div>
+																	<h6 class="mb-0">
+																		${detailList.taskCount}
+																		<div class="font-size-sm text-muted line-height-1">Task</div>
+																	</h6>
+																	&nbsp;/&nbsp;
+																	<h6 class="mb-0">
+																		${detailList.taskPts}
+																		<div class="font-size-sm text-muted line-height-1">PTS</div>
+																	</h6>
 
-											</td>
+																</div> <c:set value="1" var="find"></c:set>
+															</td>
+														</c:if>
 
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
-											<td class="text-center">10</td>
+													</c:forEach>
+													<c:if test="${find==0}">
+														<td class="text-center">
+															<div class="row">
 
-										</tr>
+																<h6 class="mb-0">
+																	0
+																	<div class="font-size-sm text-muted line-height-1">Task</div>
+																</h6>
+																&nbsp;/&nbsp;
+																<h6 class="mb-0">
+																	0
+																	<div class="font-size-sm text-muted line-height-1">PTS</div>
+																</h6>
 
-										<tr>
+															</div>
+														</td>
+													</c:if>
+												</c:forEach>
+											</tr>
+										</c:forEach>
+
+
+										<%--<tr>
 											<td class="text-center">2</td>
 											<td width="30%">Sachin</td>
 											<td class="text-center">
@@ -114,7 +140,7 @@
 											<td class="text-center">10</td>
 											<td class="text-center">10</td>
 
-										</tr>
+										</tr> --%>
 
 									</tbody>
 								</table>

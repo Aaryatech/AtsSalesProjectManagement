@@ -44,6 +44,7 @@
 										<c:when test="${moduleId==1}">LMS Task Detail</c:when>
 										<c:when test="${moduleId==2}">IMS Task Detail</c:when>
 										<c:when test="${moduleId==3}">Office Task Detail</c:when>
+										<c:when test="${moduleId==0}">All Module Task</c:when>
 									</c:choose>
 
 								</h6>
@@ -946,6 +947,32 @@
 								$("#remaining")
 										.html(
 												response.modeludeWiseDashboard.atsRemainingCount);
+							} else if (moduleId == 0) {
+								$("#unallocated")
+										.html(
+												response.modeludeWiseDashboard.atsUnallocatedTask
+														+ response.modeludeWiseDashboard.lmsUnallocatedTask
+														+ response.modeludeWiseDashboard.inqUnallocatedTask);
+								$("#allocated")
+										.html(
+												response.modeludeWiseDashboard.atsAllocatedTask
+														+ response.modeludeWiseDashboard.lmsAllocatedTask
+														+ response.modeludeWiseDashboard.inqAllocatedTask);
+								$("#completed")
+										.html(
+												response.modeludeWiseDashboard.atsTodayCompleted
+														+ response.modeludeWiseDashboard.lmsTodayCompleted
+														+ response.modeludeWiseDashboard.inqTodayCompleted);
+								$("#penidng")
+										.html(
+												response.modeludeWiseDashboard.atsPendingCount
+														+ response.modeludeWiseDashboard.lmsPendingCount
+														+ response.modeludeWiseDashboard.inqPendingCount);
+								$("#remaining")
+										.html(
+												response.modeludeWiseDashboard.atsRemainingCount
+														+ response.modeludeWiseDashboard.lmsRemainingCount
+														+ response.modeludeWiseDashboard.inqRemainingCount);
 							}
 
 						},

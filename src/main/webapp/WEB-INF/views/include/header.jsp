@@ -11,9 +11,9 @@
 	<div class="navbar-brand">
 		<a href="${pageContext.request.contextPath}/dashboard"
 			class="d-inline-block"> <%-- <img src="${pageContext.request.contextPath}/resources/global_assets/images/logo_light.png" alt=""> --%>
-			<%-- <img
-			src="${pageContext.request.contextPath}/resources/global_assets/images/logo_white.png"
-			alt="" style="height: 50px; width: 150px;"> --%>
+			<img
+			src="${pageContext.request.contextPath}/resources/global_assets/images/ats_logo.png"
+			alt="" style="height: 50px; width: 150px;">
 		</a>
 	</div>
 
@@ -129,14 +129,13 @@
 			data-toggle="dropdown" aria-expanded="false"> <img
 				src="${sessionScope.imgViewUrl}${sessionScope.userInfo.empPhoto}"
 				width="36" height="36" class="rounded-circle" alt=""
-				onerror="imgError(this);"> <span style="margin: 0 0 0 5px;">${sessionScope.userInfo.firstName}&nbsp;
-					${sessionScope.userInfo.surname} Akshay Kasar</span>
+				onerror="imgError(this);"> <span style="margin: 0 0 0 5px;">${sessionScope.userObj.empName}</span>
 		</a>
 
 			<div class="dropdown-menu dropdown-menu-right">
 				<%-- <a href="${pageContext.request.contextPath}/getUserProfile"
-					class="dropdown-item"><i class="icon-profile"></i> Profile</a> --%> <a
-					href="${pageContext.request.contextPath}/logout"
+					class="dropdown-item"><i class="icon-profile"></i> Profile</a> --%>
+				<a href="${pageContext.request.contextPath}/logout"
 					class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
 			</div></li>
 	</ul>
@@ -150,9 +149,9 @@
 		return true;
 	}
 	function setLocation(locationId) {
- 
+
 		var fd = new FormData();
-		fd.append('locationId', locationId); 
+		fd.append('locationId', locationId);
 
 		$.ajax({
 			url : '${pageContext.request.contextPath}/setLocation',
@@ -167,6 +166,6 @@
 
 			},
 		});
-		  
+
 	}
 </script>

@@ -24,12 +24,14 @@ import com.ats.hreasy.common.DateConvertor;
 import com.ats.hreasy.model.DashBoardSummary;
 import com.ats.hreasy.model.DashboardData;
 import com.ats.hreasy.model.Employee;
+import com.ats.hreasy.model.EmployeeTaskDashBoard;
 import com.ats.hreasy.model.EmployeeWiseDashboard;
 import com.ats.hreasy.model.GetTaskByModuleWise;
 import com.ats.hreasy.model.Info;
 import com.ats.hreasy.model.ModeludeWiseDashboard;
 import com.ats.hreasy.model.TaskDetails;
 import com.ats.hreasy.model.TaskDetailsEmpName;
+import com.ats.hreasy.model.TaskStatus;
 import com.ats.hreasy.model.UserLoginData;
 
 @Controller
@@ -184,6 +186,21 @@ public class AdminDashboard {
 		try {
 
 			mav = "dashboard/lmsDashBoard";
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map = new LinkedMultiValueMap<>();
+			map.add("mdAccTypeId", "1,4,5");
+			TaskStatus[] taskStatus = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getAllTaskStatusBymdAccTypeId", map, TaskStatus[].class);
+			List<TaskStatus> stsList = new ArrayList<>(Arrays.asList(taskStatus));
+			model.addAttribute("stsList", stsList);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("moduleId", "1");
+			EmployeeTaskDashBoard[] employeeTaskDashBoard = Constants.getRestTemplate()
+					.postForObject(Constants.url + "employeewiseTaskwiseList", map, EmployeeTaskDashBoard[].class);
+			List<EmployeeTaskDashBoard> employeeTaskDashBoardList = new ArrayList<>(
+					Arrays.asList(employeeTaskDashBoard));
+			model.addAttribute("employeeTaskDashBoardList", employeeTaskDashBoardList);
 
 		} catch (Exception e) {
 			e.printStackTrace();
