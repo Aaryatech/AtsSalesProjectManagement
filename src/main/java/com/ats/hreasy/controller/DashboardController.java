@@ -672,6 +672,8 @@ public class DashboardController {
 			String scaleDesc = request.getParameter("scaleDesc");
 			String remark = request.getParameter("remark");
 			String rating = request.getParameter("rating");
+			int stateId=Integer.parseInt(request.getParameter("stateID"));
+			int cityId=Integer.parseInt(request.getParameter("cityId"));
 
 			String tags = "";
 
@@ -697,7 +699,8 @@ public class DashboardController {
 			editLmsHeader.setAccAtsRating(rating);
 
 			editLmsHeader.setLmsDetailList(lmsDetailList);
-
+			editLmsHeader.setmStateId(stateId);
+			editLmsHeader.setmCityId(cityId);
 			// System.out.println(lmsHeader);
 			LmsHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewLmsHeader", editLmsHeader,
 					LmsHeader.class);
@@ -735,6 +738,8 @@ public class DashboardController {
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
 			String custName = request.getParameter("cName");
+			int stateId=Integer.parseInt(request.getParameter("stateID"));
+			int cityId=Integer.parseInt(request.getParameter("cityId"));
 			int empCount = 0;
 			try {
 				empCount = Integer.parseInt(request.getParameter("empCount"));
@@ -773,6 +778,8 @@ public class DashboardController {
 			lmsHeader.setIsActive(1);
 			lmsHeader.setMakerUserId(userDetail.getEmpId());
 			lmsHeader.setMakerDatetime(sf.format(dt));
+			lmsHeader.setmStateId(stateId);
+			lmsHeader.setmCityId(cityId);
 
 			lmsHeader.setLmsDetailList(lmsDetailList);
 

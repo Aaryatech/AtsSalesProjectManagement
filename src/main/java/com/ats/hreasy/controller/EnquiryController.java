@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ats.hreasy.common.Constants;
 import com.ats.hreasy.model.AccountType;
 import com.ats.hreasy.model.Channel;
+import com.ats.hreasy.model.City;
 import com.ats.hreasy.model.Designation;
 import com.ats.hreasy.model.DomainType;
 import com.ats.hreasy.model.Info;
@@ -30,6 +31,7 @@ import com.ats.hreasy.model.InquiryDetail;
 import com.ats.hreasy.model.InquiryHeader;
 import com.ats.hreasy.model.InquiryHeaderWithNames;
 import com.ats.hreasy.model.LmsHeaderWithNames;
+import com.ats.hreasy.model.States;
 import com.ats.hreasy.model.Tags;
 import com.ats.hreasy.model.TaskDetails;
 import com.ats.hreasy.model.TaskStatus;
@@ -100,6 +102,13 @@ public class EnquiryController {
 			List<Designation> designationList = new ArrayList<Designation>(Arrays.asList(designation));
 
 			model.addAttribute("designationList", designationList);
+			
+			
+
+			States[] states = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates", States[].class);
+			List<States> stateList = new ArrayList<States>(Arrays.asList(states));
+
+			model.addAttribute("stateList", stateList);
 			
 			AccountType[] accTypeArr=Constants.getRestTemplate().getForObject(Constants.url+"getAllAccouctTypeList", AccountType[].class);
 			List<AccountType> accTypeList=new ArrayList<AccountType>(Arrays.asList(accTypeArr));
@@ -232,6 +241,8 @@ public class EnquiryController {
 			String empCnt=request.getParameter("empCount");
 			int cid=Integer.parseInt(request.getParameter("cid"));
 			String inqTittle=request.getParameter("inqTittle");
+			int stateId=Integer.parseInt(request.getParameter("stateID"));
+			int cityId=Integer.parseInt(request.getParameter("cityId"));
 			//int accType=Integer.parseInt(request.getParameter("accType"));
 			
 			String tags = "";
@@ -276,6 +287,9 @@ public class EnquiryController {
 			  inqHeader.setMdAccTypeId(2);
 			  inqHeader.setInqRefCode(cid);
 			  inqHeader.setInquiryTittle(inqTittle);
+			  inqHeader.setmStateId(stateId);
+			  inqHeader.setmCityId(cityId);
+			 
 			 
 			  System.err.println(inqHeader);
 			 
@@ -410,6 +424,12 @@ public class EnquiryController {
 
 		model.addAttribute("designationList", designationList);
 		
+
+		States[] states = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates", States[].class);
+		List<States> stateList = new ArrayList<States>(Arrays.asList(states));
+
+		model.addAttribute("stateList", stateList);
+		
 		
 			/*
 			 * AccountType[]
@@ -468,6 +488,8 @@ public class EnquiryController {
 			String remark = request.getParameter("Remark");
 			String empCnt=request.getParameter("empCount");
 			String inqTittle=request.getParameter("inqTittle");
+			int stateId=Integer.parseInt(request.getParameter("stateID"));
+			int cityId=Integer.parseInt(request.getParameter("cityId"));
 			//int accType=Integer.parseInt(request.getParameter("accType"));
 			
 			String tags = "";
@@ -508,6 +530,8 @@ public class EnquiryController {
 			editInqHeader.setInqRemark(remark);
 			editInqHeader.setMdAccTypeId(2);
 			editInqHeader.setInquiryTittle(inqTittle);
+			editInqHeader.setmStateId(stateId);
+			editInqHeader.setmCityId(cityId);
 			
 			
 			InquiryHeader editEnqHeader=new InquiryHeader();
@@ -529,6 +553,8 @@ public class EnquiryController {
 			editEnqHeader.setMakerDatetime(editInqHeader.getMakerDatetime());
 			editEnqHeader.setMdAccTypeId(2);
 			editEnqHeader.setInquiryTittle(editInqHeader.getInquiryTittle());
+			editEnqHeader.setmStateId(editInqHeader.getmStateId());
+			editEnqHeader.setmCityId(editInqHeader.getmCityId());
 			
 			
 			
@@ -603,6 +629,30 @@ public class EnquiryController {
 		
 		
 		return info;
+	}
+	
+	
+	
+	@RequestMapping(value = "/getCityListinq", method = RequestMethod.POST)
+	@ResponseBody
+	public List<City> getCityListinq(HttpServletRequest request, HttpServletResponse response) {
+		List<City> cityList = new ArrayList<City>();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+			int stId = Integer.parseInt(request.getParameter("stateId"));
+
+			map.add("stateId", stId);
+			City[] cityArr = Constants.getRestTemplate().postForObject(Constants.url + "getCitiesByStateId", map,
+					City[].class);
+			cityList = new ArrayList<City>(Arrays.asList(cityArr));
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			cityList = new ArrayList<City>();
+			System.err.println("Exception Occured!!! In /getCityListinq ");
+			e.printStackTrace();
+		}
+		return cityList;
 	}
 	
 	
