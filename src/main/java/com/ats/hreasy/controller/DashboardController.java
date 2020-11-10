@@ -133,6 +133,7 @@ public class DashboardController {
 		try {
 
 			int taskId = Integer.parseInt(request.getParameter("taskId"));
+			int mdAccTypeId = Integer.parseInt(request.getParameter("mdAccTypeId"));
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("taskId", taskId);
 			taskDetail = Constants.getRestTemplate().postForObject(Constants.url + "getTaskdetailsEmpnameByTaskId", map,
@@ -141,7 +142,15 @@ public class DashboardController {
 			model.addAttribute("taskDetail", taskDetail);
 
 			map = new LinkedMultiValueMap<>();
-			map.add("mdAccTypeId", 1);
+
+			if (mdAccTypeId == 1) {
+				map.add("mdAccTypeId", "1,4,5");
+			} else if (mdAccTypeId == 2) {
+				map.add("mdAccTypeId", "2,4,5");
+			} else {
+				map.add("mdAccTypeId", "3,4,5");
+			}
+
 			TaskStatus[] taskStatus = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getAllTaskStatusBymdAccTypeId", map, TaskStatus[].class);
 			stsList = new ArrayList<>(Arrays.asList(taskStatus));
@@ -425,13 +434,11 @@ public class DashboardController {
 			List<Designation> designationList = new ArrayList<Designation>(Arrays.asList(designation));
 
 			model.addAttribute("designationList", designationList);
-			
-			States[] states=Constants.getRestTemplate().getForObject(Constants.url+"getAllStates", States[].class);
-			List<States> stateList=new ArrayList<States>(Arrays.asList(states));
-			
+
+			States[] states = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates", States[].class);
+			List<States> stateList = new ArrayList<States>(Arrays.asList(states));
+
 			model.addAttribute("stateList", stateList);
-			
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -592,10 +599,10 @@ public class DashboardController {
 			List<Designation> designationList = new ArrayList<Designation>(Arrays.asList(designation));
 
 			model.addAttribute("designationList", designationList);
-			
-			States[] states=Constants.getRestTemplate().getForObject(Constants.url+"getAllStates", States[].class);
-			List<States> stateList=new ArrayList<States>(Arrays.asList(states));
-			
+
+			States[] states = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates", States[].class);
+			List<States> stateList = new ArrayList<States>(Arrays.asList(states));
+
 			model.addAttribute("stateList", stateList);
 
 			String[] selectedTags = editLmsHeader.getAccTags().split(",");
@@ -935,35 +942,27 @@ public class DashboardController {
 		// System.err.println(tagId+"\t"+"Tag Id");
 		return mav;
 	}
-	
-	
-	
-	@RequestMapping(value="/getCityList",method=RequestMethod.POST)
+
+	@RequestMapping(value = "/getCityList", method = RequestMethod.POST)
 	@ResponseBody
-	public List<City> getCityList(HttpServletRequest request,HttpServletResponse response) {
-	List<City> cityList=new ArrayList<City>();
-	MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
+	public List<City> getCityList(HttpServletRequest request, HttpServletResponse response) {
+		List<City> cityList = new ArrayList<City>();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		try {
-			int stId=Integer.parseInt(request.getParameter("stateId"));
-			
-	
-				map.add("stateId", stId);
-				City[] cityArr=Constants.getRestTemplate().postForObject(Constants.url+"getCitiesByStateId" , map,City[].class);
-				cityList=new ArrayList<City>(Arrays.asList(cityArr));
-				
-			
-		
-	} catch (Exception e) {
-		// TODO: handle exception
-			cityList=new ArrayList<City>();
+			int stId = Integer.parseInt(request.getParameter("stateId"));
+
+			map.add("stateId", stId);
+			City[] cityArr = Constants.getRestTemplate().postForObject(Constants.url + "getCitiesByStateId", map,
+					City[].class);
+			cityList = new ArrayList<City>(Arrays.asList(cityArr));
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			cityList = new ArrayList<City>();
 			System.err.println("Exception Occured!!! In /getCityList ");
 			e.printStackTrace();
-	}
+		}
 		return cityList;
 	}
-	
-	
-	
-	
 
 }

@@ -652,7 +652,9 @@
 										+ pendingTask[i].taskId
 										+ ',\''
 										+ pendingTask[i].taskTittle
-										+ '\')">'
+										+ '\','
+										+ pendingTask[i].mdAccTypeId
+										+ ')">'
 										+ pendingTask[i].mdAccTypeText
 										+ '- '
 										+ pendingTask[i].taskTittle
@@ -715,13 +717,13 @@
 				format : 'DD-MM-YYYY'
 			}
 		});
-		function taskDetail(taskId, taskTittle) {
+		function taskDetail(taskId, taskTittle, mdAccTypeId) {
 			//alert(empId)
 
 			//alert(var1+':'+var2);
 			$("#taskhead").html(taskTittle);
 			var strhref = "${pageContext.request.contextPath}/compaletTask?taskId="
-					+ taskId;
+					+ taskId + "&mdAccTypeId=" + mdAccTypeId;
 			$("#modalbody").load(strhref);
 			$("#taskDetailModel").modal("show");
 			$('#taskDetailModel').on('hidden.bs.modal', function() {
