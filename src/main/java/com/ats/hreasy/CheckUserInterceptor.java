@@ -6,11 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.ModelAndView; 
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.ats.hreasy.model.UserLoginData;
- 
 
 public class CheckUserInterceptor extends HandlerInterceptorAdapter {
 
@@ -21,7 +20,7 @@ public class CheckUserInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 
 		String path = request.getRequestURI().substring(request.getContextPath().length());
-		  //System.out.println("Current Req Mapping is: "+request.getServletPath());
+		// System.out.println("Current Req Mapping is: "+request.getServletPath());
 
 		if (path.startsWith("/pdf")) {
 			return true;
@@ -52,7 +51,7 @@ public class CheckUserInterceptor extends HandlerInterceptorAdapter {
 				// System.out.println("User Details: "+userObj);
 
 			}
-			//System.out.println("User Details: "+userObj);
+			// System.out.println("User Details: "+userObj);
 			try {
 				if (request.getServletPath().equals("/") || request.getServletPath().equals("/loginProcess")
 						|| request.getServletPath().equals("/logout") || request.getServletPath().equals("/login")
@@ -62,10 +61,11 @@ public class CheckUserInterceptor extends HandlerInterceptorAdapter {
 						|| request.getServletPath().startsWith("/validateOTP")
 						|| request.getServletPath().startsWith("/chngNewPassword")
 						|| request.getServletPath().startsWith("/changePassPage")
-						|| request.getServletPath().equals("/showForPassPage")) { // ||request.getServletPath().equals("/logout"))
-																					// { //
-																					// ||request.getServletPath().equals("/logout")
-					  //System.out.println("Login request");
+						|| request.getServletPath().equals("/showForPassPage")
+						|| request.getServletPath().equals("/checkUserName")) { // ||request.getServletPath().equals("/logout"))
+					// { //
+					// ||request.getServletPath().equals("/logout")
+					// System.out.println("Login request");
 					return true;
 				} else if (userObj == null) {
 					// System.out.println("Session Expired");
