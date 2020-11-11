@@ -117,6 +117,7 @@
 													name="custName" autocomplete="off" required="required">
 											</div>
 										</div> -->
+										
 										<div class="col-md-6">
 											<label
 												class="col-form-label  text-info font-weight-bold col-lg-5 float"
@@ -301,6 +302,45 @@
 										</div>
 
 									</div>
+									<div class="form-group row">
+										<div class="col-md-6">
+											<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for="domainId">Select State<span
+												class="text-danger">* </span>:
+											</label>
+											<div class="col-lg-7 float">
+												<select name="stateID" 
+													class="form-control form-control-select2"
+													data-placeholder="Select State" data-fouc
+													required="required" id="stateID"   onchange="getCityList(this.value)">
+													<option value="" >Select State</option>
+													<c:forEach items="${stateList}" var="state">
+														<option value="${state.mStateId}" ${editLmsHeader.mStateId==state.mStateId ? 'selected':' ' }  >${state.mStateName}</option>
+													</c:forEach>
+												</select>
+
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for="domainId">Select City<span
+												class="text-danger">* </span>:
+											</label>
+											<div class="col-lg-7 float">
+												<select name="cityId"
+													class="form-control form-control-select2"
+													data-placeholder="Select City" data-fouc
+													required="required" id="cityId">
+													
+												</select>
+
+											</div>
+										</div>
+									
+									
+									</div>
 
 									<div class="form-group row">
 										<div class="col-md-6">
@@ -388,17 +428,17 @@
 													required="required" id="domainId">
 													<option value="">Select Domain</option>
 											
-														<option value="0">0</option>
-														<option value="0.5">0.5</option>
-														<option value="1.0">1.0</option>
-														<option value="1.5">1.5</option>
-														<option value="2.0">2.0</option>
-														<option value="2.5">2.5</option>
-														<option value="3.0">3.0</option>
-														<option value="3.5">3.5</option>
-														<option value="4.0">4.0</option>
-														<option value="4.5">4.5</option>
-														<option value="5.0">5.0</option>
+														<option value="0" ${editLmsHeader.accAtsRating=='0' ? 'selected' : ''}  >0</option>
+														<option value="0.5" ${editLmsHeader.accAtsRating=='0.5' ? 'selected' : ''}>0.5</option>
+														<option value="1" ${editLmsHeader.accAtsRating=='1' ? 'selected' : ''}>1.0</option>
+														<option value="1.5" ${editLmsHeader.accAtsRating=='1.5' ? 'selected' : ''}>1.5</option>
+														<option value="2" ${editLmsHeader.accAtsRating=='2' ? 'selected' : ''}>2.0</option>
+														<option value="2.5" ${editLmsHeader.accAtsRating=='2.5' ? 'selected' : ''}>2.5</option>
+														<option value="3" ${editLmsHeader.accAtsRating=='3' ? 'selected' : ''}>3.0</option>
+														<option value="3.5"${editLmsHeader.accAtsRating=='3.5' ? 'selected' : ''}>3.5</option>
+														<option value="4" ${editLmsHeader.accAtsRating=='4' ? 'selected' : ''}>4.0</option>
+														<option value="4.5" ${editLmsHeader.accAtsRating=='4.5' ? 'selected' : ''}>4.5</option>
+														<option value="5" ${editLmsHeader.accAtsRating=='5' ? 'selected' : ''}>5.0</option>
 													
 												</select>
 
@@ -752,6 +792,52 @@
 			}
 			return isError;
 		}
+		
+		
+		
+		
+		
+		function getCityList(stateId){
+			//alert("Ok!")
+			
+			if(stateId>0){
+				var fd=new FormData();
+				fd.append("stateId",stateId);
+						$.ajax({
+						url : '${pageContext.request.contextPath}/getCityList',
+						type : 'post',
+						dataType : 'json',
+						data : fd,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+							//alert(response)
+							var html;
+							var len=response.length;
+							var ctId=${editLmsHeader.mCityId}
+							for(var i=0;i<len;i++){
+							if(parseInt(ctId)==parseInt(response[i].mCityId)){
+								html += '<option selected value="'+response[i].mCityId+'"    >'+
+								response[i].mCityName+'</option>'
+								//alert(response[i].mCityName)
+							}else {
+								html += '<option value="'+response[i].mCityId+'"    >'+
+								response[i].mCityName+'</option>'
+								//alert(response[i].mCityName)
+							}
+								
+							}
+							$('#cityId').html(html);
+							$('#cityId').trigger("chosen:updated");
+						},
+					});	
+			}
+			
+				
+			
+		}	
+		
+		
 	</script>
 
 	<!-- <script type="text/javascript">

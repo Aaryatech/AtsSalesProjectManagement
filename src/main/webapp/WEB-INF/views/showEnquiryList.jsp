@@ -49,8 +49,8 @@
 								<td width="40%" align="right"><a
 									href="${pageContext.request.contextPath}/addEnquiry"
 									class="breadcrumb-elements-item">
-										<button type="button" class="btn blue_btn">NEW
-											ENQUIRY</button>
+										<!-- <button type="button" class="btn blue_btn">NEW
+											ENQUIRY</button> -->
 								</a></td>
 							</tr>
 						</table>

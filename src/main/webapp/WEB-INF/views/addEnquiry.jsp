@@ -117,7 +117,7 @@
 											<div class="form-group row">
 										<div class="col-md-6">
 										<label
-												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												class=" text-info font-weight-bold  col-lg-5 float"
 												for=CustomerName>Customer Name
 										</label>
 										<div class="col-lg-7 float">
@@ -198,8 +198,8 @@
 											<label
 											
 												class="col-form-label text-info font-weight-bold  col-lg-5 float"
-												for="inqTittle"><span class="text-danger">*
-											</span>:Inquiry Tittle
+												for="inqTittle">Inquiry Tittle<span class="text-danger">*
+											</span>:
 											</label>
 											<div class="col-lg-7  float">
 												<input type="text" class="form-control"
@@ -299,6 +299,45 @@
 
 											</div>
 										</div>
+									</div>
+												<div class="form-group row">
+										<div class="col-md-6">
+											<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for="domainId">Select State<span
+												class="text-danger">* </span>:
+											</label>
+											<div class="col-lg-7 float">
+												<select name="stateID" 
+													class="form-control form-control-select2"
+													data-placeholder="Select State" data-fouc
+													required="required" id="stateID"   onchange="getCityList(this.value)">
+													<option value="" >Select State</option>
+													<c:forEach items="${stateList}" var="state">
+														<option value="${state.mStateId}"  >${state.mStateName}</option>
+													</c:forEach>
+												</select>
+
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label
+												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												for="domainId">Select City<span
+												class="text-danger">* </span>:
+											</label>
+											<div class="col-lg-7 float">
+												<select name="cityId"
+													class="form-control form-control-select2"
+													data-placeholder="Select City" data-fouc
+													required="required" id="cityId">
+													
+												</select>
+
+											</div>
+										</div>
+									
+									
 									</div>
 
 									<div class="form-group row">
@@ -701,6 +740,44 @@
 			}
 			return isError;
 		}
+		
+		
+		
+		
+		
+		function getCityList(stateId){
+			//alert("Ok!")
+			
+			if(stateId>0){
+				var fd=new FormData();
+				fd.append("stateId",stateId);
+						$.ajax({
+						url : '${pageContext.request.contextPath}/getCityListinq',
+						type : 'post',
+						dataType : 'json',
+						data : fd,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+							//alert(response)
+							var html;
+							var len=response.length;
+							for(var i=0;i<len;i++){
+								html += '<option value="'+response[i].mCityId+'">'+
+								response[i].mCityName+'</option>'
+								//alert(response[i].mCityName)
+							}
+							$('#cityId').html(html);
+							$('#cityId').trigger("chosen:updated");
+						},
+					});	
+			}
+			
+				
+			
+		}		
+		
+		
 
 		/* $(document).ready(function($) {
 
