@@ -104,6 +104,7 @@
 									<th class="text-center">TYPE</th>
 									<th class="text-center">CHANNEL</th>
 									<th class="text-center">ACC TAG</th>
+									<th class="text-center">Contact Person</th>
 									<th width="10%" class="text-center">ACTION</th>
 								</tr>
 							</thead>
@@ -115,6 +116,7 @@
 									<td>${inqHeader.mdAccName}</td>
 									<td>${inqHeader.channelName}</td>
 									<td>${inqHeader.tagNames }</td>
+									<td>${inqHeader.cpInfo}</td>
 							
 									<td class="text-center">
 										<%-- <c:if test="${editAccess == 0}"> --%> <a

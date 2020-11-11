@@ -147,8 +147,19 @@ public class EnquiryController {
 			inquiryDetail.setCpEmail(email);
 			inquiryDetail.setDelStatus(1);
 			//System.err.println("Cp  iS ="+inquiryDetail);
-			if(inqDetailList.size()==0) {
+			if (inqDetailList.size() == 0) {
 				inquiryDetail.setCpPrimary(1);
+			} else {
+				int find = 0;
+				for (int i = 0; i < inqDetailList.size(); i++) {
+					if (inqDetailList.get(i).getDelStatus() == 1) {
+						find = 1;
+						break;
+					}
+				}
+				if (find == 0) {
+					inquiryDetail.setCpPrimary(1);
+				}
 			}
 			inqDetailList.add(inquiryDetail);
 			info.setError(false);

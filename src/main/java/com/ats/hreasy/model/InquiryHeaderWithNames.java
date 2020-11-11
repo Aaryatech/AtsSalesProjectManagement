@@ -70,6 +70,10 @@ public class InquiryHeaderWithNames {
 	private String mdAccName;
 	
 	private String tagNames;
+	
+	
+	private String cpInfo;
+	
 
 	public int getInqId() {
 		return inqId;
@@ -329,6 +333,14 @@ public class InquiryHeaderWithNames {
 		this.mCityId = mCityId;
 	}
 
+	public String getCpInfo() {
+		return cpInfo;
+	}
+
+	public void setCpInfo(String cpInfo) {
+		this.cpInfo = cpInfo;
+	}
+
 	@Override
 	public String toString() {
 		return "InquiryHeaderWithNames [inqId=" + inqId + ", channelId=" + channelId + ", mdAccTypeId=" + mdAccTypeId
@@ -341,10 +353,10 @@ public class InquiryHeaderWithNames {
 				+ ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1
 				+ ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", inqDetailList="
 				+ inqDetailList + ", channelName=" + channelName + ", mdAccName=" + mdAccName + ", tagNames=" + tagNames
-				+ "]";
+				+ ", cpInfo=" + cpInfo + "]";
 	}
 
-
+	
 	
 	
 
