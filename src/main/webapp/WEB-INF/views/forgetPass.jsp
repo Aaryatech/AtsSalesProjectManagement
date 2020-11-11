@@ -83,6 +83,19 @@ body1 {
 	background-image:
 		url("${pageContext.request.contextPath}/resources/global_assets/images/bg2.jpg");
 }
+
+.img {
+    width: 175px;
+    height: 110px;
+
+}
+
+.img img {
+    max-width:100%;
+	right: 8%;
+margin-top:-20%;
+margin-left: 25%
+}
 </style>
 <body>
 	<div class="login_bg">
@@ -101,10 +114,14 @@ body1 {
 			<div class="loginInner" id="pass_form1">
 
 				<div class="login_l">
-					<a href=""><img
-						src="${pageContext.request.contextPath}/resources/global_assets/images/monginis1.png"
-						alt=""></a>
-
+					<a href="">
+					<div class="img">
+					<img
+						src="${pageContext.request.contextPath}/resources/global_assets/images/powerdBy.png"
+						alt="">
+					</div>	
+					</a>
+					
 					<p class="login_txt">
 						Welcome to India’s one of most preferred bakery brand ! <span>Lets
 							make Monginis a part of everybody’s celebration!!</span>
@@ -116,9 +133,9 @@ body1 {
 
 
 
-					<img
+				<%-- 	<img
 						src="${pageContext.request.contextPath}/resources/global_assets/images/logo_white.png"
-						alt="">
+						alt=""> --%>
 					<h2 class="login_head_one">Reset Your Password</h2>
 					<div class="clr"></div>
 					<c:if test="${msg!=null}">
