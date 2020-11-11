@@ -99,7 +99,7 @@
 								<tr class="bg-blue">
 
 									<th width="10%" class="text-center">Sr. No.</th>
-									<th class="10%">Last TouchBase</th>
+							
 									<th class="text-center">Customer Name</th>
 									<th class="text-center">Contact</th>
 									<th class="text-center">Company Details</th>
@@ -107,6 +107,7 @@
 									<th class="text-center">City,State</th>
 									<th class="10%">Ats Rating</th>
 									<th class="10%">Last Inquiry</th>
+									<th class="10%">Last TouchBase</th>
 									 <th class="10%">Action</th> 
 								</tr>
 							</thead>
@@ -116,13 +117,14 @@
 									varStatus="count">
 									<tr>
 										<td>${count.index+1}</td>
-										<td>${0}</td>
+										
 										<td>${cust.cpInfo}</td>
 										<td>${cust.cpContact}</td>
 										<td><a href="${cust.accWebsite}">${cust.cpInfo2}</a></td>
 										<td>${cust.cityState}</td>
 										<td>${cust.accAtsRating}</td>
 										<td>10</td>
+										<td>${0}</td>
 											<td class="text-center">
 											<a
 											href="${pageContext.request.contextPath}/editLms?lmsId=${cust.lmsId}"
