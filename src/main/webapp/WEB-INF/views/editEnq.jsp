@@ -146,8 +146,8 @@
 											<label
 											
 												class="col-form-label text-info font-weight-bold  col-lg-5 float"
-												for="inqTittle"><span class="text-danger">*
-											</span>:Inquiry Tittle
+												for="inqTittle">Inquiry Tittle<span class="text-danger">*
+											</span>:
 											</label>
 											<div class="col-lg-7  float">
 												<input type="text" class="form-control"
