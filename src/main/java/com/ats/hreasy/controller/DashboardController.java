@@ -214,27 +214,31 @@ public class DashboardController {
 				}
 			}
 
-			if (terminate == 0) {
-
-				taskDetails.setTaskPriority(1);
-				taskDetails.setMakerUserId(userDetail.getEmpId());
-				taskDetails.setMakerDatetime(sf.format(dt));
-				taskDetails.setDelStatus(1);
-				taskDetails.setIsActive(1);
-				taskDetails.setTaskAllotedTo(taskDetail.getTaskAllotedTo());
-				taskDetails.setTaskAllotmentInstructions(taskDescription);
-				taskDetails.setTaskScheDate(DateConvertor.convertToYMD(sdate));
-				taskDetails.setTaskScheTime(DateConvertor.convertToYMD(sdate) + " " + stime);
-				taskDetails.setTaskClientProfiling(clientProfiling);
-				taskDetails.setTaskThoughQuestions(queations);
-				taskDetails.setTaskWhatWentWrong(right);
-
-				TaskDetails newTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask",
-						taskDetails, TaskDetails.class);
+			taskDetails.setTaskPriority(1);
+			taskDetails.setMakerUserId(userDetail.getEmpId());
+			taskDetails.setMakerDatetime(sf.format(dt));
+			taskDetails.setDelStatus(1);
+			taskDetails.setIsActive(1);
+			taskDetails.setTaskAllotedTo(taskDetail.getTaskAllotedTo());
+			taskDetails.setTaskAllotmentInstructions(taskDescription);
+			taskDetails.setTaskScheDate(DateConvertor.convertToYMD(sdate));
+			taskDetails.setTaskScheTime(DateConvertor.convertToYMD(sdate) + " " + stime);
+			taskDetails.setTaskClientProfiling(clientProfiling);
+			taskDetails.setTaskThoughQuestions(queations);
+			taskDetails.setTaskWhatWentWrong(right);
+			if (terminate == 1) {
+				taskinfo.setThisTaskStatus(0);
+				taskinfo.setTaskDoneBy(userDetail.getEmpId());
+				taskinfo.setTaskDoneDate(sf.format(dt));
 			}
+			TaskDetails newTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask", taskDetails,
+					TaskDetails.class);
+
 			info.setError(false);
 			info.setMsg("Insert new Task");
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			session.setAttribute("errorMsg", "Failed to update lead.");
 			e.printStackTrace();
 		}
@@ -672,8 +676,8 @@ public class DashboardController {
 			String scaleDesc = request.getParameter("scaleDesc");
 			String remark = request.getParameter("remark");
 			String rating = request.getParameter("rating");
-			int stateId=Integer.parseInt(request.getParameter("stateID"));
-			int cityId=Integer.parseInt(request.getParameter("cityId"));
+			int stateId = Integer.parseInt(request.getParameter("stateID"));
+			int cityId = Integer.parseInt(request.getParameter("cityId"));
 
 			String tags = "";
 
@@ -738,8 +742,8 @@ public class DashboardController {
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
 			String custName = request.getParameter("cName");
-			int stateId=Integer.parseInt(request.getParameter("stateID"));
-			int cityId=Integer.parseInt(request.getParameter("cityId"));
+			int stateId = Integer.parseInt(request.getParameter("stateID"));
+			int cityId = Integer.parseInt(request.getParameter("cityId"));
 			int empCount = 0;
 			try {
 				empCount = Integer.parseInt(request.getParameter("empCount"));
