@@ -109,65 +109,60 @@
 
 								<div class="tab-content">
 									<div class="tab-pane fade show active" id="highlighted-tab1">
-										<!-- <div
+										<div
 											class="navbar navbar-expand-lg navbar-light navbar-component rounded">
 											<div class="navbar-collapse " id="navbar-filter">
 												<span class="navbar-text font-weight-semibold mr-3">
 													Filter: </span>
+												<div class="col-md-1">By priority -</div>
+												<div class="col-md-2">
+													<select name="priorityFilter1"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="priorityFilter1" onchange="fileterTable(1)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="0">Show All</option>
+														<option value="3">High</option>
+														<option value="2">Normal</option>
+														<option value="1">Low</option>
+													</select>
+												</div>
+												<div class="col-md-1">By Module -</div>
+												<div class="col-md-2">
+													<select name="module1"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="module1" onchange="fileterTable(1)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<c:choose>
+															<c:when test="${moduleId==1}">
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+															</c:when>
+															<c:when test="${moduleId==2}">
+																<option value="0">Show All</option>
+																<option value="2">IMS</option>
+															</c:when>
+															<c:when test="${moduleId==3}">
+																<option value="0">Show All</option>
+																<option value="3">Office Task</option>
+															</c:when>
+															<c:otherwise>
 
-												<ul class="navbar-nav flex-wrap">
-													<li class="nav-item dropdown"><a href="#"
-														class="navbar-nav-link dropdown-toggle"
-														data-toggle="dropdown" aria-expanded="false"> <i
-															class="icon-sort-time-asc mr-2"></i> By date
-													</a>
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+																<option value="2">IMS</option>
+																<option value="3">Office Task</option>
 
-														<div class="dropdown-menu">
-															<a href="#" class="dropdown-item">Show all</a>
-															<div class="dropdown-divider"></div>
-															<a href="#" class="dropdown-item">Today</a> <a href="#"
-																class="dropdown-item">Yesterday</a> <a href="#"
-																class="dropdown-item">This week</a> <a href="#"
-																class="dropdown-item">This month</a> <a href="#"
-																class="dropdown-item">This year</a>
-														</div></li>
+															</c:otherwise>
+														</c:choose>
 
-													<li class="nav-item dropdown"><a href="#"
-														class="navbar-nav-link dropdown-toggle"
-														data-toggle="dropdown" aria-expanded="false"> <i
-															class="icon-sort-amount-desc mr-2"></i> By status
-													</a>
+													</select>
+												</div>
 
-														<div class="dropdown-menu">
-															<a href="#" class="dropdown-item">Show all</a>
-															<div class="dropdown-divider"></div>
-															<a href="#" class="dropdown-item">Open</a> <a href="#"
-																class="dropdown-item">On hold</a> <a href="#"
-																class="dropdown-item">Resolved</a> <a href="#"
-																class="dropdown-item">Closed</a> <a href="#"
-																class="dropdown-item">Duplicate</a> <a href="#"
-																class="dropdown-item">Invalid</a> <a href="#"
-																class="dropdown-item">Wontfix</a>
-														</div></li>
-
-													<li class="nav-item dropdown"><a href="#"
-														class="navbar-nav-link dropdown-toggle"
-														data-toggle="dropdown" aria-expanded="false"> <i
-															class="icon-sort-numeric-asc mr-2"></i> By priority
-													</a>
-
-														<div class="dropdown-menu">
-															<a href="#" class="dropdown-item">Show all</a>
-															<div class="dropdown-divider"></div>
-															<a href="#" class="dropdown-item">Highest</a> <a href="#"
-																class="dropdown-item">High</a> <a href="#"
-																class="dropdown-item">Normal</a> <a href="#"
-																class="dropdown-item">Low</a>
-														</div></li>
-												</ul>
 
 											</div>
-										</div> -->
+										</div>
 										<div class="table-responsive">
 											<table class="table tasks-list table-lg"
 												id="unallocatedTable">
@@ -188,6 +183,60 @@
 										</div>
 									</div>
 									<div class="tab-pane fade" id="highlighted-tab2">
+										<div
+											class="navbar navbar-expand-lg navbar-light navbar-component rounded">
+											<div class="navbar-collapse " id="navbar-filter">
+												<span class="navbar-text font-weight-semibold mr-3">
+													Filter: </span>
+												<div class="col-md-1">By priority -</div>
+												<div class="col-md-2">
+													<select name="priorityFilter2"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="priorityFilter2" onchange="fileterTable(2)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="0">Show All</option>
+														<option value="3">High</option>
+														<option value="2">Normal</option>
+														<option value="1">Low</option>
+													</select>
+												</div>
+												<div class="col-md-1">By Module -</div>
+												<div class="col-md-2">
+													<select name="module2"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="module2" onchange="fileterTable(2)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<c:choose>
+															<c:when test="${moduleId==1}">
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+															</c:when>
+															<c:when test="${moduleId==2}">
+																<option value="0">Show All</option>
+																<option value="2">IMS</option>
+															</c:when>
+															<c:when test="${moduleId==3}">
+																<option value="0">Show All</option>
+																<option value="3">Office Task</option>
+															</c:when>
+															<c:otherwise>
+
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+																<option value="2">IMS</option>
+																<option value="3">Office Task</option>
+
+															</c:otherwise>
+														</c:choose>
+
+													</select>
+												</div>
+
+
+											</div>
+										</div>
 										<div class="table-responsive">
 											<table class="table tasks-list table-lg" id="allocatedTable">
 												<thead>
@@ -205,40 +254,66 @@
 
 
 
-													<!-- <tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="#" data-toggle="modal"
-																	data-target="#allocate_to">Enquiry - Call to
-																	customer</a>
-															</div>
-															<div class="text-muted">Call to customer</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-
-													</tr> -->
-
 												</tbody>
 											</table>
 										</div>
 									</div>
 
 									<div class="tab-pane fade" id="highlighted-tab3">
+										<div
+											class="navbar navbar-expand-lg navbar-light navbar-component rounded">
+											<div class="navbar-collapse " id="navbar-filter">
+												<span class="navbar-text font-weight-semibold mr-3">
+													Filter: </span>
+												<div class="col-md-1">By priority -</div>
+												<div class="col-md-2">
+													<select name="priorityFilter3"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="priorityFilter3" onchange="fileterTable(3)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="0">Show All</option>
+														<option value="3">High</option>
+														<option value="2">Normal</option>
+														<option value="1">Low</option>
+													</select>
+												</div>
+												<div class="col-md-1">By Module -</div>
+												<div class="col-md-2">
+													<select name="module3"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="module3" onchange="fileterTable(3)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<c:choose>
+															<c:when test="${moduleId==1}">
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+															</c:when>
+															<c:when test="${moduleId==2}">
+																<option value="0">Show All</option>
+																<option value="2">IMS</option>
+															</c:when>
+															<c:when test="${moduleId==3}">
+																<option value="0">Show All</option>
+																<option value="3">Office Task</option>
+															</c:when>
+															<c:otherwise>
+
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+																<option value="2">IMS</option>
+																<option value="3">Office Task</option>
+
+															</c:otherwise>
+														</c:choose>
+
+													</select>
+												</div>
+
+
+											</div>
+										</div>
 										<div class="table-responsive">
 											<table class="table tasks-list table-lg" id="pendingTable">
 												<thead>
@@ -256,40 +331,66 @@
 
 
 
-													<!-- <tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="#" data-toggle="modal"
-																	data-target="#allocate_to">Enquiry - Call to
-																	customer</a>
-															</div>
-															<div class="text-muted">Call to customer</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-
-													</tr> -->
-
 												</tbody>
 											</table>
 										</div>
 									</div>
 
 									<div class="tab-pane fade" id="highlighted-tab4">
+										<div
+											class="navbar navbar-expand-lg navbar-light navbar-component rounded">
+											<div class="navbar-collapse " id="navbar-filter">
+												<span class="navbar-text font-weight-semibold mr-3">
+													Filter: </span>
+												<div class="col-md-1">By priority -</div>
+												<div class="col-md-2">
+													<select name="priorityFilter4"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="priorityFilter4" onchange="fileterTable(4)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="0">Show All</option>
+														<option value="3">High</option>
+														<option value="2">Normal</option>
+														<option value="1">Low</option>
+													</select>
+												</div>
+												<div class="col-md-1">By Module -</div>
+												<div class="col-md-2">
+													<select name="module4"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="module4" onchange="fileterTable(4)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<c:choose>
+															<c:when test="${moduleId==1}">
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+															</c:when>
+															<c:when test="${moduleId==2}">
+																<option value="0">Show All</option>
+																<option value="2">IMS</option>
+															</c:when>
+															<c:when test="${moduleId==3}">
+																<option value="0">Show All</option>
+																<option value="3">Office Task</option>
+															</c:when>
+															<c:otherwise>
+
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+																<option value="2">IMS</option>
+																<option value="3">Office Task</option>
+
+															</c:otherwise>
+														</c:choose>
+
+													</select>
+												</div>
+
+
+											</div>
+										</div>
 										<div class="table-responsive">
 											<table class="table tasks-list table-lg" id="remainingTable">
 												<thead>
@@ -305,42 +406,66 @@
 												</thead>
 												<tbody>
 
-
-
-													<!-- <tr>
-														<td><a href="#" data-toggle="modal"
-															data-target="#customerProfile"><i
-																class="icon-users2 icon-2x d-inline-block text-info"
-																title="Customer Profile"></i></a></td>
-														<td class="text-center">
-															<h6 class="mb-0">12</h6>
-															<div class="font-size-sm text-muted line-height-1">hours</div>
-
-														</td>
-														<td>
-															<div class="font-weight-semibold">
-																<a href="#" data-toggle="modal"
-																	data-target="#allocate_to">Enquiry - Call to
-																	customer</a>
-															</div>
-															<div class="text-muted">Call to customer</div> <a
-															href="#" data-toggle="modal" data-target="#task_log"><span
-																class="badge badge-success badge-pill">65
-																	Completed</span></a>
-														</td>
-
-														<td class="text-center">20-10-2020 12:00 AM</td>
-														<td class="text-center"><span
-															class="badge badge-danger">High</span></td>
-
-													</tr> -->
-
 												</tbody>
 											</table>
 										</div>
 									</div>
 
 									<div class="tab-pane fade" id="highlighted-tab5">
+										<div
+											class="navbar navbar-expand-lg navbar-light navbar-component rounded">
+											<div class="navbar-collapse " id="navbar-filter">
+												<span class="navbar-text font-weight-semibold mr-3">
+													Filter: </span>
+												<div class="col-md-1">By priority -</div>
+												<div class="col-md-2">
+													<select name="priorityFilter5"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="priorityFilter5" onchange="fileterTable(5)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="0">Show All</option>
+														<option value="3">High</option>
+														<option value="2">Normal</option>
+														<option value="1">Low</option>
+													</select>
+												</div>
+												<div class="col-md-1">By Module -</div>
+												<div class="col-md-2">
+													<select name="module5"
+														class="form-control form-control-select2"
+														data-placeholder="Allocate To" required="required"
+														id="module5" onchange="fileterTable(5)">
+														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<c:choose>
+															<c:when test="${moduleId==1}">
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+															</c:when>
+															<c:when test="${moduleId==2}">
+																<option value="0">Show All</option>
+																<option value="2">IMS</option>
+															</c:when>
+															<c:when test="${moduleId==3}">
+																<option value="0">Show All</option>
+																<option value="3">Office Task</option>
+															</c:when>
+															<c:otherwise>
+
+																<option value="0">Show All</option>
+																<option value="1">LMS</option>
+																<option value="2">IMS</option>
+																<option value="3">Office Task</option>
+
+															</c:otherwise>
+														</c:choose>
+
+													</select>
+												</div>
+
+
+											</div>
+										</div>
 										<div class="table-responsive">
 											<table class="table tasks-list table-lg" id="completedTable">
 												<thead>
@@ -503,11 +628,16 @@
 
 							//$('#modal_step1').modal('hide');
 							//alert(JSON.stringify(response))
+
+							/* let data = sessionStorage.getItem('key'); 
+							sessionStorage.removeItem('key'); 
+							sessionStorage.clear(); */
 							var table = $('#unallocatedTable').DataTable();
 							var rows = table.rows().remove().draw();
 
 							var unallocated = response.unallocatedList;
-
+							sessionStorage.setItem('unallocatedList',
+									unallocated);
 							for (var i = 0; i < unallocated.length; i++) {
 
 								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
@@ -898,7 +1028,20 @@
 														completedList[i].employeeName ])
 										.draw();
 							}
+							sessionStorage.setItem('unallocatedList', JSON
+									.stringify(unallocated));
+							sessionStorage.setItem('allocatedList', JSON
+									.stringify(allocatedList));
+							sessionStorage.setItem('pendingList', JSON
+									.stringify(pendingList));
+							sessionStorage.setItem('remainingList', JSON
+									.stringify(remainingList));
+							sessionStorage.setItem('completedList', JSON
+									.stringify(completedList));
 
+							/* var allocatedList = $.parseJSON(sessionStorage
+									.getItem('allocatedList'));
+							console.log(allocatedList) */
 							if (moduleId == 1) {
 								$("#unallocated")
 										.html(
@@ -1025,6 +1168,594 @@
 				$("#custProfile").html("");
 				//getTaskPendingList();
 			});
+
+		}
+		function fileterTable(tableNo) {
+
+			var list;
+			if (tableNo == 2) {
+				var value = $("#priorityFilter" + tableNo).val();
+				var module = $("#module" + tableNo).val();
+
+				if (value != null || module != null) {
+
+					if (value == null) {
+						value = 0;
+					}
+					if (module == null) {
+						module = 0;
+					}
+					list = $.parseJSON(sessionStorage.getItem('allocatedList'));
+					var table = $('#allocatedTable').DataTable();
+					var rows = table.rows().remove().draw();
+					for (var i = 0; i < list.length; i++) {
+
+						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')">'
+								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+						if (list[i].sts == 1) {
+							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+									+ list[i].day
+									+ ' - '
+									+ list[i].hour
+									+ ':'
+									+ list[i].minutes
+									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+						}
+						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								+ list[i].taskId
+								+ ',\''
+								+ list[i].taskTittle
+								+ '\')">'
+								+ list[i].mdAccTypeText
+								+ '- '
+								+ list[i].taskTittle
+								+ '</a>&nbsp;'
+								+ '<span class="badge badge-primary badge-pill">'
+								+ list[i].taskPts
+								+ ' PTS</span></div> <div class="text-muted">'
+								+ list[i].taskAllotmentInstructions
+								+ '</div>'
+								+ '<a href="#"  onclick="getTaskLog('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')"><span class="badge badge-success badge-pill">'
+								+ list[i].completed + ' Completed</span></a>';
+						var schdatetime = '<div class="text-center">'
+								+ list[i].taskScheTime + '</div>';
+						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+						if (list[i].taskPriority == 2) {
+							priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+						} else if (list[i].taskPriority == 3) {
+							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+						}
+
+						if (value == 0 && module != 0) {
+							if (module == list[i].mdAccTypeId) {
+								$('#allocatedTable td').css('white-space',
+										'initial');
+								$('#allocatedTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value != 0 && module == 0) {
+							if (value == list[i].taskPriority) {
+								$('#allocatedTable td').css('white-space',
+										'initial');
+								$('#allocatedTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value == 0 && module == 0) {
+							$('#allocatedTable td').css('white-space',
+									'initial');
+							$('#allocatedTable').DataTable().row.add(
+									[ profile, remainingTime, taskDescription,
+											schdatetime, priority,
+											list[i].employeeName ]).draw();
+
+						} else if (value != 0 && module != 0) {
+
+							if (value == list[i].taskPriority
+									&& module == list[i].mdAccTypeId) {
+								$('#allocatedTable td').css('white-space',
+										'initial');
+								$('#allocatedTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						}
+
+					}
+				}
+			} else if (tableNo == 3) {
+				var value = $("#priorityFilter" + tableNo).val();
+				var module = $("#module" + tableNo).val();
+
+				if (value != null || module != null) {
+
+					if (value == null) {
+						value = 0;
+					}
+					if (module == null) {
+						module = 0;
+					}
+					list = $.parseJSON(sessionStorage.getItem('pendingList'));
+					var table = $('#pendingTable').DataTable();
+					var rows = table.rows().remove().draw();
+					for (var i = 0; i < list.length; i++) {
+
+						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')">'
+								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+						if (list[i].sts == 1) {
+							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+									+ list[i].day
+									+ ' - '
+									+ list[i].hour
+									+ ':'
+									+ list[i].minutes
+									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+						}
+						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								+ list[i].taskId
+								+ ',\''
+								+ list[i].taskTittle
+								+ '\')">'
+								+ list[i].mdAccTypeText
+								+ '- '
+								+ list[i].taskTittle
+								+ '</a>&nbsp;'
+								+ '<span class="badge badge-primary badge-pill">'
+								+ list[i].taskPts
+								+ ' PTS</span></div> <div class="text-muted">'
+								+ list[i].taskAllotmentInstructions
+								+ '</div>'
+								+ '<a href="#"  onclick="getTaskLog('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')"><span class="badge badge-success badge-pill">'
+								+ list[i].completed + ' Completed</span></a>';
+						var schdatetime = '<div class="text-center">'
+								+ list[i].taskScheTime + '</div>';
+						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+						if (list[i].taskPriority == 2) {
+							priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+						} else if (list[i].taskPriority == 3) {
+							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+						}
+
+						if (value == 0 && module != 0) {
+							if (module == list[i].mdAccTypeId) {
+								$('#pendingTable td').css('white-space',
+										'initial');
+								$('#pendingTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value != 0 && module == 0) {
+							if (value == list[i].taskPriority) {
+								$('#pendingTable td').css('white-space',
+										'initial');
+								$('#pendingTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value == 0 && module == 0) {
+							$('#pendingTable td').css('white-space', 'initial');
+							$('#pendingTable').DataTable().row.add(
+									[ profile, remainingTime, taskDescription,
+											schdatetime, priority,
+											list[i].employeeName ]).draw();
+
+						} else if (value != 0 && module != 0) {
+
+							if (value == list[i].taskPriority
+									&& module == list[i].mdAccTypeId) {
+								$('#pendingTable td').css('white-space',
+										'initial');
+								$('#pendingTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						}
+
+					}
+				}
+			} else if (tableNo == 4) {
+				var value = $("#priorityFilter" + tableNo).val();
+				var module = $("#module" + tableNo).val();
+
+				if (value != null || module != null) {
+
+					if (value == null) {
+						value = 0;
+					}
+					if (module == null) {
+						module = 0;
+					}
+					list = $.parseJSON(sessionStorage.getItem('remainingList'));
+					var table = $('#remainingTable').DataTable();
+					var rows = table.rows().remove().draw();
+					for (var i = 0; i < list.length; i++) {
+
+						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')">'
+								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+						if (list[i].sts == 1) {
+							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+									+ list[i].day
+									+ ' - '
+									+ list[i].hour
+									+ ':'
+									+ list[i].minutes
+									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+						}
+						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								+ list[i].taskId
+								+ ',\''
+								+ list[i].taskTittle
+								+ '\')">'
+								+ list[i].mdAccTypeText
+								+ '- '
+								+ list[i].taskTittle
+								+ '</a>&nbsp;'
+								+ '<span class="badge badge-primary badge-pill">'
+								+ list[i].taskPts
+								+ ' PTS</span></div> <div class="text-muted">'
+								+ list[i].taskAllotmentInstructions
+								+ '</div>'
+								+ '<a href="#"  onclick="getTaskLog('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')"><span class="badge badge-success badge-pill">'
+								+ list[i].completed + ' Completed</span></a>';
+						var schdatetime = '<div class="text-center">'
+								+ list[i].taskScheTime + '</div>';
+						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+						if (list[i].taskPriority == 2) {
+							priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+						} else if (list[i].taskPriority == 3) {
+							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+						}
+
+						if (value == 0 && module != 0) {
+							if (module == list[i].mdAccTypeId) {
+								$('#remainingTable td').css('white-space',
+										'initial');
+								$('#remainingTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value != 0 && module == 0) {
+							if (value == list[i].taskPriority) {
+								$('#remainingTable td').css('white-space',
+										'initial');
+								$('#remainingTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value == 0 && module == 0) {
+							$('#remainingTable td').css('white-space',
+									'initial');
+							$('#remainingTable').DataTable().row.add(
+									[ profile, remainingTime, taskDescription,
+											schdatetime, priority,
+											list[i].employeeName ]).draw();
+
+						} else if (value != 0 && module != 0) {
+
+							if (value == list[i].taskPriority
+									&& module == list[i].mdAccTypeId) {
+								$('#remainingTable td').css('white-space',
+										'initial');
+								$('#remainingTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						}
+
+					}
+				}
+			} else if (tableNo == 5) {
+				var value = $("#priorityFilter" + tableNo).val();
+				var module = $("#module" + tableNo).val();
+
+				if (value != null || module != null) {
+
+					if (value == null) {
+						value = 0;
+					}
+					if (module == null) {
+						module = 0;
+					}
+					list = $.parseJSON(sessionStorage.getItem('completedList'));
+					var table = $('#completedTable').DataTable();
+					var rows = table.rows().remove().draw();
+					for (var i = 0; i < list.length; i++) {
+
+						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')">'
+								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+						if (list[i].sts == 1) {
+							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+									+ list[i].day
+									+ ' - '
+									+ list[i].hour
+									+ ':'
+									+ list[i].minutes
+									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+						}
+						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								+ list[i].taskId
+								+ ',\''
+								+ list[i].taskTittle
+								+ '\')">'
+								+ list[i].mdAccTypeText
+								+ '- '
+								+ list[i].taskTittle
+								+ '</a>&nbsp;'
+								+ '<span class="badge badge-primary badge-pill">'
+								+ list[i].taskPts
+								+ ' PTS</span></div> <div class="text-muted">'
+								+ list[i].taskAllotmentInstructions
+								+ '</div>'
+								+ '<a href="#"  onclick="getTaskLog('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')"><span class="badge badge-success badge-pill">'
+								+ list[i].completed + ' Completed</span></a>';
+						var schdatetime = '<div class="text-center">'
+								+ list[i].taskScheTime + '</div>';
+						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+						if (list[i].taskPriority == 2) {
+							priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+						} else if (list[i].taskPriority == 3) {
+							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+						}
+
+						if (value == 0 && module != 0) {
+							if (module == list[i].mdAccTypeId) {
+								$('#completedTable td').css('white-space',
+										'initial');
+								$('#completedTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value != 0 && module == 0) {
+							if (value == list[i].taskPriority) {
+								$('#completedTable td').css('white-space',
+										'initial');
+								$('#completedTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value == 0 && module == 0) {
+							$('#completedTable td').css('white-space',
+									'initial');
+							$('#completedTable').DataTable().row.add(
+									[ profile, remainingTime, taskDescription,
+											schdatetime, priority,
+											list[i].employeeName ]).draw();
+
+						} else if (value != 0 && module != 0) {
+
+							if (value == list[i].taskPriority
+									&& module == list[i].mdAccTypeId) {
+								$('#completedTable td').css('white-space',
+										'initial');
+								$('#completedTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						}
+
+					}
+				}
+			} else if (tableNo == 1) {
+				var value = $("#priorityFilter" + tableNo).val();
+				var module = $("#module" + tableNo).val();
+
+				if (value != null || module != null) {
+
+					if (value == null) {
+						value = 0;
+					}
+					if (module == null) {
+						module = 0;
+					}
+					list = $.parseJSON(sessionStorage
+							.getItem('unallocatedList'));
+					var table = $('#unallocatedTable').DataTable();
+					var rows = table.rows().remove().draw();
+					for (var i = 0; i < list.length; i++) {
+
+						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')">'
+								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
+								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
+						if (list[i].sts == 1) {
+							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
+									+ list[i].day
+									+ ' - '
+									+ list[i].hour
+									+ ':'
+									+ list[i].minutes
+									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
+						}
+						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								+ list[i].taskId
+								+ ',\''
+								+ list[i].taskTittle
+								+ '\')">'
+								+ list[i].mdAccTypeText
+								+ '- '
+								+ list[i].taskTittle
+								+ '</a>&nbsp;'
+								+ '<span class="badge badge-primary badge-pill">'
+								+ list[i].taskPts
+								+ ' PTS</span></div> <div class="text-muted">'
+								+ list[i].taskAllotmentInstructions
+								+ '</div>'
+								+ '<a href="#"  onclick="getTaskLog('
+								+ list[i].mdAccTypeId
+								+ ','
+								+ list[i].priKey
+								+ ')"><span class="badge badge-success badge-pill">'
+								+ list[i].completed + ' Completed</span></a>';
+						var schdatetime = '<div class="text-center">'
+								+ list[i].taskScheTime + '</div>';
+						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+
+						if (list[i].taskPriority == 2) {
+							priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
+						} else if (list[i].taskPriority == 3) {
+							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+						}
+
+						if (value == 0 && module != 0) {
+							if (module == list[i].mdAccTypeId) {
+								$('#unallocatedTable td').css('white-space',
+										'initial');
+								$('#unallocatedTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value != 0 && module == 0) {
+							if (value == list[i].taskPriority) {
+								$('#unallocatedTable td').css('white-space',
+										'initial');
+								$('#unallocatedTable').DataTable().row
+										.add(
+												[ profile, remainingTime,
+														taskDescription,
+														schdatetime, priority,
+														list[i].employeeName ])
+										.draw();
+							}
+
+						} else if (value == 0 && module == 0) {
+							$('#unallocatedTable td').css('white-space',
+									'initial');
+							$('#unallocatedTable').DataTable().row.add(
+									[ profile, remainingTime, taskDescription,
+											schdatetime, priority,
+											list[i].employeeName ]).draw();
+
+						} else if (value != 0 && module != 0) {
+
+							if (value == list[i].taskPriority
+									&& module == list[i].mdAccTypeId) {
+								$('#unallocatedTable td').css('white-space',
+										'initial');
+								$('#unallocatedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												priority ]).draw();
+							}
+
+						}
+
+					}
+				}
+			}
 
 		}
 	</script>
