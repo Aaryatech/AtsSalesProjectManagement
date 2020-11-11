@@ -131,7 +131,7 @@
 												class="icon-pencil7"></i></a>
 									
 										<a href="${pageContext.request.contextPath}/addEnquiry?Cid=${cust.lmsId}"
-										>
+										 data-popup="tooltip"  title="" data-original-title="Add Inquiry">
 											<i class="icon-add"></i>
 									<!-- 	Add Inquiry -->
 										</a>

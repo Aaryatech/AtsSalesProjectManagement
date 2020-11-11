@@ -117,10 +117,12 @@
 											<div class="form-group row">
 										<div class="col-md-6">
 										<label
-												class=" text-info font-weight-bold  col-lg-5 float"
+												class="col-form-label font-weight-bold  col-lg-5 float"
 												for=CustomerName>Customer Name
+												
+												
 										</label>
-										<div class="col-lg-7 float">
+										<div class="col-lg-6 float">
 										<c:out value="${lmsResp.customerName}"></c:out>
 											<%-- <input type="" class="form-control"  value="${lmsResp.customerName}"> --%>
 										</div>
@@ -128,7 +130,7 @@
 										
 										<div class="col-md-6">
 										<label
-												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												class="col-form-label  font-weight-bold  col-lg-5 float"
 												for=CompanyName>Company Name
 										</label>
 										<div class="col-lg-7 float">
@@ -143,7 +145,7 @@
 										<div class="form-group row">
 										<div class="col-md-6">
 										<label
-												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												class="col-form-label  font-weight-bold  col-lg-5 float"
 												for=CompanyWebsite>Company WebSite
 										</label>
 										<div class="col-lg-7 float">
@@ -154,7 +156,7 @@
 										
 										<div class="col-md-6">
 										<label
-												class="col-form-label text-info font-weight-bold  col-lg-5 float"
+												class="col-form-label  font-weight-bold  col-lg-5 float"
 												for=Cpdetail>Contact
 										</label>
 										<div class="col-lg-7 float">
