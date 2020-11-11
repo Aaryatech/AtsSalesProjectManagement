@@ -55,7 +55,8 @@
 		</label>
 		<div class="col-lg-9">
 			<select name="allocateTo" class="form-control form-control-select2"
-				data-placeholder="Allocate To" required="required" id="allocateTo">
+				data-placeholder="Allocate To" required="required" id="allocateTo"
+				multiple="multiple">
 				<c:forEach items="${empList}" var="empList">
 					<c:set value="0" var="find"></c:set>
 					<c:forEach items="${allocateTo}" var="allocateTo">
@@ -133,7 +134,8 @@
 											}
 
 											if (!isError) {
-
+												var alow = $("#allocateTo")
+														.val();
 												var x = true;
 												if (x == true) {
 
@@ -150,9 +152,10 @@
 																	$(
 																			"#taskDescription")
 																			.val());
-													fd.append("allocateTo", $(
-															"#allocateTo")
-															.val());
+													fd
+															.append(
+																	"allocateTo",
+																	alow);
 													fd.append("priority", $(
 															"#priority").val());
 

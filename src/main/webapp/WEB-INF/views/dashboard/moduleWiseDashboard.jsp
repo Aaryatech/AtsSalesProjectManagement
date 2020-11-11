@@ -109,7 +109,7 @@
 
 								<div class="tab-content">
 									<div class="tab-pane fade show active" id="highlighted-tab1">
-										<div
+										<!-- <div
 											class="navbar navbar-expand-lg navbar-light navbar-component rounded">
 											<div class="navbar-collapse " id="navbar-filter">
 												<span class="navbar-text font-weight-semibold mr-3">
@@ -167,7 +167,7 @@
 												</ul>
 
 											</div>
-										</div>
+										</div> -->
 										<div class="table-responsive">
 											<table class="table tasks-list table-lg"
 												id="unallocatedTable">
