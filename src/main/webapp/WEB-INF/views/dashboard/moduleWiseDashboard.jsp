@@ -114,26 +114,28 @@
 											<div class="navbar-collapse " id="navbar-filter">
 												<span class="navbar-text font-weight-semibold mr-3">
 													Filter: </span>
-												<div class="col-md-1">By priority -</div>
+
 												<div class="col-md-2">
 													<select name="priorityFilter1"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="priorityFilter1" onchange="fileterTable(1)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															priority</option>
 														<option value="0">Show All</option>
 														<option value="3">High</option>
 														<option value="2">Normal</option>
 														<option value="1">Low</option>
 													</select>
 												</div>
-												<div class="col-md-1">By Module -</div>
+
 												<div class="col-md-2">
 													<select name="module1"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="module1" onchange="fileterTable(1)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															Module</option>
 														<c:choose>
 															<c:when test="${moduleId==1}">
 																<option value="0">Show All</option>
@@ -188,26 +190,28 @@
 											<div class="navbar-collapse " id="navbar-filter">
 												<span class="navbar-text font-weight-semibold mr-3">
 													Filter: </span>
-												<div class="col-md-1">By priority -</div>
+
 												<div class="col-md-2">
 													<select name="priorityFilter2"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="priorityFilter2" onchange="fileterTable(2)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															priority</option>
 														<option value="0">Show All</option>
 														<option value="3">High</option>
 														<option value="2">Normal</option>
 														<option value="1">Low</option>
 													</select>
 												</div>
-												<div class="col-md-1">By Module -</div>
+
 												<div class="col-md-2">
 													<select name="module2"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="module2" onchange="fileterTable(2)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															Module</option>
 														<c:choose>
 															<c:when test="${moduleId==1}">
 																<option value="0">Show All</option>
@@ -234,7 +238,35 @@
 													</select>
 												</div>
 
+												<div class="col-md-2">
+													<select name="priorityFilter2"
+														class="form-control form-control-select2"
+														data-placeholder="Select Employee" required="required"
+														id="employee2" onchange="fileterTable(2)">
+														<option value="-1" selected="selected" disabled="disabled">By
+															Employee</option>
+														<option value="0">Show All</option>
+														<c:forEach items="${empList}" var="empList">
+															<option value="${empList.empId}">${empList.empName}</option>
 
+														</c:forEach>
+													</select>
+												</div>
+
+												<div class="col-md-2">
+													<select name="domain2"
+														class="form-control form-control-select2"
+														data-placeholder="Select Domain" required="required"
+														id="domain2" onchange="fileterTable(2)">
+														<option value="-1" selected="selected" disabled="disabled">By
+															Domain</option>
+														<option value="0">Show All</option>
+														<c:forEach items="${domainList}" var="domainList">
+															<option value="${domainList.mDomainId}">${domainList.mDomainName}</option>
+
+														</c:forEach>
+													</select>
+												</div>
 											</div>
 										</div>
 										<div class="table-responsive">
@@ -265,26 +297,28 @@
 											<div class="navbar-collapse " id="navbar-filter">
 												<span class="navbar-text font-weight-semibold mr-3">
 													Filter: </span>
-												<div class="col-md-1">By priority -</div>
+
 												<div class="col-md-2">
 													<select name="priorityFilter3"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="priorityFilter3" onchange="fileterTable(3)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															priority</option>
 														<option value="0">Show All</option>
 														<option value="3">High</option>
 														<option value="2">Normal</option>
 														<option value="1">Low</option>
 													</select>
 												</div>
-												<div class="col-md-1">By Module -</div>
+
 												<div class="col-md-2">
 													<select name="module3"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="module3" onchange="fileterTable(3)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															Module</option>
 														<c:choose>
 															<c:when test="${moduleId==1}">
 																<option value="0">Show All</option>
@@ -310,7 +344,35 @@
 
 													</select>
 												</div>
+												<div class="col-md-2">
+													<select name="priorityFilter3"
+														class="form-control form-control-select2"
+														data-placeholder="Select Employee" required="required"
+														id="employee3" onchange="fileterTable(3)">
+														<option value="-1" selected="selected" disabled="disabled">By
+															Employee</option>
+														<option value="0">Show All</option>
+														<c:forEach items="${empList}" var="empList">
+															<option value="${empList.empId}">${empList.empName}</option>
 
+														</c:forEach>
+													</select>
+												</div>
+
+												<div class="col-md-2">
+													<select name="domain3"
+														class="form-control form-control-select2"
+														data-placeholder="Select Domain" required="required"
+														id="domain3" onchange="fileterTable(3)">
+														<option value="-1" selected="selected" disabled="disabled">By
+															Domain</option>
+														<option value="0">Show All</option>
+														<c:forEach items="${domainList}" var="domainList">
+															<option value="${domainList.mDomainId}">${domainList.mDomainName}</option>
+
+														</c:forEach>
+													</select>
+												</div>
 
 											</div>
 										</div>
@@ -342,26 +404,28 @@
 											<div class="navbar-collapse " id="navbar-filter">
 												<span class="navbar-text font-weight-semibold mr-3">
 													Filter: </span>
-												<div class="col-md-1">By priority -</div>
+
 												<div class="col-md-2">
 													<select name="priorityFilter4"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="priorityFilter4" onchange="fileterTable(4)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															priority</option>
 														<option value="0">Show All</option>
 														<option value="3">High</option>
 														<option value="2">Normal</option>
 														<option value="1">Low</option>
 													</select>
 												</div>
-												<div class="col-md-1">By Module -</div>
+
 												<div class="col-md-2">
 													<select name="module4"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="module4" onchange="fileterTable(4)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															Module</option>
 														<c:choose>
 															<c:when test="${moduleId==1}">
 																<option value="0">Show All</option>
@@ -387,7 +451,35 @@
 
 													</select>
 												</div>
+												<div class="col-md-2">
+													<select name="priorityFilter4"
+														class="form-control form-control-select2"
+														data-placeholder="Select Employee" required="required"
+														id="employee4" onchange="fileterTable(4)">
+														<option value="-1" selected="selected" disabled="disabled">By
+															Employee</option>
+														<option value="0">Show All</option>
+														<c:forEach items="${empList}" var="empList">
+															<option value="${empList.empId}">${empList.empName}</option>
 
+														</c:forEach>
+													</select>
+												</div>
+
+												<div class="col-md-2">
+													<select name="domain4"
+														class="form-control form-control-select2"
+														data-placeholder="Select Domain" required="required"
+														id="domain4" onchange="fileterTable(4)">
+														<option value="-1" selected="selected" disabled="disabled">By
+															Domain</option>
+														<option value="0">Show All</option>
+														<c:forEach items="${domainList}" var="domainList">
+															<option value="${domainList.mDomainId}">${domainList.mDomainName}</option>
+
+														</c:forEach>
+													</select>
+												</div>
 
 											</div>
 										</div>
@@ -417,26 +509,28 @@
 											<div class="navbar-collapse " id="navbar-filter">
 												<span class="navbar-text font-weight-semibold mr-3">
 													Filter: </span>
-												<div class="col-md-1">By priority -</div>
+
 												<div class="col-md-2">
 													<select name="priorityFilter5"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="priorityFilter5" onchange="fileterTable(5)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															priority</option>
 														<option value="0">Show All</option>
 														<option value="3">High</option>
 														<option value="2">Normal</option>
 														<option value="1">Low</option>
 													</select>
 												</div>
-												<div class="col-md-1">By Module -</div>
+
 												<div class="col-md-2">
 													<select name="module5"
 														class="form-control form-control-select2"
 														data-placeholder="Allocate To" required="required"
 														id="module5" onchange="fileterTable(5)">
-														<option value="-1" selected="selected" disabled="disabled">Select</option>
+														<option value="-1" selected="selected" disabled="disabled">By
+															Module</option>
 														<c:choose>
 															<c:when test="${moduleId==1}">
 																<option value="0">Show All</option>
@@ -462,7 +556,35 @@
 
 													</select>
 												</div>
+												<div class="col-md-2">
+													<select name="priorityFilter5"
+														class="form-control form-control-select2"
+														data-placeholder="Select Employee" required="required"
+														id="employee5" onchange="fileterTable(5)">
+														<option value="-1" selected="selected" disabled="disabled">By
+															Employee</option>
+														<option value="0">Show All</option>
+														<c:forEach items="${empList}" var="empList">
+															<option value="${empList.empId}">${empList.empName}</option>
 
+														</c:forEach>
+													</select>
+												</div>
+
+												<div class="col-md-2">
+													<select name="domain5"
+														class="form-control form-control-select2"
+														data-placeholder="Select Domain" required="required"
+														id="domain5" onchange="fileterTable(5)">
+														<option value="-1" selected="selected" disabled="disabled">By
+															Domain</option>
+														<option value="0">Show All</option>
+														<c:forEach items="${domainList}" var="domainList">
+															<option value="${domainList.mDomainId}">${domainList.mDomainName}</option>
+
+														</c:forEach>
+													</select>
+												</div>
 
 											</div>
 										</div>
@@ -1176,14 +1298,22 @@
 			if (tableNo == 2) {
 				var value = $("#priorityFilter" + tableNo).val();
 				var module = $("#module" + tableNo).val();
-
-				if (value != null || module != null) {
+				var employee = $("#employee" + tableNo).val();
+				var domain = $("#domain" + tableNo).val();
+				if (value != null || module != null || employee != null
+						|| domain != null) {
 
 					if (value == null) {
 						value = 0;
 					}
 					if (module == null) {
 						module = 0;
+					}
+					if (employee == null) {
+						employee = 0;
+					}
+					if (domain == null) {
+						domain = 0;
 					}
 					list = $.parseJSON(sessionStorage.getItem('allocatedList'));
 					var table = $('#allocatedTable').DataTable();
@@ -1237,7 +1367,35 @@
 							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 						}
 
-						if (value == 0 && module != 0) {
+						var show = 0;
+
+						if (employee != 0) {
+
+							var empIds = list[i].taskAllotedTo.split(',');
+							//alert(empIds)
+							for (var j = 0; j < empIds.length; j++) {
+
+								if (empIds[j] == employee) {
+									show = 1;
+									break;
+								}
+							}
+						} else {
+							show = 1;
+						}
+
+						var showdomain = 0;
+						if (domain != 0) {
+
+							if (domain == list[i].domainId) {
+								showdomain = 1;
+							}
+						} else {
+							showdomain = 1;
+						}
+
+						if (value == 0 && module != 0 && show == 1
+								&& showdomain == 1) {
 							if (module == list[i].mdAccTypeId) {
 								$('#allocatedTable td').css('white-space',
 										'initial');
@@ -1250,7 +1408,8 @@
 										.draw();
 							}
 
-						} else if (value != 0 && module == 0) {
+						} else if (value != 0 && module == 0 && show == 1
+								&& showdomain == 1) {
 							if (value == list[i].taskPriority) {
 								$('#allocatedTable td').css('white-space',
 										'initial');
@@ -1263,7 +1422,8 @@
 										.draw();
 							}
 
-						} else if (value == 0 && module == 0) {
+						} else if (value == 0 && module == 0 && show == 1
+								&& showdomain == 1) {
 							$('#allocatedTable td').css('white-space',
 									'initial');
 							$('#allocatedTable').DataTable().row.add(
@@ -1271,7 +1431,8 @@
 											schdatetime, priority,
 											list[i].employeeName ]).draw();
 
-						} else if (value != 0 && module != 0) {
+						} else if (value != 0 && module != 0 && show == 1
+								&& showdomain == 1) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
@@ -1293,8 +1454,10 @@
 			} else if (tableNo == 3) {
 				var value = $("#priorityFilter" + tableNo).val();
 				var module = $("#module" + tableNo).val();
-
-				if (value != null || module != null) {
+				var employee = $("#employee" + tableNo).val();
+				var domain = $("#domain" + tableNo).val();
+				if (value != null || module != null || employee != null
+						|| domain != null) {
 
 					if (value == null) {
 						value = 0;
@@ -1302,6 +1465,13 @@
 					if (module == null) {
 						module = 0;
 					}
+					if (employee == null) {
+						employee = 0;
+					}
+					if (domain == null) {
+						domain = 0;
+					}
+
 					list = $.parseJSON(sessionStorage.getItem('pendingList'));
 					var table = $('#pendingTable').DataTable();
 					var rows = table.rows().remove().draw();
@@ -1354,7 +1524,35 @@
 							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 						}
 
-						if (value == 0 && module != 0) {
+						var show = 0;
+
+						if (employee != 0) {
+
+							var empIds = list[i].taskAllotedTo.split(',');
+							//alert(empIds)
+							for (var j = 0; j < empIds.length; j++) {
+
+								if (empIds[j] == employee) {
+									show = 1;
+									break;
+								}
+							}
+						} else {
+							show = 1;
+						}
+
+						var showdomain = 0;
+						if (domain != 0) {
+
+							if (domain == list[i].domainId) {
+								showdomain = 1;
+							}
+						} else {
+							showdomain = 1;
+						}
+
+						if (value == 0 && module != 0 && show == 1
+								&& showdomain == 1) {
 							if (module == list[i].mdAccTypeId) {
 								$('#pendingTable td').css('white-space',
 										'initial');
@@ -1367,7 +1565,8 @@
 										.draw();
 							}
 
-						} else if (value != 0 && module == 0) {
+						} else if (value != 0 && module == 0 && show == 1
+								&& showdomain == 1) {
 							if (value == list[i].taskPriority) {
 								$('#pendingTable td').css('white-space',
 										'initial');
@@ -1380,14 +1579,16 @@
 										.draw();
 							}
 
-						} else if (value == 0 && module == 0) {
+						} else if (value == 0 && module == 0 && show == 1
+								&& showdomain == 1) {
 							$('#pendingTable td').css('white-space', 'initial');
 							$('#pendingTable').DataTable().row.add(
 									[ profile, remainingTime, taskDescription,
 											schdatetime, priority,
 											list[i].employeeName ]).draw();
 
-						} else if (value != 0 && module != 0) {
+						} else if (value != 0 && module != 0 && show == 1
+								&& showdomain == 1) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
@@ -1409,14 +1610,22 @@
 			} else if (tableNo == 4) {
 				var value = $("#priorityFilter" + tableNo).val();
 				var module = $("#module" + tableNo).val();
-
-				if (value != null || module != null) {
+				var employee = $("#employee" + tableNo).val();
+				var domain = $("#domain" + tableNo).val();
+				if (value != null || module != null || employee != null
+						|| domain != null) {
 
 					if (value == null) {
 						value = 0;
 					}
 					if (module == null) {
 						module = 0;
+					}
+					if (employee == null) {
+						employee = 0;
+					}
+					if (domain == null) {
+						domain = 0;
 					}
 					list = $.parseJSON(sessionStorage.getItem('remainingList'));
 					var table = $('#remainingTable').DataTable();
@@ -1470,7 +1679,35 @@
 							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 						}
 
-						if (value == 0 && module != 0) {
+						var show = 0;
+
+						if (employee != 0) {
+
+							var empIds = list[i].taskAllotedTo.split(',');
+							//alert(empIds)
+							for (var j = 0; j < empIds.length; j++) {
+
+								if (empIds[j] == employee) {
+									show = 1;
+									break;
+								}
+							}
+						} else {
+							show = 1;
+						}
+
+						var showdomain = 0;
+						if (domain != 0) {
+
+							if (domain == list[i].domainId) {
+								showdomain = 1;
+							}
+						} else {
+							showdomain = 1;
+						}
+
+						if (value == 0 && module != 0 && show == 1
+								&& showdomain == 1) {
 							if (module == list[i].mdAccTypeId) {
 								$('#remainingTable td').css('white-space',
 										'initial');
@@ -1483,7 +1720,8 @@
 										.draw();
 							}
 
-						} else if (value != 0 && module == 0) {
+						} else if (value != 0 && module == 0 && show == 1
+								&& showdomain == 1) {
 							if (value == list[i].taskPriority) {
 								$('#remainingTable td').css('white-space',
 										'initial');
@@ -1496,7 +1734,8 @@
 										.draw();
 							}
 
-						} else if (value == 0 && module == 0) {
+						} else if (value == 0 && module == 0 && show == 1
+								&& showdomain == 1) {
 							$('#remainingTable td').css('white-space',
 									'initial');
 							$('#remainingTable').DataTable().row.add(
@@ -1504,7 +1743,8 @@
 											schdatetime, priority,
 											list[i].employeeName ]).draw();
 
-						} else if (value != 0 && module != 0) {
+						} else if (value != 0 && module != 0 && show == 1
+								&& showdomain == 1) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
@@ -1526,14 +1766,22 @@
 			} else if (tableNo == 5) {
 				var value = $("#priorityFilter" + tableNo).val();
 				var module = $("#module" + tableNo).val();
-
-				if (value != null || module != null) {
+				var employee = $("#employee" + tableNo).val();
+				var domain = $("#domain" + tableNo).val();
+				if (value != null || module != null || employee != null
+						|| domain != null) {
 
 					if (value == null) {
 						value = 0;
 					}
 					if (module == null) {
 						module = 0;
+					}
+					if (employee == null) {
+						employee = 0;
+					}
+					if (domain == null) {
+						domain = 0;
 					}
 					list = $.parseJSON(sessionStorage.getItem('completedList'));
 					var table = $('#completedTable').DataTable();
@@ -1547,25 +1795,14 @@
 								+ ')">'
 								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
 								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
-						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
-						if (list[i].sts == 1) {
-							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
-									+ list[i].day
-									+ ' - '
-									+ list[i].hour
-									+ ':'
-									+ list[i].minutes
-									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
-						}
-						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
-								+ list[i].taskId
-								+ ',\''
-								+ list[i].taskTittle
-								+ '\')">'
+						var remainingTime = '<div class="text-center">'
+								+ list[i].taskDoneDate + '</div>';
+
+						var taskDescription = '<div class="font-weight-semibold">'
 								+ list[i].mdAccTypeText
 								+ '- '
 								+ list[i].taskTittle
-								+ '</a>&nbsp;'
+								+ '&nbsp;'
 								+ '<span class="badge badge-primary badge-pill">'
 								+ list[i].taskPts
 								+ ' PTS</span></div> <div class="text-muted">'
@@ -1587,7 +1824,30 @@
 							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 						}
 
-						if (value == 0 && module != 0) {
+						var show = 0;
+
+						if (employee != 0) {
+
+							//alert(JSON.stringify(list[i]) + " " + employee)
+							if (list[i].taskDoneBy == employee) {
+								show = 1;
+							}
+						} else {
+							show = 1;
+						}
+
+						var showdomain = 0;
+						if (domain != 0) {
+
+							if (domain == list[i].domainId) {
+								showdomain = 1;
+							}
+						} else {
+							showdomain = 1;
+						}
+
+						if (value == 0 && module != 0 && show == 1
+								&& showdomain == 1) {
 							if (module == list[i].mdAccTypeId) {
 								$('#completedTable td').css('white-space',
 										'initial');
@@ -1600,7 +1860,8 @@
 										.draw();
 							}
 
-						} else if (value != 0 && module == 0) {
+						} else if (value != 0 && module == 0 && show == 1
+								&& showdomain == 1) {
 							if (value == list[i].taskPriority) {
 								$('#completedTable td').css('white-space',
 										'initial');
@@ -1613,7 +1874,8 @@
 										.draw();
 							}
 
-						} else if (value == 0 && module == 0) {
+						} else if (value == 0 && module == 0 && show == 1
+								&& showdomain == 1) {
 							$('#completedTable td').css('white-space',
 									'initial');
 							$('#completedTable').DataTable().row.add(
@@ -1621,7 +1883,8 @@
 											schdatetime, priority,
 											list[i].employeeName ]).draw();
 
-						} else if (value != 0 && module != 0) {
+						} else if (value != 0 && module != 0 && show == 1
+								&& showdomain == 1) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
@@ -1703,6 +1966,33 @@
 							priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
 						} else if (list[i].taskPriority == 3) {
 							priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
+						}
+
+						var show = 0;
+
+						if (employee != 0) {
+
+							var empIds = list[i].taskAllotedTo.split(',');
+							//alert(empIds)
+							for (var j = 0; j < empIds.length; j++) {
+
+								if (empIds[j] == employee) {
+									show = 1;
+									break;
+								}
+							}
+						} else {
+							show = 1;
+						}
+
+						var showdomain = 0;
+						if (domain != 0) {
+
+							if (domain == list[i].domainId) {
+								showdomain = 1;
+							}
+						} else {
+							showdomain = 1;
 						}
 
 						if (value == 0 && module != 0) {

@@ -70,6 +70,18 @@ private int taskId;
 	private String mdAccTypeText;
 	private int  completed;
 	private String time;
+	private int taskDoneBy;
+	private int domainId;
+	private int mStateId;
+	private int mCityId;
+	
+	public int getTaskDoneBy() {
+		return taskDoneBy;
+	}
+
+	public void setTaskDoneBy(int taskDoneBy) {
+		this.taskDoneBy = taskDoneBy;
+	}
 	public int getCompleted() {
 		return completed;
 	}
@@ -416,22 +428,47 @@ private int taskId;
 		return delStatus;
 	}
 
+	public int getDomainId() {
+		return domainId;
+	}
+
+	public void setDomainId(int domainId) {
+		this.domainId = domainId;
+	}
+
+	public int getmStateId() {
+		return mStateId;
+	}
+
+	public void setmStateId(int mStateId) {
+		this.mStateId = mStateId;
+	}
+
+	public int getmCityId() {
+		return mCityId;
+	}
+
+	public void setmCityId(int mCityId) {
+		this.mCityId = mCityId;
+	}
+
 	@Override
 	public String toString() {
 		return "TaskDetailsEmpName [taskId=" + taskId + ", mdAccTypeId=" + mdAccTypeId + ", priKey=" + priKey
 				+ ", taskTittle=" + taskTittle + ", taskTypeId=" + taskTypeId + ", taskRepType=" + taskRepType
 				+ ", taskEntryType=" + taskEntryType + ", taskScheDate=" + taskScheDate + ", taskScheTime="
-				+ taskScheTime + ", taskAllotedTo=" + taskAllotedTo + ", taskAllottedBy=" + taskAllottedBy
-				+ ", taskAllotmentInstructions=" + taskAllotmentInstructions + ", taskClientDiscussion="
-				+ taskClientDiscussion + ", taskClientProfiling=" + taskClientProfiling + ", taskThoughQuestions="
-				+ taskThoughQuestions + ", taskWhatWentWrong=" + taskWhatWentWrong + ", thisTaskStatus="
-				+ thisTaskStatus + ", taskFinalStatus=" + taskFinalStatus + ", taskPriority=" + taskPriority
-				+ ", taskPts=" + taskPts + ", taskDoneDate=" + taskDoneDate + ", delStatus=" + delStatus + ", isActive="
-				+ isActive + ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + ", allocatedById="
-				+ allocatedById + ", allocatedDatetime=" + allocatedDatetime + ", exInt1=" + exInt1 + ", exInt2="
-				+ exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", employeeName=" + employeeName + ", sts="
-				+ sts + ", day=" + day + ", hour=" + hour + ", minutes=" + minutes + ", mdAccTypeText=" + mdAccTypeText
-				+ ", completed=" + completed + ", time=" + time + "]";
+				+ taskScheTime + ", time=" + time + ", taskAllotedTo=" + taskAllotedTo + ", taskAllottedBy="
+				+ taskAllottedBy + ", taskAllotmentInstructions=" + taskAllotmentInstructions
+				+ ", taskClientDiscussion=" + taskClientDiscussion + ", taskClientProfiling=" + taskClientProfiling
+				+ ", taskThoughQuestions=" + taskThoughQuestions + ", taskWhatWentWrong=" + taskWhatWentWrong
+				+ ", thisTaskStatus=" + thisTaskStatus + ", taskFinalStatus=" + taskFinalStatus + ", taskPriority="
+				+ taskPriority + ", taskPts=" + taskPts + ", taskDoneDate=" + taskDoneDate + ", taskDoneBy="
+				+ taskDoneBy + ", domainId=" + domainId + ", mStateId=" + mStateId + ", mCityId=" + mCityId
+				+ ", delStatus=" + delStatus + ", isActive=" + isActive + ", makerUserId=" + makerUserId
+				+ ", makerDatetime=" + makerDatetime + ", allocatedById=" + allocatedById + ", allocatedDatetime="
+				+ allocatedDatetime + ", exInt1=" + exInt1 + ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2="
+				+ exVar2 + ", employeeName=" + employeeName + ", sts=" + sts + ", day=" + day + ", hour=" + hour
+				+ ", minutes=" + minutes + ", mdAccTypeText=" + mdAccTypeText + ", completed=" + completed + "]";
 	}
 
 }

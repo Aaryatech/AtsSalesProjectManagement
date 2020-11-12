@@ -23,6 +23,7 @@ import com.ats.hreasy.common.Constants;
 import com.ats.hreasy.common.DateConvertor;
 import com.ats.hreasy.model.DashBoardSummary;
 import com.ats.hreasy.model.DashboardData;
+import com.ats.hreasy.model.DomainType;
 import com.ats.hreasy.model.Employee;
 import com.ats.hreasy.model.EmployeeTaskDashBoard;
 import com.ats.hreasy.model.EmployeeWiseDashboard;
@@ -72,6 +73,18 @@ public class AdminDashboard {
 			int moduleId = Integer.parseInt(request.getParameter("moduleId"));
 			mav = "dashboard/moduleWiseDashboard";
 			model.addAttribute("moduleId", moduleId);
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			Employee[] emp = Constants.getRestTemplate().postForObject(Constants.url + "getAllEmployeeList", map,
+					Employee[].class);
+			List<Employee> empList = new ArrayList<>(Arrays.asList(emp));
+			model.addAttribute("empList", empList);
+			
+			DomainType[] domainType = Constants.getRestTemplate().getForObject(Constants.url + "getAllDomainTypelist",
+					DomainType[].class);
+			List<DomainType> domainList = new ArrayList<DomainType>(Arrays.asList(domainType));
+
+			model.addAttribute("domainList", domainList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
