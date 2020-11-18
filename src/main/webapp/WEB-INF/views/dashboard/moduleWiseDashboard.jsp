@@ -166,11 +166,11 @@
 											</div>
 										</div>
 										<div class="table-responsive">
-											<table class="table tasks-list table-lg"
-												id="unallocatedTable">
+											<table class="table" id="unallocatedTable">
 												<thead>
 													<tr>
 														<th>#</th>
+														<th class="text-center">Allocate</th>
 														<th class="text-center">Due</th>
 														<th class="text-center">Task Description</th>
 														<th class="text-center">Schedule Date Time</th>
@@ -756,7 +756,7 @@
 							sessionStorage.clear(); */
 							var table = $('#unallocatedTable').DataTable();
 							var rows = table.rows().remove().draw();
-
+							//$("#unallocatedTable tbody").empty();
 							var unallocated = response.unallocatedList;
 							sessionStorage.setItem('unallocatedList',
 									unallocated);
@@ -803,6 +803,7 @@
 								var schdatetime = '<div class="text-center">'
 										+ unallocated[i].taskScheTime
 										+ '</div>';
+								var check = '<div class="text-center"><input id="taskcheck'+unallocated[i].taskId+'" name="taskcheck" type="checkbox"></div>'
 								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
 
 								if (unallocated[i].taskPriority == 2) {
@@ -811,10 +812,16 @@
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
 
-								$('#unallocatedTable td').css('white-space',
-										'initial');
+								/* var tr_data = '<tr><td>' + profile
+										+ '</td><td>' + remainingTime
+										+ '</td><td>' + taskDescription
+										+ '</td><td>' + schdatetime
+										+ '</td><td>' + priority + '</td></tr>';
+								$('#unallocatedTable').append(tr_data); */
+								/*  $('#unallocatedTable td').css('white-space',
+									'initial'); */
 								$('#unallocatedTable').DataTable().row.add(
-										[ profile, remainingTime,
+										[ profile, check, remainingTime,
 												taskDescription, schdatetime,
 												priority ]).draw();
 							}
@@ -1961,7 +1968,7 @@
 						var schdatetime = '<div class="text-center">'
 								+ list[i].taskScheTime + '</div>';
 						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
-
+						var check = '<div class="text-center"><input id="taskcheck'+list[i].taskId+'" name="taskcheck" type="checkbox"></div>'
 						if (list[i].taskPriority == 2) {
 							priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
 						} else if (list[i].taskPriority == 3) {
@@ -2001,7 +2008,8 @@
 										'initial');
 								$('#unallocatedTable').DataTable().row
 										.add(
-												[ profile, remainingTime,
+												[ profile, check,
+														remainingTime,
 														taskDescription,
 														schdatetime, priority,
 														list[i].employeeName ])
@@ -2014,7 +2022,8 @@
 										'initial');
 								$('#unallocatedTable').DataTable().row
 										.add(
-												[ profile, remainingTime,
+												[ profile, check,
+														remainingTime,
 														taskDescription,
 														schdatetime, priority,
 														list[i].employeeName ])
@@ -2025,9 +2034,10 @@
 							$('#unallocatedTable td').css('white-space',
 									'initial');
 							$('#unallocatedTable').DataTable().row.add(
-									[ profile, remainingTime, taskDescription,
-											schdatetime, priority,
-											list[i].employeeName ]).draw();
+									[ profile, check, remainingTime,
+											taskDescription, schdatetime,
+											priority, list[i].employeeName ])
+									.draw();
 
 						} else if (value != 0 && module != 0) {
 
@@ -2036,7 +2046,7 @@
 								$('#unallocatedTable td').css('white-space',
 										'initial');
 								$('#unallocatedTable').DataTable().row.add(
-										[ profile, remainingTime,
+										[ profile, check, remainingTime,
 												taskDescription, schdatetime,
 												priority ]).draw();
 							}
