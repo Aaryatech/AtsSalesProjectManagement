@@ -183,6 +183,15 @@
 												</tbody>
 											</table>
 										</div>
+										<span class="validation-invalid-label" id="error_emp"
+											style="display: none;">Select Minimum one task.</span> <br>
+										<div class="text-center">
+
+											<button type="button" class="btn blue_btn ml-3 legitRipple"
+												id="allowTaskbtn" onclick="commonPdf()">Allocate
+												Task</button>
+
+										</div>
 									</div>
 									<div class="tab-pane fade" id="highlighted-tab2">
 										<div
@@ -803,7 +812,7 @@
 								var schdatetime = '<div class="text-center">'
 										+ unallocated[i].taskScheTime
 										+ '</div>';
-								var check = '<div class="text-center"><input id="taskcheck'+unallocated[i].taskId+'" name="taskcheck" type="checkbox"></div>'
+								var check = '<div class="text-center"><input id="taskcheck'+unallocated[i].taskId+'" name="taskcheck" type="checkbox" value="'+unallocated[i].taskId+'"></div>'
 								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
 
 								if (unallocated[i].taskPriority == 2) {
@@ -1968,7 +1977,7 @@
 						var schdatetime = '<div class="text-center">'
 								+ list[i].taskScheTime + '</div>';
 						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
-						var check = '<div class="text-center"><input id="taskcheck'+list[i].taskId+'" name="taskcheck" type="checkbox"></div>'
+						var check = '<div class="text-center"><input id="taskcheck'+list[i].taskId+'" name="taskcheck" type="checkbox" value="'+list[i].taskId+'"></div>'
 						if (list[i].taskPriority == 2) {
 							priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
 						} else if (list[i].taskPriority == 3) {
@@ -2056,6 +2065,39 @@
 					}
 				}
 			}
+
+		}
+
+		function commonPdf() {
+			$("#error_emp").hide();
+			//var selectMonth = document.getElementById("datepicker").value;
+			var list = [];
+
+			$("input:checkbox[name=taskcheck]:checked").each(function() {
+				list.push($(this).val());
+			});
+
+			if (list.length > 0) {
+				allocateTaskCommon(list);
+			} else {
+				$("#error_emp").show();
+			}
+
+		}
+
+		function allocateTaskCommon(list) {
+			//alert(list)
+
+			//alert(var1+':'+var2);
+			//$("#taskhead").html(taskTittle);
+			var strhref = "${pageContext.request.contextPath}/allocateTaskCommon?list="
+					+ list;
+			$("#modalbody").load(strhref);
+			$("#taskDetailModel").modal("show");
+			$('#taskDetailModel').on('hidden.bs.modal', function() {
+				$("#modalbody").html("");
+				getDataList();
+			});
 
 		}
 	</script>

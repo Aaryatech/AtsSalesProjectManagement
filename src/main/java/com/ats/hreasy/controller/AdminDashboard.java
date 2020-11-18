@@ -73,13 +73,13 @@ public class AdminDashboard {
 			int moduleId = Integer.parseInt(request.getParameter("moduleId"));
 			mav = "dashboard/moduleWiseDashboard";
 			model.addAttribute("moduleId", moduleId);
-			
+
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			Employee[] emp = Constants.getRestTemplate().postForObject(Constants.url + "getAllEmployeeList", map,
 					Employee[].class);
 			List<Employee> empList = new ArrayList<>(Arrays.asList(emp));
 			model.addAttribute("empList", empList);
-			
+
 			DomainType[] domainType = Constants.getRestTemplate().getForObject(Constants.url + "getAllDomainTypelist",
 					DomainType[].class);
 			List<DomainType> domainList = new ArrayList<DomainType>(Arrays.asList(domainType));
@@ -147,6 +147,81 @@ public class AdminDashboard {
 		return mav;
 	}
 
+	String taskIds = new String();
+
+	@RequestMapping(value = "/allocateTaskCommon", method = RequestMethod.GET)
+	public String allocateTaskCommon(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		HttpSession session = request.getSession();
+		String mav = new String();
+
+		try {
+			taskIds = request.getParameter("list");
+			mav = "task/allocateTaskCommon";
+
+			System.out.println(taskIds);
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+			Employee[] emp = Constants.getRestTemplate().postForObject(Constants.url + "getAllEmployeeList", map,
+					Employee[].class);
+			List<Employee> empList = new ArrayList<>(Arrays.asList(emp));
+			model.addAttribute("empList", empList);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = "/submitAllocateCommontask", method = RequestMethod.POST)
+	@ResponseBody
+	public Info submitAllocateCommontask(HttpServletRequest request, HttpServletResponse response) {
+
+		HttpSession session = request.getSession();
+		Info info = new Info();
+
+		try {
+
+			UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date dt = new Date();
+
+			// String custName = request.getParameter("custName");
+
+			String sdate = request.getParameter("sdate");
+			String stime = request.getParameter("stime");
+			String taskDescription = request.getParameter("taskDescription");
+			String allocateTo = request.getParameter("allocateTo");
+			int priority = Integer.parseInt(request.getParameter("priority"));
+
+			// System.out.println(allocateTo);
+
+			String[] ids = taskIds.split(",");
+			for (int i = 0; i < ids.length; i++) {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("taskId", ids[i]);
+				TaskDetails taskinfo = Constants.getRestTemplate().postForObject(Constants.url + "getTaskById", map,
+						TaskDetails.class);
+
+				taskinfo.setTaskAllotmentInstructions(taskDescription);
+				taskinfo.setTaskAllotedTo(allocateTo);
+				taskinfo.setTaskPriority(priority);
+				taskinfo.setTaskScheDate(DateConvertor.convertToYMD(sdate));
+				taskinfo.setTaskScheTime(DateConvertor.convertToYMD(sdate) + " " + stime);
+				TaskDetails update = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask", taskinfo,
+						TaskDetails.class);
+
+			}
+			info.setError(false);
+			info.setMsg("Insert new Task");
+		} catch (Exception e) {
+			session.setAttribute("errorMsg", "Failed to update lead.");
+			e.printStackTrace();
+		}
+		return info;
+	}
+
 	@RequestMapping(value = "/submitEdittask", method = RequestMethod.POST)
 	@ResponseBody
 	public Info submitEdittask(HttpServletRequest request, HttpServletResponse response) {
@@ -168,7 +243,7 @@ public class AdminDashboard {
 			String allocateTo = request.getParameter("allocateTo");
 			int priority = Integer.parseInt(request.getParameter("priority"));
 
-			//System.out.println(allocateTo);
+			// System.out.println(allocateTo);
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("taskId", taskDetail.getTaskId());
 			TaskDetails taskinfo = Constants.getRestTemplate().postForObject(Constants.url + "getTaskById", map,
