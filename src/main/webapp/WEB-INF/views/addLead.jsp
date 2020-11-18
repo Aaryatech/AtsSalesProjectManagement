@@ -117,7 +117,7 @@
 													name="custName" autocomplete="off" required="required">
 											</div>
 										</div> -->
-											<div class="col-md-6">
+										<div class="col-md-6">
 											<label
 												class="col-form-label  text-info font-weight-bold col-lg-5 float"
 												for="cmpName">Customer Name<span class="text-danger">*
@@ -125,12 +125,12 @@
 											</label>
 											<div class="col-lg-7 float">
 												<input type="text" class="form-control" value="${dept.name}"
-													placeholder="Customer Name" id="cName" maxlength="30"
+													placeholder="Customer Name" id="cName" maxlength="150"
 													name="cName" autocomplete="off" required="required">
 
 											</div>
 										</div>
-										
+
 										<div class="col-md-6">
 											<label
 												class="col-form-label  text-info font-weight-bold col-lg-5 float"
@@ -260,17 +260,18 @@
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold  col-lg-5 float"
-												for="domainId">Select State<span
-												class="text-danger">* </span>:
+												for="domainId">Select State<span class="text-danger">*
+											</span>:
 											</label>
 											<div class="col-lg-7 float">
-												<select name="stateID" 
+												<select name="stateID"
 													class="form-control form-control-select2"
 													data-placeholder="Select State" data-fouc
-													required="required" id="stateID"   onchange="getCityList(this.value)">
-													<option value="" >Select State</option>
+													required="required" id="stateID"
+													onchange="getCityList(this.value)">
+													<option value="">Select State</option>
 													<c:forEach items="${stateList}" var="state">
-														<option value="${state.mStateId}"  >${state.mStateName}</option>
+														<option value="${state.mStateId}">${state.mStateName}</option>
 													</c:forEach>
 												</select>
 
@@ -279,21 +280,21 @@
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold  col-lg-5 float"
-												for="domainId">Select City<span
-												class="text-danger">* </span>:
+												for="domainId">Select City<span class="text-danger">*
+											</span>:
 											</label>
 											<div class="col-lg-7 float">
 												<select name="cityId"
 													class="form-control form-control-select2"
 													data-placeholder="Select City" data-fouc
 													required="required" id="cityId">
-													
+
 												</select>
 
 											</div>
 										</div>
-									
-									
+
+
 									</div>
 
 									<div class="form-group row">
@@ -377,29 +378,29 @@
 													data-placeholder="Select ratings" data-fouc
 													required="required" id="domainId">
 													<option value="">Select Domain</option>
-											
-														<option value="0">0</option>
-														<option value="0.5">0.5</option>
-														<option value="1">1.0</option>
-														<option value="1.5">1.5</option>
-														<option value="2">2.0</option>
-														<option value="2.5">2.5</option>
-														<option value="3">3.0</option>
-														<option value="3.5">3.5</option>
-														<option value="4">4.0</option>
-														<option value="4.5">4.5</option>
-														<option value="5">5.0</option>
-													
+
+													<option value="0">0</option>
+													<option value="0.5">0.5</option>
+													<option value="1">1.0</option>
+													<option value="1.5">1.5</option>
+													<option value="2">2.0</option>
+													<option value="2.5">2.5</option>
+													<option value="3">3.0</option>
+													<option value="3.5">3.5</option>
+													<option value="4">4.0</option>
+													<option value="4.5">4.5</option>
+													<option value="5">5.0</option>
+
 												</select>
 
 											</div>
 										</div>
 
 									</div>
-									
-									
-									
-									
+
+
+
+
 									<hr>
 									<div id="detailDiv">
 										<div class="form-group row">
@@ -727,44 +728,36 @@
 			}
 			return isError;
 		}
-		
-		
-		
-		function getCityList(stateId){
+
+		function getCityList(stateId) {
 			//alert("Ok!")
-			
-			if(stateId>0){
-				var fd=new FormData();
-				fd.append("stateId",stateId);
-						$.ajax({
-						url : '${pageContext.request.contextPath}/getCityList',
-						type : 'post',
-						dataType : 'json',
-						data : fd,
-						contentType : false,
-						processData : false,
-						success : function(response) {
-							//alert(response)
-							var html;
-							var len=response.length;
-							for(var i=0;i<len;i++){
-								html += '<option value="'+response[i].mCityId+'">'+
-								response[i].mCityName+'</option>'
-								//alert(response[i].mCityName)
-							}
-							$('#cityId').html(html);
-							$('#cityId').trigger("chosen:updated");
-						},
-					});	
+
+			if (stateId > 0) {
+				var fd = new FormData();
+				fd.append("stateId", stateId);
+				$.ajax({
+					url : '${pageContext.request.contextPath}/getCityList',
+					type : 'post',
+					dataType : 'json',
+					data : fd,
+					contentType : false,
+					processData : false,
+					success : function(response) {
+						//alert(response)
+						var html;
+						var len = response.length;
+						for (var i = 0; i < len; i++) {
+							html += '<option value="'+response[i].mCityId+'">'
+									+ response[i].mCityName + '</option>'
+							//alert(response[i].mCityName)
+						}
+						$('#cityId').html(html);
+						$('#cityId').trigger("chosen:updated");
+					},
+				});
 			}
-			
-				
-			
-		}		
-		
-		
-		
-		
+
+		}
 	</script>
 
 	<!-- <script type="text/javascript">

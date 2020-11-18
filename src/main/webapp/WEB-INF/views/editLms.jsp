@@ -140,7 +140,7 @@
 											<div class="col-lg-7 float">
 												<input type="text" class="form-control"
 													value="${editLmsHeader.accCompany}"
-													placeholder="Company Name" id="cmpName" maxlength="30"
+													placeholder="Company Name" id="cmpName" maxlength="150"
 													name="cmpName" autocomplete="off" required="required">
 
 											</div>

@@ -787,18 +787,18 @@ public class DashboardController {
 
 			lmsHeader.setLmsDetailList(lmsDetailList);
 
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("mdAccTypeId", 1);
+			map.add("statusSequence", 0);
+			TaskStatus[] sts = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getTaskStatusByAccTypeIdAndSequnce", map, TaskStatus[].class);
+			lmsHeader.setAccStatus(sts[0].getmTaskStatusId());
 			// System.out.println(lmsHeader);
 			LmsHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewLmsHeader", lmsHeader,
 					LmsHeader.class);
 			if (res == null) {
 				session.setAttribute("errorMsg", "Failed To Generated Lead.");
 			} else {
-
-				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-				map.add("mdAccTypeId", 1);
-				map.add("statusSequence", 0);
-				TaskStatus[] sts = Constants.getRestTemplate()
-						.postForObject(Constants.url + "getTaskStatusByAccTypeIdAndSequnce", map, TaskStatus[].class);
 
 				TaskDetails taskDetails = new TaskDetails();
 				taskDetails.setMdAccTypeId(1);

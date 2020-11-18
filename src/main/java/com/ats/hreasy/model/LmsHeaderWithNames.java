@@ -65,7 +65,8 @@ public class LmsHeaderWithNames {
 	private List<LmsDetail> lmsDetailList;
 
 	private String cpInfo;
-
+	private String mail;
+	
 	public int getLmsId() {
 		return lmsId;
 	}
@@ -330,6 +331,14 @@ public class LmsHeaderWithNames {
 		this.mCityId = mCityId;
 	}
 
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
 	@Override
 	public String toString() {
 		return "LmsHeaderWithNames [lmsId=" + lmsId + ", mdAccTypeId=" + mdAccTypeId + ", channelId=" + channelId
@@ -342,7 +351,7 @@ public class LmsHeaderWithNames {
 				+ ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1
 				+ ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", accountType=" + accountType
 				+ ", channelName=" + channelName + ", tagNames=" + tagNames + ", lmsDetailList=" + lmsDetailList
-				+ ", cpInfo=" + cpInfo + "]";
+				+ ", cpInfo=" + cpInfo + ", mail=" + mail + "]";
 	}
 
 
