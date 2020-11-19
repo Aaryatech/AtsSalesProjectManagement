@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>HR Management</title>
+<title>Sales Management</title>
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/global_assets/images/companylogo.png"
 	type="image/x-icon" />
@@ -83,22 +83,22 @@ body1 {
 	background-image:
 		url("${pageContext.request.contextPath}/resources/global_assets/images/bg2.jpg");
 }
-.img {
-    width: 175px;
-    height: 110px;
 
+.img {
+	width: 175px;
+	height: 110px;
 }
 
 .img img {
-    max-width:100%;
+	max-width: 100%;
 	right: 8%;
-margin-top:-20%;
-margin-left: 25%
+	margin-top: -20%;
+	margin-left: 25%
 }
-
 </style>
-<body onload="divSelect()" >
-	<input type="hidden" name="loginOrforgot" id="loginOrforgot"  value="${loginOrforgot}">
+<body onload="divSelect()">
+	<input type="hidden" name="loginOrforgot" id="loginOrforgot"
+		value="${loginOrforgot}">
 
 	<div class="login_bg">
 
@@ -111,22 +111,23 @@ margin-left: 25%
 			</a>
 		</div>
 
-		
+
 
 
 		<!-- login-form -->
-		<form id="form-login" action="loginProcess" method="post"  class="form-validate-jquery" novalidate="novalidate">
-	
-		
+		<form id="form-login" action="loginProcess" method="post"
+			class="form-validate-jquery" novalidate="novalidate">
+
+
 			<div class="loginInner" id="pass_form1">
 
 				<div class="login_l">
 					<a href="">
-					<div class="img">
-					<img 
-						src="${pageContext.request.contextPath}/resources/global_assets/images/powerdBy.png"
-						alt="">
-					</div>
+						<div class="img">
+							<img
+								src="${pageContext.request.contextPath}/resources/global_assets/images/powerdBy.png"
+								alt="">
+						</div>
 					</a>
 
 					<p class="login_txt">
@@ -156,15 +157,14 @@ margin-left: 25%
 							session.removeAttribute("errorPassMsg");
 						%>
 					</c:if>
-						<c:if test="${sessionScope.successMsg!=null}">
+					<c:if test="${sessionScope.successMsg!=null}">
 						<div class="alert alert-success">${sessionScope.successMsg}</div>
 
 						<%
-							
 							session.removeAttribute("successMsg");
 						%>
 					</c:if>
-							
+
 
 					<!-- class="login-form" -->
 					<%-- 	<form action="${pageContext.request.contextPath}/loginProcess"
@@ -230,21 +230,21 @@ margin-left: 25%
 
 				<div class="clr"></div>
 			</div>
-			
 
 
 
-		
+
+
 			<!-- forgot password form -->
 			<div class="loginInner" style="display: none" id="pass_form">
 
 				<div class="login_l">
 					<a href="">
-					<div class="img">
-					<img 
-						src="${pageContext.request.contextPath}/resources/global_assets/images/powerdBy.png"
-						alt="">
-					</div>
+						<div class="img">
+							<img
+								src="${pageContext.request.contextPath}/resources/global_assets/images/powerdBy.png"
+								alt="">
+						</div>
 					</a>
 
 					<p class="login_txt">
@@ -258,7 +258,7 @@ margin-left: 25%
 
 
 
-				<%-- 	<img
+					<%-- 	<img
 						src="${pageContext.request.contextPath}/resources/global_assets/images/logo_white.png"
 						alt=""> --%>
 					<h2 class="login_head_one">Forgot Password</h2>
@@ -279,8 +279,8 @@ margin-left: 25%
 						class="form-group form-group-feedback form-group-feedback-left">
 						<input type="text" id="usernameFp" name="usernameFp"
 							class="form-control form_lgn" placeholder="Email Address"
-							style="border-radius: 5px;" required="required" >
-						
+							style="border-radius: 5px;" required="required">
+
 						<div class="form-control-feedback" style="padding-left: 10px;">
 							<i class="icon-envelop text-muted"></i>
 						</div>
@@ -288,19 +288,19 @@ margin-left: 25%
 
 
 					<div class="form-group" style="margin: 0;">
-						<button type="button" onclick="subPassForForm()" 
-						 id="sbtn"	class="buttonlogin" onkeyup="validate()">Submit</button>
+						<button type="button" onclick="subPassForForm()" id="sbtn"
+							class="buttonlogin" onkeyup="validate()">Submit</button>
 						<div class="forgot_pass" style="text-align: left;">
 							<a href="#" onclick="hidePassForForm()">Back</a>
 						</div>
 					</div>
 
-				</div> 
+				</div>
 
 				<div class="clr"></div>
 
 			</div>
-		
+
 		</form>
 
 
@@ -325,17 +325,15 @@ margin-left: 25%
 
 		}
 		function divSelect() {
-			var flag=document.getElementById("loginOrforgot").value;
+			var flag = document.getElementById("loginOrforgot").value;
 			//alert(flag)
-			if(flag==1){
-			
+			if (flag == 1) {
+
 				document.getElementById("pass_form").style.display = "block";
 				document.getElementById("pass_form1").style = "display:none";
 			}
-			
+
 		}
-		
-	
 	</script>
 </body>
 

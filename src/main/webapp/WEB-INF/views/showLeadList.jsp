@@ -54,11 +54,11 @@
 									class="breadcrumb-elements-item">
 										<button type="button" class="btn blue_btn">Import
 											Lead</button>
-								</a><a href="${pageContext.request.contextPath}/sendMailer"
+								</a><%-- <a href="${pageContext.request.contextPath}/sendMailer"
 									class="breadcrumb-elements-item">
 										<button type="button" class="btn blue_btn">Send
 											Diwali Mail</button>
-								</a></td>
+								</a> --%></td>
 							</tr>
 						</table>
 					</div>

@@ -223,7 +223,7 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<div class="col-md-6">
+										<!-- <div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"
 												for="accCode">ACC Code<span class="text-danger">*
@@ -234,7 +234,7 @@
 													placeholder="Acc Code" id="accCode" maxlength="30"
 													name="accCode" autocomplete="off" required="required">
 											</div>
-										</div>
+										</div> -->
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>HR Management</title>
+<title>Sales Management</title>
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/global_assets/images/companylogo.png"
 	type="image/x-icon" />
@@ -186,7 +186,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/validation/validate.min.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/inputs/touchspin.min.js"></script> 
+	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/inputs/touchspin.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/styling/switch.min.js"></script>
 <script

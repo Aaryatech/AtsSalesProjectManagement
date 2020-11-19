@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<p>${taskDetail.taskAllotmentInstructions}</p>
+<p>${taskDetail.companyInfo}-${taskDetail.taskAllotmentInstructions}</p>
 
 
 <ul>
@@ -48,11 +48,10 @@
 					name="sdate">
 			</div>
 			<div class="col-sm-3">
-				<label for="stime">New Schedule Time<span
-					class="text-danger">*</span>
-				</label> <input type="time" placeholder="Schedule Time"
-					class="form-control " required="required" id="stime" name="stime">
-				<span class="validation-invalid-label" id="error_stime"
+				<label for="stime">New Schedule Time </label> <input type="time"
+					placeholder="Schedule Time" class="form-control "
+					required="required" id="stime" name="stime"> <span
+					class="validation-invalid-label" id="error_stime"
 					style="display: none;">This field is required.</span>
 			</div>
 			<div class="col-sm-3">
@@ -71,9 +70,7 @@
 	<div class="form-group">
 		<div class="row">
 			<div class="col-sm-3">
-				<label for="taskDescription">New Task Instruction<span
-					class="text-danger">*</span>
-				</label>
+				<label for="taskDescription">New Task Instruction </label>
 				<textarea rows="3" cols="5" class="form-control"
 					placeholder="New Task Instruction" id="taskDescription"
 					name="taskDescription" required></textarea>
@@ -119,31 +116,31 @@
 											$("#error_clientDiscussion").hide();
 											$("#error_taskDescription").hide();
 											$("#error_status").hide();
-
+											/* alert($("#stime").val())
 											if ($("#stime").val() == "") {
 												isError = true;
 												$("#error_stime").show();
 
-											}
+											} */
 											if ($("#clientDiscussion").val() == "") {
 												isError = true;
 												$("#error_clientDiscussion")
 														.show();
 
 											}
-											if ($("#taskDescription").val() == "") {
+											/* if ($("#taskDescription").val() == "") {
 												isError = true;
 												$("#error_taskDescription")
 														.show();
 
-											}
+											} */
 
-											if ($("#currentsts").val() == $(
+											/* if ($("#currentsts").val() == $(
 													"#status").val()) {
 												isError = true;
 												$("#error_status").show();
 
-											}
+											} */
 
 											if (!isError) {
 

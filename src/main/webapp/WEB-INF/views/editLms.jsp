@@ -253,7 +253,7 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<div class="col-md-6">
+										<%-- <div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"
 												for="accCode">ACC Code<span class="text-danger">*
@@ -265,7 +265,7 @@
 													name="accCode" autocomplete="off" required="required"
 													value="${editLmsHeader.accCode}">
 											</div>
-										</div>
+										</div> --%>
 										<div class="col-md-6">
 											<label
 												class="col-form-label text-info font-weight-bold col-lg-5 float"

@@ -99,7 +99,7 @@
 									</div>
 								</div>
 								<div class="table-responsive">
-									<table class="table tasks-list table-lg" id="unallocatedTable">
+									<table class="table" id="unallocatedTable">
 										<thead>
 											<tr>
 												<th>#</th>
@@ -241,7 +241,9 @@
 										+ unallocated[i].priKey
 										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+										+ '<div class="font-size-sm text-muted line-height-1">'
+										+ unallocated[i].mdAccTypeText
+										+ '</div></div>'
 								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 								if (unallocated[i].sts == 1) {
 									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -257,13 +259,10 @@
 										+ ',\''
 										+ unallocated[i].taskTittle
 										+ '\')">'
-										+ unallocated[i].mdAccTypeText
+										+ unallocated[i].companyInfo
 										+ '- '
 										+ unallocated[i].taskTittle
-										+ '</a>&nbsp;'
-										+ '<span class="badge badge-primary badge-pill">'
-										+ unallocated[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
+										+ '</a></div> <div class="text-muted">'
 										+ unallocated[i].taskAllotmentInstructions
 										+ '</div>'
 										+ '<a href="#"  onclick="getTaskLog('
@@ -272,7 +271,10 @@
 										+ unallocated[i].priKey
 										+ ')"><span class="badge badge-success badge-pill">'
 										+ unallocated[i].completed
-										+ ' Completed</span></a>';
+										+ ' Completed</span></a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ unallocated[i].taskPts
+										+ ' PTS</span>';
 								var schdatetime = '<div class="text-center">'
 										+ unallocated[i].taskScheTime
 										+ '</div>';

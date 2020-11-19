@@ -170,7 +170,9 @@
 												<thead>
 													<tr>
 														<th>#</th>
-														<th class="text-center">Allocate</th>
+														<th class="text-center">Allocate&nbsp;<input
+															type="checkbox" name="selectAll" id="selectAll">
+														</th>
 														<th class="text-center">Due</th>
 														<th class="text-center">Task Description</th>
 														<th class="text-center">Schedule Date Time</th>
@@ -279,7 +281,7 @@
 											</div>
 										</div>
 										<div class="table-responsive">
-											<table class="table tasks-list table-lg" id="allocatedTable">
+											<table class="table" id="allocatedTable">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -386,7 +388,7 @@
 											</div>
 										</div>
 										<div class="table-responsive">
-											<table class="table tasks-list table-lg" id="pendingTable">
+											<table class="table" id="pendingTable">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -493,7 +495,7 @@
 											</div>
 										</div>
 										<div class="table-responsive">
-											<table class="table tasks-list table-lg" id="remainingTable">
+											<table class="table" id="remainingTable">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -598,7 +600,7 @@
 											</div>
 										</div>
 										<div class="table-responsive">
-											<table class="table tasks-list table-lg" id="completedTable">
+											<table class="table" id="completedTable">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -765,6 +767,7 @@
 							sessionStorage.clear(); */
 							var table = $('#unallocatedTable').DataTable();
 							var rows = table.rows().remove().draw();
+							document.getElementById("selectAll").checked = false;
 							//$("#unallocatedTable tbody").empty();
 							var unallocated = response.unallocatedList;
 							sessionStorage.setItem('unallocatedList',
@@ -777,7 +780,9 @@
 										+ unallocated[i].priKey
 										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+										+ '<div class="font-size-sm text-muted line-height-1">'
+										+ unallocated[i].mdAccTypeText
+										+ '</div></div>'
 								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 								if (unallocated[i].sts == 1) {
 									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -793,13 +798,11 @@
 										+ ',\''
 										+ unallocated[i].taskTittle
 										+ '\')">'
-										+ unallocated[i].mdAccTypeText
+										+ unallocated[i].companyInfo
 										+ '- '
 										+ unallocated[i].taskTittle
 										+ '</a>&nbsp;'
-										+ '<span class="badge badge-primary badge-pill">'
-										+ unallocated[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
+										+ '</div> <div class="text-muted">'
 										+ unallocated[i].taskAllotmentInstructions
 										+ '</div>'
 										+ '<a href="#"  onclick="getTaskLog('
@@ -808,7 +811,9 @@
 										+ unallocated[i].priKey
 										+ ')"><span class="badge badge-success badge-pill">'
 										+ unallocated[i].completed
-										+ ' Completed</span></a>';
+										+ ' Completed</span></a>&nbsp;<span class="badge badge-primary badge-pill">'
+										+ unallocated[i].taskPts
+										+ ' PTS</span>';
 								var schdatetime = '<div class="text-center">'
 										+ unallocated[i].taskScheTime
 										+ '</div>';
@@ -821,14 +826,16 @@
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
 
-								/* var tr_data = '<tr><td>' + profile
-										+ '</td><td>' + remainingTime
-										+ '</td><td>' + taskDescription
-										+ '</td><td>' + schdatetime
-										+ '</td><td>' + priority + '</td></tr>';
+								/* var tr_data = '<tr><td>'
+										+ profile
+										+ '</td><td class="text-center"><input id="taskcheck'+unallocated[i].taskId+'" name="taskcheck" type="checkbox" value="'+unallocated[i].taskId+'"></td><td>'
+										+ remainingTime + '</td><td>'
+										+ taskDescription + '</td><td>'
+										+ schdatetime + '</td><td>' + priority
+										+ '</td></tr>';
 								$('#unallocatedTable').append(tr_data); */
-								/*  $('#unallocatedTable td').css('white-space',
-									'initial'); */
+								$('#unallocatedTable td').css('white-space',
+										'initial');
 								$('#unallocatedTable').DataTable().row.add(
 										[ profile, check, remainingTime,
 												taskDescription, schdatetime,
@@ -848,7 +855,9 @@
 										+ allocatedList[i].priKey
 										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+										+ '<div class="font-size-sm text-muted line-height-1">'
+										+ allocatedList[i].mdAccTypeText
+										+ '</div></div>'
 								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 								if (allocatedList[i].sts == 1) {
 									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -864,13 +873,11 @@
 										+ ',\''
 										+ allocatedList[i].taskTittle
 										+ '\')">'
-										+ allocatedList[i].mdAccTypeText
+										+ allocatedList[i].companyInfo
 										+ '- '
 										+ allocatedList[i].taskTittle
-										+ '</a>&nbsp;'
-										+ '<span class="badge badge-primary badge-pill">'
-										+ allocatedList[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
+										+ '</a>'
+										+ '</div> <div class="text-muted">'
 										+ allocatedList[i].taskAllotmentInstructions
 										+ '</div>'
 										+ '<a href="#"  onclick="getTaskLog('
@@ -879,7 +886,9 @@
 										+ allocatedList[i].priKey
 										+ ')"><span class="badge badge-success badge-pill">'
 										+ allocatedList[i].completed
-										+ ' Completed</span></a>';
+										+ ' Completed</span></a>&nbsp;<span class="badge badge-primary badge-pill">'
+										+ allocatedList[i].taskPts
+										+ ' PTS</span>';
 								var schdatetime = '<div class="text-center">'
 										+ allocatedList[i].taskScheTime
 										+ '</div>';
@@ -909,7 +918,7 @@
 							var rows = table.rows().remove().draw();
 
 							var pendingList = response.pendingList;
-
+							//alert(JSON.stringify(pendingList))
 							for (var i = 0; i < pendingList.length; i++) {
 
 								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
@@ -918,7 +927,9 @@
 										+ pendingList[i].priKey
 										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+										+ '<div class="font-size-sm text-muted line-height-1">'
+										+ pendingList[i].mdAccTypeText
+										+ '</div></div>'
 								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 								if (pendingList[i].sts == 1) {
 									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -934,13 +945,10 @@
 										+ ',\''
 										+ pendingList[i].taskTittle
 										+ '\')">'
-										+ pendingList[i].mdAccTypeText
+										+ pendingList[i].companyInfo
 										+ '- '
 										+ pendingList[i].taskTittle
-										+ '</a>&nbsp;'
-										+ '<span class="badge badge-primary badge-pill">'
-										+ pendingList[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
+										+ '</a></div> <div class="text-muted">'
 										+ pendingList[i].taskAllotmentInstructions
 										+ '</div>'
 										+ '<a href="#"  onclick="getTaskLog('
@@ -949,7 +957,10 @@
 										+ pendingList[i].priKey
 										+ ')"><span class="badge badge-success badge-pill">'
 										+ pendingList[i].completed
-										+ ' Completed</span></a>';
+										+ ' Completed</span></a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ pendingList[i].taskPts
+										+ ' PTS</span>';
 								var schdatetime = '<div class="text-center">'
 										+ pendingList[i].taskScheTime
 										+ '</div>';
@@ -984,7 +995,9 @@
 										+ remainingList[i].priKey
 										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+										+ '<div class="font-size-sm text-muted line-height-1">'
+										+ remainingList[i].mdAccTypeText
+										+ '</div></div>'
 								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 								if (remainingList[i].sts == 1) {
 									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -1000,13 +1013,10 @@
 										+ ',\''
 										+ remainingList[i].taskTittle
 										+ '\')">'
-										+ remainingList[i].mdAccTypeText
+										+ remainingList[i].companyInfo
 										+ '- '
 										+ remainingList[i].taskTittle
-										+ '</a>&nbsp;'
-										+ '<span class="badge badge-primary badge-pill">'
-										+ remainingList[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
+										+ '</a></div> <div class="text-muted">'
 										+ remainingList[i].taskAllotmentInstructions
 										+ '</div>'
 										+ '<a href="#"  onclick="getTaskLog('
@@ -1015,7 +1025,10 @@
 										+ remainingList[i].priKey
 										+ ')"><span class="badge badge-success badge-pill">'
 										+ remainingList[i].completed
-										+ ' Completed</span></a>';
+										+ ' Completed</span></a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ remainingList[i].taskPts
+										+ ' PTS</span>';
 								var schdatetime = '<div class="text-center">'
 										+ remainingList[i].taskScheTime
 										+ '</div>';
@@ -1041,72 +1054,6 @@
 										.draw();
 							}
 
-							var table = $('#pendingTable').DataTable();
-							var rows = table.rows().remove().draw();
-
-							var pendingList = response.pendingList;
-
-							for (var i = 0; i < pendingList.length; i++) {
-
-								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
-										+ pendingList[i].mdAccTypeId
-										+ ','
-										+ pendingList[i].priKey
-										+ ')">'
-										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
-								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
-								if (pendingList[i].sts == 1) {
-									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
-											+ pendingList[i].day
-											+ ' - '
-											+ pendingList[i].hour
-											+ ':'
-											+ pendingList[i].minutes
-											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
-								}
-								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
-										+ pendingList[i].taskId
-										+ ',\''
-										+ pendingList[i].taskTittle
-										+ '\')">'
-										+ pendingList[i].mdAccTypeText
-										+ '- '
-										+ pendingList[i].taskTittle
-										+ '</a>&nbsp;'
-										+ '<span class="badge badge-primary badge-pill">'
-										+ pendingList[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
-										+ pendingList[i].taskAllotmentInstructions
-										+ '</div>'
-										+ '<a href="#"  onclick="getTaskLog('
-										+ pendingList[i].mdAccTypeId
-										+ ','
-										+ pendingList[i].priKey
-										+ ')"><span class="badge badge-success badge-pill">'
-										+ pendingList[i].completed
-										+ ' Completed</span></a>';
-								var schdatetime = '<div class="text-center">'
-										+ pendingList[i].taskScheTime
-										+ '</div>';
-								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
-
-								if (pendingList[i].taskPriority == 2) {
-									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
-								} else if (pendingList[i].taskPriority == 3) {
-									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
-								}
-
-								$('#pendingTable td').css('white-space',
-										'initial');
-								$('#pendingTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												priority,
-												pendingList[i].employeeName ])
-										.draw();
-							}
-
 							var table = $('#completedTable').DataTable();
 							var rows = table.rows().remove().draw();
 
@@ -1120,19 +1067,18 @@
 										+ completedList[i].priKey
 										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+										+ '<div class="font-size-sm text-muted line-height-1">'
+										+ completedList[i].mdAccTypeText
+										+ '</div></div>'
 								var remainingTime = '<div class="text-center">'
 										+ completedList[i].taskDoneDate
 										+ '</div>';
 
 								var taskDescription = '<div class="font-weight-semibold">'
-										+ completedList[i].mdAccTypeText
+										+ completedList[i].companyInfo
 										+ '- '
 										+ completedList[i].taskTittle
-										+ '&nbsp;'
-										+ '<span class="badge badge-primary badge-pill">'
-										+ completedList[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
+										+ '</div> <div class="text-muted">'
 										+ completedList[i].taskAllotmentInstructions
 										+ '</div>'
 										+ '<a href="#"  onclick="getTaskLog('
@@ -1141,7 +1087,10 @@
 										+ completedList[i].priKey
 										+ ')"><span class="badge badge-success badge-pill">'
 										+ completedList[i].completed
-										+ ' Completed</span></a>';
+										+ ' Completed</span></a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ completedList[i].taskPts
+										+ ' PTS</span>';
 								var schdatetime = '<div class="text-center">'
 										+ completedList[i].taskScheTime
 										+ '</div>';
@@ -1342,7 +1291,8 @@
 								+ list[i].priKey
 								+ ')">'
 								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								+ '<div class="font-size-sm text-muted line-height-1">'
+								+ list[i].mdAccTypeText + '</div></div>'
 						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 						if (list[i].sts == 1) {
 							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -1358,13 +1308,10 @@
 								+ ',\''
 								+ list[i].taskTittle
 								+ '\')">'
-								+ list[i].mdAccTypeText
+								+ list[i].companyInfo
 								+ '- '
 								+ list[i].taskTittle
-								+ '</a>&nbsp;'
-								+ '<span class="badge badge-primary badge-pill">'
-								+ list[i].taskPts
-								+ ' PTS</span></div> <div class="text-muted">'
+								+ '</a></div> <div class="text-muted">'
 								+ list[i].taskAllotmentInstructions
 								+ '</div>'
 								+ '<a href="#"  onclick="getTaskLog('
@@ -1372,7 +1319,10 @@
 								+ ','
 								+ list[i].priKey
 								+ ')"><span class="badge badge-success badge-pill">'
-								+ list[i].completed + ' Completed</span></a>';
+								+ list[i].completed
+								+ ' Completed</span></a>&nbsp;'
+								+ '<span class="badge badge-primary badge-pill">'
+								+ list[i].taskPts + ' PTS</span>';
 						var schdatetime = '<div class="text-center">'
 								+ list[i].taskScheTime + '</div>';
 						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
@@ -1499,7 +1449,8 @@
 								+ list[i].priKey
 								+ ')">'
 								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								+ '<div class="font-size-sm text-muted line-height-1">'
+								+ list[i].mdAccTypeText + '</div></div>'
 						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 						if (list[i].sts == 1) {
 							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -1515,13 +1466,10 @@
 								+ ',\''
 								+ list[i].taskTittle
 								+ '\')">'
-								+ list[i].mdAccTypeText
+								+ list[i].companyInfo
 								+ '- '
 								+ list[i].taskTittle
-								+ '</a>&nbsp;'
-								+ '<span class="badge badge-primary badge-pill">'
-								+ list[i].taskPts
-								+ ' PTS</span></div> <div class="text-muted">'
+								+ '</a></div> <div class="text-muted">'
 								+ list[i].taskAllotmentInstructions
 								+ '</div>'
 								+ '<a href="#"  onclick="getTaskLog('
@@ -1529,7 +1477,10 @@
 								+ ','
 								+ list[i].priKey
 								+ ')"><span class="badge badge-success badge-pill">'
-								+ list[i].completed + ' Completed</span></a>';
+								+ list[i].completed
+								+ ' Completed</span></a>&nbsp;'
+								+ '<span class="badge badge-primary badge-pill">'
+								+ list[i].taskPts + ' PTS</span>';
 						var schdatetime = '<div class="text-center">'
 								+ list[i].taskScheTime + '</div>';
 						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
@@ -1654,7 +1605,8 @@
 								+ list[i].priKey
 								+ ')">'
 								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								+ '<div class="font-size-sm text-muted line-height-1">'
+								+ list[i].mdAccTypeText + '</div></div>'
 						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 						if (list[i].sts == 1) {
 							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -1670,7 +1622,7 @@
 								+ ',\''
 								+ list[i].taskTittle
 								+ '\')">'
-								+ list[i].mdAccTypeText
+								+ list[i].companyInfo
 								+ '- '
 								+ list[i].taskTittle
 								+ '</a>&nbsp;'
@@ -1810,12 +1762,13 @@
 								+ list[i].priKey
 								+ ')">'
 								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								+ '<div class="font-size-sm text-muted line-height-1">'
+								+ list[i].mdAccTypeText + '</div></div>'
 						var remainingTime = '<div class="text-center">'
 								+ list[i].taskDoneDate + '</div>';
 
 						var taskDescription = '<div class="font-weight-semibold">'
-								+ list[i].mdAccTypeText
+								+ list[i].companyInfo
 								+ '- '
 								+ list[i].taskTittle
 								+ '&nbsp;'
@@ -1920,6 +1873,7 @@
 					}
 				}
 			} else if (tableNo == 1) {
+				document.getElementById("selectAll").checked = false;
 				var value = $("#priorityFilter" + tableNo).val();
 				var module = $("#module" + tableNo).val();
 
@@ -1943,7 +1897,8 @@
 								+ list[i].priKey
 								+ ')">'
 								+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-								+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+								+ '<div class="font-size-sm text-muted line-height-1">'
+								+ list[i].mdAccTypeText + '</div></div>'
 						var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 						if (list[i].sts == 1) {
 							remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -1959,13 +1914,10 @@
 								+ ',\''
 								+ list[i].taskTittle
 								+ '\')">'
-								+ list[i].mdAccTypeText
+								+ list[i].companyInfo
 								+ '- '
 								+ list[i].taskTittle
-								+ '</a>&nbsp;'
-								+ '<span class="badge badge-primary badge-pill">'
-								+ list[i].taskPts
-								+ ' PTS</span></div> <div class="text-muted">'
+								+ '</a></div> <div class="text-muted">'
 								+ list[i].taskAllotmentInstructions
 								+ '</div>'
 								+ '<a href="#"  onclick="getTaskLog('
@@ -1973,7 +1925,10 @@
 								+ ','
 								+ list[i].priKey
 								+ ')"><span class="badge badge-success badge-pill">'
-								+ list[i].completed + ' Completed</span></a>';
+								+ list[i].completed
+								+ ' Completed</span></a>&nbsp;'
+								+ '<span class="badge badge-primary badge-pill">'
+								+ list[i].taskPts + ' PTS</span>';
 						var schdatetime = '<div class="text-center">'
 								+ list[i].taskScheTime + '</div>';
 						var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
@@ -2100,6 +2055,18 @@
 			});
 
 		}
+		$('#selectAll').click(function(event) {
+			if (this.checked) {
+				// Iterate each checkbox
+				$(':checkbox').each(function() {
+					this.checked = true;
+				});
+			} else {
+				$(':checkbox').each(function() {
+					this.checked = false;
+				});
+			}
+		});
 	</script>
 </body>
 </html>

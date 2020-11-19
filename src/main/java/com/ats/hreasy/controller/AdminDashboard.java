@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -104,7 +105,7 @@ public class AdminDashboard {
 
 			getTaskByModuleWise = Constants.getRestTemplate().postForObject(Constants.url + "getTaskByModuleWise", map,
 					GetTaskByModuleWise.class);
-
+ 
 		} catch (Exception e) {
 			getTaskByModuleWise = new GetTaskByModuleWise();
 			e.printStackTrace();

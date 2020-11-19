@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<h4 class="font-weight-semibold">${taskDetail.taskTittle}</h4>
+<h4 class="font-weight-semibold">${taskDetail.companyInfo}-${taskDetail.taskTittle}</h4>
 <p>${taskDetail.taskAllotmentInstructions}</p>
 <ul>
 	<li><div class="row">
@@ -27,8 +27,7 @@
 	</div>
 	<div class="form-group row">
 		<label class="col-form-label col-lg-3" for="stime">Schedule
-			Time <span class="text-danger">*</span>
-		</label>
+			Time </label>
 		<div class="col-lg-9">
 			<input type="time" class="form-control" required
 				placeholder="Schedule Time" id="stime" name="stime"
@@ -39,8 +38,7 @@
 	</div>
 	<div class="form-group row">
 		<label class="col-form-label col-lg-3" for="taskDescription">Task
-			Instruction<span class="text-danger">*</span>
-		</label>
+			Instruction </label>
 		<div class="col-lg-9">
 			<textarea rows="3" cols="5" class="form-control" required
 				placeholder="Task Instruction" id="taskDescription"
@@ -115,17 +113,17 @@
 											$("#error_taskDescription").hide();
 											$("#error_allocateTo").hide();
 
-											if ($("#stime").val() == "") {
+											/* if ($("#stime").val() == "") {
 												isError = true;
 												$("#error_stime").show();
 
-											}
-											if ($("#taskDescription").val() == "") {
+											} */
+											/* if ($("#taskDescription").val() == "") {
 												isError = true;
 												$("#error_taskDescription")
 														.show();
 
-											}
+											} */
 											if ($("#allocateTo").val() == ""
 													|| $("#allocateTo").val() == 0) {
 												isError = true;
@@ -152,10 +150,8 @@
 																	$(
 																			"#taskDescription")
 																			.val());
-													fd
-															.append(
-																	"allocateTo",
-																	alow);
+													fd.append("allocateTo",
+															alow);
 													fd.append("priority", $(
 															"#priority").val());
 

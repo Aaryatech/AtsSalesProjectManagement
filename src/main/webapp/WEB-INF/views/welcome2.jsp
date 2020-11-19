@@ -124,7 +124,7 @@
 							</div>
 
 							<div class="table-responsive">
-								<table class="table tasks-list table-lg" id="pendingTaskTable">
+								<table class="table" id="pendingTaskTable">
 									<thead>
 										<tr>
 											<th>#</th>
@@ -637,7 +637,9 @@
 										+ pendingTask[i].priKey
 										+ ')">'
 										+ '<i class="icon-users2 icon-2x d-inline-block text-info" title="Customer Profile"></i></a>'
-										+ '<div class="font-size-sm text-muted line-height-1">Office task</div></div>'
+										+ '<div class="font-size-sm text-muted line-height-1">'
+										+ pendingTask[i].mdAccTypeText
+										+ '</div></div>'
 								var remainingTime = '<div class="text-center" style="color: red;">Overdue</div>';
 								if (pendingTask[i].sts == 1) {
 									remainingTime = '<div class="text-center" > <h6 class="mb-0">'
@@ -655,13 +657,10 @@
 										+ '\','
 										+ pendingTask[i].mdAccTypeId
 										+ ')">'
-										+ pendingTask[i].mdAccTypeText
+										+ pendingTask[i].companyInfo
 										+ '- '
 										+ pendingTask[i].taskTittle
-										+ '</a>&nbsp;'
-										+ '<span class="badge badge-primary badge-pill">'
-										+ pendingTask[i].taskPts
-										+ ' PTS</span></div> <div class="text-muted">'
+										+ '</a></div> <div class="text-muted">'
 										+ pendingTask[i].taskAllotmentInstructions
 										+ '</div>'
 										+ '<a href="#"  onclick="getTaskLog('
@@ -670,7 +669,10 @@
 										+ pendingTask[i].priKey
 										+ ')"><span class="badge badge-success badge-pill">'
 										+ pendingTask[i].completed
-										+ ' Completed</span></a>';
+										+ ' Completed</span></a>&nbsp;'
+										+ '<span class="badge badge-primary badge-pill">'
+										+ pendingTask[i].taskPts
+										+ ' PTS</span>';
 								var schdatetime = '<div class="text-center">'
 										+ pendingTask[i].taskScheTime
 										+ '</div>';
