@@ -140,8 +140,12 @@
 											<div class="col-lg-7 float">
 												<input type="text" class="form-control" value="${dept.name}"
 													placeholder="Company Name" id="cmpName" maxlength="30"
-													name="cmpName" autocomplete="off" required="required">
-
+													name="cmpName" autocomplete="off" required="required"
+													onchange="getDuplicateCompName()"> <span
+													class="validation-invalid-label" id="cmpName_error"
+													style="display: none;">Company name is already
+													exist.</span><input type="hidden" value="0" id="validName"
+													name="validName" required="required">
 											</div>
 										</div>
 
@@ -334,16 +338,12 @@
 										</div>
 
 										<div class="col-md-6">
-											<label
-												class="col-form-label text-info font-weight-bold col-lg-5 float"
-												for="contactNo">Contact No<span class="text-danger">*
-											</span>:
-											</label>
+											<label class="col-form-label  col-lg-5 float" for="contactNo">Contact
+												No : </label>
 											<div class="col-lg-7 float">
 												<input type="text" class="form-control"
-													placeholder="Contact No." id="contactNo" maxlength="10"
-													minlength="10" name="contactNo" autocomplete="off"
-													data-mask="9999999999" required="required">
+													placeholder="Contact No." id="contactNo" name="contactNo"
+													autocomplete="off">
 
 											</div>
 										</div>
@@ -370,13 +370,16 @@
 									</div>
 									<div class="form-group row">
 										<div class="col-md-6">
-											<label class="col-form-label  col-lg-5 float" for="rating">Rating
-												: </label>
+											<label
+												class="col-form-label  text-info font-weight-bold col-lg-5 float"
+												for="rating">Rating<span class="text-danger">*
+											</span> :
+											</label>
 											<div class="col-lg-7 float">
 												<select name="rating"
 													class="form-control form-control-select2"
 													data-placeholder="Select ratings" data-fouc
-													required="required" id="domainId">
+													required="required" id="rating">
 													<option value="">Select Domain</option>
 
 													<option value="0">0</option>
@@ -544,35 +547,39 @@
 			return;
 		}
 
-		$(document).ready(function($) {
+		$(document).ready(
+				function($) {
 
-			$("#submitLead").submit(function(e) {
-				if ($('#submitLead').valid() == true) {
+					$("#submitLead").submit(
+							function(e) {
+								if ($('#submitLead').valid() == true
+										&& $("#validName").val() == 1) {
 
-					bootbox.confirm({
-						title : 'Confirm',
-						message : 'Confirm Generate Lead ? ',
-						buttons : {
-							confirm : {
-								label : 'yes',
-								className : 'btn-success'
-							},
-							cancel : {
-								lable : 'Cancel',
-								classNAme : 'btn-link'
-							}
-						},
-						callback : function(result) {
-							if (result) {
-								document.getElementById('submitLead').submit();
-							}
-						}
-					});
-					return false;
-				}
-				return false;
-			});
-		});
+									bootbox.confirm({
+										title : 'Confirm',
+										message : 'Confirm Generate Lead ? ',
+										buttons : {
+											confirm : {
+												label : 'yes',
+												className : 'btn-success'
+											},
+											cancel : {
+												lable : 'Cancel',
+												classNAme : 'btn-link'
+											}
+										},
+										callback : function(result) {
+											if (result) {
+												document.getElementById(
+														'submitLead').submit();
+											}
+										}
+									});
+									return false;
+								}
+								return false;
+							});
+				});
 
 		function addCp() {
 
@@ -705,7 +712,7 @@
 				$("#error_designation").show();
 				isError = false;
 			}
-			if (cpMobile1 == "") {
+			/* if (cpMobile1 == "") {
 				$("#error_cpMobile1").html('This filed is required.');
 				$("#error_cpMobile1").show();
 				isError = false;
@@ -713,7 +720,7 @@
 				$("#error_cpMobile1").html('Invalid mobile no');
 				$("#error_cpMobile1").show();
 				isError = false;
-			}
+			} */
 
 			if (!mob.test(cpMobile2) && cpMobile2 != "") {
 				$("#error_cpMobile2").html('Invalid mobile no');
@@ -735,62 +742,61 @@
 			if (stateId > 0) {
 				var fd = new FormData();
 				fd.append("stateId", stateId);
-				$.ajax({
-					url : '${pageContext.request.contextPath}/getCityList',
-					type : 'post',
-					dataType : 'json',
-					data : fd,
-					contentType : false,
-					processData : false,
-					success : function(response) {
-						//alert(response)
-						var html;
-						var len = response.length;
-						for (var i = 0; i < len; i++) {
-							html += '<option value="'+response[i].mCityId+'">'
-									+ response[i].mCityName + '</option>'
-							//alert(response[i].mCityName)
-						}
-						$('#cityId').html(html);
-						$('#cityId').trigger("chosen:updated");
-					},
-				});
+				$
+						.ajax({
+							url : '${pageContext.request.contextPath}/getCityList',
+							type : 'post',
+							dataType : 'json',
+							data : fd,
+							contentType : false,
+							processData : false,
+							success : function(response) {
+								//alert(response)
+								var html = '<option value="" disabled selected>Select City</option>';
+								var len = response.length;
+								for (var i = 0; i < len; i++) {
+									html += '<option value="'+response[i].mCityId+'">'
+											+ response[i].mCityName
+											+ '</option>'
+									//alert(response[i].mCityName)
+								}
+								$('#cityId').html(html);
+								$('#cityId').trigger("chosen:updated");
+							},
+						});
+			}
+
+		}
+
+		function getDuplicateCompName() {
+			var value = $('#cmpName').val();
+			//alert(value)
+			$("#cmpName_error").hide();
+			if (value != "") {
+				var fd = new FormData();
+				fd.append("value", value);
+				$
+						.ajax({
+							url : '${pageContext.request.contextPath}/getDuplicateCompName',
+							type : 'post',
+							dataType : 'json',
+							data : fd,
+							contentType : false,
+							processData : false,
+							success : function(response) {
+								if (response.error == true) {
+									$("#cmpName_error").show();
+									$("#validName").val(0);
+								} else {
+									$("#validName").val(1);
+								}
+
+							},
+						});
 			}
 
 		}
 	</script>
-
-	<!-- <script type="text/javascript">
-	$('#submtbtn').on('click', function() {
-        swalInit({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-            confirmButtonClass: 'btn btn-success',
-            cancelButtonClass: 'btn btn-danger',
-            buttonsStyling: false
-        }).then(function(result) {
-            if(result.value) {
-                swalInit(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                );
-            }
-            else if(result.dismiss === swal.DismissReason.cancel) {
-                swalInit(
-                    'Cancelled',
-                    'Your imaginary file is safe :)',
-                    'error'
-                );
-            }
-        });
-    });
-	
-	</script> -->
 
 </body>
 </html>

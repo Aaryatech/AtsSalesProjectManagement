@@ -176,6 +176,7 @@
 														<th class="text-center">Due</th>
 														<th class="text-center">Task Description</th>
 														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Channel</th>
 														<th class="text-center">Priority</th>
 
 													</tr>
@@ -288,6 +289,7 @@
 														<th class="text-center">Due</th>
 														<th class="text-center">Task Description</th>
 														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Channel</th>
 														<th class="text-center">Priority</th>
 														<th class="text-center">Assigned users</th>
 
@@ -395,6 +397,7 @@
 														<th class="text-center">Due</th>
 														<th class="text-center">Task Description</th>
 														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Channel</th>
 														<th class="text-center">Priority</th>
 														<th class="text-center">Assigned users</th>
 
@@ -502,6 +505,7 @@
 														<th class="text-center">Due</th>
 														<th class="text-center">Task Description</th>
 														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Channel</th>
 														<th class="text-center">Priority</th>
 														<th class="text-center">Assigned users</th>
 
@@ -607,6 +611,7 @@
 														<th class="text-center">Completed Date</th>
 														<th class="text-center">Task Description</th>
 														<th class="text-center">Schedule Date Time</th>
+														<th class="text-center">Channel</th>
 														<th class="text-center">Priority</th>
 														<th class="text-center">Completed By</th>
 													</tr>
@@ -839,6 +844,7 @@
 								$('#unallocatedTable').DataTable().row.add(
 										[ profile, check, remainingTime,
 												taskDescription, schdatetime,
+												unallocated[i].channelName,
 												priority ]).draw();
 							}
 
@@ -909,6 +915,7 @@
 														remainingTime,
 														taskDescription,
 														schdatetime,
+														allocatedList[i].channelName,
 														priority,
 														allocatedList[i].employeeName ])
 										.draw();
@@ -977,6 +984,7 @@
 								$('#pendingTable').DataTable().row.add(
 										[ profile, remainingTime,
 												taskDescription, schdatetime,
+												pendingList[i].channelName,
 												priority,
 												pendingList[i].employeeName ])
 										.draw();
@@ -1049,6 +1057,7 @@
 														remainingTime,
 														taskDescription,
 														schdatetime,
+														remainingList[i].channelName,
 														priority,
 														remainingList[i].employeeName ])
 										.draw();
@@ -1111,6 +1120,7 @@
 														remainingTime,
 														taskDescription,
 														schdatetime,
+														completedList[i].channelName,
 														priority,
 														completedList[i].employeeName ])
 										.draw();
@@ -1365,13 +1375,11 @@
 							if (module == list[i].mdAccTypeId) {
 								$('#allocatedTable td').css('white-space',
 										'initial');
-								$('#allocatedTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#allocatedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value != 0 && module == 0 && show == 1
@@ -1379,13 +1387,11 @@
 							if (value == list[i].taskPriority) {
 								$('#allocatedTable td').css('white-space',
 										'initial');
-								$('#allocatedTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#allocatedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value == 0 && module == 0 && show == 1
@@ -1394,8 +1400,9 @@
 									'initial');
 							$('#allocatedTable').DataTable().row.add(
 									[ profile, remainingTime, taskDescription,
-											schdatetime, priority,
-											list[i].employeeName ]).draw();
+											schdatetime, list[i].channelName,
+											priority, list[i].employeeName ])
+									.draw();
 
 						} else if (value != 0 && module != 0 && show == 1
 								&& showdomain == 1) {
@@ -1404,13 +1411,11 @@
 									&& module == list[i].mdAccTypeId) {
 								$('#allocatedTable td').css('white-space',
 										'initial');
-								$('#allocatedTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#allocatedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						}
@@ -1523,13 +1528,11 @@
 							if (module == list[i].mdAccTypeId) {
 								$('#pendingTable td').css('white-space',
 										'initial');
-								$('#pendingTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#pendingTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value != 0 && module == 0 && show == 1
@@ -1537,13 +1540,11 @@
 							if (value == list[i].taskPriority) {
 								$('#pendingTable td').css('white-space',
 										'initial');
-								$('#pendingTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#pendingTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value == 0 && module == 0 && show == 1
@@ -1551,8 +1552,9 @@
 							$('#pendingTable td').css('white-space', 'initial');
 							$('#pendingTable').DataTable().row.add(
 									[ profile, remainingTime, taskDescription,
-											schdatetime, priority,
-											list[i].employeeName ]).draw();
+											schdatetime, list[i].channelName,
+											priority, list[i].employeeName ])
+									.draw();
 
 						} else if (value != 0 && module != 0 && show == 1
 								&& showdomain == 1) {
@@ -1561,13 +1563,11 @@
 									&& module == list[i].mdAccTypeId) {
 								$('#pendingTable td').css('white-space',
 										'initial');
-								$('#pendingTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#pendingTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						}
@@ -1679,13 +1679,11 @@
 							if (module == list[i].mdAccTypeId) {
 								$('#remainingTable td').css('white-space',
 										'initial');
-								$('#remainingTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#remainingTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value != 0 && module == 0 && show == 1
@@ -1693,13 +1691,11 @@
 							if (value == list[i].taskPriority) {
 								$('#remainingTable td').css('white-space',
 										'initial');
-								$('#remainingTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#remainingTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value == 0 && module == 0 && show == 1
@@ -1708,8 +1704,9 @@
 									'initial');
 							$('#remainingTable').DataTable().row.add(
 									[ profile, remainingTime, taskDescription,
-											schdatetime, priority,
-											list[i].employeeName ]).draw();
+											schdatetime, list[i].channelName,
+											priority, list[i].employeeName ])
+									.draw();
 
 						} else if (value != 0 && module != 0 && show == 1
 								&& showdomain == 1) {
@@ -1718,13 +1715,11 @@
 									&& module == list[i].mdAccTypeId) {
 								$('#remainingTable td').css('white-space',
 										'initial');
-								$('#remainingTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#remainingTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						}
@@ -1820,13 +1815,11 @@
 							if (module == list[i].mdAccTypeId) {
 								$('#completedTable td').css('white-space',
 										'initial');
-								$('#completedTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#completedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value != 0 && module == 0 && show == 1
@@ -1834,13 +1827,11 @@
 							if (value == list[i].taskPriority) {
 								$('#completedTable td').css('white-space',
 										'initial');
-								$('#completedTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#completedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value == 0 && module == 0 && show == 1
@@ -1849,8 +1840,9 @@
 									'initial');
 							$('#completedTable').DataTable().row.add(
 									[ profile, remainingTime, taskDescription,
-											schdatetime, priority,
-											list[i].employeeName ]).draw();
+											schdatetime, list[i].channelName,
+											priority, list[i].employeeName ])
+									.draw();
 
 						} else if (value != 0 && module != 0 && show == 1
 								&& showdomain == 1) {
@@ -1859,13 +1851,11 @@
 									&& module == list[i].mdAccTypeId) {
 								$('#completedTable td').css('white-space',
 										'initial');
-								$('#completedTable').DataTable().row
-										.add(
-												[ profile, remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#completedTable').DataTable().row.add(
+										[ profile, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						}
@@ -1970,28 +1960,22 @@
 							if (module == list[i].mdAccTypeId) {
 								$('#unallocatedTable td').css('white-space',
 										'initial');
-								$('#unallocatedTable').DataTable().row
-										.add(
-												[ profile, check,
-														remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#unallocatedTable').DataTable().row.add(
+										[ profile, check, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value != 0 && module == 0) {
 							if (value == list[i].taskPriority) {
 								$('#unallocatedTable td').css('white-space',
 										'initial');
-								$('#unallocatedTable').DataTable().row
-										.add(
-												[ profile, check,
-														remainingTime,
-														taskDescription,
-														schdatetime, priority,
-														list[i].employeeName ])
-										.draw();
+								$('#unallocatedTable').DataTable().row.add(
+										[ profile, check, remainingTime,
+												taskDescription, schdatetime,
+												list[i].channelName, priority,
+												list[i].employeeName ]).draw();
 							}
 
 						} else if (value == 0 && module == 0) {
@@ -2000,8 +1984,8 @@
 							$('#unallocatedTable').DataTable().row.add(
 									[ profile, check, remainingTime,
 											taskDescription, schdatetime,
-											priority, list[i].employeeName ])
-									.draw();
+											list[i].channelName, priority,
+											list[i].employeeName ]).draw();
 
 						} else if (value != 0 && module != 0) {
 
@@ -2009,10 +1993,14 @@
 									&& module == list[i].mdAccTypeId) {
 								$('#unallocatedTable td').css('white-space',
 										'initial');
-								$('#unallocatedTable').DataTable().row.add(
-										[ profile, check, remainingTime,
-												taskDescription, schdatetime,
-												priority ]).draw();
+								$('#unallocatedTable').DataTable().row
+										.add(
+												[ profile, check,
+														remainingTime,
+														taskDescription,
+														schdatetime,
+														list[i].channelName,
+														priority ]).draw();
 							}
 
 						}

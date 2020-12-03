@@ -769,7 +769,7 @@
 				$("#error_designation").show();
 				isError = false;
 			}
-			if (cpMobile1 == "") {
+			/* if (cpMobile1 == "") {
 				$("#error_cpMobile1").html('This filed is required.');
 				$("#error_cpMobile1").show();
 				isError = false;
@@ -777,7 +777,7 @@
 				$("#error_cpMobile1").html('Invalid mobile no');
 				$("#error_cpMobile1").show();
 				isError = false;
-			}
+			} */
 
 			if (!mob.test(cpMobile2) && cpMobile2 != "") {
 				$("#error_cpMobile2").html('Invalid mobile no');

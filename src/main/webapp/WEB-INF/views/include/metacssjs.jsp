@@ -193,8 +193,5 @@
 	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
-<script>
-	// Export options - column selector
-</script>
 <!-- /theme JS files -->
 

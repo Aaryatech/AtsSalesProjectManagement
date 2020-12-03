@@ -131,6 +131,7 @@
 											<th class="text-center">Due</th>
 											<th class="text-center">Task Description</th>
 											<th class="text-center">Schedule Date Time</th>
+											<th class="text-center">Channel</th>
 											<th class="text-center">Priority</th>
 											<th class="text-center">Assigned users</th>
 
@@ -689,6 +690,7 @@
 								$('#pendingTaskTable').DataTable().row.add(
 										[ profile, remainingTime,
 												taskDescription, schdatetime,
+												pendingTask[i].channelName,
 												priority,
 												pendingTask[i].employeeName ])
 										.draw();
