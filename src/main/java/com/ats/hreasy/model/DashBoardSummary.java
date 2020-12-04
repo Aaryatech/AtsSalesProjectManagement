@@ -8,6 +8,8 @@ public class DashBoardSummary {
 	private int remainingCount;
 	private int todayCompletedPts;
 	private int pendingPts;
+	private int todaysLeadCount;
+	private int todaysInqCount;
 
 	public String getId() {
 		return id;
@@ -65,10 +67,33 @@ public class DashBoardSummary {
 		this.pendingPts = pendingPts;
 	}
 
+	public int getTodaysLeadCount() {
+		return todaysLeadCount;
+	}
+
+	public void setTodaysLeadCount(int todaysLeadCount) {
+		this.todaysLeadCount = todaysLeadCount;
+	}
+
+	public int getTodaysInqCount() {
+		return todaysInqCount;
+	}
+
+	public void setTodaysInqCount(int todaysInqCount) {
+		this.todaysInqCount = todaysInqCount;
+	}
+
 	@Override
 	public String toString() {
 		return "DashBoardSummary [id=" + id + ", todayCount=" + todayCount + ", todayCompleted=" + todayCompleted
 				+ ", pendingCount=" + pendingCount + ", remainingCount=" + remainingCount + ", todayCompletedPts="
-				+ todayCompletedPts + ", pendingPts=" + pendingPts + "]";
+				+ todayCompletedPts + ", pendingPts=" + pendingPts + ", todaysLeadCount=" + todaysLeadCount
+				+ ", todaysInqCount=" + todaysInqCount + "]";
 	}
+
+
+	
+	
+	
+	
 }

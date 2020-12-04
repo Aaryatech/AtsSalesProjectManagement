@@ -287,6 +287,7 @@ public class DashboardController {
 
 			DashBoardSummary dashBoardSummary = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getRegularDashboardSummry", map, DashBoardSummary.class);
+			System.err.println("DashSummry===="+dashBoardSummary);
 			dashboardData.setDashBoardSummary(dashBoardSummary);
 			dashboardData.setPendingTask(list);
 
@@ -811,7 +812,7 @@ public class DashboardController {
 				taskDetails.setMakerDatetime(sf.format(dt));
 				taskDetails.setDelStatus(1);
 				taskDetails.setIsActive(1);
-				taskDetails.setTaskAllotedTo("0");
+				taskDetails.setTaskAllotedTo(String.valueOf(userDetail.getEmpId()));
 				taskDetails.setTaskAllotmentInstructions("-");
 				taskDetails.setTaskScheDate(yy.format(dt));
 				taskDetails.setTaskScheTime(sf.format(dt));

@@ -110,6 +110,66 @@
 						<!-- /tabs content -->
 
 					</div>
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header header-elements-inline">
+								<h6 class="card-title">Todays Status</h6>
+	
+							</div>
+
+							<!-- Numbers -->
+							<div class="card-body py-0">
+								<div class="row text-center">
+
+									<!-- <div class="col-2">
+										<div class="mb-3 ">
+											<h5 class="font-weight-semibold mb-0" id="todays_task">0</h5>
+											<span class="text-muted font-size-sm">Today's</span>
+										</div>
+									</div> -->
+									<div class="col-2">
+										<div class="mb-3">
+											<h5 class="font-weight-semibold mb-0" id="todays_lead">0</h5>
+											<span class="text-muted font-size-sm">Todays Lead</span>
+										</div>
+									</div>
+
+									<div class="col-2">
+										<div class="mb-3">
+											<h5 class="font-weight-semibold mb-0" id="Todays_Inq">0</h5>
+											<span class="text-muted font-size-sm">Todays Inquiry</span>
+										</div>
+									</div>
+
+								<!-- 	<div class="col-2">
+										<div class="mb-3">
+											<h5 class="font-weight-semibold mb-0" id="remaining_task">0</h5>
+											<span class="text-muted font-size-sm">Remaining</span>
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="mb-3">
+											<h5 class="font-weight-semibold mb-0" id="completed_pts">0</h5>
+											<span class="text-muted font-size-sm">Completed PTS</span>
+										</div>
+									</div> -->
+
+								<!-- 	<div class="col-2">
+										<div class="mb-3">
+											<h5 class="font-weight-semibold mb-0" id="pending_pts">0</h5>
+											<span class="text-muted font-size-sm">Pending PTS</span>
+										</div>
+									</div> -->
+								</div>
+							</div>
+							<!-- /numbers -->
+
+							<!-- Tabs content -->
+
+						</div>
+						<!-- /tabs content -->
+
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -134,6 +194,7 @@
 											<th class="text-center">Channel</th>
 											<th class="text-center">Priority</th>
 											<th class="text-center">Assigned users</th>
+											<th class="text-center">Action</th>
 
 										</tr>
 									</thead>
@@ -423,6 +484,21 @@
 		</div>
 	</div>
 
+	<!-- <div id="taskDetailModel1" class="modal fade" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					 
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body" id="modalbody1"></div>
+
+
+			</div>
+		</div>
+	</div> -->
+
 	<div id="allocate_to" class="modal fade" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -678,6 +754,9 @@
 										+ pendingTask[i].taskScheTime
 										+ '</div>';
 								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
+								var Action = '<a  href="#" class="list-icons-item"  data-original-title="Edit"  onclick="editClick('
+										+ pendingTask[i].taskId
+										+ ')" ><i class="icon-pencil7" ></i></a>';
 
 								if (pendingTask[i].taskPriority == 2) {
 									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
@@ -692,12 +771,18 @@
 												taskDescription, schdatetime,
 												pendingTask[i].channelName,
 												priority,
-												pendingTask[i].employeeName ])
-										.draw();
+												pendingTask[i].employeeName,
+												Action ]).draw();
 							}
 
 							$("#todays_task").html(
 									response.dashBoardSummary.todayCount);
+							 
+							
+							$("#Todays_Inq").html(
+									response.dashBoardSummary.todaysInqCount);
+							 $("#todays_lead").html(
+										response.dashBoardSummary.todaysLeadCount);
 							$("#completed_task").html(
 									response.dashBoardSummary.todayCompleted);
 							$("#pending_task").html(
@@ -767,6 +852,18 @@
 				//getTaskPendingList();
 			});
 
+		}
+
+		function editClick(val) {
+			//alert(parseInt(val));
+			var strhref = "${pageContext.request.contextPath}/editTask?taskId="
+					+ val;
+			$("#modalbody").load(strhref);
+			$("#taskDetailModel").modal("show");
+			$('#taskDetailModel').on('hidden.bs.modal', function() {
+				$("#modalbody").html("");
+				getTaskPendingList();
+			});
 		}
 	</script>
 </body>

@@ -110,7 +110,7 @@ public class EnquiryController {
 
 			model.addAttribute("stateList", stateList);
 			
-			AccountType[] accTypeArr=Constants.getRestTemplate().getForObject(Constants.url+"getAllAccouctTypeList", AccountType[].class);
+			AccountType[] accTypeArr=Constants.getRestTemplate().postForObject(Constants.url+"getAllAccouctTypeList", null ,AccountType[].class);
 			List<AccountType> accTypeList=new ArrayList<AccountType>(Arrays.asList(accTypeArr));
 			model.addAttribute("accTypeList",accTypeList);
 			
@@ -335,7 +335,7 @@ public class EnquiryController {
 			  taskDetails.setMakerDatetime(sf.format(dt)); 
 			  taskDetails.setDelStatus(1);
 			  taskDetails.setIsActive(1);
-			  taskDetails.setTaskAllotedTo("0");
+			  taskDetails.setTaskAllotedTo(String.valueOf(userDetail.getEmpId()));
 			  taskDetails.setTaskAllotmentInstructions("-");
 			  taskDetails.setTaskScheDate(yy.format(dt));
 			  taskDetails.setTaskScheTime(sf.format(dt));
