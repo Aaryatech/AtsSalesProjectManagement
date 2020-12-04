@@ -661,7 +661,7 @@ public class DashboardController {
 			int channelId = Integer.parseInt(request.getParameter("channelId"));
 			int domainId = Integer.parseInt(request.getParameter("domainId"));
 			String domainText = request.getParameter("domainText");
-			//String accCode = request.getParameter("accCode");
+			// String accCode = request.getParameter("accCode");
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
 			String custName = request.getParameter("cName");
@@ -693,7 +693,7 @@ public class DashboardController {
 			editLmsHeader.setChannelId(channelId);
 			editLmsHeader.setAccDomainId(domainId);
 			editLmsHeader.setAccDomainOther(domainText);
-			//editLmsHeader.setAccCode(accCode);
+			// editLmsHeader.setAccCode(accCode);
 			editLmsHeader.setAccTags(tags);
 			editLmsHeader.setAccWebsite(website);
 			editLmsHeader.setAccEmpCount(empCount);
@@ -738,7 +738,7 @@ public class DashboardController {
 			int channelId = Integer.parseInt(request.getParameter("channelId"));
 			int domainId = Integer.parseInt(request.getParameter("domainId"));
 			String domainText = request.getParameter("domainText");
-			//String accCode = request.getParameter("accCode");
+			// String accCode = request.getParameter("accCode");
 			String[] accTag = request.getParameterValues("accTag");
 			String website = request.getParameter("website");
 			String custName = request.getParameter("cName");
@@ -770,7 +770,7 @@ public class DashboardController {
 			lmsHeader.setAccDomainId(domainId);
 			lmsHeader.setAccDomainOther(domainText);
 			lmsHeader.setCustomerName(custName);
-			//lmsHeader.setAccCode(accCode);
+			// lmsHeader.setAccCode(accCode);
 			lmsHeader.setAccTags(tags);
 			lmsHeader.setAccWebsite(website);
 			lmsHeader.setAccEmpCount(empCount);
@@ -974,6 +974,24 @@ public class DashboardController {
 			e.printStackTrace();
 		}
 		return cityList;
+	}
+
+	@RequestMapping(value = "/getDuplicateCompName", method = RequestMethod.POST)
+	@ResponseBody
+	public Info getDuplicateCompName(HttpServletRequest request, HttpServletResponse response) {
+
+		Info info = new Info();
+		try {
+			String value = request.getParameter("value");// checkCompanyName
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("compName", value);
+			info = Constants.getRestTemplate().postForObject(Constants.url + "checkCompanyName", map, Info.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("failed Deleted");
+		}
+		return info;
 	}
 
 }
