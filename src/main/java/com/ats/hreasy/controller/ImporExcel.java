@@ -258,7 +258,7 @@ public class ImporExcel {
 						taskDetails.setMakerDatetime(sf.format(dt));
 						taskDetails.setDelStatus(1);
 						taskDetails.setIsActive(1);
-						taskDetails.setTaskAllotedTo("0");
+						taskDetails.setTaskAllotedTo(String.valueOf(userDetail.getEmpId()));
 						taskDetails.setTaskAllotmentInstructions("-");
 						taskDetails.setTaskScheDate(yy.format(dt));
 						taskDetails.setTaskScheTime(sf.format(dt));
@@ -290,97 +290,74 @@ public class ImporExcel {
 
 		return "redirect:/importLead";
 	}
-	
+
 	@RequestMapping(value = "/sendMailer", method = RequestMethod.GET)
 	public String sendMailer(HttpServletRequest request, HttpServletResponse response) {
-		 
+
 		HttpSession session = request.getSession();
 		try {
-			
-			
-			
+
 			LmsHeaderWithNames[] tags = Constants.getRestTemplate()
 					.getForObject(Constants.url + "getListOfAllLmsHeader", LmsHeaderWithNames[].class);
 			List<LmsHeaderWithNames> list = new ArrayList<>(Arrays.asList(tags));
-			 
-			String msg = "﻿﻿<!doctype html>\n" + 
-					"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" + 
-					"<head>\n" + 
-					"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" + 
-					"<title>Aaryatech Solutions</title>\n" + 
-					"</head>\n" + 
-					"<body leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\" yahoo=\"fix\" style=\"font-family:Arial, sans-serif; background:#FFF;\">\n" + 
-					"<!-- Wrapper -->\n" + 
-					"<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\" style=\"margin-bottom:10px;\">\n" + 
-					"  <tr>\n" + 
-					"    <td width=\"100%\" valign=\"top\" bgcolor=\"#FFF\"><!-- Start Header--> <!--style=\"padding-top:20px; padding-bottom:20px;\"-->\n" + 
-					"      \n" + 
-					"      <table width=\"700\" id=\"tborder\" class=\"deviceWidth\" bgcolor=\"#fff\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\"  style=\"position:relative;\">\n" + 
-					"        <!--f07d00-->\n" + 
-					"        \n" + 
-					"        <tr>\n" + 
-					"        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"+Constants.softPath+"logo.jpg' alt=\"logo\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n" + 
-					"        </tr>\n" + 
-					"        <tr>\n" + 
-					"        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"+Constants.softPath+"banner_pic.jpg' alt=\"banner_pic\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n" + 
-					"        </tr>\n" + 
-					"        <tr>\n" + 
-					"        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"+Constants.softPath+"future_txt.jpg' alt=\"future_txt\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n" + 
-					"        </tr>\n" + 
-					"        <tr>\n" + 
-					"        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"+Constants.softPath+"diwali_title.jpg' alt=\"diwali_title\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n" + 
-					"        </tr>\n" + 
-					"        <tr>\n" + 
-					"        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"+Constants.softPath+"footer.jpg' alt=\"footer\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n" + 
-					"        </tr> "
-					+ "<tr>\n" + 
-					"        	<td style=\"color:#0000ff; font-size:13px; line-height:20px; padding-left:10px;\">\n" + 
-					"            	Best Regards, <br>\n" + 
-					"                Mr. Swapnil S Mashalkar <br>\n" + 
-					"                Executive Director, <br>\n" + 
-					"                Cell No: +91 99 22 942972 <br>\n" + 
-					"                Cell No: +91 75 88 174966 <br>\n" + 
-					"            </td>\n" + 
-					"        </tr>\n" + 
-					"        \n" + 
-					"        <tr>\n" + 
-					"        	<td style=\"color:#0000ff; font-size:13px; line-height:20px; padding-left:10px;\">\n" + 
-					"            <img src='"+Constants.softPath+"logo_footer.jpg' alt=\"\" style=\"margin:0px 0 5px 5px;\"> <br> \n" + 
-					"            eSaleX | <span style=\"color:#00ff00;\">EasY</span> | <span style=\"color:#cc0000;\">BuzZ</span>\n" + 
-					"            </td>\n" + 
-					"        </tr>\n" + 
-					"        \n" + 
-					"        <tr>\n" + 
-					"        	<td style=\"color:#222222; font-size:13px; line-height:20px; padding-left:10px; padding-top:20px;\">\n" + 
-					"            	<strong style=\"color:#0000ff;\">Head Office:</strong> <br>\n" + 
-					"1st Floor, Raj Apartment, Rachna Vidyalay Road, <br>\n" + 
-					"Sharanpur Rd, opp. to BSNL Office,  <br>\n" + 
-					"Nashik, Maharashtra 422002 \n" + 
-					"            </td>\n" + 
-					"        </tr>\n" + 
-					"        \n" + 
-					"        <tr>\n" + 
-					"        	<td style=\"color:#222222; font-size:13px; line-height:20px; padding-left:10px; padding-top:20px;\">\n" + 
-					"            	<strong style=\"color:#0000ff;\">Pune Office :</strong> <br>\n" + 
-					"C4,202,Kumar Prithvi,Mitha Nagar, <br>\n" + 
-					"Kondhwa,Pune-411048.\n" + 
-					"            </td>\n" + 
-					"        </tr>\n" + 
-					"        \n" + 
-					"        \n" + 
-					"        \n" + 
-					"      </table>\n" + 
-					"      \n" + 
-					"      <!--end--></td>\n" + 
-					"  </tr>\n" + 
-					"</table> </body>\n" + 
-					"</html>";  
-			
+
+			String msg = "﻿﻿<!doctype html>\n" + "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" + "<head>\n"
+					+ "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n"
+					+ "<title>Aaryatech Solutions</title>\n" + "</head>\n"
+					+ "<body leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\" yahoo=\"fix\" style=\"font-family:Arial, sans-serif; background:#FFF;\">\n"
+					+ "<!-- Wrapper -->\n"
+					+ "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\" style=\"margin-bottom:10px;\">\n"
+					+ "  <tr>\n"
+					+ "    <td width=\"100%\" valign=\"top\" bgcolor=\"#FFF\"><!-- Start Header--> <!--style=\"padding-top:20px; padding-bottom:20px;\"-->\n"
+					+ "      \n"
+					+ "      <table width=\"700\" id=\"tborder\" class=\"deviceWidth\" bgcolor=\"#fff\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\"  style=\"position:relative;\">\n"
+					+ "        <!--f07d00-->\n" + "        \n" + "        <tr>\n"
+					+ "        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"
+					+ Constants.softPath
+					+ "logo.jpg' alt=\"logo\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n"
+					+ "        </tr>\n" + "        <tr>\n"
+					+ "        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"
+					+ Constants.softPath
+					+ "banner_pic.jpg' alt=\"banner_pic\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n"
+					+ "        </tr>\n" + "        <tr>\n"
+					+ "        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"
+					+ Constants.softPath
+					+ "future_txt.jpg' alt=\"future_txt\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n"
+					+ "        </tr>\n" + "        <tr>\n"
+					+ "        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"
+					+ Constants.softPath
+					+ "diwali_title.jpg' alt=\"diwali_title\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n"
+					+ "        </tr>\n" + "        <tr>\n"
+					+ "        	<td align=\"center\" ><a href=\"https://aaryatechindia.in/\" target=\"_blank\"> <img src='"
+					+ Constants.softPath
+					+ "footer.jpg' alt=\"footer\" style=\"border:none; max-width:100%; float:none; vertical-align:top;\"></a></td>\n"
+					+ "        </tr> " + "<tr>\n"
+					+ "        	<td style=\"color:#0000ff; font-size:13px; line-height:20px; padding-left:10px;\">\n"
+					+ "            	Best Regards, <br>\n" + "                Mr. Swapnil S Mashalkar <br>\n"
+					+ "                Executive Director, <br>\n" + "                Cell No: +91 99 22 942972 <br>\n"
+					+ "                Cell No: +91 75 88 174966 <br>\n" + "            </td>\n" + "        </tr>\n"
+					+ "        \n" + "        <tr>\n"
+					+ "        	<td style=\"color:#0000ff; font-size:13px; line-height:20px; padding-left:10px;\">\n"
+					+ "            <img src='" + Constants.softPath
+					+ "logo_footer.jpg' alt=\"\" style=\"margin:0px 0 5px 5px;\"> <br> \n"
+					+ "            eSaleX | <span style=\"color:#00ff00;\">EasY</span> | <span style=\"color:#cc0000;\">BuzZ</span>\n"
+					+ "            </td>\n" + "        </tr>\n" + "        \n" + "        <tr>\n"
+					+ "        	<td style=\"color:#222222; font-size:13px; line-height:20px; padding-left:10px; padding-top:20px;\">\n"
+					+ "            	<strong style=\"color:#0000ff;\">Head Office:</strong> <br>\n"
+					+ "1st Floor, Raj Apartment, Rachna Vidyalay Road, <br>\n"
+					+ "Sharanpur Rd, opp. to BSNL Office,  <br>\n" + "Nashik, Maharashtra 422002 \n"
+					+ "            </td>\n" + "        </tr>\n" + "        \n" + "        <tr>\n"
+					+ "        	<td style=\"color:#222222; font-size:13px; line-height:20px; padding-left:10px; padding-top:20px;\">\n"
+					+ "            	<strong style=\"color:#0000ff;\">Pune Office :</strong> <br>\n"
+					+ "C4,202,Kumar Prithvi,Mitha Nagar, <br>\n" + "Kondhwa,Pune-411048.\n" + "            </td>\n"
+					+ "        </tr>\n" + "        \n" + "        \n" + "        \n" + "      </table>\n" + "      \n"
+					+ "      <!--end--></td>\n" + "  </tr>\n" + "</table> </body>\n" + "</html>";
+
 			EmailUtility.mailer("ATS wishes you a Very Happy Diwali & Prosperous New Year.", msg, list);
-			
+
 			session.setAttribute("successMsg", "Mail Send Successfully..!!");
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			session.setAttribute("successMsg", "Failed to send mail.");
 			e.printStackTrace();
 		}
