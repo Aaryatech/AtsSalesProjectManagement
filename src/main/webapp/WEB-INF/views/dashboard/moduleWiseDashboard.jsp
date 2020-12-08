@@ -7,7 +7,17 @@
 <head>
 
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
-
+<style type="text/css">
+.record_search {
+	float: right;
+	border: 1px solid #CCC;
+	padding: 6px 10px;
+	border-radius: 30px;
+	margin: 10px;
+	width: 15%;
+	outline: none;
+}
+</style>
 </head>
 
 <body>
@@ -165,6 +175,7 @@
 
 											</div>
 										</div>
+
 										<div class="table-responsive">
 											<table class="table" id="unallocatedTable">
 												<thead>
@@ -281,6 +292,9 @@
 												</div>
 											</div>
 										</div>
+										<input type="text" id="myInput1" class="myInput record_search"
+											onkeyup="myFunction1()" placeholder="Search..."
+											title="Type in a name">
 										<div class="table-responsive">
 											<table class="table" id="allocatedTable">
 												<thead>
@@ -389,6 +403,9 @@
 
 											</div>
 										</div>
+										<input type="text" id="myInput2" class="myInput record_search"
+											onkeyup="myFunction2()" placeholder="Search..."
+											title="Type in a name">
 										<div class="table-responsive">
 											<table class="table" id="pendingTable">
 												<thead>
@@ -497,6 +514,9 @@
 
 											</div>
 										</div>
+										<input type="text" id="myInput3" class="myInput record_search"
+											onkeyup="myFunction3()" placeholder="Search..."
+											title="Type in a name">
 										<div class="table-responsive">
 											<table class="table" id="remainingTable">
 												<thead>
@@ -603,6 +623,9 @@
 
 											</div>
 										</div>
+										<input type="text" id="myInput4" class="myInput record_search"
+											onkeyup="myFunction4()" placeholder="Search..."
+											title="Type in a name">
 										<div class="table-responsive">
 											<table class="table" id="completedTable">
 												<thead>
@@ -621,7 +644,7 @@
 
 
 													<!-- <tr>
-														<td><a href="#" data-toggle="modal"
+														<td><a href="javascript:void(0)" data-toggle="modal"
 															data-target="#customerProfile"><i
 																class="icon-users2 icon-2x d-inline-block text-info"
 																title="Customer Profile"></i></a></td>
@@ -719,7 +742,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(document)
+		/* $(document)
 				.ready(
 						function() {
 							$('a[data-toggle="tab"]')
@@ -731,7 +754,7 @@
 														.adjust().responsive
 														.recalc();
 											});
-						});
+						}); */
 
 		$('.datepickerclass').daterangepicker({
 			singleDatePicker : true,
@@ -779,7 +802,7 @@
 									unallocated);
 							for (var i = 0; i < unallocated.length; i++) {
 
-								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 										+ unallocated[i].mdAccTypeId
 										+ ','
 										+ unallocated[i].priKey
@@ -798,7 +821,7 @@
 											+ unallocated[i].minutes
 											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 								}
-								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"    onclick="taskDetail('
 										+ unallocated[i].taskId
 										+ ',\''
 										+ unallocated[i].taskTittle
@@ -810,7 +833,7 @@
 										+ '</div> <div class="text-muted">'
 										+ unallocated[i].taskAllotmentInstructions
 										+ '</div>'
-										+ '<a href="#"  onclick="getTaskLog('
+										+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 										+ unallocated[i].mdAccTypeId
 										+ ','
 										+ unallocated[i].priKey
@@ -856,7 +879,7 @@
 
 							for (var i = 0; i < allocatedList.length; i++) {
 
-								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 										+ allocatedList[i].mdAccTypeId
 										+ ','
 										+ allocatedList[i].priKey
@@ -875,7 +898,7 @@
 											+ allocatedList[i].minutes
 											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 								}
-								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"    onclick="taskDetail('
 										+ allocatedList[i].taskId
 										+ ',\''
 										+ allocatedList[i].taskTittle
@@ -887,7 +910,7 @@
 										+ '</div> <div class="text-muted">'
 										+ allocatedList[i].taskAllotmentInstructions
 										+ '</div>'
-										+ '<a href="#"  onclick="getTaskLog('
+										+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 										+ allocatedList[i].mdAccTypeId
 										+ ','
 										+ allocatedList[i].priKey
@@ -939,7 +962,7 @@
 							//alert(JSON.stringify(pendingList))
 							for (var i = 0; i < pendingList.length; i++) {
 
-								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 										+ pendingList[i].mdAccTypeId
 										+ ','
 										+ pendingList[i].priKey
@@ -958,7 +981,7 @@
 											+ pendingList[i].minutes
 											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 								}
-								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"    onclick="taskDetail('
 										+ pendingList[i].taskId
 										+ ',\''
 										+ pendingList[i].taskTittle
@@ -969,7 +992,7 @@
 										+ '</a></div> <div class="text-muted">'
 										+ pendingList[i].taskAllotmentInstructions
 										+ '</div>'
-										+ '<a href="#"  onclick="getTaskLog('
+										+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 										+ pendingList[i].mdAccTypeId
 										+ ','
 										+ pendingList[i].priKey
@@ -1018,7 +1041,7 @@
 
 							for (var i = 0; i < remainingList.length; i++) {
 
-								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 										+ remainingList[i].mdAccTypeId
 										+ ','
 										+ remainingList[i].priKey
@@ -1037,7 +1060,7 @@
 											+ remainingList[i].minutes
 											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 								}
-								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"    onclick="taskDetail('
 										+ remainingList[i].taskId
 										+ ',\''
 										+ remainingList[i].taskTittle
@@ -1048,7 +1071,7 @@
 										+ '</a></div> <div class="text-muted">'
 										+ remainingList[i].taskAllotmentInstructions
 										+ '</div>'
-										+ '<a href="#"  onclick="getTaskLog('
+										+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 										+ remainingList[i].mdAccTypeId
 										+ ','
 										+ remainingList[i].priKey
@@ -1101,7 +1124,7 @@
 
 							for (var i = 0; i < completedList.length; i++) {
 
-								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 										+ completedList[i].mdAccTypeId
 										+ ','
 										+ completedList[i].priKey
@@ -1121,7 +1144,7 @@
 										+ '</div> <div class="text-muted">'
 										+ completedList[i].taskAllotmentInstructions
 										+ '</div>'
-										+ '<a href="#"  onclick="getTaskLog('
+										+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 										+ completedList[i].mdAccTypeId
 										+ ','
 										+ completedList[i].priKey
@@ -1339,7 +1362,7 @@
 
 					for (var i = 0; i < list.length; i++) {
 
-						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+						var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1357,7 +1380,7 @@
 									+ list[i].minutes
 									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 						}
-						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+						var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"    onclick="taskDetail('
 								+ list[i].taskId
 								+ ',\''
 								+ list[i].taskTittle
@@ -1368,7 +1391,7 @@
 								+ '</a></div> <div class="text-muted">'
 								+ list[i].taskAllotmentInstructions
 								+ '</div>'
-								+ '<a href="#"  onclick="getTaskLog('
+								+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1482,7 +1505,7 @@
 					$("#pendingTable tbody").empty();
 					for (var i = 0; i < list.length; i++) {
 
-						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+						var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1500,7 +1523,7 @@
 									+ list[i].minutes
 									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 						}
-						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+						var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"    onclick="taskDetail('
 								+ list[i].taskId
 								+ ',\''
 								+ list[i].taskTittle
@@ -1511,7 +1534,7 @@
 								+ '</a></div> <div class="text-muted">'
 								+ list[i].taskAllotmentInstructions
 								+ '</div>'
-								+ '<a href="#"  onclick="getTaskLog('
+								+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1623,7 +1646,7 @@
 					$("#remainingTable tbody").empty();
 					for (var i = 0; i < list.length; i++) {
 
-						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+						var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1641,7 +1664,7 @@
 									+ list[i].minutes
 									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 						}
-						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+						var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"    onclick="taskDetail('
 								+ list[i].taskId
 								+ ',\''
 								+ list[i].taskTittle
@@ -1655,7 +1678,7 @@
 								+ ' PTS</span></div> <div class="text-muted">'
 								+ list[i].taskAllotmentInstructions
 								+ '</div>'
-								+ '<a href="#"  onclick="getTaskLog('
+								+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1764,7 +1787,7 @@
 					$("#completedTable tbody").empty();
 					for (var i = 0; i < list.length; i++) {
 
-						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+						var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1785,7 +1808,7 @@
 								+ ' PTS</span></div> <div class="text-muted">'
 								+ list[i].taskAllotmentInstructions
 								+ '</div>'
-								+ '<a href="#"  onclick="getTaskLog('
+								+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1882,7 +1905,7 @@
 					$("#unallocatedTable tbody").empty();
 					for (var i = 0; i < list.length; i++) {
 
-						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+						var profile = '<div class="text-center"> <a href="javascript:void(0)"  onclick="getCustProfile('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -1900,7 +1923,7 @@
 									+ list[i].minutes
 									+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 						}
-						var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+						var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"    onclick="taskDetail('
 								+ list[i].taskId
 								+ ',\''
 								+ list[i].taskTittle
@@ -1911,7 +1934,7 @@
 								+ '</a></div> <div class="text-muted">'
 								+ list[i].taskAllotmentInstructions
 								+ '</div>'
-								+ '<a href="#"  onclick="getTaskLog('
+								+ '<a href="javascript:void(0)"  onclick="getTaskLog('
 								+ list[i].mdAccTypeId
 								+ ','
 								+ list[i].priKey
@@ -2048,6 +2071,153 @@
 				});
 			}
 		});
+	</script>
+
+	<script>
+		function myFunction1() {
+			var input, filter, table, tr, td, td1, td2, td3, td4, td5, td6, i, txtValue, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5, txtValue6;
+			input = document.getElementById("myInput1");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("allocatedTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[2];
+				td1 = tr[i].getElementsByTagName("td")[3];
+				td2 = tr[i].getElementsByTagName("td")[4];
+				td3 = tr[i].getElementsByTagName("td")[5];
+				td4 = tr[i].getElementsByTagName("td")[6];
+
+				if (td || td1 || td2 || td3 || td4) {
+					txtValue = td.textContent || td.innerText;
+					txtValue1 = td1.textContent || td1.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					txtValue4 = td4.textContent || td4.innerText;
+
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue3.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue4.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+		function myFunction2() {
+			var input, filter, table, tr, td, td1, td2, td3, td4, td5, td6, i, txtValue, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5, txtValue6;
+			input = document.getElementById("myInput2");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("pendingTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[2];
+				td1 = tr[i].getElementsByTagName("td")[3];
+				td2 = tr[i].getElementsByTagName("td")[4];
+				td3 = tr[i].getElementsByTagName("td")[5];
+				td4 = tr[i].getElementsByTagName("td")[6];
+
+				if (td || td1 || td2 || td3 || td4) {
+					txtValue = td.textContent || td.innerText;
+					txtValue1 = td1.textContent || td1.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					txtValue4 = td4.textContent || td4.innerText;
+
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue3.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue4.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+		function myFunction3() {
+			var input, filter, table, tr, td, td1, td2, td3, td4, td5, td6, i, txtValue, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5, txtValue6;
+			input = document.getElementById("myInput3");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("remainingTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[2];
+				td1 = tr[i].getElementsByTagName("td")[3];
+				td2 = tr[i].getElementsByTagName("td")[4];
+				td3 = tr[i].getElementsByTagName("td")[5];
+				td4 = tr[i].getElementsByTagName("td")[6];
+
+				if (td || td1 || td2 || td3 || td4) {
+					txtValue = td.textContent || td.innerText;
+					txtValue1 = td1.textContent || td1.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					txtValue4 = td4.textContent || td4.innerText;
+
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue3.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue4.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+		function myFunction4() {
+			var input, filter, table, tr, td, td1, td2, td3, td4, td5, td6, i, txtValue, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5, txtValue6;
+			input = document.getElementById("myInput4");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("completedTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[2];
+				td1 = tr[i].getElementsByTagName("td")[3];
+				td2 = tr[i].getElementsByTagName("td")[4];
+				td3 = tr[i].getElementsByTagName("td")[5];
+				td4 = tr[i].getElementsByTagName("td")[6];
+
+				if (td || td1 || td2 || td3 || td4) {
+					txtValue = td.textContent || td.innerText;
+					txtValue1 = td1.textContent || td1.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					txtValue4 = td4.textContent || td4.innerText;
+
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue3.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue4.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
 	</script>
 </body>
 </html>
