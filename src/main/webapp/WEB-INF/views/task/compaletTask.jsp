@@ -147,6 +147,8 @@
 												var x = true;
 												if (x == true) {
 
+													document
+															.getElementById('insertbtn').disabled = true;
 													var fd = new FormData();
 													fd.append("status", $(
 															"#status").val());

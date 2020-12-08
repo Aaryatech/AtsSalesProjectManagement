@@ -54,8 +54,7 @@
 									class="breadcrumb-elements-item">
 										<button type="button" class="btn blue_btn">Import
 											Lead</button>
-								</a>
-								<%-- <a href="${pageContext.request.contextPath}/sendMailer"
+								</a> <%-- <a href="${pageContext.request.contextPath}/sendMailer"
 									class="breadcrumb-elements-item">
 										<button type="button" class="btn blue_btn">Send
 											Diwali Mail</button>
@@ -114,6 +113,7 @@
 									<th class="text-center">Channel</th>
 									<th class="text-center">ACC Tag</th>
 									<th class="text-center">Contact Person Info</th>
+									<th class="text-center">Current Status</th>
 									<th width="10%" class="text-center">Action</th>
 								</tr>
 							</thead>
@@ -132,6 +132,7 @@
 										<td>${list.channelName}</td>
 										<td>${list.tagNames}</td>
 										<td>${list.cpInfo}</td>
+										<td>${list.currentStatus}</td>
 										<td class="text-center">
 											<%-- <c:if test="${editAccess == 0}"> --%> <a
 											href="${pageContext.request.contextPath}/editLms?lmsId=${list.lmsId}"

@@ -66,7 +66,7 @@ public class LmsHeaderWithNames {
 
 	private String cpInfo;
 	private String mail;
-	
+	private String currentStatus; 
 	public int getLmsId() {
 		return lmsId;
 	}
@@ -339,6 +339,14 @@ public class LmsHeaderWithNames {
 		this.mail = mail;
 	}
 
+	public String getCurrentStatus() {
+		return currentStatus;
+	}
+
+	public void setCurrentStatus(String currentStatus) {
+		this.currentStatus = currentStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "LmsHeaderWithNames [lmsId=" + lmsId + ", mdAccTypeId=" + mdAccTypeId + ", channelId=" + channelId
@@ -351,7 +359,7 @@ public class LmsHeaderWithNames {
 				+ ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + ", exInt1=" + exInt1
 				+ ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", accountType=" + accountType
 				+ ", channelName=" + channelName + ", tagNames=" + tagNames + ", lmsDetailList=" + lmsDetailList
-				+ ", cpInfo=" + cpInfo + ", mail=" + mail + "]";
+				+ ", cpInfo=" + cpInfo + ", mail=" + mail + ", currentStatus=" + currentStatus + "]";
 	}
 
 
