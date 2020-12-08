@@ -75,7 +75,7 @@ public class RightsController {
 		try {
 
 			int moduleId = Integer.parseInt(request.getParameter("moduleId"));
-			// System.out.println(moduleId);
+			// //System.out.println(moduleId);
 			for (int i = 0; i < moduleList.size(); i++) {
 
 				if (moduleList.get(i).getModuleId() == moduleId) {
@@ -89,7 +89,7 @@ public class RightsController {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 		return list;
 
@@ -127,12 +127,12 @@ public class RightsController {
 			if (FormValidation.Validaton(empTypeName, "") == true) {
 
 				ret = true;
-				System.out.println("locName" + ret);
+				//System.out.println("locName" + ret);
 			}
 			if (FormValidation.Validaton(empShortName, "") == true) {
 
 				ret = true;
-				System.out.println("locShortName" + ret);
+				//System.out.println("locShortName" + ret);
 			}
 
 			if (ret == false) {
@@ -237,7 +237,7 @@ public class RightsController {
 
 						String newsLetterJSON = mapper.writeValueAsString(moduleJsonList);
 
-						System.out.println("JSON  " + newsLetterJSON);
+						//System.out.println("JSON  " + newsLetterJSON);
 						empType.setEmpTypeAccess(newsLetterJSON);
 
 					} catch (JsonProcessingException e) {
@@ -313,16 +313,16 @@ public class RightsController {
 						newModuleList);
 
 				/*if (add.isError() == false) {
-					System.out.println(" add   Accessable ");*/
+					//System.out.println(" add   Accessable ");*/
 					model.addAttribute("addAccess", 0);
 
 				//}
 				/*if (edit.isError() == false) {
-					System.out.println(" edit   Accessable ");*/
+					//System.out.println(" edit   Accessable ");*/
 					model.addAttribute("editAccess", 0);
 				//}
 				/*if (delete.isError() == false) {
-					System.out.println(" delete   Accessable ");*/
+					//System.out.println(" delete   Accessable ");*/
 					model.addAttribute("deleteAccess", 0);
 
 				//}
@@ -425,7 +425,7 @@ public class RightsController {
 
 						if (moduleList.get(i).getModuleId() == moduleJsonList.get(j).getModuleId()) {
 
-							// System.out.println("match Module " + moduleList.get(i).getModuleName());
+							// //System.out.println("match Module " + moduleList.get(i).getModuleName());
 
 							for (int k = 0; k < moduleList.get(i).getAccessRightSubModuleList().size(); k++) {
 
@@ -606,7 +606,7 @@ public class RightsController {
 
 							String newsLetterJSON = mapper.writeValueAsString(moduleJsonList);
 
-							System.out.println("JSON  " + newsLetterJSON);
+							//System.out.println("JSON  " + newsLetterJSON);
 							editEmpType.setEmpTypeAccess(newsLetterJSON);
 
 						} catch (JsonProcessingException e) {

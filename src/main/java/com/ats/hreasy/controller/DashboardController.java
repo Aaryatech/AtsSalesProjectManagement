@@ -63,7 +63,7 @@ public class DashboardController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("type", typeId);
 			map.add("primaryKey", primaryKey);
-			// System.out.println(map);
+			// //System.out.println(map);
 			CustInfo custInfo = Constants.getRestTemplate().postForObject(Constants.url + "getCustInfo", map,
 					CustInfo.class);
 
@@ -78,7 +78,7 @@ public class DashboardController {
 			map = new LinkedMultiValueMap<>();
 			map.add("mdAccTypeId", typeId);
 			map.add("priKey", primaryKey);
-			// System.out.println(map);
+			// //System.out.println(map);
 			TaskDetailsWithMsg[] taskDetailsWithMsg = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getTaskDetailsClientProfiling", map, TaskDetailsWithMsg[].class);
 			List<TaskDetailsWithMsg> clientProfilingList = new ArrayList<>(Arrays.asList(taskDetailsWithMsg));
@@ -118,7 +118,7 @@ public class DashboardController {
 			List<TaskDetailsEmpName> logList = new ArrayList<>(Arrays.asList(log));
 			model.addAttribute("logList", logList);
 
-			System.out.println(logList);
+			//System.out.println(logList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -204,7 +204,7 @@ public class DashboardController {
 			int terminate = 0;
 
 			for (int i = 0; i < stsList.size(); i++) {
-				// System.out.println(stsList.get(i).getmTaskStatusId() + " " + status);
+				// //System.out.println(stsList.get(i).getmTaskStatusId() + " " + status);
 				if (stsList.get(i).getmTaskStatusId() == status) {
 					taskDetails.setTaskTittle(stsList.get(i).getmTaskStatusName());
 					taskDetails.setTaskFinalStatus(status);
@@ -287,7 +287,7 @@ public class DashboardController {
 
 			DashBoardSummary dashBoardSummary = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getRegularDashboardSummry", map, DashBoardSummary.class);
-			// System.err.println("DashSummry===="+dashBoardSummary);
+			// //System.err.println("DashSummry===="+dashBoardSummary);
 			dashboardData.setDashBoardSummary(dashBoardSummary);
 			dashboardData.setPendingTask(list);
 
@@ -351,11 +351,11 @@ public class DashboardController {
 			Tags[] tags = Constants.getRestTemplate().postForObject(Constants.url + "getAllTagsWithAccountTypeName",
 					null, Tags[].class);
 			tagListResp = new ArrayList<Tags>(Arrays.asList(tags));
-			System.err.println(tagListResp);
+			//System.err.println(tagListResp);
 			mav = "tagList";
 			model.addAttribute("tagList", tagListResp);
 		} catch (Exception e) {
-			System.err.println("Exception Occur In Catch Block Of / tagList Mapping");
+			//System.err.println("Exception Occur In Catch Block Of / tagList Mapping");
 			tagListResp = new ArrayList<Tags>();
 			mav = "tagList";
 			e.printStackTrace();
@@ -373,7 +373,7 @@ public class DashboardController {
 			AccountType[] accType = Constants.getRestTemplate().postForObject(Constants.url + "getAllAccouctTypeList",
 					null, AccountType[].class);
 			accTypeResponse = new ArrayList<>(Arrays.asList(accType));
-			// System.err.println(accTypeResponse+"Accounttype Response");
+			// //System.err.println(accTypeResponse+"Accounttype Response");
 			model.addAttribute("AccountTypeList", accTypeResponse);
 			model.addAttribute("tagResponse", newTag);
 		} catch (Exception e) {
@@ -385,7 +385,7 @@ public class DashboardController {
 	@RequestMapping(value = "/editTag", method = RequestMethod.GET)
 	public String editTag(HttpServletRequest request, HttpServletResponse response, Model model,
 			@RequestParam int tagId) {
-		System.err.println("In Edit Tag ");
+		//System.err.println("In Edit Tag ");
 		List<AccountType> accTypeResponse = new ArrayList<AccountType>();
 		String mav = "addNewTag";
 		Tags tagResp = new Tags();
@@ -393,13 +393,13 @@ public class DashboardController {
 		map.add("tagId", tagId);
 
 		try {
-			System.err.println("In Try Before Resttemplate");
+			//System.err.println("In Try Before Resttemplate");
 			AccountType[] accType = Constants.getRestTemplate().postForObject(Constants.url + "getAllAccouctTypeList",
 					null, AccountType[].class);
 			accTypeResponse = new ArrayList<>(Arrays.asList(accType));
 			tagResp = Constants.getRestTemplate().postForObject(Constants.url + "getSingTagByIdAndDelStatus", map,
 					Tags.class);
-			// System.err.println(accTypeResponse+"Accounttype Response");
+			// //System.err.println(accTypeResponse+"Accounttype Response");
 			model.addAttribute("AccountTypeList", accTypeResponse);
 			model.addAttribute("tagResponse", tagResp);
 		} catch (Exception e) {
@@ -686,7 +686,7 @@ public class DashboardController {
 				tags = tags + "," + accTag[i];
 			}
 			tags = tags.substring(1);
-			// System.out.println(tags);
+			// //System.out.println(tags);
 
 			editLmsHeader.setAccCompany(cmpName);
 			editLmsHeader.setCustomerName(custName);
@@ -706,7 +706,7 @@ public class DashboardController {
 			editLmsHeader.setLmsDetailList(lmsDetailList);
 			editLmsHeader.setmStateId(stateId);
 			editLmsHeader.setmCityId(cityId);
-			// System.out.println(lmsHeader);
+			// //System.out.println(lmsHeader);
 			LmsHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewLmsHeader", editLmsHeader,
 					LmsHeader.class);
 			if (res == null) {
@@ -763,7 +763,7 @@ public class DashboardController {
 				tags = tags + "," + accTag[i];
 			}
 			tags = tags.substring(1);
-			// System.out.println(tags);
+			// //System.out.println(tags);
 			LmsHeader lmsHeader = new LmsHeader();
 			lmsHeader.setAccCompany(cmpName);
 			lmsHeader.setMdAccTypeId(type);
@@ -794,7 +794,7 @@ public class DashboardController {
 			TaskStatus[] sts = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getTaskStatusByAccTypeIdAndSequnce", map, TaskStatus[].class);
 			lmsHeader.setAccStatus(sts[0].getmTaskStatusId());
-			// System.out.println(lmsHeader);
+			// //System.out.println(lmsHeader);
 			LmsHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewLmsHeader", lmsHeader,
 					LmsHeader.class);
 			if (res == null) {
@@ -873,14 +873,14 @@ public class DashboardController {
 			if (tag.getmTagId() == 0) {
 
 				Tags t1 = Constants.getRestTemplate().postForObject(Constants.url + "addNewTag", tag, Tags.class);
-				System.err.println("Saved Tag Is=" + "\t" + t1);
+				//System.err.println("Saved Tag Is=" + "\t" + t1);
 				if (t1 != null) {
 					session.setAttribute("successMsg", "New Tag SuccessFully  Added");
 				} else {
 					session.setAttribute("errorMsg", "Unable To Add New Tag");
 				}
 			} else {
-				System.err.println("Exiisting Tag For Edit Is:" + "\t" + tag);
+				//System.err.println("Exiisting Tag For Edit Is:" + "\t" + tag);
 				info = Constants.getRestTemplate().postForObject(Constants.url + "editTag", tag, Info.class);
 				if (!info.isError()) {
 					session.setAttribute("successMsg", "Tag SucessFully Updated");
@@ -895,7 +895,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 
-			System.err.println("Something Went Wrong Cat Block Of  /submitTagForm  mapping");
+			//System.err.println("Something Went Wrong Cat Block Of  /submitTagForm  mapping");
 			e.printStackTrace();
 			mav = "redirect:/addNewTag";
 		}
@@ -922,12 +922,12 @@ public class DashboardController {
 			mav = "redirect:/tagList";
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
+			//System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
 			e.printStackTrace();
 			mav = "redirect:/";
 		}
 
-		// System.err.println(tagId+"\t"+"Tag Id");
+		// //System.err.println(tagId+"\t"+"Tag Id");
 		return mav;
 	}
 
@@ -947,11 +947,11 @@ public class DashboardController {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
+			//System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
 
 		}
 
-		// System.err.println(tagId+"\t"+"Tag Id");
+		// //System.err.println(tagId+"\t"+"Tag Id");
 		return mav;
 	}
 
@@ -971,7 +971,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			cityList = new ArrayList<City>();
-			System.err.println("Exception Occured!!! In /getCityList ");
+			//System.err.println("Exception Occured!!! In /getCityList ");
 			e.printStackTrace();
 		}
 		return cityList;
@@ -1005,7 +1005,7 @@ public class DashboardController {
 					Designation[].class);
 			designationList = new ArrayList<Designation>(Arrays.asList(desgArr));
 
-			System.err.println("Designation List Size=" + designationList.size());
+			//System.err.println("Designation List Size=" + designationList.size());
 			model.addAttribute("designationList", designationList);
 
 			mav = "designationList";
@@ -1032,7 +1032,7 @@ public class DashboardController {
 
 	@RequestMapping(value = "/submitDesignationForm", method = RequestMethod.POST)
 	public String submitDesignationForm(HttpServletRequest request, HttpServletResponse response, Model model) {
-		System.err.println("in submitDesignationForm ");
+		//System.err.println("in submitDesignationForm ");
 		HttpSession session = request.getSession();
 
 		Info info = new Info();
@@ -1073,7 +1073,7 @@ public class DashboardController {
 				map.add("desgName", desgName);
 
 				info = Constants.getRestTemplate().postForObject(Constants.url + "editDesignation", map, Info.class);
-				System.err.println(info + "++++++++++++++");
+				//System.err.println(info + "++++++++++++++");
 				if (info.isError()) {
 					session.setAttribute("successMsg", "Designation SucessFully Updated");
 
@@ -1087,7 +1087,7 @@ public class DashboardController {
 			// TODO: handle exception
 			mav = "redirect:/designationList";
 			session.setAttribute("errorMsg", "Unable To Update  Designation");
-			System.err.println("Exception Occuerd In /submitDesignationForm");
+			//System.err.println("Exception Occuerd In /submitDesignationForm");
 			e.printStackTrace();
 		}
 
@@ -1164,7 +1164,7 @@ public class DashboardController {
 			States[] stateResp = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates",
 					States[].class);
 			stateList = new ArrayList<States>(Arrays.asList(stateResp));
-			System.err.println("Statelist Size==" + "\t" + stateList.size());
+			//System.err.println("Statelist Size==" + "\t" + stateList.size());
 			if (stateList.size() == 0) {
 				session.setAttribute("errorMsg", "No State Found");
 			}
@@ -1173,7 +1173,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "No State Found Exception Occuered");
-			System.err.println("Exception Occuered!!! In /stateList");
+			//System.err.println("Exception Occuered!!! In /stateList");
 			e.printStackTrace();
 		}
 
@@ -1194,7 +1194,7 @@ public class DashboardController {
 
 	@RequestMapping(value = "/submitStateForm", method = RequestMethod.POST)
 	public String submitStateForm(HttpServletRequest request, HttpServletResponse response, Model model) {
-		System.err.println("In /submitStateForm");
+		//System.err.println("In /submitStateForm");
 		String mav = "redirect:/stateList";
 		Info info = new Info();
 		HttpSession session = request.getSession();
@@ -1227,7 +1227,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Add New State Exception Occured ");
-			System.err.println("Exception Occured in /submitStateForm ");
+			//System.err.println("Exception Occured in /submitStateForm ");
 			e.printStackTrace();
 		}
 
@@ -1253,7 +1253,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			mav = "";
-			System.err.println("Exception In /editState");
+			//System.err.println("Exception In /editState");
 			e.printStackTrace();
 		}
 
@@ -1280,7 +1280,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Delete State Exception Occuered!");
-			System.err.println("Exception Occuered In /deleteState ");
+			//System.err.println("Exception Occuered In /deleteState ");
 			e.printStackTrace();
 		}
 
@@ -1296,7 +1296,7 @@ public class DashboardController {
 			City[] cityArr = Constants.getRestTemplate().getForObject(Constants.url + "getAllCitiesListWithStateName",
 					City[].class);
 			cityList = new ArrayList<City>(Arrays.asList(cityArr));
-			System.err.println("Citylist Size==" + cityList.size());
+			//System.err.println("Citylist Size==" + cityList.size());
 			if (cityList.size() < 1) {
 				session.setAttribute("errorMsg", "No City Found!!!");
 			}
@@ -1304,7 +1304,7 @@ public class DashboardController {
 			// TODO: handle exception
 			cityList = new ArrayList<City>();
 			session.setAttribute("errorMsg", "No City Found   Exception Occuered!!!");
-			System.err.println("Exception Occured In /citylist");
+			//System.err.println("Exception Occured In /citylist");
 			e.printStackTrace();
 		}
 
@@ -1329,7 +1329,7 @@ public class DashboardController {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.err.println("Exception Occuered In /addCity");
+			//System.err.println("Exception Occuered In /addCity");
 			e.printStackTrace();
 		}
 		return mav;
@@ -1371,7 +1371,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Add New City   Exception Occured !!!");
-			System.err.println("Exception Occured In /submitAddCityForm");
+			//System.err.println("Exception Occured In /submitAddCityForm");
 			e.printStackTrace();
 		}
 
@@ -1407,7 +1407,7 @@ public class DashboardController {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.err.println("Exception occurred in /editCity");
+			//System.err.println("Exception occurred in /editCity");
 			e.printStackTrace();
 		}
 
@@ -1433,7 +1433,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Delete City Exception Occuerred!!!");
-			System.err.println("Exception Occuerred In /deleteCity");
+			//System.err.println("Exception Occuerred In /deleteCity");
 			e.printStackTrace();
 		}
 

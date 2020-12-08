@@ -28,12 +28,12 @@ public class CustomerComtroller {
 	try {
 		resp =Constants.getRestTemplate().getForObject(Constants.url+"getCustList", LmsheaderWithCustDetail[].class);
 		custList=new ArrayList<LmsheaderWithCustDetail>(Arrays.asList(resp));
-		//System.err.println("Cust List In Mvc Is "+custList);
+		////System.err.println("Cust List In Mvc Is "+custList);
 		mav.addObject("custList", custList);
 	} catch (Exception e) {
 		// TODO: handle exception
 		custList=new ArrayList<LmsheaderWithCustDetail>();
-		System.err.println("Exception Occurerd!!! In Catch Block Of /getCustomerList Mapping");
+		//System.err.println("Exception Occurerd!!! In Catch Block Of /getCustomerList Mapping");
 		e.printStackTrace();
 	}
 	
@@ -52,12 +52,12 @@ public class CustomerComtroller {
 	try {
 		resp =Constants.getRestTemplate().getForObject(Constants.url+"getCollabratorList", LmsheaderWithCustDetail[].class);
 		collabratorList=new ArrayList<LmsheaderWithCustDetail>(Arrays.asList(resp));
-		System.err.println("Collabrator List In Mvc Is "+collabratorList);
+		//System.err.println("Collabrator List In Mvc Is "+collabratorList);
 		mav.addObject("collabratorList", collabratorList);
 	} catch (Exception e) {
 		// TODO: handle exception
 		collabratorList=new ArrayList<LmsheaderWithCustDetail>();
-		System.err.println("Exception Occurerd!!! In Catch Block Of /getCustomerList Mapping");
+		//System.err.println("Exception Occurerd!!! In Catch Block Of /getCustomerList Mapping");
 		e.printStackTrace();
 	}
 	

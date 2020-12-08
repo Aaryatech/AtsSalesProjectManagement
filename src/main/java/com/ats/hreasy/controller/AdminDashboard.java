@@ -160,7 +160,7 @@ public class AdminDashboard {
 			taskIds = request.getParameter("list");
 			mav = "task/allocateTaskCommon";
 
-			System.out.println(taskIds);
+			//System.out.println(taskIds);
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 			Employee[] emp = Constants.getRestTemplate().postForObject(Constants.url + "getAllEmployeeList", map,
@@ -195,7 +195,7 @@ public class AdminDashboard {
 			String allocateTo = request.getParameter("allocateTo");
 			int priority = Integer.parseInt(request.getParameter("priority"));
 
-			// System.out.println(allocateTo);
+			// //System.out.println(allocateTo);
 
 			String[] ids = taskIds.split(",");
 			for (int i = 0; i < ids.length; i++) {
@@ -244,7 +244,7 @@ public class AdminDashboard {
 			String allocateTo = request.getParameter("allocateTo");
 			int priority = Integer.parseInt(request.getParameter("priority"));
 
-			// System.out.println(allocateTo);
+			// //System.out.println(allocateTo);
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("taskId", taskDetail.getTaskId());
 			TaskDetails taskinfo = Constants.getRestTemplate().postForObject(Constants.url + "getTaskById", map,

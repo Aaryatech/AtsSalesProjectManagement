@@ -770,10 +770,10 @@
 							/* let data = sessionStorage.getItem('key'); 
 							sessionStorage.removeItem('key'); 
 							sessionStorage.clear(); */
-							var table = $('#unallocatedTable').DataTable();
-							var rows = table.rows().remove().draw();
+							/* var table = $('#unallocatedTable').DataTable();
+							var rows = table.rows().remove().draw(); */
 							document.getElementById("selectAll").checked = false;
-							//$("#unallocatedTable tbody").empty();
+							$("#unallocatedTable tbody").empty();
 							var unallocated = response.unallocatedList;
 							sessionStorage.setItem('unallocatedList',
 									unallocated);
@@ -831,26 +831,27 @@
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
 
-								/* var tr_data = '<tr><td>'
-										+ profile
-										+ '</td><td class="text-center"><input id="taskcheck'+unallocated[i].taskId+'" name="taskcheck" type="checkbox" value="'+unallocated[i].taskId+'"></td><td>'
-										+ remainingTime + '</td><td>'
-										+ taskDescription + '</td><td>'
-										+ schdatetime + '</td><td>' + priority
-										+ '</td></tr>';
-								$('#unallocatedTable').append(tr_data); */
-								$('#unallocatedTable td').css('white-space',
+								var tr_data = '<tr><td>' + profile
+										+ '</td><td class="text-center">'
+										+ check + '</td><td>' + remainingTime
+										+ '</td><td>' + taskDescription
+										+ '</td><td>' + schdatetime
+										+ '</td><td>'
+										+ unallocated[i].channelName
+										+ '</td><td>' + priority + '</td></tr>';
+								$('#unallocatedTable').append(tr_data);
+								/* $('#unallocatedTable td').css('white-space',
 										'initial');
 								$('#unallocatedTable').DataTable().row.add(
 										[ profile, check, remainingTime,
 												taskDescription, schdatetime,
 												unallocated[i].channelName,
-												priority ]).draw();
+												priority ]).draw(); */
 							}
 
-							var table = $('#allocatedTable').DataTable();
-							var rows = table.rows().remove().draw();
-
+							/* var table = $('#allocatedTable').DataTable();
+							var rows = table.rows().remove().draw(); */
+							$("#allocatedTable tbody").empty();
 							var allocatedList = response.allocatedList;
 
 							for (var i = 0; i < allocatedList.length; i++) {
@@ -906,7 +907,7 @@
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
 
-								$('#allocatedTable td').css('white-space',
+								/* $('#allocatedTable td').css('white-space',
 										'initial');
 								$('#allocatedTable').DataTable().row
 										.add(
@@ -918,12 +919,22 @@
 														allocatedList[i].channelName,
 														priority,
 														allocatedList[i].employeeName ])
-										.draw();
+										.draw(); */
+								var tr_data = '<tr><td>' + profile
+										+ '</td> <td>' + remainingTime
+										+ '</td><td>' + taskDescription
+										+ '</td><td>' + schdatetime
+										+ '</td><td>'
+										+ allocatedList[i].channelName
+										+ '</td><td>' + priority + '</td><td>'
+										+ allocatedList[i].employeeName
+										+ '</td></tr>';
+								$('#allocatedTable').append(tr_data);
 							}
 
-							var table = $('#pendingTable').DataTable();
-							var rows = table.rows().remove().draw();
-
+							/* var table = $('#pendingTable').DataTable();
+							var rows = table.rows().remove().draw(); */
+							$("#pendingTable tbody").empty();
 							var pendingList = response.pendingList;
 							//alert(JSON.stringify(pendingList))
 							for (var i = 0; i < pendingList.length; i++) {
@@ -979,7 +990,7 @@
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
 
-								$('#pendingTable td').css('white-space',
+								/* $('#pendingTable td').css('white-space',
 										'initial');
 								$('#pendingTable').DataTable().row.add(
 										[ profile, remainingTime,
@@ -987,12 +998,22 @@
 												pendingList[i].channelName,
 												priority,
 												pendingList[i].employeeName ])
-										.draw();
+										.draw(); */
+								var tr_data = '<tr><td>' + profile
+										+ '</td> <td>' + remainingTime
+										+ '</td><td>' + taskDescription
+										+ '</td><td>' + schdatetime
+										+ '</td><td>'
+										+ pendingList[i].channelName
+										+ '</td><td>' + priority + '</td><td>'
+										+ pendingList[i].employeeName
+										+ '</td></tr>';
+								$('#pendingTable').append(tr_data);
 							}
 
-							var table = $('#remainingTable').DataTable();
-							var rows = table.rows().remove().draw();
-
+							/* var table = $('#remainingTable').DataTable();
+							var rows = table.rows().remove().draw(); */
+							$("#remainingTable tbody").empty();
 							var remainingList = response.remainingList;
 
 							for (var i = 0; i < remainingList.length; i++) {
@@ -1048,7 +1069,7 @@
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
 
-								$('#remainingTable td').css('white-space',
+								/* $('#remainingTable td').css('white-space',
 										'initial');
 								$('#remainingTable').DataTable().row
 										.add(
@@ -1060,12 +1081,22 @@
 														remainingList[i].channelName,
 														priority,
 														remainingList[i].employeeName ])
-										.draw();
+										.draw(); */
+								var tr_data = '<tr><td>' + profile
+										+ '</td> <td>' + remainingTime
+										+ '</td><td>' + taskDescription
+										+ '</td><td>' + schdatetime
+										+ '</td><td>'
+										+ pendingList[i].channelName
+										+ '</td><td>' + priority + '</td><td>'
+										+ pendingList[i].employeeName
+										+ '</td></tr>';
+								$('#remainingTable').append(tr_data);
 							}
 
-							var table = $('#completedTable').DataTable();
-							var rows = table.rows().remove().draw();
-
+							/* var table = $('#completedTable').DataTable();
+							var rows = table.rows().remove().draw(); */
+							$("#completedTable tbody").empty();
 							var completedList = response.completedList;
 
 							for (var i = 0; i < completedList.length; i++) {
@@ -1111,7 +1142,7 @@
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
 
-								$('#completedTable td').css('white-space',
+								/* $('#completedTable td').css('white-space',
 										'initial');
 								$('#completedTable').DataTable().row
 										.add(
@@ -1123,7 +1154,17 @@
 														completedList[i].channelName,
 														priority,
 														completedList[i].employeeName ])
-										.draw();
+										.draw(); */
+								var tr_data = '<tr><td>' + profile
+										+ '</td> <td>' + remainingTime
+										+ '</td><td>' + taskDescription
+										+ '</td><td>' + schdatetime
+										+ '</td><td>'
+										+ completedList[i].channelName
+										+ '</td><td>' + priority + '</td><td>'
+										+ completedList[i].employeeName
+										+ '</td></tr>';
+								$('#completedTable').append(tr_data);
 							}
 							sessionStorage.setItem('unallocatedList', JSON
 									.stringify(unallocated));
@@ -1291,8 +1332,11 @@
 						domain = 0;
 					}
 					list = $.parseJSON(sessionStorage.getItem('allocatedList'));
-					var table = $('#allocatedTable').DataTable();
-					var rows = table.rows().remove().draw();
+					/* var table = $('#allocatedTable').DataTable();
+					var rows = table.rows().remove().draw(); */
+
+					$("#allocatedTable tbody").empty();
+
 					for (var i = 0; i < list.length; i++) {
 
 						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
@@ -1370,54 +1414,43 @@
 							showdomain = 1;
 						}
 
+						var append = 0;
+
 						if (value == 0 && module != 0 && show == 1
 								&& showdomain == 1) {
 							if (module == list[i].mdAccTypeId) {
-								$('#allocatedTable td').css('white-space',
-										'initial');
-								$('#allocatedTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value != 0 && module == 0 && show == 1
 								&& showdomain == 1) {
 							if (value == list[i].taskPriority) {
-								$('#allocatedTable td').css('white-space',
-										'initial');
-								$('#allocatedTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value == 0 && module == 0 && show == 1
 								&& showdomain == 1) {
-							$('#allocatedTable td').css('white-space',
-									'initial');
-							$('#allocatedTable').DataTable().row.add(
-									[ profile, remainingTime, taskDescription,
-											schdatetime, list[i].channelName,
-											priority, list[i].employeeName ])
-									.draw();
+							append = 1;
 
 						} else if (value != 0 && module != 0 && show == 1
 								&& showdomain == 1) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
-								$('#allocatedTable td').css('white-space',
-										'initial');
-								$('#allocatedTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
+						}
+
+						if (append == 1) {
+							var tr_data = '<tr><td>' + profile + '</td><td>'
+									+ remainingTime + '</td><td>'
+									+ taskDescription + '</td><td>'
+									+ schdatetime + '</td><td>'
+									+ list[i].channelName + '</td><td>'
+									+ priority + '</td><td>'
+									+ list[i].employeeName + '</td></tr>';
+							$('#allocatedTable').append(tr_data);
 						}
 
 					}
@@ -1444,8 +1477,9 @@
 					}
 
 					list = $.parseJSON(sessionStorage.getItem('pendingList'));
-					var table = $('#pendingTable').DataTable();
-					var rows = table.rows().remove().draw();
+					/* var table = $('#pendingTable').DataTable();
+					var rows = table.rows().remove().draw(); */
+					$("#pendingTable tbody").empty();
 					for (var i = 0; i < list.length; i++) {
 
 						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
@@ -1523,53 +1557,42 @@
 							showdomain = 1;
 						}
 
+						var append = 0;
+
 						if (value == 0 && module != 0 && show == 1
 								&& showdomain == 1) {
 							if (module == list[i].mdAccTypeId) {
-								$('#pendingTable td').css('white-space',
-										'initial');
-								$('#pendingTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value != 0 && module == 0 && show == 1
 								&& showdomain == 1) {
 							if (value == list[i].taskPriority) {
-								$('#pendingTable td').css('white-space',
-										'initial');
-								$('#pendingTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value == 0 && module == 0 && show == 1
 								&& showdomain == 1) {
-							$('#pendingTable td').css('white-space', 'initial');
-							$('#pendingTable').DataTable().row.add(
-									[ profile, remainingTime, taskDescription,
-											schdatetime, list[i].channelName,
-											priority, list[i].employeeName ])
-									.draw();
+							append = 1;
 
 						} else if (value != 0 && module != 0 && show == 1
 								&& showdomain == 1) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
-								$('#pendingTable td').css('white-space',
-										'initial');
-								$('#pendingTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
+						}
+						if (append == 1) {
+							var tr_data = '<tr><td>' + profile + '</td> <td>'
+									+ remainingTime + '</td><td>'
+									+ taskDescription + '</td><td>'
+									+ schdatetime + '</td><td>'
+									+ list[i].channelName + '</td><td>'
+									+ priority + '</td><td>'
+									+ list[i].employeeName + '</td></tr>';
+							$('#pendingTable').append(tr_data);
 						}
 
 					}
@@ -1595,8 +1618,9 @@
 						domain = 0;
 					}
 					list = $.parseJSON(sessionStorage.getItem('remainingList'));
-					var table = $('#remainingTable').DataTable();
-					var rows = table.rows().remove().draw();
+					/* var table = $('#remainingTable').DataTable();
+					var rows = table.rows().remove().draw(); */
+					$("#remainingTable tbody").empty();
 					for (var i = 0; i < list.length; i++) {
 
 						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
@@ -1674,54 +1698,42 @@
 							showdomain = 1;
 						}
 
+						var append = 0;
 						if (value == 0 && module != 0 && show == 1
 								&& showdomain == 1) {
 							if (module == list[i].mdAccTypeId) {
-								$('#remainingTable td').css('white-space',
-										'initial');
-								$('#remainingTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value != 0 && module == 0 && show == 1
 								&& showdomain == 1) {
 							if (value == list[i].taskPriority) {
-								$('#remainingTable td').css('white-space',
-										'initial');
-								$('#remainingTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value == 0 && module == 0 && show == 1
 								&& showdomain == 1) {
-							$('#remainingTable td').css('white-space',
-									'initial');
-							$('#remainingTable').DataTable().row.add(
-									[ profile, remainingTime, taskDescription,
-											schdatetime, list[i].channelName,
-											priority, list[i].employeeName ])
-									.draw();
+							append = 1;
 
 						} else if (value != 0 && module != 0 && show == 1
 								&& showdomain == 1) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
-								$('#remainingTable td').css('white-space',
-										'initial');
-								$('#remainingTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
+						}
+
+						if (append == 0) {
+							var tr_data = '<tr><td>' + profile + '</td> <td>'
+									+ remainingTime + '</td><td>'
+									+ taskDescription + '</td><td>'
+									+ schdatetime + '</td><td>'
+									+ list[i].channelName + '</td><td>'
+									+ priority + '</td><td>'
+									+ list[i].employeeName + '</td></tr>';
+							$('#remainingTable').append(tr_data);
 						}
 
 					}
@@ -1747,8 +1759,9 @@
 						domain = 0;
 					}
 					list = $.parseJSON(sessionStorage.getItem('completedList'));
-					var table = $('#completedTable').DataTable();
-					var rows = table.rows().remove().draw();
+					/* var table = $('#completedTable').DataTable();
+					var rows = table.rows().remove().draw(); */
+					$("#completedTable tbody").empty();
 					for (var i = 0; i < list.length; i++) {
 
 						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
@@ -1810,54 +1823,41 @@
 							showdomain = 1;
 						}
 
+						var append = 0;
 						if (value == 0 && module != 0 && show == 1
 								&& showdomain == 1) {
 							if (module == list[i].mdAccTypeId) {
-								$('#completedTable td').css('white-space',
-										'initial');
-								$('#completedTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value != 0 && module == 0 && show == 1
 								&& showdomain == 1) {
 							if (value == list[i].taskPriority) {
-								$('#completedTable td').css('white-space',
-										'initial');
-								$('#completedTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value == 0 && module == 0 && show == 1
 								&& showdomain == 1) {
-							$('#completedTable td').css('white-space',
-									'initial');
-							$('#completedTable').DataTable().row.add(
-									[ profile, remainingTime, taskDescription,
-											schdatetime, list[i].channelName,
-											priority, list[i].employeeName ])
-									.draw();
+							append = 1;
 
 						} else if (value != 0 && module != 0 && show == 1
 								&& showdomain == 1) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
-								$('#completedTable td').css('white-space',
-										'initial');
-								$('#completedTable').DataTable().row.add(
-										[ profile, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
+						}
+						if (append == 1) {
+							var tr_data = '<tr><td>' + profile + '</td> <td>'
+									+ remainingTime + '</td><td>'
+									+ taskDescription + '</td><td>'
+									+ schdatetime + '</td><td>'
+									+ list[i].channelName + '</td><td>'
+									+ priority + '</td><td>'
+									+ list[i].employeeName + '</td></tr>';
+							$('#completedTable').append(tr_data);
 						}
 
 					}
@@ -1877,8 +1877,9 @@
 					}
 					list = $.parseJSON(sessionStorage
 							.getItem('unallocatedList'));
-					var table = $('#unallocatedTable').DataTable();
-					var rows = table.rows().remove().draw();
+					/* var table = $('#unallocatedTable').DataTable();
+					var rows = table.rows().remove().draw(); */
+					$("#unallocatedTable tbody").empty();
 					for (var i = 0; i < list.length; i++) {
 
 						var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
@@ -1956,53 +1957,45 @@
 							showdomain = 1;
 						}
 
+						var append = 0;
 						if (value == 0 && module != 0) {
 							if (module == list[i].mdAccTypeId) {
-								$('#unallocatedTable td').css('white-space',
+								append = 1;
+								/* $('#unallocatedTable td').css('white-space',
 										'initial');
 								$('#unallocatedTable').DataTable().row.add(
 										[ profile, check, remainingTime,
 												taskDescription, schdatetime,
 												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+												list[i].employeeName ]).draw(); */
 							}
 
 						} else if (value != 0 && module == 0) {
 							if (value == list[i].taskPriority) {
-								$('#unallocatedTable td').css('white-space',
-										'initial');
-								$('#unallocatedTable').DataTable().row.add(
-										[ profile, check, remainingTime,
-												taskDescription, schdatetime,
-												list[i].channelName, priority,
-												list[i].employeeName ]).draw();
+								append = 1;
 							}
 
 						} else if (value == 0 && module == 0) {
-							$('#unallocatedTable td').css('white-space',
-									'initial');
-							$('#unallocatedTable').DataTable().row.add(
-									[ profile, check, remainingTime,
-											taskDescription, schdatetime,
-											list[i].channelName, priority,
-											list[i].employeeName ]).draw();
+							append = 1;
 
 						} else if (value != 0 && module != 0) {
 
 							if (value == list[i].taskPriority
 									&& module == list[i].mdAccTypeId) {
-								$('#unallocatedTable td').css('white-space',
-										'initial');
-								$('#unallocatedTable').DataTable().row
-										.add(
-												[ profile, check,
-														remainingTime,
-														taskDescription,
-														schdatetime,
-														list[i].channelName,
-														priority ]).draw();
+								append = 1;
 							}
 
+						}
+
+						if (append == 1) {
+							var tr_data = '<tr><td>' + profile
+									+ '</td><td class="text-center">' + check
+									+ '</td><td>' + remainingTime + '</td><td>'
+									+ taskDescription + '</td><td>'
+									+ schdatetime + '</td><td>'
+									+ list[i].channelName + '</td><td>'
+									+ priority + '</td></tr>';
+							$('#unallocatedTable').append(tr_data);
 						}
 
 					}

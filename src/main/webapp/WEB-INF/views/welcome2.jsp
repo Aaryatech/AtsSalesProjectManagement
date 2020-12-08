@@ -555,15 +555,16 @@
 						success : function(response) {
 
 							//$('#modal_step1').modal('hide');
-							
+
 							/* var table = $('#pendingTaskTable').DataTable();
 							var rows = table.rows().remove().draw(); */
+							
 							$("#pendingTaskTable tbody").empty();
 							var pendingTask = response.pendingTask;
-							 
+							 //alert(pendingTask.length)
 							for (var i = 0; i < pendingTask.length; i++) {
 								//alert("sdf")
-								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
+								var profile = '<div class="text-center"> <a href="javascript:void(0)" onclick="getCustProfile('
 										+ pendingTask[i].mdAccTypeId
 										+ ','
 										+ pendingTask[i].priKey
@@ -582,7 +583,7 @@
 											+ pendingTask[i].minutes
 											+ '</h6> <div class="font-size-sm text-muted line-height-1">Day - HH:MM</div></div>';
 								}
-								var taskDescription = '<div class="font-weight-semibold"><a href="#"    onclick="taskDetail('
+								var taskDescription = '<div class="font-weight-semibold"><a href="javascript:void(0)"   onclick="taskDetail('
 										+ pendingTask[i].taskId
 										+ ',\''
 										+ pendingTask[i].taskTittle
@@ -595,7 +596,7 @@
 										+ '</a></div> <div class="text-muted">'
 										+ pendingTask[i].taskAllotmentInstructions
 										+ '</div>'
-										+ '<a href="#"  onclick="getTaskLog('
+										+ '<a href="javascript:void(0)" onclick="getTaskLog('
 										+ pendingTask[i].mdAccTypeId
 										+ ','
 										+ pendingTask[i].priKey
@@ -609,7 +610,7 @@
 										+ pendingTask[i].taskScheTime
 										+ '</div>';
 								var priority = '<div class="text-center"><span class="badge badge-success">Low</span></div>';
-								var Action = '<a  href="#" class="list-icons-item"  data-original-title="Edit"  onclick="editClick('
+								var Action = '<a  href="javascript:void(0)" class="list-icons-item"  data-original-title="Edit"  onclick="editClick('
 										+ pendingTask[i].taskId
 										+ ')" ><i class="icon-pencil7" ></i></a>';
 
@@ -629,7 +630,7 @@
 										+ pendingTask[i].employeeName
 										+ '</td><td>' + Action + '</td></tr>';
 								$('#pendingTaskTable').append(tr_data);
-								
+
 								/* $('#pendingTaskTable td').css('white-space',
 										'initial');
 								$('#pendingTaskTable').DataTable().row.add(
@@ -659,6 +660,7 @@
 											response.dashBoardSummary.todayCompletedPts);
 							$("#pending_pts").html(
 									response.dashBoardSummary.pendingPts);
+							myFunction1();
 						},
 					});
 
@@ -683,6 +685,7 @@
 			$('#taskDetailModel').on('hidden.bs.modal', function() {
 				$("#modalbody").html("");
 				getTaskPendingList();
+
 			});
 
 		}
