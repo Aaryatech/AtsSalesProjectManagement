@@ -33,6 +33,8 @@ import com.ats.hreasy.model.DashboardData;
 import com.ats.hreasy.model.Designation;
 import com.ats.hreasy.model.DomainType;
 import com.ats.hreasy.model.Info;
+import com.ats.hreasy.model.InquiryDetail;
+import com.ats.hreasy.model.InquiryHeader;
 import com.ats.hreasy.model.LmsDetail;
 import com.ats.hreasy.model.LmsHeader;
 import com.ats.hreasy.model.LmsHeaderWithNames;
@@ -118,7 +120,7 @@ public class DashboardController {
 			List<TaskDetailsEmpName> logList = new ArrayList<>(Arrays.asList(log));
 			model.addAttribute("logList", logList);
 
-			//System.out.println(logList);
+			// System.out.println(logList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -203,9 +205,12 @@ public class DashboardController {
 
 			int terminate = 0;
 
+			int id = 0;
+
 			for (int i = 0; i < stsList.size(); i++) {
 				// //System.out.println(stsList.get(i).getmTaskStatusId() + " " + status);
 				if (stsList.get(i).getmTaskStatusId() == status) {
+					id = stsList.get(i).getmTaskStatusId();
 					taskDetails.setTaskTittle(stsList.get(i).getmTaskStatusName());
 					taskDetails.setTaskFinalStatus(status);
 					taskDetails.setTaskPts(stsList.get(i).getmTaskPts());
@@ -227,13 +232,113 @@ public class DashboardController {
 			taskDetails.setTaskThoughQuestions(queations);
 			taskDetails.setTaskWhatWentWrong(right);
 			if (terminate == 1) {
-				taskinfo.setThisTaskStatus(0);
-				taskinfo.setTaskDoneBy(userDetail.getEmpId());
-				taskinfo.setTaskDoneDate(sf.format(dt));
+				taskDetails.setThisTaskStatus(1);
+				taskDetails.setTaskDoneBy(userDetail.getEmpId());
+				taskDetails.setTaskDoneDate(sf.format(dt));
 			}
 			TaskDetails newTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask", taskDetails,
 					TaskDetails.class);
 
+			int isEnquery = 0;
+
+			map = new LinkedMultiValueMap<>();
+
+			if (id == 6) {
+				isEnquery = 1;
+				map.add("type", 1);
+
+			} else if (id == 7) {
+				isEnquery = 1;
+				map.add("type", 2);
+			}
+
+			if (isEnquery == 1) {
+
+				map.add("lmsId", taskDetail.getPriKey());
+				Info infores = Constants.getRestTemplate().postForObject(Constants.url + "updateAccCodeInLms", map,
+						Info.class);
+
+				List<InquiryDetail> inqDetailList = new ArrayList<InquiryDetail>();
+
+				map = new LinkedMultiValueMap<>();
+				map.add("lmsId", taskDetail.getPriKey());
+				LmsHeaderWithNames editLmsHeader = Constants.getRestTemplate()
+						.postForObject(Constants.url + "/getLmsHeader", map, LmsHeaderWithNames.class);
+
+				InquiryHeader inqHeader = new InquiryHeader();
+				inqHeader.setChannelId(editLmsHeader.getChannelId());
+				inqHeader.setInqDomainOther(editLmsHeader.getAccDomainOther());
+				inqHeader.setInqDomainId(editLmsHeader.getAccDomainId());
+				inqHeader.setInqTags(editLmsHeader.getAccTags());
+				inqHeader.setInqCompany(editLmsHeader.getAccCompany());
+				inqHeader.setInqWebsite(editLmsHeader.getAccWebsite());
+				inqHeader.setInqTurnover(editLmsHeader.getAccTurnover());
+				inqHeader.setInqCompanyLandline(editLmsHeader.getAccCompanyLandline());
+				inqHeader.setInqScaleDesc(editLmsHeader.getAccScaleDesc());
+				inqHeader.setInqRemark(editLmsHeader.getAccRemark());
+
+				try {
+					inqHeader.setInqEmpCount(String.valueOf(editLmsHeader.getAccEmpCount()));
+				} catch (Exception e) {
+					inqHeader.setInqEmpCount("0");
+				}
+
+				inqHeader.setDelStatus(1);
+				inqHeader.setIsActive(1);
+				inqHeader.setMakerUserId(userDetail.getEmpId());
+				inqHeader.setMakerDatetime(sf.format(dt));
+				inqHeader.setInqAtsRating(editLmsHeader.getAccAtsRating());
+				inqHeader.setMdAccTypeId(2);
+				inqHeader.setInqRefCode(editLmsHeader.getLmsId());
+				inqHeader.setInquiryTittle(editLmsHeader.getCustomerName());
+				inqHeader.setmStateId(editLmsHeader.getmStateId());
+				inqHeader.setmCityId(editLmsHeader.getmCityId());
+
+				for (int i = 0; i < editLmsHeader.getLmsDetailList().size(); i++) {
+					InquiryDetail inquiryDetail = new InquiryDetail();
+					inquiryDetail.setCpName(editLmsHeader.getLmsDetailList().get(i).getCpName());
+					inquiryDetail.setCpDesignationId(editLmsHeader.getLmsDetailList().get(i).getCpDesignationId());
+					inquiryDetail.setCpMobile(editLmsHeader.getLmsDetailList().get(i).getCpMobile());
+					inquiryDetail.setCpMobile2(editLmsHeader.getLmsDetailList().get(i).getCpMobile2());
+					inquiryDetail.setCpEmail(editLmsHeader.getLmsDetailList().get(i).getCpEmail());
+					inquiryDetail.setDelStatus(1);
+					inquiryDetail.setCpPrimary(editLmsHeader.getLmsDetailList().get(i).getCpPrimary());
+					inqDetailList.add(inquiryDetail);
+				}
+				inqHeader.setInqDetailList(inqDetailList);
+				InquiryHeader res = Constants.getRestTemplate().postForObject(Constants.url + "addNewInquiryHeader",
+						inqHeader, InquiryHeader.class);
+				if (res != null) {
+
+					sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					SimpleDateFormat yy = new SimpleDateFormat("yyyy-MM-dd");
+					map = new LinkedMultiValueMap<>();
+					map.add("mdAccTypeId", 2);
+					map.add("statusSequence", 0);
+					TaskStatus[] sts = Constants.getRestTemplate().postForObject(
+							Constants.url + "getTaskStatusByAccTypeIdAndSequnce", map, TaskStatus[].class);
+
+					TaskDetails taskDetailsEnq = new TaskDetails();
+					taskDetailsEnq.setMdAccTypeId(2);
+					taskDetailsEnq.setPriKey(res.getInqId());
+					taskDetailsEnq.setTaskTittle(sts[0].getmTaskStatusName());
+					taskDetailsEnq.setTaskFinalStatus(sts[0].getmTaskStatusId());
+					taskDetailsEnq.setTaskPriority(1);
+					taskDetailsEnq.setTaskPts(sts[0].getmTaskPts());
+					taskDetailsEnq.setMakerUserId(userDetail.getEmpId());
+					taskDetailsEnq.setMakerDatetime(sf.format(dt));
+					taskDetailsEnq.setDelStatus(1);
+					taskDetailsEnq.setIsActive(1);
+					taskDetailsEnq.setTaskAllotedTo(String.valueOf(userDetail.getEmpId()));
+					taskDetailsEnq.setTaskAllotmentInstructions("-");
+					taskDetailsEnq.setTaskScheDate(yy.format(dt));
+					taskDetailsEnq.setTaskScheTime(sf.format(dt));
+
+					// System.err.println("Task Details To Be Saved Is ="+taskDetails);
+					TaskDetails resNewInqTask = Constants.getRestTemplate().postForObject(Constants.url + "addNewTask",
+							taskDetailsEnq, TaskDetails.class);
+				}
+			}
 			info.setError(false);
 			info.setMsg("Insert new Task");
 		} catch (
@@ -351,11 +456,11 @@ public class DashboardController {
 			Tags[] tags = Constants.getRestTemplate().postForObject(Constants.url + "getAllTagsWithAccountTypeName",
 					null, Tags[].class);
 			tagListResp = new ArrayList<Tags>(Arrays.asList(tags));
-			//System.err.println(tagListResp);
+			// System.err.println(tagListResp);
 			mav = "tagList";
 			model.addAttribute("tagList", tagListResp);
 		} catch (Exception e) {
-			//System.err.println("Exception Occur In Catch Block Of / tagList Mapping");
+			// System.err.println("Exception Occur In Catch Block Of / tagList Mapping");
 			tagListResp = new ArrayList<Tags>();
 			mav = "tagList";
 			e.printStackTrace();
@@ -385,7 +490,7 @@ public class DashboardController {
 	@RequestMapping(value = "/editTag", method = RequestMethod.GET)
 	public String editTag(HttpServletRequest request, HttpServletResponse response, Model model,
 			@RequestParam int tagId) {
-		//System.err.println("In Edit Tag ");
+		// System.err.println("In Edit Tag ");
 		List<AccountType> accTypeResponse = new ArrayList<AccountType>();
 		String mav = "addNewTag";
 		Tags tagResp = new Tags();
@@ -393,7 +498,7 @@ public class DashboardController {
 		map.add("tagId", tagId);
 
 		try {
-			//System.err.println("In Try Before Resttemplate");
+			// System.err.println("In Try Before Resttemplate");
 			AccountType[] accType = Constants.getRestTemplate().postForObject(Constants.url + "getAllAccouctTypeList",
 					null, AccountType[].class);
 			accTypeResponse = new ArrayList<>(Arrays.asList(accType));
@@ -873,14 +978,14 @@ public class DashboardController {
 			if (tag.getmTagId() == 0) {
 
 				Tags t1 = Constants.getRestTemplate().postForObject(Constants.url + "addNewTag", tag, Tags.class);
-				//System.err.println("Saved Tag Is=" + "\t" + t1);
+				// System.err.println("Saved Tag Is=" + "\t" + t1);
 				if (t1 != null) {
 					session.setAttribute("successMsg", "New Tag SuccessFully  Added");
 				} else {
 					session.setAttribute("errorMsg", "Unable To Add New Tag");
 				}
 			} else {
-				//System.err.println("Exiisting Tag For Edit Is:" + "\t" + tag);
+				// System.err.println("Exiisting Tag For Edit Is:" + "\t" + tag);
 				info = Constants.getRestTemplate().postForObject(Constants.url + "editTag", tag, Info.class);
 				if (!info.isError()) {
 					session.setAttribute("successMsg", "Tag SucessFully Updated");
@@ -895,7 +1000,8 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 
-			//System.err.println("Something Went Wrong Cat Block Of  /submitTagForm  mapping");
+			// System.err.println("Something Went Wrong Cat Block Of /submitTagForm
+			// mapping");
 			e.printStackTrace();
 			mav = "redirect:/addNewTag";
 		}
@@ -922,7 +1028,7 @@ public class DashboardController {
 			mav = "redirect:/tagList";
 		} catch (Exception e) {
 			// TODO: handle exception
-			//System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
+			// System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
 			e.printStackTrace();
 			mav = "redirect:/";
 		}
@@ -947,7 +1053,7 @@ public class DashboardController {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			//System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
+			// System.err.println("Exception Occurs In Catch Block Of /deleteTag Mapping ");
 
 		}
 
@@ -971,7 +1077,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			cityList = new ArrayList<City>();
-			//System.err.println("Exception Occured!!! In /getCityList ");
+			// System.err.println("Exception Occured!!! In /getCityList ");
 			e.printStackTrace();
 		}
 		return cityList;
@@ -1005,7 +1111,7 @@ public class DashboardController {
 					Designation[].class);
 			designationList = new ArrayList<Designation>(Arrays.asList(desgArr));
 
-			//System.err.println("Designation List Size=" + designationList.size());
+			// System.err.println("Designation List Size=" + designationList.size());
 			model.addAttribute("designationList", designationList);
 
 			mav = "designationList";
@@ -1032,7 +1138,7 @@ public class DashboardController {
 
 	@RequestMapping(value = "/submitDesignationForm", method = RequestMethod.POST)
 	public String submitDesignationForm(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//System.err.println("in submitDesignationForm ");
+		// System.err.println("in submitDesignationForm ");
 		HttpSession session = request.getSession();
 
 		Info info = new Info();
@@ -1073,7 +1179,7 @@ public class DashboardController {
 				map.add("desgName", desgName);
 
 				info = Constants.getRestTemplate().postForObject(Constants.url + "editDesignation", map, Info.class);
-				//System.err.println(info + "++++++++++++++");
+				// System.err.println(info + "++++++++++++++");
 				if (info.isError()) {
 					session.setAttribute("successMsg", "Designation SucessFully Updated");
 
@@ -1087,7 +1193,7 @@ public class DashboardController {
 			// TODO: handle exception
 			mav = "redirect:/designationList";
 			session.setAttribute("errorMsg", "Unable To Update  Designation");
-			//System.err.println("Exception Occuerd In /submitDesignationForm");
+			// System.err.println("Exception Occuerd In /submitDesignationForm");
 			e.printStackTrace();
 		}
 
@@ -1164,7 +1270,7 @@ public class DashboardController {
 			States[] stateResp = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates",
 					States[].class);
 			stateList = new ArrayList<States>(Arrays.asList(stateResp));
-			//System.err.println("Statelist Size==" + "\t" + stateList.size());
+			// System.err.println("Statelist Size==" + "\t" + stateList.size());
 			if (stateList.size() == 0) {
 				session.setAttribute("errorMsg", "No State Found");
 			}
@@ -1173,7 +1279,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "No State Found Exception Occuered");
-			//System.err.println("Exception Occuered!!! In /stateList");
+			// System.err.println("Exception Occuered!!! In /stateList");
 			e.printStackTrace();
 		}
 
@@ -1194,7 +1300,7 @@ public class DashboardController {
 
 	@RequestMapping(value = "/submitStateForm", method = RequestMethod.POST)
 	public String submitStateForm(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//System.err.println("In /submitStateForm");
+		// System.err.println("In /submitStateForm");
 		String mav = "redirect:/stateList";
 		Info info = new Info();
 		HttpSession session = request.getSession();
@@ -1227,7 +1333,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Add New State Exception Occured ");
-			//System.err.println("Exception Occured in /submitStateForm ");
+			// System.err.println("Exception Occured in /submitStateForm ");
 			e.printStackTrace();
 		}
 
@@ -1253,7 +1359,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			mav = "";
-			//System.err.println("Exception In /editState");
+			// System.err.println("Exception In /editState");
 			e.printStackTrace();
 		}
 
@@ -1280,7 +1386,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Delete State Exception Occuered!");
-			//System.err.println("Exception Occuered In /deleteState ");
+			// System.err.println("Exception Occuered In /deleteState ");
 			e.printStackTrace();
 		}
 
@@ -1296,7 +1402,7 @@ public class DashboardController {
 			City[] cityArr = Constants.getRestTemplate().getForObject(Constants.url + "getAllCitiesListWithStateName",
 					City[].class);
 			cityList = new ArrayList<City>(Arrays.asList(cityArr));
-			//System.err.println("Citylist Size==" + cityList.size());
+			// System.err.println("Citylist Size==" + cityList.size());
 			if (cityList.size() < 1) {
 				session.setAttribute("errorMsg", "No City Found!!!");
 			}
@@ -1304,7 +1410,7 @@ public class DashboardController {
 			// TODO: handle exception
 			cityList = new ArrayList<City>();
 			session.setAttribute("errorMsg", "No City Found   Exception Occuered!!!");
-			//System.err.println("Exception Occured In /citylist");
+			// System.err.println("Exception Occured In /citylist");
 			e.printStackTrace();
 		}
 
@@ -1329,7 +1435,7 @@ public class DashboardController {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			//System.err.println("Exception Occuered In /addCity");
+			// System.err.println("Exception Occuered In /addCity");
 			e.printStackTrace();
 		}
 		return mav;
@@ -1371,7 +1477,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Add New City   Exception Occured !!!");
-			//System.err.println("Exception Occured In /submitAddCityForm");
+			// System.err.println("Exception Occured In /submitAddCityForm");
 			e.printStackTrace();
 		}
 
@@ -1407,7 +1513,7 @@ public class DashboardController {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			//System.err.println("Exception occurred in /editCity");
+			// System.err.println("Exception occurred in /editCity");
 			e.printStackTrace();
 		}
 
@@ -1433,7 +1539,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Delete City Exception Occuerred!!!");
-			//System.err.println("Exception Occuerred In /deleteCity");
+			// System.err.println("Exception Occuerred In /deleteCity");
 			e.printStackTrace();
 		}
 

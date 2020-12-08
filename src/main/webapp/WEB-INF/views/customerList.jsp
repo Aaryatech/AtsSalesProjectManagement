@@ -48,8 +48,7 @@
 									</h5></td>
 								<td width="40%" align="right"><a
 									href="${pageContext.request.contextPath}/addEnquiry"
-									class="breadcrumb-elements-item">
-										<!-- <button type="button" class="btn blue_btn">New Inquiry</button> -->
+									class="breadcrumb-elements-item"> <!-- <button type="button" class="btn blue_btn">New Inquiry</button> -->
 								</a></td>
 							</tr>
 						</table>
@@ -99,47 +98,43 @@
 								<tr class="bg-blue">
 
 									<th width="10%" class="text-center">Sr. No.</th>
-									
-									<th class="text-center">Customer Name</th>
+
+									<th class="text-center">Customer Name (Acc No)</th>
 									<th class="text-center">Contact</th>
 									<th class="text-center">Company Details</th>
-									
+
 									<th class="text-center">City,State</th>
 									<th class="10%">Ats Rating</th>
 									<th class="10%">Last Inquiry</th>
 									<th class="10%">Last TouchBase</th>
-									 <th class="10%">Action</th>
+									<th class="10%">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-							
-						<c:forEach items="${custList}" var="cust"
-									varStatus="count">
+
+								<c:forEach items="${custList}" var="cust" varStatus="count">
 									<tr>
 										<td>${count.index+1}</td>
-									
-										<td>${cust.cpInfo}</td>
+
+										<td>${cust.cpInfo}&nbsp;(${cust.accCode})</td>
 										<td>${cust.cpContact}</td>
-										<td><a href="${cust.accWebsite}">${cust.cpInfo2}</a></td>
+										<td><a href="${cust.accWebsite}" target="_blank">${cust.cpInfo2}</a></td>
 										<td>${cust.cityState}</td>
 										<td>${cust.accAtsRating}</td>
-										<td>10</td>
-										<td>0</td>
-										<td class="text-center">
-										<a
+										<td>-</td>
+										<td>-</td>
+										<td class="text-center"><a
 											href="${pageContext.request.contextPath}/editLms?lmsId=${cust.lmsId}"
 											class="list-icons-item text-primary-600" data-popup="tooltip"
 											title="" data-original-title="Edit"><i
-												class="icon-pencil7"></i></a>
-									
-										<a href="${pageContext.request.contextPath}/addEnquiry?Cid=${cust.lmsId}"
-										data-popup="tooltip"  title="" data-original-title="Add Inquiry">
-											<i class="icon-add"></i>
-								<!-- 		Add Inquiry -->
-										</a>
-										</td>
+												class="icon-pencil7"></i></a> <a
+											href="${pageContext.request.contextPath}/addEnquiry?Cid=${cust.lmsId}"
+											data-popup="tooltip" title=""
+											data-original-title="Add Inquiry"> <i class="icon-add"></i>
+												<!-- 		Add Inquiry -->
+										</a></td>
 
-									<%-- 	<td class="text-center">
+										<%-- 	<td class="text-center">
 											<c:if test="${editAccess == 0}"> <a
 											href="${pageContext.request.contextPath}/editTag?tagId=${tag.mTagId}"
 											class="list-icons-item text-primary-600" data-popup="tooltip"

@@ -22,15 +22,20 @@
 			<div class="col-sm-3">
 				<label for="status">Change Status<span class="text-danger">*</span>
 				</label> <select name="status" class="form-control form-control-select2"
-					data-placeholder="Select status" required="required" id="status">
+					data-placeholder="Select status" required="required" id="status"
+					onchange="checkStatus(this.value)">
 					<c:forEach items="${stsList}" var="stsList">
 						<c:choose>
 							<c:when
 								test="${stsList.mTaskStatusId==taskDetail.taskFinalStatus}">
-								<option value="${stsList.mTaskStatusId}" selected>${stsList.mTaskStatusName}</option>
+								<option value="${stsList.mTaskStatusId}" selected
+									id="sts${stsList.mTaskStatusId}"
+									data-isclosed="${stsList.mTaskIsClosed}">${stsList.mTaskStatusName}</option>
 							</c:when>
 							<c:otherwise>
-								<option value="${stsList.mTaskStatusId}">${stsList.mTaskStatusName}</option>
+								<option value="${stsList.mTaskStatusId}"
+									id="sts${stsList.mTaskStatusId}"
+									data-isclosed="${stsList.mTaskIsClosed}">${stsList.mTaskStatusName}</option>
 							</c:otherwise>
 						</c:choose>
 
@@ -40,21 +45,23 @@
 			</div>
 			<input type="hidden" id="currentsts" name="currentsts"
 				value="${taskDetail.taskFinalStatus}">
-			<div class="col-sm-3">
+
+
+			<div class="col-sm-3" id="hideDiv1">
 				<label for="sdate">New Schedule Date<span
 					class="text-danger">*</span>
 				</label> <input type="text" placeholder="Schedule Date"
 					class="form-control datepickerclass" required="required" id="sdate"
 					name="sdate">
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="hideDiv2">
 				<label for="stime">New Schedule Time </label> <input type="time"
 					placeholder="Schedule Time" class="form-control "
 					required="required" id="stime" name="stime"> <span
 					class="validation-invalid-label" id="error_stime"
 					style="display: none;">This field is required.</span>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="hideDiv3">
 				<label for="clientDiscussion">Client Discussion<span
 					class="text-danger">*</span>
 				</label>
@@ -69,7 +76,7 @@
 
 	<div class="form-group">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="hideDiv4">
 				<label for="taskDescription">New Task Instruction </label>
 				<textarea rows="3" cols="5" class="form-control"
 					placeholder="New Task Instruction" id="taskDescription"
@@ -77,18 +84,18 @@
 				<span class="validation-invalid-label" id="error_taskDescription"
 					style="display: none;">This field is required.</span>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="hideDiv5">
 				<label for="clientProfiling">Client Profiling </label>
 				<textarea rows="3" cols="5" class="form-control"
 					placeholder="Client Profiling" id="clientProfiling"
 					name="clientProfiling"></textarea>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="hideDiv6">
 				<label for="queations">Any Tough Question </label>
 				<textarea rows="3" cols="5" class="form-control"
 					placeholder="Question" id="queations" name="queations"></textarea>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="hideDiv7">
 				<label for="right">What went right </label>
 				<textarea rows="3" cols="5" class="form-control"
 					placeholder="What went right " id="right" name="right"></textarea>
@@ -102,6 +109,31 @@
 	</div>
 </form>
 <script type="text/javascript">
+	function checkStatus(id) {
+
+		var isclosed = $("#sts" + id).data("isclosed");
+		//alert(isclosed)
+		if (isclosed == 1) {
+			$("#hideDiv1").hide();
+			$("#hideDiv2").hide();
+			$("#hideDiv3").hide();
+			$("#hideDiv4").hide();
+			$("#hideDiv5").hide();
+			$("#hideDiv6").hide();
+			$("#hideDiv7").hide();
+			$("#clientDiscussion").val("NA");
+		} else {
+			$("#hideDiv1").show();
+			$("#hideDiv2").show();
+			$("#hideDiv3").show();
+			$("#hideDiv4").show();
+			$("#hideDiv5").show();
+			$("#hideDiv6").show();
+			$("#hideDiv7").show();
+			$("#clientDiscussion").val("");
+		}
+
+	}
 	$(document)
 			.ready(
 					function($) {
