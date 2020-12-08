@@ -287,7 +287,7 @@ public class DashboardController {
 
 			DashBoardSummary dashBoardSummary = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getRegularDashboardSummry", map, DashBoardSummary.class);
-			System.err.println("DashSummry===="+dashBoardSummary);
+			// System.err.println("DashSummry===="+dashBoardSummary);
 			dashboardData.setDashBoardSummary(dashBoardSummary);
 			dashboardData.setPendingTask(list);
 
@@ -994,90 +994,86 @@ public class DashboardController {
 		}
 		return info;
 	}
-	
-	
 
-	@RequestMapping(value="/designationList",method=RequestMethod.GET)
-	public String  designationList(HttpServletRequest request,HttpServletResponse response,Model model) {
-		List<Designation> designationList=new ArrayList<Designation>();
-		String mav=" ";
+	@RequestMapping(value = "/designationList", method = RequestMethod.GET)
+	public String designationList(HttpServletRequest request, HttpServletResponse response, Model model) {
+		List<Designation> designationList = new ArrayList<Designation>();
+		String mav = " ";
 		try {
-			
-			Designation[] desgArr=Constants.getRestTemplate().getForObject(Constants.url+"getAllDesignation", Designation[].class);
-			designationList=new ArrayList<Designation>(Arrays.asList(desgArr));
-			
-			System.err.println("Designation List Size="+designationList.size());
+
+			Designation[] desgArr = Constants.getRestTemplate().getForObject(Constants.url + "getAllDesignation",
+					Designation[].class);
+			designationList = new ArrayList<Designation>(Arrays.asList(desgArr));
+
+			System.err.println("Designation List Size=" + designationList.size());
 			model.addAttribute("designationList", designationList);
-			
-			mav="designationList";
+
+			mav = "designationList";
 		} catch (Exception e) {
 			// TODO: handle exception
-			mav=" ";
-			designationList=new ArrayList<Designation>();
+			mav = " ";
+			designationList = new ArrayList<Designation>();
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		return mav;
 	}
-	
-	
-	@RequestMapping(value="/addNewDesignation",method=RequestMethod.GET)
-	public String addNewDesignation(HttpServletRequest request,HttpServletResponse response,Model model) {
-		Designation desg=new Designation();
-		int flag=0;
+
+	@RequestMapping(value = "/addNewDesignation", method = RequestMethod.GET)
+	public String addNewDesignation(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Designation desg = new Designation();
+		int flag = 0;
 		model.addAttribute("designation", desg);
-		model.addAttribute("flag",flag );
-		String mav=" ";
-		mav="addNewDesignation";
+		model.addAttribute("flag", flag);
+		String mav = " ";
+		mav = "addNewDesignation";
 		return mav;
 	}
-	
-	@RequestMapping(value="/submitDesignationForm",method=RequestMethod.POST)
-	public String submitDesignationForm(HttpServletRequest request,HttpServletResponse response,Model model) {
+
+	@RequestMapping(value = "/submitDesignationForm", method = RequestMethod.POST)
+	public String submitDesignationForm(HttpServletRequest request, HttpServletResponse response, Model model) {
 		System.err.println("in submitDesignationForm ");
 		HttpSession session = request.getSession();
 
-		Info info=new Info();
-		Designation designation=new Designation();
+		Info info = new Info();
+		Designation designation = new Designation();
 		UserLoginData userDetail = (UserLoginData) session.getAttribute("userObj");
-		String mav=" ";
+		String mav = " ";
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat yy = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
-		MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
-		//MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
-		
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		// MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
+
 		try {
-			int desgId=Integer.parseInt(request.getParameter("desgId"));
-			String desgName=request.getParameter("desgName");
+			int desgId = Integer.parseInt(request.getParameter("desgId"));
+			String desgName = request.getParameter("desgName");
 			designation.setmDesignationName(desgName);
 			designation.setDelStatus(true);
 			designation.setActive(true);
 			designation.setMakerUserID(userDetail.getEmpId());
 			designation.setMakerDatetime(sf.format(dt));
-			//map.add("", value);
-			
-			
-			if(desgId==0) {
-				designation=Constants.getRestTemplate().postForObject(Constants.url+"savedesignation", designation, Designation.class);
-				
-				if(designation.getmDesignationId()<0) {
-					session.setAttribute("errorMsg","Unable To Add Designation" );
-					
-				}else {
-					session.setAttribute("successMsg","New Designation Added" );
-					
+			// map.add("", value);
+
+			if (desgId == 0) {
+				designation = Constants.getRestTemplate().postForObject(Constants.url + "savedesignation", designation,
+						Designation.class);
+
+				if (designation.getmDesignationId() < 0) {
+					session.setAttribute("errorMsg", "Unable To Add Designation");
+
+				} else {
+					session.setAttribute("successMsg", "New Designation Added");
+
 				}
-				
-			}else {
-				map=new LinkedMultiValueMap<String,Object>();
+
+			} else {
+				map = new LinkedMultiValueMap<String, Object>();
 				map.add("desgId", desgId);
 				map.add("desgName", desgName);
-				
-				info=Constants.getRestTemplate().postForObject(Constants.url+"editDesignation", map, Info.class);
-				System.err.println(info+"++++++++++++++");
+
+				info = Constants.getRestTemplate().postForObject(Constants.url + "editDesignation", map, Info.class);
+				System.err.println(info + "++++++++++++++");
 				if (info.isError()) {
 					session.setAttribute("successMsg", "Designation SucessFully Updated");
 
@@ -1085,270 +1081,252 @@ public class DashboardController {
 					session.setAttribute("errorMsg", "Unable To Update  Designation");
 				}
 			}
-			
-			
-			mav="redirect:/designationList";
+
+			mav = "redirect:/designationList";
 		} catch (Exception e) {
 			// TODO: handle exception
-			mav="redirect:/designationList";
+			mav = "redirect:/designationList";
 			session.setAttribute("errorMsg", "Unable To Update  Designation");
 			System.err.println("Exception Occuerd In /submitDesignationForm");
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
+
 		return mav;
 	}
-	
-	
-	
-	@RequestMapping(value="/editDesignation",method=RequestMethod.GET)
-	public String editDesignation(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam int desgId) {
-		String mav="";
-		int flag=1;
-		MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
+
+	@RequestMapping(value = "/editDesignation", method = RequestMethod.GET)
+	public String editDesignation(HttpServletRequest request, HttpServletResponse response, Model model,
+			@RequestParam int desgId) {
+		String mav = "";
+		int flag = 1;
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("desgId", desgId);
-		
-		Designation desgResp=new Designation();														
+
+		Designation desgResp = new Designation();
 		try {
-			
-			desgResp=Constants.getRestTemplate().postForObject(Constants.url+"getDesignationByIdAndDelstatus", map,Designation.class);
+
+			desgResp = Constants.getRestTemplate().postForObject(Constants.url + "getDesignationByIdAndDelstatus", map,
+					Designation.class);
 			model.addAttribute("designation", desgResp);
 			model.addAttribute("flag", flag);
-			mav="addNewDesignation";
-			
+			mav = "addNewDesignation";
+
 		} catch (Exception e) {
 			// TODO: handle exception
-			mav=" ";
+			mav = " ";
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		return mav;
 	}
-	
-	
-	@RequestMapping(value="/deleteDesignation",method=RequestMethod.GET)
-	public String deleteDesignation(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam int desgId) {
-	String	mav="redirect:/designationList";
-	Designation desgResp=new Designation();
-	Info info=new Info();
-	MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-	map.add("desgId", desgId);
-	HttpSession session = request.getSession();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	SimpleDateFormat yy = new SimpleDateFormat("yyyy-MM-dd");
-	Date dt = new Date();
-	try {
-		desgResp=Constants.getRestTemplate().postForObject(Constants.url+"getDesignationByIdAndDelstatus", map, Designation.class);
-		
-		map.add("makerId", desgResp.getMakerUserID());
-		map.add("makerDtTime", sf.format(dt));
-		
-		
-		info = Constants.getRestTemplate().postForObject(Constants.url + "deleteDesignation", map, Info.class);
-		if(info.isError()) {
-			
-			session.setAttribute("errorMsg", "Unable To Delete Designation");
-		}
-		session.setAttribute("successMsg", "Designation Successfully Deleted");
-	} catch (Exception e) {
-		// TODO: handle exception
-		session.setAttribute("errorMsg", "Unable To Delete Designation Exception Occuered");
-		e.printStackTrace();
-	}
-		
-		
-		
-		return mav;
-	}
-	
-	
-	
-	@RequestMapping(value="/stateList",method=RequestMethod.GET)
-	public String stateList(HttpServletRequest request,HttpServletResponse response,Model model) {
-		List<States> stateList=new ArrayList<States>();
-		String mav="stateList";
+
+	@RequestMapping(value = "/deleteDesignation", method = RequestMethod.GET)
+	public String deleteDesignation(HttpServletRequest request, HttpServletResponse response, Model model,
+			@RequestParam int desgId) {
+		String mav = "redirect:/designationList";
+		Designation desgResp = new Designation();
+		Info info = new Info();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("desgId", desgId);
 		HttpSession session = request.getSession();
-		
-		
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat yy = new SimpleDateFormat("yyyy-MM-dd");
+		Date dt = new Date();
 		try {
-			States[] stateResp=Constants.getRestTemplate().getForObject(Constants.url+"getAllStates", States[].class);
-			stateList=new ArrayList<States>(Arrays.asList(stateResp));
-			System.err.println("Statelist Size=="+"\t"+stateList.size());
-			if(stateList.size()==0) {
+			desgResp = Constants.getRestTemplate().postForObject(Constants.url + "getDesignationByIdAndDelstatus", map,
+					Designation.class);
+
+			map.add("makerId", desgResp.getMakerUserID());
+			map.add("makerDtTime", sf.format(dt));
+
+			info = Constants.getRestTemplate().postForObject(Constants.url + "deleteDesignation", map, Info.class);
+			if (info.isError()) {
+
+				session.setAttribute("errorMsg", "Unable To Delete Designation");
+			}
+			session.setAttribute("successMsg", "Designation Successfully Deleted");
+		} catch (Exception e) {
+			// TODO: handle exception
+			session.setAttribute("errorMsg", "Unable To Delete Designation Exception Occuered");
+			e.printStackTrace();
+		}
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/stateList", method = RequestMethod.GET)
+	public String stateList(HttpServletRequest request, HttpServletResponse response, Model model) {
+		List<States> stateList = new ArrayList<States>();
+		String mav = "stateList";
+		HttpSession session = request.getSession();
+
+		try {
+			States[] stateResp = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates",
+					States[].class);
+			stateList = new ArrayList<States>(Arrays.asList(stateResp));
+			System.err.println("Statelist Size==" + "\t" + stateList.size());
+			if (stateList.size() == 0) {
 				session.setAttribute("errorMsg", "No State Found");
 			}
 			model.addAttribute("stateList", stateList);
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "No State Found Exception Occuered");
 			System.err.println("Exception Occuered!!! In /stateList");
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
+
 		return mav;
 	}
-	
-	
-	@RequestMapping(value="/addNewState",method=RequestMethod.GET)
-	public String addNewState(HttpServletRequest request,HttpServletResponse response,Model model) {
-		String mav="addNewState";
-		States state=new States();
-		int flag=0;
+
+	@RequestMapping(value = "/addNewState", method = RequestMethod.GET)
+	public String addNewState(HttpServletRequest request, HttpServletResponse response, Model model) {
+		String mav = "addNewState";
+		States state = new States();
+		int flag = 0;
 		model.addAttribute("flag", flag);
-		model.addAttribute("state",state);
+		model.addAttribute("state", state);
 		/* submitStateForm */
-		
+
 		return mav;
 	}
-	
-	
-	
-	@RequestMapping(value="/submitStateForm",method=RequestMethod.POST)
-	public String submitStateForm(HttpServletRequest request,HttpServletResponse response,Model model) {
+
+	@RequestMapping(value = "/submitStateForm", method = RequestMethod.POST)
+	public String submitStateForm(HttpServletRequest request, HttpServletResponse response, Model model) {
 		System.err.println("In /submitStateForm");
-		String mav="redirect:/stateList";
+		String mav = "redirect:/stateList";
 		Info info = new Info();
 		HttpSession session = request.getSession();
-		States state=new States();
-		MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
-			try {
-				
-				state.setmStateName(request.getParameter("stateName"));
-				state.setmStateId(Integer.parseInt(request.getParameter("stateId")));
-				state.setDelStatus(1);
-				state.setIsActive(1);
-				if(state.getmStateId()==0) {
-					States s1=Constants.getRestTemplate().postForObject(Constants.url+"saveState", state, States.class);
-					if (s1 != null) {
-						session.setAttribute("successMsg", "New State SuccessFully  Added");
-					} else {
-						session.setAttribute("errorMsg", "Unable To Add New State");
-					}	
-				}else {
-					map.add("stateName", state.getmStateName());
-					map.add("stateId", state.getmStateId());
-					 info =Constants.getRestTemplate().postForObject(Constants.url+"EditState", map, Info.class);
-					if (!info.isError()) {
-						session.setAttribute("successMsg", " State SuccessFully  Updated");
-					} else {
-						session.setAttribute("errorMsg", "Unable To Update State");
-					}
+		States state = new States();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		try {
+
+			state.setmStateName(request.getParameter("stateName"));
+			state.setmStateId(Integer.parseInt(request.getParameter("stateId")));
+			state.setDelStatus(1);
+			state.setIsActive(1);
+			if (state.getmStateId() == 0) {
+				States s1 = Constants.getRestTemplate().postForObject(Constants.url + "saveState", state, States.class);
+				if (s1 != null) {
+					session.setAttribute("successMsg", "New State SuccessFully  Added");
+				} else {
+					session.setAttribute("errorMsg", "Unable To Add New State");
 				}
-				
-					} catch (Exception e) {
-				// TODO: handle exception
-				session.setAttribute("errorMsg", "Unable To Add New State Exception Occured ");
-				System.err.println("Exception Occured in /submitStateForm ");
-				e.printStackTrace();
+			} else {
+				map.add("stateName", state.getmStateName());
+				map.add("stateId", state.getmStateId());
+				info = Constants.getRestTemplate().postForObject(Constants.url + "EditState", map, Info.class);
+				if (!info.isError()) {
+					session.setAttribute("successMsg", " State SuccessFully  Updated");
+				} else {
+					session.setAttribute("errorMsg", "Unable To Update State");
+				}
 			}
-		
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			session.setAttribute("errorMsg", "Unable To Add New State Exception Occured ");
+			System.err.println("Exception Occured in /submitStateForm ");
+			e.printStackTrace();
+		}
+
 		return mav;
 	}
-	
-	
-	
+
 	/**/
-	
-	@RequestMapping(value="/editState",method=RequestMethod.GET)
-	public String editState(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam int stateId) {
-		String mav="addNewState";
-		MultiValueMap<String,Object> map=new LinkedMultiValueMap<String, Object>();
-		States stateResp=new States();
-		int flag=1;
+
+	@RequestMapping(value = "/editState", method = RequestMethod.GET)
+	public String editState(HttpServletRequest request, HttpServletResponse response, Model model,
+			@RequestParam int stateId) {
+		String mav = "addNewState";
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		States stateResp = new States();
+		int flag = 1;
 		model.addAttribute("flag", flag);
-		
+
 		try {
 			map.add("stateId", stateId);
-			stateResp=Constants.getRestTemplate().postForObject(Constants.url+"getStateByStateId", map, States.class);
+			stateResp = Constants.getRestTemplate().postForObject(Constants.url + "getStateByStateId", map,
+					States.class);
 			model.addAttribute("state", stateResp);
 		} catch (Exception e) {
 			// TODO: handle exception
-			mav="";
+			mav = "";
 			System.err.println("Exception In /editState");
 			e.printStackTrace();
 		}
-			
+
 		return mav;
 	}
-	
-	
-	@RequestMapping(value="/deleteState",method=RequestMethod.GET)
-	public String deleteState(HttpServletResponse response,HttpServletRequest request,Model model,@RequestParam int stateId) {
-		String mav="redirect:/stateList";
+
+	@RequestMapping(value = "/deleteState", method = RequestMethod.GET)
+	public String deleteState(HttpServletResponse response, HttpServletRequest request, Model model,
+			@RequestParam int stateId) {
+		String mav = "redirect:/stateList";
 		Info info = new Info();
 		HttpSession session = request.getSession();
-		MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
-		
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
 		try {
 			map.add("stateId", stateId);
-			info=Constants.getRestTemplate().postForObject(Constants.url+"DeleteState", map, Info.class);
-			if(info.isError()) {
+			info = Constants.getRestTemplate().postForObject(Constants.url + "DeleteState", map, Info.class);
+			if (info.isError()) {
 				session.setAttribute("errorMsg", "Unable To Delete State!!!");
-			}else {
+			} else {
 				session.setAttribute("successMsg", "State Deleted Successfully");
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Delete State Exception Occuered!");
 			System.err.println("Exception Occuered In /deleteState ");
 			e.printStackTrace();
 		}
-		
+
 		return mav;
 	}
-	
-	@RequestMapping(value="/citylist",method=RequestMethod.GET)
-	public String citylist(HttpServletRequest request,HttpServletResponse response,Model model) {
-	List<City> cityList=new ArrayList<City>();
-		String mav="cityList";
+
+	@RequestMapping(value = "/citylist", method = RequestMethod.GET)
+	public String citylist(HttpServletRequest request, HttpServletResponse response, Model model) {
+		List<City> cityList = new ArrayList<City>();
+		String mav = "cityList";
 		HttpSession session = request.getSession();
 		try {
-			City[] cityArr=Constants.getRestTemplate().getForObject(Constants.url+"getAllCitiesListWithStateName", City[].class);
-			cityList=new ArrayList<City>(Arrays.asList(cityArr));
-			System.err.println("Citylist Size=="+cityList.size());
-			if(cityList.size()<1) {
+			City[] cityArr = Constants.getRestTemplate().getForObject(Constants.url + "getAllCitiesListWithStateName",
+					City[].class);
+			cityList = new ArrayList<City>(Arrays.asList(cityArr));
+			System.err.println("Citylist Size==" + cityList.size());
+			if (cityList.size() < 1) {
 				session.setAttribute("errorMsg", "No City Found!!!");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			cityList=new ArrayList<City>();
+			cityList = new ArrayList<City>();
 			session.setAttribute("errorMsg", "No City Found   Exception Occuered!!!");
 			System.err.println("Exception Occured In /citylist");
 			e.printStackTrace();
 		}
-		
+
 		model.addAttribute("cityList", cityList);
-		
+
 		return mav;
 	}
-	
-	
-	@RequestMapping(value="/addCity",method=RequestMethod.GET)
-	public String addCity(HttpServletRequest request,HttpServletResponse response,Model model) {
-		int flag=0;
+
+	@RequestMapping(value = "/addCity", method = RequestMethod.GET)
+	public String addCity(HttpServletRequest request, HttpServletResponse response, Model model) {
+		int flag = 0;
 		model.addAttribute("flag", flag);
-		String mav="addNewCity";
-		City city=new City();
-		List<States> stateListResp=new ArrayList<States>();
+		String mav = "addNewCity";
+		City city = new City();
+		List<States> stateListResp = new ArrayList<States>();
 		try {
-			States[] stateResp=Constants.getRestTemplate().getForObject(Constants.url+"getAllStates", States[].class);
-			stateListResp=new ArrayList<States>(Arrays.asList(stateResp));
+			States[] stateResp = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates",
+					States[].class);
+			stateListResp = new ArrayList<States>(Arrays.asList(stateResp));
 			model.addAttribute("city", city);
 			model.addAttribute("stateList", stateListResp);
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println("Exception Occuered In /addCity");
@@ -1356,129 +1334,110 @@ public class DashboardController {
 		}
 		return mav;
 	}
-	
 
-	@RequestMapping(value="/submitAddCityForm",method=RequestMethod.POST)
-	public String submitAddCityForm(HttpServletRequest request,HttpServletResponse response,Model model) {
-		String mav="redirect:/citylist";
-		HttpSession session=request.getSession();
-		City city=new City();
-		Info info=new Info();
+	@RequestMapping(value = "/submitAddCityForm", method = RequestMethod.POST)
+	public String submitAddCityForm(HttpServletRequest request, HttpServletResponse response, Model model) {
+		String mav = "redirect:/citylist";
+		HttpSession session = request.getSession();
+		City city = new City();
+		Info info = new Info();
 		try {
-			
+
 			city.setmCityId(Integer.parseInt(request.getParameter("cityId")));
 			city.setmCityName(request.getParameter("cityName"));
 			city.setmStateId(Integer.parseInt(request.getParameter("stateId")));
 			city.setDelStatus(1);
 			city.setIsActive(1);
-			if(city.getmCityId()==0) {
-				
-				City c1=Constants.getRestTemplate().postForObject(Constants.url+"saveCity", city, City.class);
-				if(c1!=null) {
+			if (city.getmCityId() == 0) {
+
+				City c1 = Constants.getRestTemplate().postForObject(Constants.url + "saveCity", city, City.class);
+				if (c1 != null) {
 					session.setAttribute("successMsg", "New City Added Successfully");
-				}else {
+				} else {
 					session.setAttribute("errorMsg", "Unable To Add New City!!!");
 				}
-			}else {
-				 info=Constants.getRestTemplate().postForObject(Constants.url+"editCity", city, Info.class);
-				 
-				 if(!info.isError()) {
-					 session.setAttribute("successMsg", "City SuccessFully Updated");
-					 
-				 }else {
-					 session.setAttribute("errorMsg", "Unable To Update City!!!");
+			} else {
+				info = Constants.getRestTemplate().postForObject(Constants.url + "editCity", city, Info.class);
+
+				if (!info.isError()) {
+					session.setAttribute("successMsg", "City SuccessFully Updated");
+
+				} else {
+					session.setAttribute("errorMsg", "Unable To Update City!!!");
 				}
-				 
-				 
+
 			}
-			
-			
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Add New City   Exception Occured !!!");
 			System.err.println("Exception Occured In /submitAddCityForm");
 			e.printStackTrace();
 		}
-		
-		
+
 		return mav;
-		
-		
-		
+
 	}
-	
-	
-	@RequestMapping(value="/editCity",method=RequestMethod.GET)
-	public String editCity(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam int cityId) {
-		List<States> stateList=new ArrayList<States>();
-		int flag=1;
+
+	@RequestMapping(value = "/editCity", method = RequestMethod.GET)
+	public String editCity(HttpServletRequest request, HttpServletResponse response, Model model,
+			@RequestParam int cityId) {
+		List<States> stateList = new ArrayList<States>();
+		int flag = 1;
 		model.addAttribute("flag", flag);
-		HttpSession session =request.getSession();
-		String mav="addNewCity";
-		MultiValueMap<String,Object> map=new LinkedMultiValueMap<String, Object>();
+		HttpSession session = request.getSession();
+		String mav = "addNewCity";
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("cityId", cityId);
-		City city=new City();
+		City city = new City();
 		try {
-			city=Constants.getRestTemplate().postForObject(Constants.url+"getCityBycityId", map,City.class);
-			if(city.getmCityId()==0) {
+			city = Constants.getRestTemplate().postForObject(Constants.url + "getCityBycityId", map, City.class);
+			if (city.getmCityId() == 0) {
 				session.setAttribute("errorMsg", "City Not Found!!!");
-			}else {
+			} else {
 				model.addAttribute("city", city);
 			}
-			States[] stateResp=Constants.getRestTemplate().getForObject(Constants.url+"getAllStates", States[].class);
-			stateList=new ArrayList<States>(Arrays.asList(stateResp));
+			States[] stateResp = Constants.getRestTemplate().getForObject(Constants.url + "getAllStates",
+					States[].class);
+			stateList = new ArrayList<States>(Arrays.asList(stateResp));
 			model.addAttribute("stateList", stateList);
-			if(stateList.size()<0) {
+			if (stateList.size() < 0) {
 				session.setAttribute("errorMsg", "No State Found");
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println("Exception occurred in /editCity");
 			e.printStackTrace();
 		}
-		
-		
+
 		return mav;
 	}
-	
-	
-	
-	
-	@RequestMapping(value="/deleteCity",method=RequestMethod.GET)
-	public String deleteCity(HttpServletRequest request,HttpServletResponse response,@RequestParam int cityId) {
-		String mav="redirect:/citylist";
-		MultiValueMap<String, Object> map=new LinkedMultiValueMap<String, Object>();
+
+	@RequestMapping(value = "/deleteCity", method = RequestMethod.GET)
+	public String deleteCity(HttpServletRequest request, HttpServletResponse response, @RequestParam int cityId) {
+		String mav = "redirect:/citylist";
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("cityId", cityId);
-		Info info=new Info();
-		HttpSession session=request.getSession();
-		
+		Info info = new Info();
+		HttpSession session = request.getSession();
+
 		try {
-			info=Constants.getRestTemplate().postForObject(Constants.url+"DeleteCity", map, Info.class);
-			if(info.isError()) {
+			info = Constants.getRestTemplate().postForObject(Constants.url + "DeleteCity", map, Info.class);
+			if (info.isError()) {
 				session.setAttribute("errorMsg", "Unable To Delete City!!!");
-			}else {
+			} else {
 				session.setAttribute("successMsg", "City Deleted Successfully!!!");
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			session.setAttribute("errorMsg", "Unable To Delete City Exception Occuerred!!!");
 			System.err.println("Exception Occuerred In /deleteCity");
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		return mav;
 	}
-	
-	
-	
-	
-	
 
 }

@@ -54,7 +54,8 @@
 									class="breadcrumb-elements-item">
 										<button type="button" class="btn blue_btn">Import
 											Lead</button>
-								</a><%-- <a href="${pageContext.request.contextPath}/sendMailer"
+								</a>
+								<%-- <a href="${pageContext.request.contextPath}/sendMailer"
 									class="breadcrumb-elements-item">
 										<button type="button" class="btn blue_btn">Send
 											Diwali Mail</button>
@@ -178,7 +179,7 @@
 							bootbox
 									.confirm({
 										title : 'Confirm ',
-										message : 'Are you sure you want to delete selected records ?',
+										message : 'All communication will be deleted of this record. Are you sure you want to delete selected records ?',
 										buttons : {
 											confirm : {
 												label : 'Yes',

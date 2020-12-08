@@ -14,6 +14,20 @@
 
 <script
 	src="${pageContext.request.contextPath}/resources/global_assets/js/demo_pages/content_cards_draggable.js"></script>
+
+<style type="text/css">
+.record_search {
+	float: right;
+	border: 1px solid #CCC;
+	padding: 6px 10px;
+	border-radius: 30px;
+	margin: 10px;
+	width: 15%;
+	outline: none;
+}
+</style>
+
+
 </head>
 
 <body>
@@ -114,7 +128,7 @@
 						<div class="card">
 							<div class="card-header header-elements-inline">
 								<h6 class="card-title">Todays Status</h6>
-	
+
 							</div>
 
 							<!-- Numbers -->
@@ -141,7 +155,7 @@
 										</div>
 									</div>
 
-								<!-- 	<div class="col-2">
+									<!-- 	<div class="col-2">
 										<div class="mb-3">
 											<h5 class="font-weight-semibold mb-0" id="remaining_task">0</h5>
 											<span class="text-muted font-size-sm">Remaining</span>
@@ -154,7 +168,7 @@
 										</div>
 									</div> -->
 
-								<!-- 	<div class="col-2">
+									<!-- 	<div class="col-2">
 										<div class="mb-3">
 											<h5 class="font-weight-semibold mb-0" id="pending_pts">0</h5>
 											<span class="text-muted font-size-sm">Pending PTS</span>
@@ -183,7 +197,12 @@
 								</div>
 							</div>
 
+							<input type="text" id="myInput1" class="myInput record_search"
+								onkeyup="myFunction1()" placeholder="Search..."
+								title="Type in a name">
+
 							<div class="table-responsive">
+
 								<table class="table" id="pendingTaskTable">
 									<thead>
 										<tr>
@@ -201,184 +220,20 @@
 									<tbody>
 
 
-										<%-- <tr>
-											<td class="text-center"><a href="#" data-toggle="modal"
-												data-target="#customerProfile"><i
-													class="icon-users2 icon-2x d-inline-block text-info"
-													title="Customer Profile"></i></a>
-												<div class="font-size-sm text-muted line-height-1">Office
-													task</div></td>
-											<td class="text-center">
-												<h6 class="mb-0">12</h6>
-												<div class="font-size-sm text-muted line-height-1">hours</div>
-											</td>
-											<td>
-												<div class="font-weight-semibold">
-													LEAD - Previous Task <span
-														class="badge badge-primary badge-pill">10 PTS</span>
-												</div>
-												<div class="text-muted">Call to customer</div> <a href="#"
-												data-toggle="modal" data-target="#task_log"><span
-													class="badge badge-success badge-pill">65 Completed</span></a>
-											</td>
-
-											<td class="text-center">20-10-2020 12:00 AM</td>
-											<td class="text-center"><span class="badge badge-danger">High</span></td>
-											<td>Akshay,Sachin</td>
-
-										</tr>
-										<tr>
-											<td><a href="#" data-toggle="modal"
-												data-target="#customerProfile"><i
-													class="icon-users2 icon-2x d-inline-block text-info"
-													title="Customer Profile"></i></a></td>
-											<td class="text-center">
-												<h6 class="mb-0">12</h6>
-												<div class="font-size-sm text-muted line-height-1">hours</div>
-											</td>
-											<td>
-												<div class="font-weight-semibold">
-													<a href="#" data-toggle="modal"
-														data-target="#modal_form_vertical">Office task - Call
-														to customer</a>
-												</div>
-												<div class="text-muted">Call to customer</div> <a href="#"
-												data-toggle="modal" data-target="#task_log"><span
-													class="badge badge-success badge-pill">65 Completed</span></a>
-
-											</td>
-
-											<td class="text-center">20-10-2020 12:00 AM</td>
-											<td class="text-center"><span class="badge badge-danger">High</span></td>
-											<td>Akshay,Sachin</td>
-
-										</tr>
-
-										<tr>
-											<td><a href="#" data-toggle="modal"
-												data-target="#customerProfile"><i
-													class="icon-users2 icon-2x d-inline-block text-info"
-													title="Customer Profile"></i></a></td>
-											<td class="text-center">
-												<h6 class="mb-0">12</h6>
-												<div class="font-size-sm text-muted line-height-1">hours</div>
-											</td>
-											<td>
-												<div class="font-weight-semibold">Enquiry - Demo For
-													Client</div>
-												<div class="text-muted">Demo For Client</div> <a href="#"
-												data-toggle="modal" data-target="#task_log"><span
-													class="badge badge-success badge-pill">65 Completed</span></a>
-											</td>
-
-											<td class="text-center">20-10-2020 12:00 AM</td>
-											<td class="text-center"><span
-												class="badge badge-warning">Normal</span></td>
-											<td>Akshay,Sachin</td>
-
-										</tr>
-
-										<tr>
-											<td><a href="#" data-toggle="modal"
-												data-target="#customerProfile"><i
-													class="icon-users2 icon-2x d-inline-block text-info"
-													title="Customer Profile"></i></a></td>
-											<td class="text-center">
-												<h6 class="mb-0">12</h6>
-												<div class="font-size-sm text-muted line-height-1">hours</div>
-											</td>
-											<td>
-												<div class="font-weight-semibold">
-													<a href="${pageContext.request.contextPath}/tagList">Developing</a>
-												</div>
-												<div class="text-muted">Developing</div> <a href="#"
-												data-toggle="modal" data-target="#task_log"><span
-													class="badge badge-success badge-pill">65 Completed</span></a>
-											</td>
-
-											<td class="text-center">20-10-2020 12:00 AM</td>
-											<td class="text-center"><span
-												class="badge badge-success">Low</span></td>
-											<td>Akshay,Sachin</td>
-
-										</tr>
-
-										<tr>
-											<td><a href="#" data-toggle="modal"
-												data-target="#customerProfile"><i
-													class="icon-users2 icon-2x d-inline-block text-info"
-													title="Customer Profile"></i></a></td>
-											<td class="text-center">
-												<h6 class="mb-0">12</h6>
-												<div class="font-size-sm text-muted line-height-1">hours</div>
-											</td>
-											<td>
-												<div class="font-weight-semibold">
-													<a href="${pageContext.request.contextPath}/addEnquiry">Create
-														ad campaign banners set</a>
-												</div>
-												<div class="text-muted">That he had recently ...</div> <a
-												href="#" data-toggle="modal" data-target="#task_log"><span
-													class="badge badge-success badge-pill">65 Completed</span></a>
-											</td>
-
-											<td class="text-center">20-10-2020 12:00 AM</td>
-											<td class="text-center"><span class="badge badge-danger">High</span></td>
-											<td>Akshay,Sachin</td>
-
-
-										</tr>
-
-										<tr>
-											<td><a href="#" data-toggle="modal"
-												data-target="#customerProfile"><i
-													class="icon-users2 icon-2x d-inline-block text-info"
-													title="Customer Profile"></i></a></td>
-											<td class="text-center">
-												<h6 class="mb-0">12</h6>
-												<div class="font-size-sm text-muted line-height-1">hours</div>
-											</td>
-											<td>
-												<div class="font-weight-semibold">
-													<a href="${pageContext.request.contextPath}/addLead">Edit
-														the draft for the icons</a>
-												</div>
-												<div class="text-muted">You've got to get enough
-													sleep..</div> <a href="#" data-toggle="modal"
-												data-target="#task_log"><span
-													class="badge badge-success badge-pill">65 Completed</span></a>
-											</td>
-
-											<td class="text-center">20-10-2020 12:00 AM</td>
-											<td class="text-center"><span class="badge badge-danger">High</span></td>
-											<td>Akshay,Sachin</td> --%>
-
-										<!-- <td class="text-center">
-										<div class="list-icons">
-											<div class="dropdown">
-												<a href="#" class="list-icons-item dropdown-toggle caret-0"
-													data-toggle="dropdown"><i class="icon-menu9"></i></a>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a href="#" class="dropdown-item"><i
-														class="icon-alarm-add"></i> Check in</a> <a href="#"
-														class="dropdown-item"><i class="icon-attachment"></i>
-														Attach screenshot</a> <a href="#" class="dropdown-item"><i
-														class="icon-rotate-ccw2"></i> Reassign</a>
-													<div class="dropdown-divider"></div>
-													<a href="#" class="dropdown-item"><i
-														class="icon-pencil7"></i> Edit task</a> <a href="#"
-														class="dropdown-item"><i class="icon-cross2"></i>
-														Remove</a>
-												</div>
-												</li>
-											</div>
-									</td> -->
-										<!-- </tr> -->
-
 
 									</tbody>
 								</table>
 							</div>
+							<!-- <ul class="pagination align-self-center">
+								<li class="page-item"><a href="#" class="page-link">&larr;
+										&nbsp; Prev</a></li>
+								<li class="page-item active"><a href="#" class="page-link">1</a></li>
+								<li class="page-item"><a href="#" class="page-link">2</a></li>
+								<li class="page-item  "><a href="#" class="page-link">3</a></li>
+								<li class="page-item"><a href="#" class="page-link">4</a></li>
+								<li class="page-item"><a href="#" class="page-link">Next
+										&nbsp; &rarr;</a></li>
+							</ul> -->
 						</div>
 
 					</div>
@@ -700,14 +555,14 @@
 						success : function(response) {
 
 							//$('#modal_step1').modal('hide');
-							//alert(JSON.stringify(response))
-							var table = $('#pendingTaskTable').DataTable();
-							var rows = table.rows().remove().draw();
-
+							
+							/* var table = $('#pendingTaskTable').DataTable();
+							var rows = table.rows().remove().draw(); */
+							$("#pendingTaskTable tbody").empty();
 							var pendingTask = response.pendingTask;
-
+							 
 							for (var i = 0; i < pendingTask.length; i++) {
-
+								//alert("sdf")
 								var profile = '<div class="text-center"> <a href="#"  onclick="getCustProfile('
 										+ pendingTask[i].mdAccTypeId
 										+ ','
@@ -763,8 +618,19 @@
 								} else if (pendingTask[i].taskPriority == 3) {
 									priority = '<div class="text-center"><span class="badge badge-danger">High</span></div>'
 								}
-
-								$('#pendingTaskTable td').css('white-space',
+								//alert("sdf")
+								var tr_data = '<tr><td>' + profile
+										+ '</td><td>' + remainingTime
+										+ '</td><td>' + taskDescription
+										+ '</td><td>' + schdatetime
+										+ '</td><td>'
+										+ pendingTask[i].channelName
+										+ '</td><td>' + priority + '</td><td>'
+										+ pendingTask[i].employeeName
+										+ '</td><td>' + Action + '</td></tr>';
+								$('#pendingTaskTable').append(tr_data);
+								
+								/* $('#pendingTaskTable td').css('white-space',
 										'initial');
 								$('#pendingTaskTable').DataTable().row.add(
 										[ profile, remainingTime,
@@ -772,17 +638,16 @@
 												pendingTask[i].channelName,
 												priority,
 												pendingTask[i].employeeName,
-												Action ]).draw();
+												Action ]).draw(); */
 							}
 
 							$("#todays_task").html(
 									response.dashBoardSummary.todayCount);
-							 
-							
+
 							$("#Todays_Inq").html(
 									response.dashBoardSummary.todaysInqCount);
-							 $("#todays_lead").html(
-										response.dashBoardSummary.todaysLeadCount);
+							$("#todays_lead").html(
+									response.dashBoardSummary.todaysLeadCount);
 							$("#completed_task").html(
 									response.dashBoardSummary.todayCompleted);
 							$("#pending_task").html(
@@ -864,6 +729,44 @@
 				$("#modalbody").html("");
 				getTaskPendingList();
 			});
+		}
+	</script>
+	<script>
+		function myFunction1() {
+			var input, filter, table, tr, td, td1, td2, td3, td4, td5, td6, i, txtValue, txtValue1, txtValue2, txtValue3, txtValue4, txtValue5, txtValue6;
+			input = document.getElementById("myInput1");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("pendingTaskTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[2];
+				td1 = tr[i].getElementsByTagName("td")[3];
+				td2 = tr[i].getElementsByTagName("td")[4];
+				td3 = tr[i].getElementsByTagName("td")[5];
+				td4 = tr[i].getElementsByTagName("td")[6];
+
+				if (td || td1 || td2 || td3 || td4) {
+					txtValue = td.textContent || td.innerText;
+					txtValue1 = td1.textContent || td1.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					txtValue4 = td4.textContent || td4.innerText;
+
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue3.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else if (txtValue4.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
 		}
 	</script>
 </body>
