@@ -2262,7 +2262,7 @@ public void AllCityWiseDetailINQReportExcel(HttpServletRequest request, HttpServ
 		}
 	}
 
-
+ 
 @RequestMapping(value = "/LeadConversionTimeReportExcel", method = RequestMethod.GET)
 public void LeadConversionTimeReportExcel(HttpServletRequest request, HttpServletResponse response) {
 	MultiValueMap<String,Object> map=new LinkedMultiValueMap<String, Object>();
