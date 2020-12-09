@@ -177,7 +177,7 @@
 
 											<div class="advance_bx">
 												<ul>
-													<li>Employee Advance Payment (F1) <span> <a
+													<!-- <li>Employee Advance Payment (F1) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f1',0,'showAdvancePaymentRep')"
 															title="excel"><i
@@ -222,7 +222,155 @@
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger  "
 																style="color: black;"></i></a>
+													</span></li> -->
+													
+													
+													
+													<li>Channel Wise Leads (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'ChannelWiseLeadCount')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
 													</span></li>
+													<li>Channel Wise Inquiries (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'ChannelWiseInqCount')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseInqCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>Domain Wise Leads (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'DomainWiseLeadCount')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'domainWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>Domain Wise Inquiries (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'DomainWiseInqCount')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'domainWiseInqCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>City Wise Leads (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'CityWiseLeadCount')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f1',1,'showAdvancePaymentRep')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>City Wise Inquiries (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'CityWiseInqCount')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f1',1,'showAdvancePaymentRep')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>All Channel Wise Detail LEAD Report (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'AllChannelWiseDetailLeadReportExcel')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>All Domain Wise Detail LEAD Report (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'AllDomainWiseDetailLeadReportExcel')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>All City Wise Detail LEAD Report (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'AllCityWiseDetailLeadReportExcel')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>All Channel Wise Detail Inquiry Report (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'AllChannelWiseDetailINQReportExcel')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>All Domain Wise Detail Inquiry Report (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'AllDomainWiseDetailINQReportExcel')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>All City Wise Detail Inquiry Report (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'AllCityWiseDetailINQReportExcel')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>Lead Conversion Time Report (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'LeadConversionTimeReportExcel')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													
+													
 
 												</ul>
 											</div>
@@ -231,7 +379,7 @@
 										</div>
 									</div>
 
-									<div class="col-sm-12 col-md-6">
+									<!-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -341,9 +489,9 @@
 											</div>
 
 										</div>
-									</div>
+									</div> -->
 
-									<div class="col-sm-12 col-md-6">
+									<!-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -380,10 +528,10 @@
 
 
 										</div>
-									</div>
+									</div> -->
 
 
-									<div class="col-sm-12 col-md-6">
+									<!-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -433,10 +581,10 @@
 												</ul>
 											</div>
 										</div>
-									</div>
+									</div> -->
 
 
-									<div class="col-sm-12 col-md-6">
+									<!-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -497,22 +645,22 @@
 															onclick="getProgReport('f1',0,'ecrUploadFile')"
 															title="Text file"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
+																style="color: black;"></i></a> <a href="javascript:void(0)"
 															onclick="getProgReport('f1',1,'showEmployeeEmployerPfRep')"
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger    "
-																style="color: black;"></i></a> --></span>
+																style="color: black;"></i></a></span>
 													</li>
 
 
 												</ul>
 											</div>
 										</div>
-									</div>
+									</div> -->
 
 
 
-									<div class="col-sm-12 col-md-6">
+									<!-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -538,24 +686,24 @@
 															onclick="getProgReport('f1',0,'showEsicDataUpload')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
+																style="color: black;"></i></a> <a href="javascript:void(0)"
 															onclick="getProgReport('f1',1,'showEsicDataUpload')"
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger    "
-																style="color: black;"></i></a>--></span>
+																style="color: black;"></i></a></span>
 													</li>
 													<li>LWF Data to Upload (F1) <span><a
 															href="javascript:void(0)"
 															onclick="getProgReport('f1',0,'showLwfDataUpload')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
+																style="color: black;"></i></a> <a href="javascript:void(0)"
 															onclick="getProgReport('f1',1,'showEsicDataUpload')"
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger    "
-																style="color: black;"></i></a>--></span>
+																style="color: black;"></i></a></span>
 													</li>
-													<!-- <li>Professional Tax Statement(F2,F3) <span><a
+													<li>Professional Tax Statement(F2,F3) <span><a
 															href="javascript:void(0)"
 															onclick="getProgReport('f3',0,'showEmpPTStatRep')"
 															title="excel"><i
@@ -576,16 +724,16 @@
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger    "
 																style="color: black;"></i></a></span>
-													</li> -->
+													</li>
 												</ul>
 											</div>
 
 
 										</div>
-									</div>
+									</div> -->
 
 
-									<div class="col-sm-12 col-md-6">
+									<!-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -658,11 +806,11 @@
 											</div>
 
 										</div>
-									</div>
+									</div> -->
 
 
 
-									<div class="col-sm-12 col-md-6">
+									<%-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -726,10 +874,10 @@
 
 
 										</div>
-									</div>
+									</div> --%>
 
 
-									<div class="col-sm-12 col-md-6">
+									<%-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -779,8 +927,8 @@
 											</div>
 
 										</div>
-									</div>
-									<div class="col-sm-12 col-md-6">
+									</div> --%>
+									<!-- <div class="col-sm-12 col-md-6">
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
@@ -837,17 +985,17 @@
 															onclick="getProgReport('f1',0,'ecrArrearsUploadFile')"
 															title="Text file"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
+																style="color: black;"></i></a> <a href="javascript:void(0)"
 															onclick="getProgReport('f1',1,'showEmployeeEmployerPfRep')"
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger    "
-																style="color: black;"></i></a> --></span>
+																style="color: black;"></i></a></span>
 													</li>
 												</ul>
 											</div>
 
 										</div>
-									</div>
+									</div> -->
 
 								</div>
 								<input type="hidden" id="cal_yr" name="cal_yr" value="0">
