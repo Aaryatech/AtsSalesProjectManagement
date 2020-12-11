@@ -297,9 +297,9 @@
 															onclick="getProgReport('f2',0,'AllChannelWiseDetailLeadReportExcel')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
-															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
-															title="PDF"><i
+																style="color: black;"></i></a> <a  href="javascript:void(0)"
+															
+															title="PDF" ><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
 																style="color: black;"></i></a>
 													</span></li>
@@ -309,7 +309,7 @@
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
 																style="color: black;"></i></a> <a href="javascript:void(0)"
-															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
 																style="color: black;"></i></a>
@@ -320,7 +320,7 @@
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
 																style="color: black;"></i></a> <a href="javascript:void(0)"
-															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
 																style="color: black;"></i></a>
@@ -331,7 +331,7 @@
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
 																style="color: black;"></i></a> <a href="javascript:void(0)"
-															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
 																style="color: black;"></i></a>
@@ -342,7 +342,7 @@
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
 																style="color: black;"></i></a> <a href="javascript:void(0)"
-															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
 																style="color: black;"></i></a>
@@ -353,7 +353,7 @@
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
 																style="color: black;"></i></a> <a href="javascript:void(0)"
-															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
 																style="color: black;"></i></a>
@@ -364,7 +364,18 @@
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
 																style="color: black;"></i></a> <a href="javascript:void(0)"
-															onclick="getProgReport('f2',1,'channelWiseLeadCntPdf')"
+															
+															title="PDF"><i
+																class="icon-file-pdf icon-1x text-danger  text-danger    "
+																style="color: black;"></i></a>
+													</span></li>
+													<li>Employee Wise LMS IMS Count Report (F2) <span> <a
+															href="javascript:void(0)"
+															onclick="getProgReport('f2',0,'EmpWiseLMSIMSCount')"
+															title="excel"><i
+																class="icon-file-spreadsheet text-success  "
+																style="color: black;"></i></a> <a href="javascript:void(0)"
+															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
 																style="color: black;"></i></a>

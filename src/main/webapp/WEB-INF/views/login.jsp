@@ -130,9 +130,10 @@ body1 {
 						</div>
 					</a>
 
-					<p class="login_txt">
-						Welcome to India’s one of most preferred bakery brand ! <span>Lets
-							make Monginis a part of everybody’s celebration!!</span>
+					<p class="login_txt" style="font-weight: bold;font-size: 20px">
+							<span> </span><span>Concept 2 Product...</span>
+						<!-- Welcome to India’s one of most preferred bakery brand ! <span>Lets
+							make Monginis a part of everybody’s celebration!! --></span>
 					</p>
 
 				</div>

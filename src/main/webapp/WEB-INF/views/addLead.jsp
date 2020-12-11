@@ -162,7 +162,7 @@
 													data-placeholder="Select Type" data-fouc
 													required="required" id="type">
 													<option value="">select</option>
-													<option value="1">Customer</option>
+													<option value="1" selected="selected">Customer</option>
 													<option value="2">Collaborator</option>
 												</select>
 

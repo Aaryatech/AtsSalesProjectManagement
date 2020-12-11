@@ -7,6 +7,7 @@
 <head>
 
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
+<script src="../../../../global_assets/js/demo_pages/extra_fab.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js"></script>
 <script
@@ -16,6 +17,7 @@
 	src="${pageContext.request.contextPath}/resources/global_assets/js/demo_pages/content_cards_draggable.js"></script>
 
 <style type="text/css">
+
 .record_search {
 	float: right;
 	border: 1px solid #CCC;
@@ -127,20 +129,13 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header header-elements-inline">
-								<h6 class="card-title">Todays Status</h6>
+								<h6 class="card-title">Performance Index</h6>
 
 							</div>
 
 							<!-- Numbers -->
 							<div class="card-body py-0">
 								<div class="row text-center">
-
-									<!-- <div class="col-2">
-										<div class="mb-3 ">
-											<h5 class="font-weight-semibold mb-0" id="todays_task">0</h5>
-											<span class="text-muted font-size-sm">Today's</span>
-										</div>
-									</div> -->
 									<div class="col-2">
 										<div class="mb-3">
 											<h5 class="font-weight-semibold mb-0" id="todays_lead">0</h5>
@@ -150,30 +145,36 @@
 
 									<div class="col-2">
 										<div class="mb-3">
+											<h5 class="font-weight-semibold mb-0" id="Todays_Sch_Demo">0</h5>
+											<span class="text-muted font-size-sm">Todays Sche Demo</span>
+										</div>
+									</div>
+
+									<div class="col-2">
+										<div class="mb-3">
 											<h5 class="font-weight-semibold mb-0" id="Todays_Inq">0</h5>
 											<span class="text-muted font-size-sm">Todays Inquiry</span>
 										</div>
 									</div>
-
-									<!-- 	<div class="col-2">
-										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0" id="remaining_task">0</h5>
-											<span class="text-muted font-size-sm">Remaining</span>
-										</div>
-									</div>
 									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0" id="completed_pts">0</h5>
-											<span class="text-muted font-size-sm">Completed PTS</span>
+											<h5 class="font-weight-semibold mb-0" id="month_lead">0</h5>
+											<span class="text-muted font-size-sm">Lead This Month</span>
 										</div>
-									</div> -->
+									</div> 
 
-									<!-- 	<div class="col-2">
+									<div class="col-2">
 										<div class="mb-3">
-											<h5 class="font-weight-semibold mb-0" id="pending_pts">0</h5>
-											<span class="text-muted font-size-sm">Pending PTS</span>
+											<h5 class="font-weight-semibold mb-0" id="month_demo">0</h5>
+											<span class="text-muted font-size-sm">Demos This Month</span>
 										</div>
-									</div> -->
+									</div> 
+									<div class="col-2">
+										<div class="mb-3">
+											<h5 class="font-weight-semibold mb-0" id="month_inq">0</h5>
+											<span class="text-muted font-size-sm">Inquiries This Month</span>
+										</div>
+									</div> 
 								</div>
 							</div>
 							<!-- /numbers -->
@@ -209,6 +210,7 @@
 											<th>#</th>
 											<th class="text-center">Due</th>
 											<th class="text-center">Task Description</th>
+											<th class="text-center">Contact</th>
 											<th class="text-center">Schedule Date Time</th>
 											<th class="text-center">Channel</th>
 											<th class="text-center">Priority</th>
@@ -305,6 +307,24 @@
 					</div>
 
 				</div> -->
+				<div class="row">
+					
+						<div class="fab-menu fab-menu-fixed fab-menu-bottom-right" >
+							
+							<div>
+								<ul class="fab-menu" title="Add New Lead" >
+									<li>
+										<a style="padding: 15px;font-size: 15px;" href="${pageContext.request.contextPath}/addLead" class="fab-menu-btn btn btn-primary " >
+										
+										<i class="fab-icon-open icon-plus3"></i>
+											<!-- <i class="fab-icon-close icon-cross2"></i>   -->
+											New Lead
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					
 
 			</div>
 			<!-- /content area -->
@@ -443,6 +463,7 @@
 		</div>
 	</div>
 
+
 	<div id="task_log" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
@@ -503,6 +524,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 		// Single picker
 		$('.datepickerclass').daterangepicker({
@@ -614,6 +636,7 @@
 										+ pendingTask[i].taskId
 										+ ')" ><i class="icon-pencil7" ></i></a>';
 
+								var contact='<a href="tel:'+pendingTask[i].companyContact+'" >'+pendingTask[i].companyContact+'</a>';
 								if (pendingTask[i].taskPriority == 2) {
 									priority = '<div class="text-center"><span class="badge badge-warning">Normal</span></div>'
 								} else if (pendingTask[i].taskPriority == 3) {
@@ -623,6 +646,7 @@
 								var tr_data = '<tr><td>' + profile
 										+ '</td><td>' + remainingTime
 										+ '</td><td>' + taskDescription
+										+ '</td><td>' + contact
 										+ '</td><td>' + schdatetime
 										+ '</td><td>'
 										+ pendingTask[i].channelName
@@ -641,7 +665,16 @@
 												pendingTask[i].employeeName,
 												Action ]).draw(); */
 							}
-
+							   
+							
+							$("#Todays_Sch_Demo").html(
+									response.dashBoardSummary.scheDemoCnt);
+							$("#month_lead").html(
+									response.dashBoardSummary.monthlyLeadCount);
+							$("#month_demo").html(
+									response.dashBoardSummary.monthScheDemo);
+							$("#month_inq").html(
+									response.dashBoardSummary.monthlyInqCount);
 							$("#todays_task").html(
 									response.dashBoardSummary.todayCount);
 
