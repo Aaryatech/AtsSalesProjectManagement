@@ -297,7 +297,7 @@ public class EnquiryController {
 			taskDetails.setPriKey(res.getInqId());
 			taskDetails.setTaskTittle(sts[0].getmTaskStatusName());
 			taskDetails.setTaskFinalStatus(sts[0].getmTaskStatusId());
-			taskDetails.setTaskPriority(1);
+			taskDetails.setTaskPriority(2);
 			taskDetails.setTaskPts(sts[0].getmTaskPts());
 			taskDetails.setMakerUserId(userDetail.getEmpId());
 			taskDetails.setMakerDatetime(sf.format(dt));

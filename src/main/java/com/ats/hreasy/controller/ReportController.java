@@ -42,6 +42,7 @@ import com.ats.hreasy.model.CityReports;
 import com.ats.hreasy.model.CityWiseDetailReport;
 import com.ats.hreasy.model.DomainTypeReports;
 import com.ats.hreasy.model.DomainWiseDetailReports;
+import com.ats.hreasy.model.EmployeeReport;
 import com.ats.hreasy.model.LeadConTymReport;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -2395,6 +2396,136 @@ public void LeadConversionTimeReportExcel(HttpServletRequest request, HttpServle
 		}
 	}
 
+
+@RequestMapping(value = "/EmpWiseLMSIMSCount", method = RequestMethod.GET)
+public void EmpWiseLMSIMSCount(HttpServletRequest request, HttpServletResponse response) {
+	MultiValueMap<String,Object> map=new LinkedMultiValueMap<String, Object>();
+	
+	
+	String dateRange=request.getParameter("leaveDateRange");
+	
+	String dates[]=dateRange.split("to");
+	String fromDate=DateConvertor.convertToYMD(dates[0]);
+	String toDate=DateConvertor.convertToYMD(dates[1]);
+	System.err.println("date Range========"+dates[0]);
+	System.err.println("date Range========"+dates[1]);
+	map.add("fromDate", fromDate);
+	map.add("toDate",toDate);
+		
+		EmployeeReport[] EmpCntRepArr=Constants.getRestTemplate().postForObject(Constants.url+"getEmpWiseLMSIMScount", map, EmployeeReport[].class);
+	  	List<EmployeeReport> EmpLMSINQCntReportList=new ArrayList<EmployeeReport>(Arrays.asList(EmpCntRepArr)); 
+		
+
+		List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+		ExportToExcel expoExcel = new ExportToExcel();
+		List<String> rowData = new ArrayList<String>();
+
+		rowData.add("Sr. No");
+		rowData.add("Employee Name");
+		rowData.add("Lead Count");
+		rowData.add("Inquiry Count ");
+		/*
+		 * rowData.add("Ref. Name"); rowData.add("Schedule Date");
+		 * rowData.add("Current Status"); rowData.add("Total Days");
+		 */
+		//rowData.add("Group Id");
+		//rowData.add("Group Name");
+		//rowData.add("Assesse Name");
+		//rowData.add("PAN No");
+		//rowData.add("Email Id");
+		//rowData.add("Phone No");
+		//rowData.add("Address 1");
+		//rowData.add("Address 2");
+		//rowData.add("City");
+		//rowData.add("Pincode");
+		
+		//rowData.add("Business Nature");
+		//rowData.add("Folder Id");
+		//rowData.add("File No");
+		
+		//rowData.add("DOB");
+		//rowData.add("Aadhar No");
+		//rowData.add("Is Active ?");
+		
+		
+		expoExcel.setRowData(rowData);
+		exportToExcelList.add(expoExcel);
+
+		for (int i = 0; i < EmpLMSINQCntReportList.size(); i++) {
+			expoExcel = new ExportToExcel();
+			rowData = new ArrayList<String>();
+
+			rowData.add("" + (i + 1));
+
+			rowData.add(""+ EmpLMSINQCntReportList.get(i).getEmpName());
+			rowData.add(""+ EmpLMSINQCntReportList.get(i).getLeadCount());
+			rowData.add(""+ EmpLMSINQCntReportList.get(i).getInqCount());
+			
+			
+			
+			
+			
+			/*
+			 * rowData.add("" + custList.get(i).getOwnerEmpId()); rowData.add("" +
+			 * custList.get(i).getExVar2());//owner name
+			 * 
+			 * rowData.add("" + custList.get(i).getCustGroupId()); rowData.add("" +
+			 * custList.get(i).getExVar1());//group name rowData.add("" +
+			 * custList.get(i).getCustAssesseeName()); rowData.add("" +
+			 * custList.get(i).getCustPanNo()); rowData.add("" +
+			 * custList.get(i).getCustEmailId());
+			 * 
+			 * rowData.add("" + custList.get(i).getCustPhoneNo());
+			 * 
+			 * //rowData.add("" + custList.get(i).getCustAddr1()); //rowData.add("" +
+			 * custList.get(i).getCustAddr2());
+			 * 
+			 * rowData.add("" + custList.get(i).getCustCity()); rowData.add("" +
+			 * custList.get(i).getCustPinCode()); rowData.add("" +
+			 * custList.get(i).getCustBusinNatute());
+			 * 
+			 * //rowData.add("" + custList.get(i).getCustFolderId()); //rowData.add("" +
+			 * custList.get(i).getCustFileNo());
+			 * 
+			 * rowData.add("" + custList.get(i).getCustDob()); rowData.add("" +
+			 * custList.get(i).getCustAadhar()); rowData.add("" +
+			 * custList.get(i).getIsActive());
+			 */
+
+
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+		}
+		XSSFWorkbook wb = null;
+		try {
+
+			// System.out.println("Excel List :" + exportToExcelList.toString());
+			String rep = "Employee Wise LMS IMS Count Report";
+			System.err.println("rep  " + rep);
+			String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+			// String excelName = (String) session.getAttribute("excelName");
+			wb = ExceUtil.createWorkbook(exportToExcelList, rep, " ",
+					"Export Time " + date + " ", "  ", 'Q');
+			ExceUtil.autoSizeColumns(wb, 3);
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-disposition",
+					"attachment; filename=" + rep + "-" + date + ".xlsx");
+			wb.write(response.getOutputStream());
+
+		} catch (IOException ioe) {
+			throw new RuntimeException("Error writing spreadsheet to output stream");
+		} finally {
+			if (wb != null) {
+				try {
+					wb.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 
 

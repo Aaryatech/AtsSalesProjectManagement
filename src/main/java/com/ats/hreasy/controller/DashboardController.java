@@ -389,10 +389,12 @@ public class DashboardController {
 			TaskDetailsEmpName[] tags = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getTaskDetailWithEmpNameByEmpid", map, TaskDetailsEmpName[].class);
 			List<TaskDetailsEmpName> list = new ArrayList<>(Arrays.asList(tags));
-
+		
+			
 			DashBoardSummary dashBoardSummary = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getRegularDashboardSummry", map, DashBoardSummary.class);
 			// //System.err.println("DashSummry===="+dashBoardSummary);
+			System.err.println("list========"+list);
 			dashboardData.setDashBoardSummary(dashBoardSummary);
 			dashboardData.setPendingTask(list);
 
@@ -911,7 +913,7 @@ public class DashboardController {
 				taskDetails.setPriKey(res.getLmsId());
 				taskDetails.setTaskTittle(sts[0].getmTaskStatusName());
 				taskDetails.setTaskFinalStatus(sts[0].getmTaskStatusId());
-				taskDetails.setTaskPriority(1);
+				taskDetails.setTaskPriority(2);
 				taskDetails.setTaskPts(sts[0].getmTaskPts());
 				taskDetails.setMakerUserId(userDetail.getEmpId());
 				taskDetails.setMakerDatetime(sf.format(dt));

@@ -33,6 +33,8 @@ public class UserLoginData {
 	
 	private int userTypeId;
 	
+	private String email;
+	
 	
 
 	public int getEmpId() {
@@ -141,15 +143,24 @@ public class UserLoginData {
 		this.userTypeId = userTypeId;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "UserLoginData [empId=" + empId + ", mdAccTypeId=" + mdAccTypeId + ", empDept=" + empDept + ", empName="
 				+ empName + ", empUsername=" + empUsername + ", empMobile=" + empMobile + ", empPassword=" + empPassword
 				+ ", empAccessId=" + empAccessId + ", delStatus=" + delStatus + ", isActive=" + isActive
 				+ ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + ", userTypeId=" + userTypeId
-				+ "]";
+				+ ", email=" + email + "]";
 	}
 
+	
 	
 	
 	

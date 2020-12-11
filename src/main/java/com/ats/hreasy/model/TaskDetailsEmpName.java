@@ -76,6 +76,9 @@ private int taskId;
 	private int mCityId;
 	private String companyInfo;
 	private String channelName;
+	
+	private String companyContact;
+	
 	public int getTaskDoneBy() {
 		return taskDoneBy;
 	}
@@ -469,24 +472,34 @@ private int taskId;
 		this.channelName = channelName;
 	}
 
+	public String getCompanyContact() {
+		return companyContact;
+	}
+
+	public void setCompanyContact(String companyContact) {
+		this.companyContact = companyContact;
+	}
+
 	@Override
 	public String toString() {
 		return "TaskDetailsEmpName [taskId=" + taskId + ", mdAccTypeId=" + mdAccTypeId + ", priKey=" + priKey
 				+ ", taskTittle=" + taskTittle + ", taskTypeId=" + taskTypeId + ", taskRepType=" + taskRepType
 				+ ", taskEntryType=" + taskEntryType + ", taskScheDate=" + taskScheDate + ", taskScheTime="
-				+ taskScheTime + ", time=" + time + ", taskAllotedTo=" + taskAllotedTo + ", taskAllottedBy="
-				+ taskAllottedBy + ", taskAllotmentInstructions=" + taskAllotmentInstructions
-				+ ", taskClientDiscussion=" + taskClientDiscussion + ", taskClientProfiling=" + taskClientProfiling
-				+ ", taskThoughQuestions=" + taskThoughQuestions + ", taskWhatWentWrong=" + taskWhatWentWrong
-				+ ", thisTaskStatus=" + thisTaskStatus + ", taskFinalStatus=" + taskFinalStatus + ", taskPriority="
-				+ taskPriority + ", taskPts=" + taskPts + ", taskDoneDate=" + taskDoneDate + ", taskDoneBy="
-				+ taskDoneBy + ", domainId=" + domainId + ", mStateId=" + mStateId + ", mCityId=" + mCityId
-				+ ", companyInfo=" + companyInfo + ", channelName=" + channelName + ", delStatus=" + delStatus
-				+ ", isActive=" + isActive + ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime
-				+ ", allocatedById=" + allocatedById + ", allocatedDatetime=" + allocatedDatetime + ", exInt1=" + exInt1
-				+ ", exInt2=" + exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", employeeName=" + employeeName
-				+ ", sts=" + sts + ", day=" + day + ", hour=" + hour + ", minutes=" + minutes + ", mdAccTypeText="
-				+ mdAccTypeText + ", completed=" + completed + "]";
+				+ taskScheTime + ", taskAllotedTo=" + taskAllotedTo + ", taskAllottedBy=" + taskAllottedBy
+				+ ", taskAllotmentInstructions=" + taskAllotmentInstructions + ", taskClientDiscussion="
+				+ taskClientDiscussion + ", taskClientProfiling=" + taskClientProfiling + ", taskThoughQuestions="
+				+ taskThoughQuestions + ", taskWhatWentWrong=" + taskWhatWentWrong + ", thisTaskStatus="
+				+ thisTaskStatus + ", taskFinalStatus=" + taskFinalStatus + ", taskPriority=" + taskPriority
+				+ ", taskPts=" + taskPts + ", taskDoneDate=" + taskDoneDate + ", delStatus=" + delStatus + ", isActive="
+				+ isActive + ", makerUserId=" + makerUserId + ", makerDatetime=" + makerDatetime + ", allocatedById="
+				+ allocatedById + ", allocatedDatetime=" + allocatedDatetime + ", exInt1=" + exInt1 + ", exInt2="
+				+ exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", employeeName=" + employeeName + ", sts="
+				+ sts + ", day=" + day + ", hour=" + hour + ", minutes=" + minutes + ", mdAccTypeText=" + mdAccTypeText
+				+ ", completed=" + completed + ", time=" + time + ", taskDoneBy=" + taskDoneBy + ", domainId="
+				+ domainId + ", mStateId=" + mStateId + ", mCityId=" + mCityId + ", companyInfo=" + companyInfo
+				+ ", channelName=" + channelName + ", companyContact=" + companyContact + "]";
 	}
+
+
 
 }
