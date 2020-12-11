@@ -74,7 +74,7 @@
 					<div class="card-body">
 						<div class="card-header header-elements-inline">
 							<h3 class="pageTitle">
-								<i class="icon-list-unordered"></i> Report
+								<i class="icon-list-unordered"></i> Report's
 							</h3>
 						</div>
 
@@ -99,7 +99,7 @@
 
 								<div class="form-group row">
 
-									<div class="col-md-6">
+									<%-- <div class="col-md-6">
 										<label class="col-form-label text-info col-lg-5 float"
 											for="date">Select Date(F1) <span style="color: red">*
 										</span> :
@@ -111,7 +111,7 @@
 												class="validation-invalid-label" id="error_datepicker"
 												style="display: none;">Please Select Date. </span>
 										</div>
-									</div>
+									</div> --%>
 									<div class="col-md-6">
 										<label class="col-form-label text-info col-lg-5 float ">Date
 											Range(F2)<span style="color: red">* </span>:
@@ -134,7 +134,7 @@
 
 
 								<div class="form-group row">
-									<div class="col-md-6">
+									<%-- <div class="col-md-6">
 										<label class="col-form-label col-lg-5 float" for="date">Select
 											Company(F3): </label>
 										<div class="col-md-7 float">
@@ -148,8 +148,8 @@
 											</select> <span class="validation-invalid-label" id="error_company"
 												style="display: none;">Please Select Company.</span>
 										</div>
-									</div>
-									<div class="col-md-6">
+									</div> --%>
+								<!-- 	<div class="col-md-6">
 										<label class="col-form-label col-lg-5 float" for="date">Select
 											Date(F4): </label>
 										<div class="col-md-7 float">
@@ -159,7 +159,7 @@
 												class="validation-invalid-label" id="error_SingleDate"
 												style="display: none;">Please Select Date.</span>
 										</div>
-									</div>
+									</div> -->
 								</div>
 
 
@@ -170,7 +170,7 @@
 										<div class="card">
 											<div
 												class="card-header bg-primary text-white header-elements-inline">
-												<h6 class="box_title" style="margin: 0;">Advance
+												<h6 class="box_title" style="margin: 0;">
 													Reports</h6>
 												<div class="header-elements"></div>
 											</div>
@@ -275,110 +275,110 @@
 															onclick="getProgReport('f2',0,'CityWiseLeadCount')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															onclick="getProgReport('f1',1,'showAdvancePaymentRep')"
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>City Wise Inquiries (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'CityWiseInqCount')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															onclick="getProgReport('f1',1,'showAdvancePaymentRep')"
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>All Channel Wise Detail LEAD Report (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'AllChannelWiseDetailLeadReportExcel')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a  href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a  href="javascript:void(0)"
 															
 															title="PDF" ><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>All Domain Wise Detail LEAD Report (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'AllDomainWiseDetailLeadReportExcel')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>All City Wise Detail LEAD Report (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'AllCityWiseDetailLeadReportExcel')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>All Channel Wise Detail Inquiry Report (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'AllChannelWiseDetailINQReportExcel')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>All Domain Wise Detail Inquiry Report (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'AllDomainWiseDetailINQReportExcel')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>All City Wise Detail Inquiry Report (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'AllCityWiseDetailINQReportExcel')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>Lead Conversion Time Report (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'LeadConversionTimeReportExcel')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													<li>Employee Wise LMS IMS Count Report (F2) <span> <a
 															href="javascript:void(0)"
 															onclick="getProgReport('f2',0,'EmpWiseLMSIMSCount')"
 															title="excel"><i
 																class="icon-file-spreadsheet text-success  "
-																style="color: black;"></i></a> <a href="javascript:void(0)"
+																style="color: black;"></i></a> <!-- <a href="javascript:void(0)"
 															
 															title="PDF"><i
 																class="icon-file-pdf icon-1x text-danger  text-danger    "
-																style="color: black;"></i></a>
+																style="color: black;"></i></a> -->
 													</span></li>
 													
 													

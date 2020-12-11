@@ -884,19 +884,19 @@ public void channelWiseLeadCntPdf(HttpServletRequest request, HttpServletRespons
 
 		hcell.setPadding(3);
 		hcell = new PdfPCell(new Phrase("Sr.No.", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
 
 		hcell = new PdfPCell(new Phrase("Channel Name", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
 
 		hcell = new PdfPCell(new Phrase("Lead Count", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
@@ -907,21 +907,21 @@ public void channelWiseLeadCntPdf(HttpServletRequest request, HttpServletRespons
 			PdfPCell cell;
 
 			cell = new PdfPCell(new Phrase(String.valueOf(index), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_LEFT);
+			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setPadding(3);
 			table.addCell(cell);
 
 			cell = new PdfPCell(new Phrase(chnl.getmChannelName(), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_LEFT);
+			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setPaddingRight(2);
 			cell.setPadding(3);
 			table.addCell(cell);
 
 			cell = new PdfPCell(new Phrase(String.valueOf(chnl.getChnlLeadCount()), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_RIGHT);
+			cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			cell.setPaddingRight(2);
 			cell.setPadding(3);
 			table.addCell(cell);
@@ -1051,13 +1051,13 @@ public void channelWiseInqCntPdf(HttpServletRequest request, HttpServletResponse
 		table.addCell(hcell);
 
 		hcell = new PdfPCell(new Phrase("Channel Name", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
 
 		hcell = new PdfPCell(new Phrase("Lead Count", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
@@ -1074,15 +1074,15 @@ public void channelWiseInqCntPdf(HttpServletRequest request, HttpServletResponse
 			table.addCell(cell);
 
 			cell = new PdfPCell(new Phrase(chnl.getmChannelName(), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_LEFT);
+			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setPaddingRight(2);
 			cell.setPadding(3);
 			table.addCell(cell);
 
 			cell = new PdfPCell(new Phrase(String.valueOf(chnl.getChnlInqCount()), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_RIGHT);
+			cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			cell.setPaddingRight(2);
 			cell.setPadding(3);
 			table.addCell(cell);
@@ -1220,13 +1220,13 @@ public void domainWiseLeadCntPdf(HttpServletRequest request, HttpServletResponse
 		table.addCell(hcell);
 
 		hcell = new PdfPCell(new Phrase("Domain Name", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
 
 		hcell = new PdfPCell(new Phrase("Lead Count", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
@@ -1243,15 +1243,15 @@ public void domainWiseLeadCntPdf(HttpServletRequest request, HttpServletResponse
 			table.addCell(cell);
 
 			cell = new PdfPCell(new Phrase(chnl.getmDomainName(), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_LEFT);
+			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setPaddingRight(2);
 			cell.setPadding(3);
 			table.addCell(cell);
 
 			cell = new PdfPCell(new Phrase(String.valueOf(chnl.getDomainLeadCount()), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_RIGHT);
+			cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			cell.setPaddingRight(2);
 			cell.setPadding(3);
 			table.addCell(cell);
@@ -1386,13 +1386,13 @@ public void domainWiseInqCntPdf(HttpServletRequest request, HttpServletResponse 
 		table.addCell(hcell);
 
 		hcell = new PdfPCell(new Phrase("Domain Name", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
 
 		hcell = new PdfPCell(new Phrase("Inquiry Count", headFont1));
-		hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		hcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		hcell.setBackgroundColor(BaseColor.PINK);
 
 		table.addCell(hcell);
@@ -1409,15 +1409,15 @@ public void domainWiseInqCntPdf(HttpServletRequest request, HttpServletResponse 
 			table.addCell(cell);
 
 			cell = new PdfPCell(new Phrase(chnl.getmDomainName(), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_LEFT);
+			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell.setPaddingRight(2);
 			cell.setPadding(3);
 			table.addCell(cell);
 
 			cell = new PdfPCell(new Phrase(String.valueOf(chnl.getDomainInqCount()), headFont));
-			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setVerticalAlignment(Element.ALIGN_RIGHT);
+			cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			cell.setPaddingRight(2);
 			cell.setPadding(3);
 			table.addCell(cell);
