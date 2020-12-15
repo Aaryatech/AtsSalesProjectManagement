@@ -36,7 +36,7 @@ import javax.activation.FileDataSource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.smartcardio.ATR;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +67,6 @@ import com.ats.hreasy.model.TaskDetails;
 import com.ats.hreasy.model.TaskStatus;
 import com.ats.hreasy.model.UserLoginData;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 /**
