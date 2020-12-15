@@ -62,70 +62,74 @@
 										</tr>
 									</thead>
 									<tbody>
-
+										<c:set value="0" var="index"></c:set>
 										<c:forEach items="${empList}" var="empList" varStatus="count">
-											<tr>
-												<td>${count.index+1}</td>
-												<td><a
-													href="${pageContext.request.contextPath}/moduleDetailWiseDashboard?moduleId=0">${empList.empName}</a></td>
-												<td class="text-center">
-													<div class="row">
+											<c:if
+												test="${empList.allocateTask>0 || empList.completedTask>0 || empList.pendingCount>0 || empList.remainingCount>0}">
+												<c:set value="${index+1}" var="index"></c:set>
+												<tr>
+													<td>${index}</td>
+													<td><a
+														href="${pageContext.request.contextPath}/moduleDetailWiseDashboard?moduleId=0">${empList.empName}</a></td>
+													<td class="text-center">
+														<div class="row">
 
-														<h6 class="mb-0">
-															${empList.allocateTask}
-															<div class="font-size-sm text-muted line-height-1">Task</div>
-														</h6>
-														&nbsp;/&nbsp;
-														<h6 class="mb-0">
-															${empList.allocatePts}
-															<div class="font-size-sm text-muted line-height-1">PTS</div>
-														</h6>
+															<h6 class="mb-0">
+																${empList.allocateTask}
+																<div class="font-size-sm text-muted line-height-1">Task</div>
+															</h6>
+															&nbsp;/&nbsp;
+															<h6 class="mb-0">
+																${empList.allocatePts}
+																<div class="font-size-sm text-muted line-height-1">PTS</div>
+															</h6>
 
-													</div>
+														</div>
 
-												</td>
+													</td>
 
-												<td class="text-center"><div class="row">
+													<td class="text-center"><div class="row">
 
-														<h6 class="mb-0">
-															${empList.completedTask}
-															<div class="font-size-sm text-muted line-height-1">Task</div>
-														</h6>
-														&nbsp;/&nbsp;
-														<h6 class="mb-0">
-															${empList.completedPts}
-															<div class="font-size-sm text-muted line-height-1">PTS</div>
-														</h6>
+															<h6 class="mb-0">
+																${empList.completedTask}
+																<div class="font-size-sm text-muted line-height-1">Task</div>
+															</h6>
+															&nbsp;/&nbsp;
+															<h6 class="mb-0">
+																${empList.completedPts}
+																<div class="font-size-sm text-muted line-height-1">PTS</div>
+															</h6>
 
-													</div></td>
-												<td class="text-center"><div class="row">
+														</div></td>
+													<td class="text-center"><div class="row">
 
-														<h6 class="mb-0">
-															${empList.pendingCount}
-															<div class="font-size-sm text-muted line-height-1">Task</div>
-														</h6>
-														&nbsp;/&nbsp;
-														<h6 class="mb-0">
-															${empList.pendingPts}
-															<div class="font-size-sm text-muted line-height-1">PTS</div>
-														</h6>
+															<h6 class="mb-0">
+																${empList.pendingCount}
+																<div class="font-size-sm text-muted line-height-1">Task</div>
+															</h6>
+															&nbsp;/&nbsp;
+															<h6 class="mb-0">
+																${empList.pendingPts}
+																<div class="font-size-sm text-muted line-height-1">PTS</div>
+															</h6>
 
-													</div></td>
-												<td class="text-center"><div class="row">
+														</div></td>
+													<td class="text-center"><div class="row">
 
-														<h6 class="mb-0">
-															${empList.remainingCount}
-															<div class="font-size-sm text-muted line-height-1">Task</div>
-														</h6>
-														&nbsp;/&nbsp;
-														<h6 class="mb-0">
-															${empList.remainingPts}
-															<div class="font-size-sm text-muted line-height-1">PTS</div>
-														</h6>
+															<h6 class="mb-0">
+																${empList.remainingCount}
+																<div class="font-size-sm text-muted line-height-1">Task</div>
+															</h6>
+															&nbsp;/&nbsp;
+															<h6 class="mb-0">
+																${empList.remainingPts}
+																<div class="font-size-sm text-muted line-height-1">PTS</div>
+															</h6>
 
-													</div></td>
+														</div></td>
 
-											</tr>
+												</tr>
+											</c:if>
 										</c:forEach>
 
 
